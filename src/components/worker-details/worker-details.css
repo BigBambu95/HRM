@@ -1,0 +1,110 @@
+.worker-details {
+    flex: 3 1 75%;
+    background: #fff;
+    padding: 2em;
+    box-shadow: var(--main-shadow);
+    border-bottom-left-radius: 10px;
+    font-weight: var(--thin-weight);
+}
+
+.worker-details__header {
+    /*display: grid;*/
+    /*grid-template-columns: 195px 1fr 150px;*/
+    align-items: center;
+    margin-bottom: 3em;
+    font-size: var(--small-font);
+}
+
+.worker-details__content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+}
+
+.worker-details__content__left {
+    display: grid;
+    grid-template-areas: "worker-avatar worker-description"
+                         "worker-info worker-info";
+    grid-template-columns: 195px 1fr;
+}
+
+
+.worker-details__content__picture {
+    grid-area: worker-avatar;
+    width: 155px;
+    height: 200px;
+}
+
+.worker-details__content__picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.worker-details__content__description {
+    grid-area: worker-description;
+}
+
+.worker-details__content__description h3 {
+    margin-top: .55em;
+    font-weight: var(--thin-weight);
+}
+
+.worker-details__content__description > div {
+    margin-bottom: 2.3em;
+}
+
+.worker-details__content__description .record {
+    margin: .55em 0;
+}
+
+.worker-details__content__info {
+    grid-area: worker-info;
+}
+
+.worker-details__content__info__btn-group {
+    max-width: 230px;
+    justify-content: space-between;
+}
+
+.worker-details__content__right > div:not(:first-child) {
+    margin: 3em 0;
+}
+
+.worker-details__content__right h3 {
+    margin: .9em 0;
+}
+
+.worker-details__content__actions {
+    padding: 0 2.4em;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--main-border-radius);
+    text-align: center;
+}
+
+.worker-details__content__actions .worker-status {
+    margin: 1.5em 0;
+}
+
+.worker-details__content__actions__btn-group > * {
+    margin-bottom: 1em;
+}
+
+.worker-details__content__right .document,
+.worker-details__content__right .history__item {
+    display: flex;
+    justify-content: space-between;
+    margin: .7em 0;
+}
+
+.worker-details__content__right .document span {
+    display: flex;
+}
+.worker-details__content__right .document .download-link {
+    margin-left: 1em;
+}
+
+.worker-details__content__right .history__item .date {
+    font-size: var(--small-font);
+    color: var(--gray);
+}

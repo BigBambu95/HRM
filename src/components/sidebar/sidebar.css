@@ -1,0 +1,10 @@
+.sidebar {
+    z-index: 9;
+    max-width: 225px;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-flow: column wrap;
+    padding: 1em .75em 1em 0;
+    box-shadow: var(--main-shadow);
+    user-select: none;
+}

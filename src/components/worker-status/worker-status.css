@@ -1,0 +1,35 @@
+.worker-status {
+    display: inline-block;
+    position: relative;
+    margin: 0 1.5em;
+}
+
+.worker-status::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 5px);
+    left: -20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.worker-status.work::before {
+    background: #27AE60;
+}
+
+.worker-status.blue::before {
+    background: #4285F4;
+}
+
+.worker-status.orange::before {
+    background: #EB5757;
+}
+
+.worker-status.aqua::before {
+    background: #74EEEE;
+}
+
+.worker-status.yellow::before {
+    background: #F2C94C;
+}

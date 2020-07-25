@@ -1,0 +1,135 @@
+:root {
+    --purple: #CC00FF;
+    --dark-purple: #6C00BF;
+    --gray: #A3A3A3;
+    --light-gray: #DFDFDF;
+    --main-gradient: linear-gradient(135deg, #CC00FF 0%, #6B00BE 100%);
+    --transparent-gradient: linear-gradient(135deg, rgba(204, 0, 255, .5) 0%, rgba(107, 0, 190, .5) 100%);
+    --main-shadow: 0px 4px 20px rgba(0, 0, 0, .1);
+    --alternate-shadow: 0 -4px 20px rgba(0, 0, 0, .1);
+    --second-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    --main-font-family: Roboto, sans-serif;
+    --small-font: .85rem;
+    --normal-font: 1rem;
+    --big-font: 1.15rem;
+    --very-big-font: 1.3rem;
+    --thin-weight: 300;
+    --normal-weight: 500;
+    --bold-weight: 700;
+    --very-bold-weight: 900;
+    --main-border-radius: 10px;
+    --second-border-radius: 8px;
+}
+
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    outline: none;
+}
+
+
+html, body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    font-family: var(--main-font-family);
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 2.6rem;
+    line-height: 1.16;
+    font-weight: var(--very-bold-weight);
+    margin: 0;
+}
+
+h2 {
+    font-size: 2rem;
+    line-height: 1.16;
+    margin: 0;
+}
+
+h3 {
+    font-size: var(--very-big-font);
+    line-height: 1.16;
+    font-weight: var(--bold-weight);
+    margin: 0;
+}
+
+h4 {
+    font-size: var(--big-font);
+    line-height: 1.16;
+    font-weight: var(--normal-weight);
+    margin: 0;
+}
+
+
+a {
+    display: inherit;
+    color: inherit;
+    text-decoration: none;
+    user-select: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    user-select: none;
+}
+
+input {
+    border: none;
+}
+
+.responsive-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.HRM-app {
+    display: grid;
+    grid-template-areas:
+    "header header"
+    "sidebar content";
+    grid-template-columns: 225px 1fr;
+}
+
+.header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.content {
+    grid-area: content;
+    background: #F9F9F9;
+}
+

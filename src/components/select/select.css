@@ -1,0 +1,62 @@
+:root {
+    --select-height: 30px;
+}
+
+.select {
+    position: relative;
+    width: 140px;
+    height: var(--select-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6em .4em .6em .6em;
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    font-weight: var(--thin-weight);
+    white-space: nowrap;
+    user-select: none;
+    transition: .2s all;
+}
+
+.select:hover {
+ border-color: rgba(107, 0, 190, .5);
+}
+
+.select.active {
+    border-color: var(--purple);
+    background: transparent;
+}
+
+.select__current-item {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: var(--small-font);
+}
+
+.select__list {
+    display: none;
+    z-index: 10;
+    position: absolute;
+    top: var(--select-height);
+    left: 0;
+    min-width: 100%;
+    padding: 1em 0;
+    box-shadow: var(--second-shadow);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.select.active .select__list {
+    display: block;
+}
+
+.select__list__item {
+    padding: .6em;
+    cursor: pointer;
+    transition: .2s background;
+}
+
+.select__list__item:hover {
+    color: #fff;
+    background: var(--main-gradient);
+}

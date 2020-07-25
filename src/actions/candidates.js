@@ -1,0 +1,20 @@
+import C from '../contstants';
+
+const candidates = {
+    candidatesRequest: () => C.FETCH_CANDIDATES_REQUEST,
+    candidatesLoaded: (newCandidates) => {
+        return {
+            payload: newCandidates,
+            type: C.FETCH_CANDIDATES_SUCCESS
+        }
+    },
+    candidatesError: (err) => {
+        return {
+            payload: err,
+            type: C.FETCH_CANDIDATES_FAILURE
+        }
+    },
+
+};
+
+export default candidates;

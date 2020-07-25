@@ -1,0 +1,40 @@
+.input {
+    position: relative;
+    font-weight: var(--thin-weight);
+}
+
+.input__field {
+    height: 34px;
+    padding: 0 .85em;
+    border: 1px solid var(--gray);
+    border-radius: var(--second-border-radius);
+    font-size: var(--normal-font);
+}
+
+.input__label {
+    position: absolute;
+    top: 50%;
+    left: .9em;
+    transform: translateY(-50%);
+    padding: 0 5px;
+    background: #fff;
+    font-size: var( --small-font);
+    color: var( --gray);
+}
+
+.input__field:focus {
+    border-color: var(--dark-purple);
+}
+
+.input.focused .input__label {
+    transform: translateY(-160%);
+}
+
+.input__right-icon {
+    position: absolute;
+    top: 50%;
+    right: .9em;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+}

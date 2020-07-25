@@ -1,0 +1,95 @@
+.vacancies,
+.salary,
+.documents,
+.vacancy-detail,
+.candidates {
+    padding: 2em;
+}
+
+.workers {
+    display: flex;
+}
+
+.worker-list {
+    flex: 1 1 100%;
+    padding: 2em;
+}
+
+.worker-list.opened-worker {
+    max-width: 25%;
+}
+
+.worker-list.opened-worker .worker-list__item__left {
+    max-width: initial;
+}
+
+.worker-list.opened-worker .worker-list__item__right {
+    display: none;
+}
+
+.worker-list.opened-worker .filter-list__btn {
+    width: 100%;
+}
+
+.worker-list.opened-worker .filter-list__items {
+   width: 60%;
+}
+
+.worker-list.opened-worker .filter {
+    width: 100%;
+    margin: .5em 0;
+}
+
+.worker-list.opened-worker .filter:first-child {
+    margin-top: 1em;
+}
+
+.worker-list.opened-worker .tool-bar__group-item {
+    display: none;
+}
+
+.vacancy-list__modal-window h3 {
+    font-weight: var(--thin-weight);
+}
+
+.vacancy-list__modal-window__section {
+    margin-top: 6.85em;
+}
+
+.salary .table .table__body {
+    grid-template-columns: 1fr repeat(10, 8%);
+}
+
+.salary .table-row,
+.salary .table-sort-row {
+    grid-template-columns: 1fr repeat(10, 6%);
+    grid-gap: 2em;
+    justify-items: end;
+}
+
+.salary__footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 1em;
+    background: #fff;
+    box-shadow: var(--alternate-shadow);
+    border-radius: var(--main-border-radius);
+}
+
+.salary__footer__total-sum {
+    display: flex;
+    align-items: center;
+    margin: 0 3em;
+    font-size: var(--very-big-font);
+    font-weight: var(--bold-weight);
+}
+
+.documents .table-row {
+    grid-template-columns: 1fr 105px repeat(2, 50px) 75px 25px;
+    line-height: 0;
+}
+
+.candidate-list {
+    margin-top: 1.6em;
+}

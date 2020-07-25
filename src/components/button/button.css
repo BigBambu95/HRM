@@ -1,0 +1,86 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--normal-font);
+    font-weight: var(--thin-weight);
+    padding: 0.5em 1.7em;
+    border-radius: 8px;
+    color: #000;
+    white-space: nowrap;
+}
+
+.btn.red {
+    color: #EB5757;
+}
+
+.btn.medium {
+    padding: .65em 2em;
+    border-radius: var(--main-border-radius);
+}
+
+.btn.large {
+    padding: 1em 1.7em;
+    border-radius: var(--main-border-radius);
+}
+
+.btn.largeFont {
+    font-size: var(--big-font);
+    font-weight: var(--normal-weight);
+}
+
+.btn.solid {
+    background: var(--light-gray);
+}
+
+.btn.solid.purple {
+    background: var(--main-gradient);
+    color: #fff;
+}
+
+.btn.solid.purple:hover {
+    background: linear-gradient(130deg, var(--purple) 0%, var(--purple) 100%);
+}
+
+.btn.solid.purple:active {
+    background: linear-gradient(130deg, var(--dark-purple) 0%, var(--dark-purple) 100%);
+}
+
+.btn.outlined {
+    border: 1px solid var(--gray);
+}
+
+.btn.outlined.green {
+    border-color: #27AE60;
+}
+
+.btn.outlined.red {
+    border-color: #EB5757;
+}
+
+.btn.outlined.aqua {
+    border-color: #74EEEE;
+}
+
+.btn.outlined.purple {
+    border-color: var(--purple);
+}
+
+.btn.outlined.purple:hover {
+    color: #fff;
+    background: var(--purple);
+}
+
+.btn.outlined.purple:active {
+    color: #fff;
+    background: var(--dark-purple);
+}
+
+.btn.icon,
+.btn.text {
+    padding: 0;
+}
+
+.btn.icon:hover path {
+    fill: var(--purple);
+}

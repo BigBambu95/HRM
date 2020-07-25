@@ -1,0 +1,19 @@
+.toast {
+    z-index: 90;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    padding: 1.15em 1.7em;
+    border-radius: var(--main-border-radius);
+    background: rgba(51, 51, 51, 0.8);
+    color: #fff;
+    font-weight: var(--thin-weight);
+    user-select: none;
+}
+
+.toast .btn {
+    margin-left: 1em;
+}

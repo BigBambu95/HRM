@@ -1,0 +1,6 @@
+.worker-status-panel {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2em 0;
+
+}

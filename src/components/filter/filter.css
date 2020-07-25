@@ -1,0 +1,12 @@
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 1.4em;
+}
+
+.filter__label {
+    margin-right: 1em;
+    font-size: var(--small-font);
+    font-weight: var(--thin-weight);
+}

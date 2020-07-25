@@ -1,0 +1,12 @@
+.table-row {
+    display: grid;
+    align-items: center;
+    padding: 1em 0;
+    border-bottom: 1px solid var(--light-gray);
+    font-weight: 300;
+}
+
+
+.table-row:last-child {
+    border: none;
+}

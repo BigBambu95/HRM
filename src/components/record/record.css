@@ -1,0 +1,7 @@
+.record span {
+    color: #B1B1B1;
+}
+
+.record:not(:first-child):not(:last-child) {
+    margin: .6em 0;
+}
