@@ -7,23 +7,25 @@ import Button from "../button";
 
 class Select extends Component {
 
-
     static propTypes = {
         items: PropTypes.array.isRequired,
         icon: PropTypes.node,
-        getSelectValue: PropTypes.func
+        getSelectValue: PropTypes.func,
+        defaultValue: PropTypes.string
     };
-
 
     static defaultProps = {
         items: [],
         icon: <ArrowDownIcon />,
-        getSelectValue: function() {}
+        getSelectValue: function() {},
+        defaultValue: ''
     };
 
     state = {
         isOpen: false,
         selectValue: {
+            value: this.props.defaultValue,
+            label: this.props.defaultValue
         }
     };
 
@@ -64,12 +66,9 @@ class Select extends Component {
     };
 
     render() {
-
-
         const selectClassNames = this.state.isOpen ? 'select active' : 'select';
 
-        const selectList = this.props.items.map((item, idx) => {
-        return(
+        const selectList = this.props.items.map((item, idx) => (
             <li key={idx}
                 className="select__list__item"
                 onClick={() => this.chooseItem(item.value || item, item.label || item )}
@@ -77,7 +76,7 @@ class Select extends Component {
                 {item.label || item}
             </li>
         )
-    });
+    );
 
 
     return(

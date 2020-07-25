@@ -57,17 +57,33 @@ const VacancyContainer = (props) => {
 
     const candidateLists = (
         <Grid columns={4} gap="2em">
-            <CandidateList title="Рассмотрение резюме" items={reviewSummaryCandidates} editItem={editCandidate}
-                           archiveItem={archiveCandidate} archiveAllItems={archiveAllCandidates}
+            <CandidateList 
+                title="Рассмотрение резюме" 
+                items={reviewSummaryCandidates} 
+                editItem={editCandidate}        
+                archiveItem={archiveCandidate} 
+                archiveAllItems={archiveAllCandidates}
             />
-            <CandidateList title="Телефонное интервью" items={phoneCandidates} editItem={editCandidate}
-                           archiveItem={archiveCandidate} archiveAllItems={archiveAllCandidates}
+            <CandidateList 
+                title="Телефонное интервью" 
+                items={phoneCandidates} 
+                editItem={editCandidate}
+                archiveItem={archiveCandidate} 
+                archiveAllItems={archiveAllCandidates}
             />
-            <CandidateList title="Собеседование" items={interviewCandidates} editItem={editCandidate}
-                           archiveItem={archiveCandidate} archiveAllItems={archiveAllCandidates}
+            <CandidateList 
+                title="Собеседование" 
+                items={interviewCandidates} 
+                editItem={editCandidate}
+                archiveItem={archiveCandidate} 
+                archiveAllItems={archiveAllCandidates}
             />
-            <CandidateList title="Кандидаты" items={finalCandidates} editItem={editCandidate}
-                           archiveItem={archiveCandidate} archiveAllItems={archiveAllCandidates}
+            <CandidateList 
+                title="Кандидаты" 
+                items={finalCandidates} 
+                editItem={editCandidate}
+                archiveItem={archiveCandidate} 
+                archiveAllItems={archiveAllCandidates}
             />
         </Grid>
     );

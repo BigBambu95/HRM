@@ -21,8 +21,9 @@ import {SearchIcon} from "../svg";
 
 
 const VacancyListContainer = ({
-    filteredVacancies, vacancyProfessions, vacancyOffices, fetchOffices,
-    setFilterProfessionValue, setFilterOfficeValue, deleteVacancy, addTab
+    filteredVacancies, vacancyProfessions, vacancyOffices,
+    setFilterProfessionValue, setFilterOfficeValue, deleteVacancy, 
+    addTab, filterOffice, filterProfession
 }) => {
 
 
@@ -49,8 +50,18 @@ const VacancyListContainer = ({
         <Fragment>
             <ToolBar>
                 <FilterList>
-                    <Filter label="Должность" items={vacancyProfessions.concat('Все')} filter={setFilterProfessionValue} />
-                    <Filter label="Офис" items={vacancyOffices.concat('Все')} filter={setFilterOfficeValue}  />
+                    <Filter 
+                        label="Должность" 
+                        items={vacancyProfessions.concat('Все')} 
+                        filter={setFilterProfessionValue} 
+                        defaultValue={filterProfession} 
+                    />
+                    <Filter 
+                        label="Офис" 
+                        items={vacancyOffices.concat('Все')} 
+                        filter={setFilterOfficeValue} 
+                        defaultValue={filterOffice}
+                    />
                 </FilterList>
                 <Button variant="outlined" color="purple" clickHandler={() => setIsOpenModal(true)}>Добавить вакансию</Button>
             </ToolBar>
