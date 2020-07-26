@@ -49,7 +49,7 @@ const WorkerListContainer = ({
 	}, [match.params.id])
 
 	const columns = isWorker ? 1 : 2
-	const workerDetails = isWorker ? <WorkerContainer /> : null
+	const workerDetails = isWorker && <WorkerContainer />
 	const clazz = isWorker ? 'worker-list opened-worker' : 'worker-list'
 
 	const workerList = filteredWorkers.map((worker) => {

@@ -1,9 +1,9 @@
 import React from 'react'
 import Button from '../button'
 
-const ContextMenuItem = ({ handleClick, icon, children }) => (
+const ContextMenuItem = ({ onClick, icon, children }) => (
 	<span className="context-menu__list__item">
-		<Button onClick={handleClick} variant="icon">
+		<Button onClick={onClick} variant="icon">
 			{icon}
 			{children}
 		</Button>

@@ -9,7 +9,7 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
     profession, url, office, date, quickly = false,
   } = item;
 
-  const fireIcon = quickly ? <FireIcon /> : null;
+  const fireIcon = quickly && <FireIcon />
 
   return (
     <div className="vacancy-list__item">
@@ -22,7 +22,6 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
           <div className="label">Крайний срок до:</div>
           <div className="vacancy-list__item__date">
             {fireIcon}
-            {' '}
             {date}
           </div>
         </div>
@@ -40,7 +39,6 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
         >
           Удалить
         </ContextMenuItem>
-
       </ContextMenu>
     </div>
   );
