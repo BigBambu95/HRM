@@ -1,35 +1,31 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-
 const ItemList = (props) => {
+  const { View, items, classNames } = props;
 
-    const { View, items, classNames } = props;
-
-    return(
-        <div className={classNames}>
-            {
-                items.map(item => {
-                    return(
-                        <Fragment key={item.id}>
-                            <View item={item} {...props} />
-                        </Fragment>
-                    )
-                })
+  return (
+    <div className={classNames}>
+      {
+                items.map((item) => (
+                  <Fragment key={item.id}>
+                    <View item={item} {...props} />
+                  </Fragment>
+                ))
             }
-        </div>
-    )
+    </div>
+  );
 };
 
 ItemList.defaultProps = {
   items: [],
-  classNames: ''
+  classNames: '',
 };
 
 ItemList.propTypes = {
   View: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
-  classNames: PropTypes.string
+  classNames: PropTypes.string,
 };
 
 export default ItemList;

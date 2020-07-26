@@ -1,33 +1,25 @@
 import React, { Component } from 'react';
-import Spinner from "../spinner";
-import ErrorIndicator from "../error-indicator";
+import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 
+const withData = (getData) => (View) => class extends Component {
+  componentDidMount() {
+    this.props[getData]();
+  }
 
-const withData = (getData) => View => {
-   return class extends Component {
+  render() {
+    const { loading, error } = this.props;
 
-       componentDidMount() {
-           this.props[getData]();
-       }
+    if (loading) {
+      return <Spinner />;
+    }
 
-       render() {
+    if (error) {
+      return <ErrorIndicator />;
+    }
 
-           const {loading, error} = this.props;
-
-           if (loading) {
-               return <Spinner/>;
-           }
-
-           if (error) {
-               return <ErrorIndicator/>;
-           }
-
-
-           return <View  {...this.props} />;
-       }
-
-   }
+    return <View {...this.props} />;
+  }
 };
-
 
 export default withData;

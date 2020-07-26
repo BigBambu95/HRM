@@ -9,13 +9,13 @@ import Candidates from './candidates';
 
 import './pages.css';
 
-export  {
-    Workers,
-    Vacancies,
-    Calendar,
-    Documents,
-    Salary,
-    Vacancy,
-    Archive,
-    Candidates
-}
+export {
+  Workers,
+  Vacancies,
+  Calendar,
+  Documents,
+  Salary,
+  Vacancy,
+  Archive,
+  Candidates,
+};

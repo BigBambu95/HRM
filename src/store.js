@@ -4,15 +4,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducer from './reducers';
 
-const logMiddleware = () => next => action => {
+const logMiddleware = () => (next) => (action) => {
   console.log(action.type);
   return next(action);
 };
 
-const stringMiddleware = () => next => action => {
-  if(typeof action === 'string') {
+const stringMiddleware = () => (next) => (action) => {
+  if (typeof action === 'string') {
     return next({
-      type: action
+      type: action,
     });
   }
 
@@ -20,10 +20,10 @@ const stringMiddleware = () => next => action => {
 };
 
 const store = createStore(
-    reducer,
-    composeWithDevTools(
-        applyMiddleware(thunk, stringMiddleware),
-    )
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(thunk, stringMiddleware),
+  ),
 );
 
 export default store;

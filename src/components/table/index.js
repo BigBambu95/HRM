@@ -4,6 +4,6 @@ import TableColumn from './table-column';
 import './table.css';
 
 export {
-    Table,
-    TableColumn
-}
+  Table,
+  TableColumn,
+};

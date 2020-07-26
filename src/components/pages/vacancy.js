@@ -1,17 +1,10 @@
 import React from 'react';
-import VacansyContainer from "../../containers/vacancy-container";
+import VacansyContainer from '../../containers/vacancy-container';
 
-
-
-const Vacancy = () => {
-    return(
-        <section className="vacancy-detail">
-            <VacansyContainer />
-        </section>
-    )
-
-};
-
+const Vacancy = () => (
+  <section className="vacancy-detail">
+    <VacansyContainer />
+  </section>
+);
 
 export default Vacancy;
-

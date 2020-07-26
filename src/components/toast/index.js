@@ -1,8 +1,8 @@
-import {Toast, pushToast} from './toast';
+import { Toast, pushToast } from './toast';
 
 import './toast.css';
 
 export {
-    Toast,
-    pushToast
-}
+  Toast,
+  pushToast,
+};

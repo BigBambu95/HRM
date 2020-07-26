@@ -1,14 +1,12 @@
 const filterArr = (items, ...filters) => {
-    const filteredItems = items.filter(item => {
-        let values = Object.values(item);
-        return filters.every(filter => {
-            return values.includes(filter) || filter === 'Все';
-        });
-    });
+  const filteredItems = items.filter((item) => {
+    const values = Object.values(item);
+    return filters.every((filter) => values.includes(filter) || filter === 'Все');
+  });
 
-    return filteredItems;
+  return filteredItems;
 };
 
 export {
-    filterArr
-}
+  filterArr,
+};

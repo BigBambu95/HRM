@@ -1,18 +1,12 @@
 import React from 'react';
-import { HRMServiceConsumer } from "../hrm-service-context";
+import { HRMServiceConsumer } from '../hrm-service-context';
 
-const withHRMService = () => Wrapped => {
-  return (props) => {
-      return(
-          <HRMServiceConsumer>
-              {
-                  (hrmService) => {
-                      return <Wrapped {...props} hrmService={hrmService} />
-                  }
+const withHRMService = () => (Wrapped) => (props) => (
+  <HRMServiceConsumer>
+    {
+                  (hrmService) => <Wrapped {...props} hrmService={hrmService} />
               }
-          </HRMServiceConsumer>
-      )
-  }
-};
+  </HRMServiceConsumer>
+);
 
 export default withHRMService;
