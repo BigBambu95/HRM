@@ -19,6 +19,8 @@
     --very-bold-weight: 900;
     --main-border-radius: 10px;
     --second-border-radius: 8px;
+    --base-padding: 8px;
+    --base-margin: 8px;
 }
 
 
@@ -38,31 +40,28 @@ html, body {
     margin: 0;
     font-family: var(--main-font-family);
     font-size: 14px;
+    line-height: 1.5;
 }
 
 h1 {
     font-size: 2.6rem;
-    line-height: 1.16;
     font-weight: var(--very-bold-weight);
     margin: 0;
 }
 
 h2 {
     font-size: 2rem;
-    line-height: 1.16;
     margin: 0;
 }
 
 h3 {
     font-size: var(--very-big-font);
-    line-height: 1.16;
     font-weight: var(--bold-weight);
     margin: 0;
 }
 
 h4 {
     font-size: var(--big-font);
-    line-height: 1.16;
     font-weight: var(--normal-weight);
     margin: 0;
 }

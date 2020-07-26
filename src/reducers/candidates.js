@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const candidateList = (state, action) => {
   if (state === undefined) {

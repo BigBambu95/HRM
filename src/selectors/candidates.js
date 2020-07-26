@@ -1,5 +1,3 @@
-export const getCandidatesSelector = (vacancy) => vacancy.candidates;
-
 export const getReviewSummaryCandidatesSelector = ({ candidates = [] }) => candidates.filter((item) => item.status.toLowerCase() === 'рассмотрение резюме');
 
 export const getPhoneCandidatesSelector = ({ candidates = [] }) => candidates.filter((item) => item.status.toLowerCase() === 'телефонное интервью');

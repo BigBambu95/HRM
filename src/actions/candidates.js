@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const candidates = {
   candidatesRequest: () => C.FETCH_CANDIDATES_REQUEST,

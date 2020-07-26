@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -6,108 +7,33 @@ import { withRouter } from 'react-router-dom'
 import { withData, withHRMService } from '../../components/hoc'
 
 import {
-	getCandidatesSelector,
 	getFinalCandidatesSelector,
 	getInterviewCandidatesSelector,
 	getPhoneCandidatesSelector,
 	getReviewSummaryCandidatesSelector,
 } from '../../selectors/candidates'
 
-import { candidates, vacancies } from '../../actions'
-import { ContextMenu, ContextMenuItem } from '../../components/context-menu'
-import CandidateListItem from '../../components/candidate-list-item'
+import { vacancies } from '../../actions'
+import CandidateList from './candidate-list'
 import { ToolBar, ToolBarGroupItem } from '../../components/tool-bar'
 import Button from '../../components/button'
 import Grid from '../../components/grid'
-import {
-	ArchiveIcon,
-	PencilIcon,
-	RemoveBasketIcon,
-	VacancyIcon,
-} from '../../svg'
+import FilterList from '../../components/filter-list'
+import Filter from '../../components/filter'
+import { PencilIcon, RemoveBasketIcon } from '../../svg'
 import { pushToast } from '../../components/toast'
 
-const CandidateList = (props) => {
-	const { items, archiveAllItems, title } = props
-
-	if (items.length === 0) {
-		return null
-	}
-
-	return (
-		<div>
-			<div className="flex justify-content-between">
-				<h4>{title}</h4>
-				<ContextMenu iconVariant="horizontal">
-					<ContextMenuItem
-						icon={<ArchiveIcon width={16} height={16} />}
-						handleClick={() => archiveAllItems(items)}
-					>
-						Архивировать всех
-					</ContextMenuItem>
-					<ContextMenuItem
-						icon={<VacancyIcon width={16} height={16} />}
-						handleClick={() => archiveAllItems(items)}
-					>
-						Добавить резюме
-					</ContextMenuItem>
-				</ContextMenu>
-			</div>
-			<Grid columns={1} gap="2em" style={{ marginTop: '2em' }}>
-				{items?.map((item) => (
-					<CandidateListItem key={item.id} item={item} {...props} />
-				))}
-			</Grid>
-		</div>
-	)
-}
-
-const VacancyContainer = (props) => {
-	const {
-		candidates,
-		reviewSummaryCandidates,
-		phoneCandidates,
-		interviewCandidates,
-		finalCandidates,
-		editCandidate,
-		archiveCandidate,
-		archiveAllCandidates,
-		deleteVacancy,
-	} = props
-
-	const candidateLists = (
-		<Grid columns={4} gap="2em">
-			<CandidateList
-				title="Рассмотрение резюме"
-				items={reviewSummaryCandidates}
-				editItem={editCandidate}
-				archiveItem={archiveCandidate}
-				archiveAllItems={archiveAllCandidates}
-			/>
-			<CandidateList
-				title="Телефонное интервью"
-				items={phoneCandidates}
-				editItem={editCandidate}
-				archiveItem={archiveCandidate}
-				archiveAllItems={archiveAllCandidates}
-			/>
-			<CandidateList
-				title="Собеседование"
-				items={interviewCandidates}
-				editItem={editCandidate}
-				archiveItem={archiveCandidate}
-				archiveAllItems={archiveAllCandidates}
-			/>
-			<CandidateList
-				title="Кандидаты"
-				items={finalCandidates}
-				editItem={editCandidate}
-				archiveItem={archiveCandidate}
-				archiveAllItems={archiveAllCandidates}
-			/>
-		</Grid>
-	)
-
+const VacancyContainer = ({
+	candidates = [],
+	reviewSummaryCandidates,
+	phoneCandidates,
+	interviewCandidates,
+	finalCandidates,
+	editCandidate,
+	archiveCandidate,
+	archiveAllCandidates,
+	deleteVacancy,
+}) => {
 	if (candidates.length === 0) {
 		return <h4>На данную вакансию пока нет кандидатов!</h4>
 	}
@@ -127,13 +53,46 @@ const VacancyContainer = (props) => {
 					</Button>
 				</ToolBarGroupItem>
 			</ToolBar>
-			{candidateLists}
+			<Grid columns={4} gap="2em">
+				<CandidateList
+					title="Рассмотрение резюме"
+					items={reviewSummaryCandidates}
+					editItem={editCandidate}
+					archiveItem={archiveCandidate}
+					archiveAllItems={archiveAllCandidates}
+				/>
+				<CandidateList
+					title="Телефонное интервью"
+					items={phoneCandidates}
+					editItem={editCandidate}
+					archiveItem={archiveCandidate}
+					archiveAllItems={archiveAllCandidates}
+				/>
+				<CandidateList
+					title="Собеседование"
+					items={interviewCandidates}
+					editItem={editCandidate}
+					archiveItem={archiveCandidate}
+					archiveAllItems={archiveAllCandidates}
+				/>
+				<CandidateList
+					title="Кандидаты"
+					items={finalCandidates}
+					editItem={editCandidate}
+					archiveItem={archiveCandidate}
+					archiveAllItems={archiveAllCandidates}
+				/>
+			</Grid>
 		</>
 	)
 }
 
+VacancyContainer.propTypes = {
+	candidates: PropTypes.array.isRequired,
+}
+
 const mapStateToProps = ({ vacancyList: { vacancy, loading, error } }) => ({
-	candidates: getCandidatesSelector(vacancy),
+	candidates: vacancy.candidates,
 	reviewSummaryCandidates: getReviewSummaryCandidatesSelector(vacancy),
 	phoneCandidates: getPhoneCandidatesSelector(vacancy),
 	interviewCandidates: getInterviewCandidatesSelector(vacancy),

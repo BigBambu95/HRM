@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const worker = {
   workerRequest: () => C.FETCH_WORKER_REQUEST,

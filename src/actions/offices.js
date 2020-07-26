@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const offices = {
   officesRequest: () => C.FETCH_OFFICES_REQUEST,

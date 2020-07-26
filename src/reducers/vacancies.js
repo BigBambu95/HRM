@@ -1,5 +1,4 @@
-import C from '../contstants';
-import candidateList from './candidates';
+import C from '../constants';
 
 const vacancyList = (state, action) => {
   if (state === undefined) {

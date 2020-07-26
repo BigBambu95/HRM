@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const vacancies = {
   vacanciesRequest: () => C.FETCH_VACANCIES_REQUEST,
@@ -49,6 +49,7 @@ const vacancies = {
     payload: newArchiveCandidates,
     type: C.ARCHIVE_VACANCY_CANDIDATES,
   }),
+
 };
 
 export default vacancies;

@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const documents = {
   documentsRequest: () => C.FETCH_DOCUMENTS_REQUEST,
