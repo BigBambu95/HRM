@@ -1,12 +1,10 @@
 import React from 'react';
-import { DocumentTableContainer } from "../../containers";
+import { DocumentTableContainer } from '../../containers';
 
-const Documents = () => {
-  return(
-      <section className="documents">
-          <DocumentTableContainer />
-      </section>
-  )
-};
+const Documents = () => (
+  <section className="documents">
+    <DocumentTableContainer />
+  </section>
+);
 
 export default Documents;

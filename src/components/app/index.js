@@ -1,5 +1,5 @@
 import app from './app';
 
-import "./app.css";
+import './app.css';
 
 export default app;

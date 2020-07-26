@@ -1,23 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const TableRow = ({ data, children }) => {
-
-  return(
-      <div className="table-row">
-          {
-              React.Children.map(children, child => {
-                return React.cloneElement(child, { data });
-              })
+const TableRow = ({ data, children }) => (
+  <div className="table-row">
+    {
+              React.Children.map(children, (child) => React.cloneElement(child, { data }))
           }
-      </div>
-  )
-};
+  </div>
+);
 
 TableRow.propTypes = {
-    data: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired
+  data: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default TableRow;

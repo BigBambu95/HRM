@@ -1,35 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TableCell from './table-cell';
-import Button from "../button";
-import {ArrowDownIcon} from "../../svg";
+import Button from '../button';
+import { ArrowDownIcon } from '../../svg';
 
-const TableColumn = ({data, label}) => {
+const TableColumn = ({ data, label }) => {
+  const cells = data.map((cell, idx) => <TableCell key={idx}>{cell}</TableCell>);
 
-    const cells = data.map((cell, idx) => {
-
-
-        return <TableCell key={idx}>{cell}</TableCell>;
-    });
-
-    return(
-        <div className="table-column">
-            <div className="table-column__label">
-                <Button variant="icon">{label} <ArrowDownIcon /></Button>
-            </div>
-            {cells}
-        </div>
-    )
+  return (
+    <div className="table-column">
+      <div className="table-column__label">
+        <Button variant="icon">
+          {label}
+          {' '}
+          <ArrowDownIcon />
+        </Button>
+      </div>
+      {cells}
+    </div>
+  );
 };
 
 TableColumn.propTypes = {
   data: PropTypes.array.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
 };
 
 TableColumn.defaultProps = {
   data: [],
-  label: ''
+  label: '',
 };
 
 export default TableColumn;
