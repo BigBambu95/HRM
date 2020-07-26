@@ -38,7 +38,7 @@ const ModalWindow = ({
       <div className={modalWindowClass} style={styles}>
         <div className="modal-window__header">
           <h2>{title}</h2>
-          <Button variant="icon" classname="modal-window__close-btn" clickHandler={onCancel}>
+          <Button variant="icon" classname="modal-window__close-btn" onClick={onCancel}>
             <CloseIcon />
           </Button>
         </div>
@@ -58,7 +58,7 @@ const ModalWindow = ({
             variant="outlined"
             color="purple"
             size="large"
-            clickHandler={onCancel}
+            onClick={onCancel}
           >
             Отменить
           </Button>

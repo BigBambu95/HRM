@@ -10,7 +10,7 @@ const TabBarNav = ({ children, setActiveTab, className }) => {
   );
 
   return (
-    <Button classname={btnClass} clickHandler={() => setActiveTab(children)}>
+    <Button classname={btnClass} onClick={() => setActiveTab(children)}>
       {children}
     </Button>
   );

@@ -14,7 +14,7 @@ const PageTabListItem = ({
     </div>
   ) : null;
   const renderOffice = office ? <div className="tab-list__item__office">{office}</div> : null;
-  const arrowBack = office || prevPage ? <Button variant="icon" classname="tab-list__item__back" clickHandler={() => history.goBack()}><BackIcon /></Button> : null;
+  const arrowBack = office || prevPage ? <Button variant="icon" classname="tab-list__item__back" onClick={() => history.goBack()}><BackIcon /></Button> : null;
   const styles = prevPage || office ? { padding: '.35em .5em' } : null;
 
   const isActive = location.pathname === path;
@@ -28,7 +28,7 @@ const PageTabListItem = ({
         {renderPrevPage}
         <div className="flex align-items-center">
           <Link to={path}>{label}</Link>
-          <Button variant="icon" classname="close-btn" clickHandler={() => removeTab(idx)}>
+          <Button variant="icon" classname="close-btn" onClick={() => removeTab(idx)}>
             <CloseIcon width={16} height={16} />
           </Button>
         </div>
