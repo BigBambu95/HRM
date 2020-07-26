@@ -46,7 +46,7 @@ const SidebarLink = ({
             {children}
           </span>
         </Link>
-        <Button clickHandler={() => showSubMenu(!isShowSubMenu)} classname={arrowClassNames} variant="icon">
+        <Button onClick={() => showSubMenu(!isShowSubMenu)} classname={arrowClassNames} variant="icon">
           {arrow}
         </Button>
       </div>

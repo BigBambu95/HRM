@@ -40,7 +40,7 @@ const WorkerDetails = ({ worker, closeWorker }) => {
     <div className="worker-details">
       <header className="worker-details__header">
         <ToolBar>
-          <Button clickHandler={closeWorker} variant="icon">
+          <Button onClick={closeWorker} variant="icon">
             <BackIcon />
           </Button>
           <div>

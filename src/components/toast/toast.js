@@ -14,7 +14,7 @@ export const Toast = ({
   return (
     <div className="toast">
       <span>{children}</span>
-      <Button variant="icon" clickHandler={() => setIsOpen(false)}>
+      <Button variant="icon" onClick={() => setIsOpen(false)}>
         <CloseIcon width={16} height={16} fill="#a3a3a3" />
       </Button>
     </div>
