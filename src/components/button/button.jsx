@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Button = ({
-  children, clickHandler, size, font, variant, color, width, classname,
+  children, onClick, size,
+  font, variant, color, width,
+  classname,
 }) => {
   const btnClass = classNames(
     'btn',
@@ -19,15 +21,17 @@ const Button = ({
   };
 
   return (
-    <button className={btnClass} onClick={clickHandler} style={styles}>
+    <button className={btnClass} onClick={onClick} style={styles}>
       {children}
     </button>
   );
 };
 
 Button.defaultProps = {
+  width: 'auto',
+  classname: '',
   children: null,
-  clickHandler() {},
+  onClick() {},
   size: '',
   variant: '',
   color: '',
@@ -35,8 +39,10 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  width: PropTypes.string,
+  classname: PropTypes.string,
   children: PropTypes.node,
-  clickHandler: PropTypes.func,
+  onClick: PropTypes.func,
   size: PropTypes.string,
   variant: PropTypes.string,
   color: PropTypes.string,

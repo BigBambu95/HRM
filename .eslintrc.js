@@ -22,5 +22,11 @@ module.exports = {
     'react',
   ],
   rules: {
+    "react/jsx-props-no-spreading": [<enabled>, {
+        "html": "ignore" | "enforce",
+        "custom": "ignore" | "enforce",
+        "explicitSpread": "ignore" | "enforce",
+        "exceptions": [<string>]
+    }]
   },
 };
