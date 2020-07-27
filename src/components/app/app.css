@@ -40,29 +40,32 @@ html, body {
     margin: 0;
     font-family: var(--main-font-family);
     font-size: 14px;
-    line-height: 1.5;
 }
 
 h1 {
     font-size: 2.6rem;
     font-weight: var(--very-bold-weight);
+    line-height: 1.5;
     margin: 0;
 }
 
 h2 {
     font-size: 2rem;
+    line-height: 1.5;
     margin: 0;
 }
 
 h3 {
     font-size: var(--very-big-font);
     font-weight: var(--bold-weight);
+    line-height: 1.5;
     margin: 0;
 }
 
 h4 {
     font-size: var(--big-font);
     font-weight: var(--normal-weight);
+    line-height: 1.5;
     margin: 0;
 }
 

@@ -1,11 +1,6 @@
-const filterArr = (items, ...filters) => {
-  const filteredItems = items.filter((item) => {
-    const values = Object.values(item);
-    return filters.every((filter) => values.includes(filter) || filter === 'Все');
-  });
-
-  return filteredItems;
-};
+const filterArr = (items, ...filters) => (
+  items.filter((item) => filters.every((filter) => Object.values(item).includes(filter) || filter === 'Все'))
+)
 
 export {
   filterArr,
