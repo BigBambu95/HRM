@@ -1,38 +1,44 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-
-import { withData, withHRMService } from '../components/hoc'
-import { vacancies, addTab, offices } from '../actions'
+import React, { useState, useContext, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { vacancies, addTab } from 'actions'
 import {
 	getFilteredVacancies,
 	getVacancyProfessions,
 	getVacancyOffices,
 } from '../selectors'
+import VacancyListItem from 'components/vacancy-list-item'
+import Filter from 'components/filter'
+import FilterList from 'components/filter-list'
+import { ToolBar } from 'components/tool-bar'
+import { 
+	Input, Select, Grid, Button, 
+	ModalWindow, HRMServiceContext, Spinner 
+} from 'components'
+import { SearchIcon } from 'svg'
 
-import VacancyListItem from '../components/vacancy-list-item'
-import Filter from '../components/filter'
-import FilterList from '../components/filter-list'
-import { ToolBar } from '../components/tool-bar'
-import Button from '../components/button'
-import ModalWindow from '../components/modal-window'
-import Grid from '../components/grid'
-import Select from '../components/select'
-import Input from '../components/input'
-import { SearchIcon } from '../svg'
 
-const VacancyListContainer = ({
-	filteredVacancies,
-	vacancyProfessions,
-	vacancyOffices,
-	setFilterProfessionValue,
-	setFilterOfficeValue,
-	deleteVacancy,
-	addTab,
-	filterOffice,
-	filterProfession,
-}) => {
+const VacancyListContainer = () => {
+
+	// Redux
+	const dispatch = useDispatch()
+	const filterOffice = useSelector((state) => state.vacancyList.filterOffice)
+	const filterProfession = useSelector((state) => state.vacancyList.filterProfession)
+	const filteredVacancies = useSelector((state) => getFilteredVacancies(state))
+	const vacancyProfessions = useSelector((state) => getVacancyProfessions(state))
+	const vacancyOffices = useSelector((state) => getVacancyOffices(state))
+	const loading = useSelector((state) => state.vacancyList.loading)
+
+	const hrmService = useContext(HRMServiceContext)
+	const [isOpenModal, setIsOpenModal] = useState(false)
+
+	useEffect(() => {
+		dispatch(vacancies.vacanciesRequest())
+		hrmService
+			.getVacancies()
+			.then((data) => dispatch(vacancies.vacanciesLoaded(data)))
+			.catch((err) => dispatch(vacancies.vacanciesError(err)))
+	}, [])
+	
 	const vacancyTemplates = [
 		'UI/UX дизайнер',
 		'Менеджер проектов',
@@ -48,8 +54,8 @@ const VacancyListContainer = ({
 		<VacancyListItem
 			key={vacancy.id}
 			item={vacancy}
-			addTab={addTab}
-			deleteItem={deleteVacancy}
+			addTab={(label, path, office, prevPage) => dispatch(addTab(label, path, office, prevPage))}
+			deleteItem={(url) => dispatch(vacancies.removeVacancy(url))}
 		/>
 	))
 
@@ -62,7 +68,7 @@ const VacancyListContainer = ({
 			</Grid>
 		)
 
-	const [isOpenModal, setIsOpenModal] = useState(false)
+	if(loading) return <Spinner />
 
 	return (
 		<>
@@ -71,13 +77,13 @@ const VacancyListContainer = ({
 					<Filter
 						label="Должность"
 						items={vacancyProfessions.concat('Все')}
-						filter={setFilterProfessionValue}
+						filter={(val) => dispatch(vacancies.setFilterProfessionValue(val))}
 						defaultValue={filterProfession}
 					/>
 					<Filter
 						label="Офис"
 						items={vacancyOffices.concat('Все')}
-						filter={setFilterOfficeValue}
+						filter={(val) => dispatch(vacancies.setFilterOfficeValue(val))}
 						defaultValue={filterOffice}
 					/>
 				</FilterList>
@@ -138,71 +144,4 @@ const VacancyListContainer = ({
 	)
 }
 
-VacancyListContainer.propTypes = {
-	filterOffice: PropTypes.string.isRequired,
-	filterProfession: PropTypes.string.isRequired,
-	filteredVacancies: PropTypes.array.isRequired,
-	vacancyProfessions: PropTypes.array.isRequired,
-	vacancyOffices: PropTypes.array.isRequired,
-	loading: PropTypes.bool.isRequired,
-	error: PropTypes.object,
-}
-
-const mapStateToProps = (state) => ({
-	filterOffice: state.vacancyList.filterOffice,
-	filterProfession: state.vacancyList.filterProfession,
-	filteredVacancies: getFilteredVacancies(state),
-	vacancyProfessions: getVacancyProfessions(state),
-	vacancyOffices: getVacancyOffices(state),
-	loading: state.vacancyList.loading,
-	error: state.vacancyList.error,
-})
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-	const { hrmService } = ownProps
-	const {
-		vacanciesRequest,
-		vacanciesLoaded,
-		vacanciesError,
-		removeVacancy,
-		setFilterProfessionValue,
-		setFilterOfficeValue,
-	} = vacancies
-	const { officesRequest, officesLoaded, officesError } = offices
-
-	return {
-		fetchVacancies: () => {
-			dispatch(vacanciesRequest())
-			hrmService
-				.getVacancies()
-				.then((data) => dispatch(vacanciesLoaded(data)))
-				.catch((err) => dispatch(vacanciesError(err)))
-		},
-		fetchOffices: () => {
-			dispatch(officesRequest())
-			hrmService
-				.getOffices()
-				.then((data) => dispatch(officesLoaded(data)))
-				.catch((err) => dispatch(officesError(err)))
-		},
-		setFilterProfessionValue: (val) => dispatch(setFilterProfessionValue(val)),
-		setFilterOfficeValue: (val) => dispatch(setFilterOfficeValue(val)),
-		deleteVacancy: (url) => dispatch(removeVacancy(url)),
-		addTab: (label, path, office, prevPage) => {
-			dispatch(
-				addTab({
-					label,
-					path,
-					office,
-					prevPage,
-				})
-			)
-		},
-	}
-}
-
-export default compose(
-	withHRMService(),
-	connect(mapStateToProps, mapDispatchToProps),
-	withData('fetchVacancies')
-)(VacancyListContainer)
+export default VacancyListContainer
