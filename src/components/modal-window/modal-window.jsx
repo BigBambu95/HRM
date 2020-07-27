@@ -50,6 +50,7 @@ const ModalWindow = ({
             variant="solid"
             color="purple"
             size="large"
+            fullWidth
             onClick={onSubmit}
           >
             {submitBtnLabel}
@@ -58,6 +59,7 @@ const ModalWindow = ({
             variant="outlined"
             color="purple"
             size="large"
+            fullWidth
             onClick={onCancel}
           >
             Отменить

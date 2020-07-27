@@ -12,8 +12,6 @@ import {
 } from "../../actions";
 
 
-
-
 class Sidebar extends Component {
 
 

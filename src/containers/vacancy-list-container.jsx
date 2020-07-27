@@ -15,6 +15,7 @@ import {
 	ModalWindow, HRMServiceContext, Spinner 
 } from 'components'
 import { SearchIcon } from 'svg'
+import Row from 'components/row'
 
 
 const VacancyListContainer = () => {
@@ -104,14 +105,17 @@ const VacancyListContainer = () => {
 				onCancel={() => setIsOpenModal(false)}
 				submitBtnLabel="Создать"
 			>
-				<div className="flex justify-content-between">
+				<Row justify="space-between">
 					<h3>Выберите шаблон</h3>
-					<Input
-						label="Поиск"
-						name="vacancyTemplateSearch"
-						rightIcon={<SearchIcon width={16} height={16} />}
-					/>
-				</div>
+					<Row justify="space-between">
+						<Input
+							label="Поиск"
+							name="vacancyTemplateSearch"
+							rightIcon={<SearchIcon width={16} height={16} />}
+						/>
+						<Button variant="outlined" color="purple">Создать</Button>
+					</Row>
+				</Row>
 				<div>
 					<p>Популярные шаблоны</p>
 					<Grid columns={4} gap="1em">
@@ -124,9 +128,10 @@ const VacancyListContainer = () => {
 				</div>
 				<div className="vacancy-list__modal-window__section">
 					<h3>Небольшие подробности</h3>
-					1 250 000
-					<Select />
-					<Input label="Зарплата" />
+					<Row justify="start">
+						<Select />
+						<Input label="Зарплата" />
+					</Row>
 					<input type="checkbox" />
 				</div>
 				<div className="vacancy-list__modal-window__section">
