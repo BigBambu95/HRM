@@ -1,3 +1,7 @@
+.wrap {
+  flex-wrap: wrap;
+}
+
 .justify-space-between {
   justify-content: space-between;
 }

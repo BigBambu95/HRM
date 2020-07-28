@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Input = ({
-  name, id, label, rightIcon,
+  name, id, label, rightIcon, style
 }) => {
   const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState('');
@@ -16,7 +16,7 @@ const Input = ({
   };
 
   return (
-    <div className={clazz}>
+    <div className={clazz} style={style}>
       <input
         type="text"
         id={id}

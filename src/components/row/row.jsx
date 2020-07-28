@@ -6,22 +6,30 @@ const Row = ({
   children, 
   gutter = [0, 0], 
   justify = 'center', 
-  align = 'top'
+  align = 'top',
+  style
 }) => {
 
   const className = classnames(
-    'flex', 
+    'flex wrap', 
     `justify-${justify}`,
     `align-${align}`
   )
 
   const styles = {
-    marginBottom: `${gutter[1]}px`
+    ...style,
+    marginLeft: `-${gutter[0] / 2}px`,
   }
 
   return(
     <div className={className} style={styles}>
-      {children}
+      {React.Children.map(children, (child) => {
+        return React.cloneElement(child, {
+          style: {
+            padding: `${gutter[1] / 2}px ${gutter[0] / 2}px`
+          }
+        })
+      })}
     </div>
   )
 }
@@ -30,7 +38,8 @@ Row.propTypes = {
   children: PropTypes.node,
   justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between']),
   align: PropTypes.oneOf(['top', 'center' , 'bottom']),
-  gutter: PropTypes.array
+  gutter: PropTypes.array,
+  style: PropTypes.string
 }
 
 export default Row

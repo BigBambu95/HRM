@@ -11,13 +11,14 @@ class Select extends Component {
 		icon: PropTypes.node,
 		getSelectValue: PropTypes.func,
 		defaultValue: PropTypes.string,
+		style: PropTypes.object
 	}
 
 	static defaultProps = {
 		items: [],
 		icon: <ArrowDownIcon />,
 		getSelectValue: function () {},
-		defaultValue: '',
+		defaultValue: ''
 	}
 
 	state = {
@@ -74,7 +75,7 @@ class Select extends Component {
 		))
 
 		return (
-			<div className={selectClassNames}>
+			<div className={selectClassNames} style={this.props.style}>
 				<div className="select__current-item">
 					{this.state.selectValue.label}
 				</div>
