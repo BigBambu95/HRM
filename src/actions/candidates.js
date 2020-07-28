@@ -1,16 +1,9 @@
-import C from '../contstants';
+import { createActions } from 'redux-actions'
 
-const candidates = {
-  candidatesRequest: () => C.FETCH_CANDIDATES_REQUEST,
-  candidatesLoaded: (newCandidates) => ({
-    payload: newCandidates,
-    type: C.FETCH_CANDIDATES_SUCCESS,
-  }),
-  candidatesError: (err) => ({
-    payload: err,
-    type: C.FETCH_CANDIDATES_FAILURE,
-  }),
+const candidatesActions = createActions({
+	FETCH_CANDIDATES_REQUEST: () => ({}),
+	FETCH_CANDIDATES_SUCCESS: (newCandidates) => ({ newCandidates }),
+	FETCH_CANDIDATES_FAILURE: (err) => ({ err }),
+})
 
-};
-
-export default candidates;
+export default candidatesActions

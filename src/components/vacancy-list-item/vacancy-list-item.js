@@ -28,13 +28,13 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
       </Link>
       <ContextMenu>
         <ContextMenuItem
-          handleClick={() => console.log(`edit ${url}`)}
+          onClick={() => console.log(`edit ${url}`)}
           icon={<PencilIcon width={16} height={16} />}
         >
           Изменить
         </ContextMenuItem>
         <ContextMenuItem
-          handleClick={() => deleteItem(url)}
+          onClick={() => deleteItem(url)}
           icon={<RemoveBasketIcon width={16} height={16} />}
         >
           Удалить

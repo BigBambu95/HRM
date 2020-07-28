@@ -13,7 +13,7 @@ import {
 	getReviewSummaryCandidatesSelector,
 } from '../../selectors/candidates'
 
-import { candidates, vacancies } from '../../actions'
+import { vacanciesActions } from '../../actions'
 import { ContextMenu, ContextMenuItem } from '../../components/context-menu'
 import CandidateListItem from '../../components/candidate-list-item'
 import { ToolBar, ToolBarGroupItem } from '../../components/tool-bar'
@@ -144,33 +144,31 @@ const mapStateToProps = ({ vacancyList: { vacancy, loading, error } }) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	const {
-		vacancyRequest,
-		vacancyLoaded,
-		vacancyError,
+		fetchVacancyRequest,
+		fetchVacancySuccess,
+		fetchVacancyFailure,
 		removeVacancy,
-		archiveCandidate,
-		archiveAllCandidates,
-	} = vacancies
+	} = vacanciesActions
 	const { hrmService, match, history } = ownProps
 
 	return {
 		fetchVacancy: () => {
-			dispatch(vacancyRequest())
+			dispatch(fetchVacancyRequest())
 			hrmService
 				.getVacancy(match.params.id)
-				.then((data) => dispatch(vacancyLoaded(data)))
-				.catch((err) => dispatch(vacancyError(err)))
+				.then((data) => dispatch(fetchVacancySuccess(data)))
+				.catch((err) => dispatch(fetchVacancyFailure(err)))
 		},
 		deleteVacancy: () => {
 			dispatch(removeVacancy(match.params.id))
 			history.push('/vacancies/')
 		},
 		editCandidate: () => dispatch(),
-		archiveCandidate: (candidate) => {
-			dispatch(archiveCandidate(candidate))
-			pushToast('Кандидат перемещен в архив')
-		},
-		archiveAllCandidates: (items) => dispatch(archiveAllCandidates(items)),
+		// archiveCandidate: (candidate) => {
+		// 	dispatch(archiveCandidate(candidate))
+		// 	pushToast('Кандидат перемещен в архив')
+		// },
+		// archiveAllCandidates: (items) => dispatch(archiveAllCandidates(items)),
 	}
 }
 

@@ -1,54 +1,17 @@
-import C from '../contstants';
+import { createActions } from 'redux-actions'
 
-const vacancies = {
-  vacanciesRequest: () => C.FETCH_VACANCIES_REQUEST,
+const vacanciesActions = createActions({
+  FETCH_VACANCIES_REQUEST: () => ({}),
+  FETCH_VACANCIES_SUCCESS: (newVacancies) => ({ newVacancies }),
+  FETCH_VACANCIES_FAILURE: (err) => ({ err }),
+  FETCH_VACANCY_REQUEST: () => ({}),
+  FETCH_VACANCY_SUCCESS: (vacancy) => ({ vacancy }),
+  FETCH_VACANCY_FAILURE: (err) => ({ err }),
+  SET_FILTER_PROFESSION_VALUE: (val) => ({ val }),
+  SET_FILTER_OFFICE_VALUE: (val) => ({ val }),
+  REMOVE_VACANCY: (id) => ({ id }),
+  ARCHIVE_VACANCY_CANDIDATE: (candidate) => ({ candidate }),
+  ARCHIVE_VACANCY_CANDIDATES: (newArchiveCandidates) => ({ newArchiveCandidates })
+})
 
-  vacanciesLoaded: (vacancies) => ({
-    payload: vacancies,
-    type: C.FETCH_VACANCIES_SUCCESS,
-  }),
-
-  vacanciesError: (err) => ({
-    payload: err,
-    type: C.FETCH_VACANCIES_FAILURE,
-  }),
-
-  vacancyRequest: () => C.FETCH_VACANCY_REQUEST,
-
-  vacancyLoaded: (vacancy) => ({
-    payload: vacancy,
-    type: C.FETCH_VACANCY_SUCCESS,
-  }),
-
-  vacancyError: (err) => ({
-    payload: err,
-    type: C.FETCH_VACANCY_FAILURE,
-  }),
-
-  setFilterProfessionValue: (value) => ({
-    value,
-    type: C.SET_FILTER_PROFESSION_VALUE,
-  }),
-
-  setFilterOfficeValue: (value) => ({
-    value,
-    type: C.SET_FILTER_OFFICE_VALUE,
-  }),
-
-  removeVacancy: (id) => ({
-    payload: id,
-    type: C.REMOVE_VACANCY,
-  }),
-
-  archiveCandidate: (candidate) => ({
-    payload: candidate,
-    type: C.ARCHIVE_VACANCY_CANDIDATE,
-  }),
-
-  archiveAllCandidates: (newArchiveCandidates) => ({
-    payload: newArchiveCandidates,
-    type: C.ARCHIVE_VACANCY_CANDIDATES,
-  }),
-};
-
-export default vacancies;
+export default vacanciesActions;

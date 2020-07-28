@@ -1,7 +1,7 @@
 import C from '../contstants';
 import actionWorkers from './workers';
 import worker from './worker';
-import vacancies from './vacancies';
+import vacanciesActions from './vacancies';
 import documents from './documents';
 import salary from './salary';
 import candidates from './candidates';
@@ -37,7 +37,6 @@ const hotVacanciesError = (err) => ({
 export {
   actionWorkers,
   worker,
-  vacancies,
   documents,
   salary,
   candidates,
@@ -48,4 +47,5 @@ export {
   hotVacanciesRequest,
   hotVacanciesLoaded,
   hotVacanciesError,
+  vacanciesActions
 };

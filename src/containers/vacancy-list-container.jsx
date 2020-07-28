@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import { withData, withHRMService } from '../components/hoc'
-import { vacancies, addTab, offices } from '../actions'
+import { addTab, offices, vacanciesActions } from '../actions'
 import {
 	getFilteredVacancies,
 	getVacancyProfessions,
@@ -160,23 +160,20 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	const { hrmService } = ownProps
-	const {
-		vacanciesRequest,
-		vacanciesLoaded,
-		vacanciesError,
-		removeVacancy,
-		setFilterProfessionValue,
-		setFilterOfficeValue,
-	} = vacancies
+
 	const { officesRequest, officesLoaded, officesError } = offices
+	const { 
+		fetchVacanciesRequest, fetchVacanciesSuccess, fetchVacanciesFailure,
+		setFilterProfessionValue, setFilterOfficeValue, removeVacancy
+	} = vacanciesActions
 
 	return {
 		fetchVacancies: () => {
-			dispatch(vacanciesRequest())
+			dispatch(fetchVacanciesRequest())
 			hrmService
 				.getVacancies()
-				.then((data) => dispatch(vacanciesLoaded(data)))
-				.catch((err) => dispatch(vacanciesError(err)))
+				.then((data) => dispatch(fetchVacanciesSuccess(data)))
+				.catch((err) => dispatch(fetchVacanciesFailure(err)))
 		},
 		fetchOffices: () => {
 			dispatch(officesRequest())
