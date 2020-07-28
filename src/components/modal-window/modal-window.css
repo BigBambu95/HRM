@@ -16,7 +16,7 @@
 .modal-window {
     position: absolute;
     left: 50%;
-    top: 40%;
+    top: 50%;
     transform: translateX(-50%) translateY(-50%);
     min-width: 320px;
     padding: 1.5em 2em 2em 2em;

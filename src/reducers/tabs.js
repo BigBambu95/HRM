@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const updateObjectInArray = (array, action, index) => array.map((item, idx) => {
   if (idx !== index) {

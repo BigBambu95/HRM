@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 import actionWorkers from './workers';
 import worker from './worker';
 import vacanciesActions from './vacancies';

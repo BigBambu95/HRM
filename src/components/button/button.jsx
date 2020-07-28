@@ -11,13 +11,14 @@ const Button = ({
 	color,
 	width,
 	classname,
+	fullWidth
 }) => {
 	const btnClass = classNames('btn', classname, size, variant, color, {
 		largeFont: font === 'large',
 	})
 
 	const styles = {
-		width,
+		width: fullWidth ? '100%' : width
 	}
 
 	return (
@@ -36,6 +37,7 @@ Button.defaultProps = {
 	variant: '',
 	color: '',
 	font: '',
+	fullWidth: false
 }
 
 Button.propTypes = {
@@ -47,6 +49,7 @@ Button.propTypes = {
 	variant: PropTypes.string,
 	color: PropTypes.string,
 	font: PropTypes.string,
+	fullWidth: PropTypes.bool
 }
 
 export default Button

@@ -4,8 +4,8 @@ import { HRMServiceConsumer } from '../hrm-service-context';
 const withHRMService = () => (Wrapped) => (props) => (
   <HRMServiceConsumer>
     {
-                  (hrmService) => <Wrapped {...props} hrmService={hrmService} />
-              }
+      (hrmService) => <Wrapped {...props} hrmService={hrmService} />
+    }
   </HRMServiceConsumer>
 );
 

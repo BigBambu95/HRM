@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const salary = {
   salaryRequest: () => C.FETCH_SALARY_REQUEST,
