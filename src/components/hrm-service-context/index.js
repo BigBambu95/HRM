@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const {
-  Provider: HRMServiceProvider,
-  Consumer: HRMServiceConsumer,
-} = React.createContext();
+const HRMServiceContext = React.createContext()
+
+const { Provider, Consumer } = HRMServiceContext
 
 export {
-  HRMServiceProvider,
-  HRMServiceConsumer,
+  HRMServiceContext,
+  Provider as HRMServiceProvider,
+  Consumer as HRMServiceConsumer,
 };

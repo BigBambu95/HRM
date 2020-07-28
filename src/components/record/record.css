@@ -1,5 +1,14 @@
+.record {
+    line-height: 1;
+}
+
 .record span {
     color: #B1B1B1;
+    margin-right: 5px;
+}
+
+.record span::after {
+    content: ':';
 }
 
 .record:not(:first-child):not(:last-child) {

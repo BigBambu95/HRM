@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants'
 
 const actionWorkers = {
   workersRequest: () => C.FETCH_WORKERS_REQUEST,
@@ -30,9 +30,7 @@ const actionWorkers = {
     type: C.SET_FILTER_DEPARTMENT_VALUE,
   }),
 
-  filterWorkers: () => ({
-    type: C.FILTER_WORKERS,
-  }),
+  filterWorkers: () => C.FILTER_WORKERS,
 };
 
 export default actionWorkers;

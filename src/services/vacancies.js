@@ -70,6 +70,7 @@ export const vacancies = [
     url: 'front-end-developer',
     office: 'Москва',
     date: '06.02.19',
+    candidates: []
   },
   {
     id: 3,
@@ -77,6 +78,7 @@ export const vacancies = [
     url: 'designer',
     office: 'Екатеринбург',
     date: '02.03.19',
+    candidates: []
   },
   {
     id: 4,
@@ -85,6 +87,7 @@ export const vacancies = [
     office: 'Москва',
     date: '05.11.18',
     quickly: true,
+    candidates: []
   },
   {
     id: 5,
@@ -92,6 +95,7 @@ export const vacancies = [
     url: 'project-manager',
     office: 'Ростов-на-Дону',
     date: '08.05.19',
+    candidates: []
   },
   {
     id: 6,
@@ -100,5 +104,6 @@ export const vacancies = [
     office: 'Ростов-на-Дону',
     date: '05.12.18',
     quickly: true,
+    candidates: []
   },
 ];

@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const sortByAlphabet = (a, b) => {
   if (a.title < b.title) {

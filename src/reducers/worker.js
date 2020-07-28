@@ -1,4 +1,4 @@
-import C from '../contstants';
+import C from '../constants';
 
 const workersList = (state, action) => {
   if (state === undefined) {
