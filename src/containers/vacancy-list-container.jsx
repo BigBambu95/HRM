@@ -33,11 +33,11 @@ const VacancyListContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
-		dispatch(vacanciesActions.vacanciesRequest())
+		dispatch(vacanciesActions.fetchVacanciesRequest())
 		hrmService
 			.getVacancies()
-			.then((data) => dispatch(vacanciesActions.vacanciesLoaded(data)))
-			.catch((err) => dispatch(vacanciesActions.vacanciesError(err)))
+			.then((data) => dispatch(vacanciesActions.fetchVacanciesSuccess(data)))
+			.catch((err) => dispatch(vacanciesActions.fetchVacanciesFailure(err)))
 	}, [])
 	
 	const vacancyTemplates = [

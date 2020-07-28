@@ -18,6 +18,7 @@ import CandidateList from './candidate-list'
 import { ToolBar, ToolBarGroupItem } from '../../components/tool-bar'
 import Button from '../../components/button'
 import Grid from '../../components/grid'
+import { PencilIcon, RemoveBasketIcon } from '../../svg'
 
 const VacancyContainer = ({
 	candidates = [],
