@@ -73,7 +73,11 @@ export default class HRMService {
     createPromise = (data) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(data);
+                try {
+                    resolve(data);
+                } catch(err) {
+                    reject(err, 'Не удалось загрузить данные')
+                }
             }, 700);
         });
     };

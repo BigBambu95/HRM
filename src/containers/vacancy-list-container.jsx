@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-import { vacancies, addTab } from 'actions'
 import { getFilteredVacancies, getVacancyProfessions, getVacancyOffices } from '../selectors'
+import { vacanciesActions, addTab } from 'actions'
 import VacancyListItem from 'components/vacancy-list-item'
 import Filter from 'components/filter'
 import FilterList from 'components/filter-list'
@@ -15,7 +15,6 @@ import {
 	ModalWindow,
 	HRMServiceContext,
 	Spinner,
-	Checkbox,
 	Row,
 	Form,
 	FormItem,
@@ -76,11 +75,11 @@ const VacancyListContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
-		dispatch(vacancies.vacanciesRequest())
+		dispatch(vacanciesActions.fetchVacanciesRequest())
 		hrmService
 			.getVacancies()
-			.then((data) => dispatch(vacancies.vacanciesLoaded(data)))
-			.catch((err) => dispatch(vacancies.vacanciesError(err)))
+			.then((data) => dispatch(vacanciesActions.fetchVacanciesSuccess(data)))
+			.catch((err) => dispatch(vacanciesActions.fetchVacanciesFailure(err)))
 	}, [])
 
 	const vacancyList = filteredVacancies?.map((vacancy) => (
@@ -88,7 +87,7 @@ const VacancyListContainer = () => {
 			key={vacancy.id}
 			item={vacancy}
 			addTab={(label, path, office, prevPage) => dispatch(addTab(label, path, office, prevPage))}
-			deleteItem={(url) => dispatch(vacancies.removeVacancy(url))}
+			deleteItem={(url) => dispatch(vacanciesActions.removeVacancy(url))}
 		/>
 	))
 
@@ -110,13 +109,13 @@ const VacancyListContainer = () => {
 					<Filter
 						label="Должность"
 						items={vacancyProfessions.concat('Все')}
-						filter={(val) => dispatch(vacancies.setFilterProfessionValue(val))}
+						filter={(val) => dispatch(vacanciesActions.setFilterProfessionValue(val))}
 						defaultValue={filterProfession}
 					/>
 					<Filter
 						label="Офис"
 						items={vacancyOffices.concat('Все')}
-						filter={(val) => dispatch(vacancies.setFilterOfficeValue(val))}
+						filter={(val) => dispatch(vacanciesActions.setFilterOfficeValue(val))}
 						defaultValue={filterOffice}
 					/>
 				</FilterList>
