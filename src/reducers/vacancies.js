@@ -57,6 +57,10 @@ const vacancyList = handleActions(
 			...state,
 			filterOffice: payload.val,
 		}),
+		ADD_VACANCY: (state, { payload }) => ({
+			...state,
+			vacancies: state.vacancies.concat(payload.newVacancy)
+		}),
 		REMOVE_VACANCY: (state, { payload }) => {
 			const filterdVacancies = state.vacancies.filter(
 				(vacancy) => vacancy.url !== payload.id

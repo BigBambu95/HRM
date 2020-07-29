@@ -23,7 +23,7 @@ import {
 const AddVacancyForm = ({ isOpenModal, setIsOpenModal }) => {
 	const { register, handleSubmit, watch, errors } = useForm()
 	const onSubmit = (data) => {
-		console.log(data)
+		return vacanciesActions.addVacancy(data)
 	}
 
 	watch('example') // watch input value by passing the name of it
