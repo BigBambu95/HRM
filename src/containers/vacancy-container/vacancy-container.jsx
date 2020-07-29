@@ -13,15 +13,12 @@ import {
 	getReviewSummaryCandidatesSelector,
 } from '../../selectors/candidates'
 
-import { vacancies } from '../../actions'
+import { vacanciesActions } from 'actions'
 import CandidateList from './candidate-list'
 import { ToolBar, ToolBarGroupItem } from '../../components/tool-bar'
 import Button from '../../components/button'
 import Grid from '../../components/grid'
-import FilterList from '../../components/filter-list'
-import Filter from '../../components/filter'
 import { PencilIcon, RemoveBasketIcon } from '../../svg'
-import { pushToast } from '../../components/toast'
 
 const VacancyContainer = ({
 	candidates = [],
@@ -103,33 +100,31 @@ const mapStateToProps = ({ vacancyList: { vacancy, loading, error } }) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	const {
-		vacancyRequest,
-		vacancyLoaded,
-		vacancyError,
+		fetchVacancyRequest,
+		fetchVacancySuccess,
+		fetchVacancyFailure,
 		removeVacancy,
-		archiveCandidate,
-		archiveAllCandidates,
-	} = vacancies
+	} = vacanciesActions
 	const { hrmService, match, history } = ownProps
 
 	return {
 		fetchVacancy: () => {
-			dispatch(vacancyRequest())
+			dispatch(fetchVacancyRequest())
 			hrmService
 				.getVacancy(match.params.id)
-				.then((data) => dispatch(vacancyLoaded(data)))
-				.catch((err) => dispatch(vacancyError(err)))
+				.then((data) => dispatch(fetchVacancySuccess(data)))
+				.catch((err) => dispatch(fetchVacancyFailure(err)))
 		},
 		deleteVacancy: () => {
 			dispatch(removeVacancy(match.params.id))
 			history.push('/vacancies/')
 		},
 		editCandidate: () => dispatch(),
-		archiveCandidate: (candidate) => {
-			dispatch(archiveCandidate(candidate))
-			pushToast('Кандидат перемещен в архив')
-		},
-		archiveAllCandidates: (items) => dispatch(archiveAllCandidates(items)),
+		// archiveCandidate: (candidate) => {
+		// 	dispatch(archiveCandidate(candidate))
+		// 	pushToast('Кандидат перемещен в архив')
+		// },
+		// archiveAllCandidates: (items) => dispatch(archiveAllCandidates(items)),
 	}
 }
 

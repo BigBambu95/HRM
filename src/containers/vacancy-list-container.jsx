@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { vacancies, addTab } from 'actions'
+import { vacanciesActions, addTab } from 'actions'
 import {
 	getFilteredVacancies,
 	getVacancyProfessions,
@@ -33,11 +33,11 @@ const VacancyListContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
-		dispatch(vacancies.vacanciesRequest())
+		dispatch(vacanciesActions.fetchVacanciesRequest())
 		hrmService
 			.getVacancies()
-			.then((data) => dispatch(vacancies.vacanciesLoaded(data)))
-			.catch((err) => dispatch(vacancies.vacanciesError(err)))
+			.then((data) => dispatch(vacanciesActions.fetchVacanciesSuccess(data)))
+			.catch((err) => dispatch(vacanciesActions.fetchVacanciesFailure(err)))
 	}, [])
 	
 	const vacancyTemplates = [
@@ -56,7 +56,7 @@ const VacancyListContainer = () => {
 			key={vacancy.id}
 			item={vacancy}
 			addTab={(label, path, office, prevPage) => dispatch(addTab(label, path, office, prevPage))}
-			deleteItem={(url) => dispatch(vacancies.removeVacancy(url))}
+			deleteItem={(url) => dispatch(vacanciesActions.removeVacancy(url))}
 		/>
 	))
 
@@ -78,13 +78,13 @@ const VacancyListContainer = () => {
 					<Filter
 						label="Должность"
 						items={vacancyProfessions.concat('Все')}
-						filter={(val) => dispatch(vacancies.setFilterProfessionValue(val))}
+						filter={(val) => dispatch(vacanciesActions.setFilterProfessionValue(val))}
 						defaultValue={filterProfession}
 					/>
 					<Filter
 						label="Офис"
 						items={vacancyOffices.concat('Все')}
-						filter={(val) => dispatch(vacancies.setFilterOfficeValue(val))}
+						filter={(val) => dispatch(vacanciesActions.setFilterOfficeValue(val))}
 						defaultValue={filterOffice}
 					/>
 				</FilterList>

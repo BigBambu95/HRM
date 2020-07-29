@@ -1,119 +1,101 @@
-import C from '../constants';
+import { handleActions } from 'redux-actions'
 
-const vacancyList = (state, action) => {
-  if (state === undefined) {
-    return {
-      vacancies: [],
-      vacancy: {
-        candidates: [],
-      },
-      filterProfession: 'Все',
-      filterOffice: 'Все',
-      loading: true,
-      error: null,
-    };
-  }
+const initialState = {
+	vacancies: [],
+	vacancy: {
+		candidates: [],
+	},
+	filterProfession: 'Все',
+	filterOffice: 'Все',
+	loading: true,
+	error: null,
+}
 
-  switch (action.type) {
-    case C.FETCH_VACANCIES_REQUEST:
-      return {
-        ...state,
-        vacancies: [],
-        loading: true,
-        error: null,
-      };
+const vacancyList = handleActions(
+	{
+		FETCH_VACANCIES_REQUEST: (state) => ({
+			...state,
+			vacancies: [],
+			loading: true,
+			error: null,
+		}),
+		FETCH_VACANCIES_SUCCESS: (state, { payload }) => ({
+			...state,
+			vacancies: payload.newVacancies,
+			loading: false,
+			error: null,
+		}),
+		FETCH_VACANCIES_FAILURE: (state, { payload }) => ({
+			...state,
+			vacancies: [],
+			loading: false,
+			error: payload.err,
+		}),
+		FETCH_VACANCY_REQUEST: (state) => ({
+			...state,
+			vacancy: {},
+			loading: true,
+			error: null,
+		}),
+		FETCH_VACANCY_SUCCESS: (state, { payload }) => ({
+			...state,
+			vacancy: payload.vacancy,
+			loading: false,
+			error: null,
+		}),
+		FETCH_VACANCY_FAILURE: (state, { payload }) => ({
+			...state,
+			vacancy: {},
+			loading: false,
+			error: payload.err,
+		}),
+		SET_FILTER_PROFESSION_VALUE: (state, { payload }) => ({
+			...state,
+			filterProfession: payload.val,
+		}),
+		SET_FILTER_OFFICE_VALUE: (state, { payload }) => ({
+			...state,
+			filterOffice: payload.val,
+		}),
+		REMOVE_VACANCY: (state, { payload }) => {
+			const filterdVacancies = state.vacancies.filter(
+				(vacancy) => vacancy.url !== payload.id
+			)
 
-    case C.FETCH_VACANCIES_SUCCESS:
-      return {
-        ...state,
-        vacancies: action.payload,
-        loading: false,
-        error: null,
-      };
+			return {
+				...state,
+				vacancies: filterdVacancies,
+				vacancy: {},
+			}
+		},
+		ARCHIVE_VACANCY_CANDIDATE: (state, { payload }) => {
+			const filteredCandidates = state.vacancy.candidates.filter(
+				(item) => item.id !== payload.id
+			)
 
-    case C.FETCH_VACANCIES_FAILURE:
-      return {
-        ...state,
-        vacancies: [],
-        loading: false,
-        error: action.payload,
-      };
+			return {
+				...state,
+				vacancy: {
+					...state.vacancy,
+					candidates: filteredCandidates,
+				},
+			}
+		},
+		ARCHIVE_VACANCY_CANDIDATES: (state, { payload }) => {
+			const newCandidates = state.vacancy.candidates.filter(
+				(item) => !payload.includes(item)
+			)
 
-    case C.SET_FILTER_PROFESSION_VALUE:
-      return {
-        ...state,
-        filterProfession: action.value,
-      };
+			return {
+				...state,
+				vacancy: {
+					...state.vacancy,
+					candidates: newCandidates,
+				},
+			}
+		},
+	},
+	initialState
+)
 
-    case C.SET_FILTER_OFFICE_VALUE:
-      return {
-        ...state,
-        filterOffice: action.value,
-      };
-
-    case C.FETCH_VACANCY_REQUEST:
-      return {
-        ...state,
-        vacancy: {},
-        loading: true,
-        error: null,
-      };
-
-    case C.FETCH_VACANCY_SUCCESS:
-      return {
-        ...state,
-        vacancy: action.payload,
-        loading: false,
-        error: null,
-      };
-
-    case C.FETCH_VACANCY_FAILURE:
-      return {
-        ...state,
-        vacancy: {},
-        loading: false,
-        error: action.payload,
-      };
-
-    case C.REMOVE_VACANCY:
-
-      const notDeletedVacancies = state.vacancies.filter((vacancy) => vacancy.url !== action.payload);
-
-      return {
-        ...state,
-        vacancies: notDeletedVacancies,
-        vacancy: {},
-      };
-
-    case C.ARCHIVE_VACANCY_CANDIDATE:
-
-      const filteredCandidates = state.vacancy.candidates.filter((item) => item.id !== action.payload.id);
-
-      const newVacancy = {
-        ...state.vacancy,
-        candidates: filteredCandidates,
-      };
-
-      return {
-        ...state,
-        vacancy: newVacancy,
-      };
-
-    case C.ARCHIVE_VACANCY_CANDIDATES:
-
-      const newCandidates = state.vacancy.candidates.filter((item) => !action.payload.includes(item));
-
-      return {
-        ...state,
-        vacancy: {
-          ...state.vacancy,
-          candidates: newCandidates,
-        },
-      };
-
-    default:
-      return state;
-  }
-};
-
-export default vacancyList;
+export default vacancyList
