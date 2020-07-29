@@ -58,6 +58,18 @@ export default class HRMService {
     ];
 
 
+    vacancyTemplates = [
+		'UI/UX дизайнер',
+		'Менеджер проектов',
+		'Front-end разработчик',
+		'PHP разработчик',
+		'Back-end разработчик',
+		'Проектировщик',
+		'Аналитик',
+		'Motion дизайнер',
+	]
+
+
     createPromise = (data) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {

@@ -1,37 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({
-  name, id, label, rightIcon, style
-}) => {
-  const [isFocus, setIsFocus] = useState(false);
-  const [value, setValue] = useState('');
-
-  const clazz = isFocus ? 'input focused' : 'input';
-
-  const removeFocus = () => {
-    if (value.length === 0) {
-      setIsFocus(false);
-    }
-  };
+const Input = React.forwardRef(({ name, id, label, rightIcon, style }, ref) => {
 
   return (
-    <div className={clazz} style={style}>
+    <div className="input" style={style}>
+    <label className="input__label" htmlFor={id}>{label}</label>
       <input
+        ref={ref}
         type="text"
         id={id}
         name={name}
         className="input__field"
-        value={value}
-        onFocus={() => setIsFocus(true)}
-        onBlur={removeFocus}
-        onChange={(e) => setValue(e.target.value)}
       />
-      <label className="input__label">{label}</label>
-      <span className="input__right-icon">{rightIcon}</span>
-    </div>
-  );
-};
+    <span className="input__right-icon">{rightIcon}</span>
+  </div>
+  )
+})
+
+Input.displayName = "Input"
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,

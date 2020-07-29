@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useForm } from 'react-hook-form'
 import { vacancies, addTab } from 'actions'
 import { getFilteredVacancies, getVacancyProfessions, getVacancyOffices } from '../selectors'
 import VacancyListItem from 'components/vacancy-list-item'
@@ -15,22 +16,18 @@ import {
 	HRMServiceContext,
 	Spinner,
 	Checkbox,
-	Col,
+	Row,
+	Form,
+	FormItem,
 } from 'components'
-import { SearchIcon } from 'svg'
-import Row from 'components/row'
 
 const AddVacancyForm = ({ isOpenModal, setIsOpenModal }) => {
-	const vacancyTemplates = [
-		'UI/UX дизайнер',
-		'Менеджер проектов',
-		'Front-end разработчик',
-		'PHP разработчик',
-		'Back-end разработчик',
-		'Проектировщик',
-		'Аналитик',
-		'Motion дизайнер',
-	]
+	const { register, handleSubmit, watch, errors } = useForm()
+	const onSubmit = (data) => {
+		console.log(data)
+	}
+
+	watch('example') // watch input value by passing the name of it
 
 	return (
 		<ModalWindow
@@ -39,45 +36,28 @@ const AddVacancyForm = ({ isOpenModal, setIsOpenModal }) => {
 			className="vacancy-list__modal-window"
 			isOpen={isOpenModal}
 			onCancel={() => setIsOpenModal(false)}
-			submitBtnLabel="Создать"
 		>
-			<Row justify="space-between">
-				<h3>Выберите шаблон</h3>
-				<Row justify="space-between">
-					<Input
-						label="Поиск"
-						name="vacancyTemplateSearch"
-						rightIcon={<SearchIcon width={16} height={16} />}
+			<Form onSubmit={handleSubmit(onSubmit)}>
+				<FormItem validation={errors.profession}>
+					<Input name="profession" label="Специальность" ref={register({ required: true })} />
+				</FormItem>
+				<FormItem validation={errors.office}>
+					<Select
+						items={['1', '2', '3']}
+						name="office"
+						label="Офис"
+						ref={register({ required: true })}
 					/>
-					<Button variant="outlined" color="purple">
+				</FormItem>
+				<FormItem validation={errors.salary}>
+					<Input name="salary" label="Зарплата" ref={register({ required: true })} />
+				</FormItem>
+				<Row justify="center">
+					<Button variant="solid" size="large" color="purple" type="submit">
 						Создать
 					</Button>
 				</Row>
-			</Row>
-			<div>
-				<p>Популярные шаблоны</p>
-				<Row justify="space-between" gutter={[16, 16]}>
-					{vacancyTemplates.map((template, idx) => (
-						<Col size={6}>
-							<Button key={idx} variant="outlined" size="large" fullWidth>
-								{template}
-							</Button>
-						</Col>
-					))}
-				</Row>
-			</div>
-			<div className="vacancy-list__modal-window__section">
-				<h3>Небольшие подробности</h3>
-				<Row justify="start" gutter={[16, 0]} style={{ margin: '32px 0' }}>
-					<Col>
-						<Select />
-					</Col>
-					<Col>
-						<Input label="Зарплата" />
-					</Col>
-				</Row>
-				<Checkbox>Можно удалённо</Checkbox>
-			</div>
+			</Form>
 		</ModalWindow>
 	)
 }

@@ -9,7 +9,6 @@ const Filter = ({ label, items, filter, icon, defaultValue }) => (
 		<Select
 			items={items}
 			getSelectValue={filter}
-			label={label}
 			icon={icon}
 			defaultValue={defaultValue}
 		/>

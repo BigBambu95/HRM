@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 const Row = ({ 
   children, 
-  gutter = [0, 0], 
+  gutter = [], 
   justify = 'center', 
   align = 'top',
   style
@@ -18,7 +18,7 @@ const Row = ({
 
   const styles = {
     ...style,
-    marginLeft: `-${gutter[0] / 2}px`,
+    margin: `0 -${gutter[0] / 2}px`,
   }
 
   return(
@@ -39,7 +39,7 @@ Row.propTypes = {
   justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between']),
   align: PropTypes.oneOf(['top', 'center' , 'bottom']),
   gutter: PropTypes.array,
-  style: PropTypes.string
+  style: PropTypes.object
 }
 
 export default Row

@@ -1,91 +1,91 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import onClickOutside from 'react-onclickoutside'
 
 import { ArrowDownIcon } from '../../svg'
 import Button from '../button'
 
-class Select extends Component {
-	static propTypes = {
-		items: PropTypes.array.isRequired,
-		icon: PropTypes.node,
-		getSelectValue: PropTypes.func,
-		defaultValue: PropTypes.string,
-		style: PropTypes.object
-	}
+const Select = React.forwardRef((
+{	
+	defaultValue,
+	items,
+	icon,
+	name,
+	getSelectValue,
+	style,
+	label
+}, ref) => {
 
-	static defaultProps = {
-		items: [],
-		icon: <ArrowDownIcon />,
-		getSelectValue: function () {},
-		defaultValue: ''
-	}
+	const [isOpen, setIsOpen] = useState(false)
+	const [value, setValue] = useState(defaultValue)
+	const container = useRef(null)
 
-	state = {
-		isOpen: false,
-		selectValue: {
-			value: this.props.defaultValue,
-			label: this.props.defaultValue,
-		},
-	}
+	useEffect(() => {
+		getSelectValue(value)
+	}, [value])
 
-	componentDidUpdate(prevProps, prevState, snapshot) {
-		const { selectValue } = this.state
 
-		if (selectValue.value !== prevState.selectValue.value) {
-			this.props.getSelectValue(selectValue.value, this.props.label)
+	useEffect(() => {
+		window.addEventListener('click', onClickOutsideHandler)
+
+		return (() => {
+			window.removeEventListener('click', onClickOutsideHandler)
+		})
+	}, [isOpen])
+
+	function onClickOutsideHandler(e) {
+		if(isOpen && !container.current.contains(e.target)) {
+				setIsOpen(false);
 		}
 	}
 
-	handleClickOutside = (e) => {
-		this.setState({
-			isOpen: false,
-		})
-	}
+	const selectList = items.map((item) => (
+		<li
+			key={item}
+			className="select__list__item"
+			onClick={() => {
+				setValue(item)
+				setIsOpen(false)
+			}}
+		>
+			{item}
+		</li>
+	))
 
-	setIsOpen = () => {
-		this.setState({
-			isOpen: !this.state.isOpen,
-		})
-	}
-
-	chooseItem = (value, label) => {
-		const newItem = {
-			value,
-			label,
-		}
-
-		this.setState({
-			selectValue: newItem,
-			isOpen: false,
-		})
-	}
-
-	render() {
-		const selectClassNames = this.state.isOpen ? 'select active' : 'select'
-
-		const selectList = this.props.items.map((item, idx) => (
-			<li
-				key={idx}
-				className="select__list__item"
-				onClick={() => this.chooseItem(item.value || item, item.label || item)}
-			>
-				{item.label || item}
-			</li>
-		))
-
-		return (
-			<div className={selectClassNames} style={this.props.style}>
+	return (
+		<div className="select-wrapper">
+			{label && <label className="select__label">{label}</label>}
+			<div className="select" style={style} ref={container}>
 				<div className="select__current-item">
-					{this.state.selectValue.label}
+					{value?.toString()}
 				</div>
-				<Button variant="icon" onClick={this.setIsOpen}>
-					{this.props.icon}
+				<input type="hidden" name={name} value={value} ref={ref} />
+				<Button variant="icon" onClick={() => setIsOpen(!isOpen)}>
+					{icon}
 				</Button>
-				<ul className="select__list">{selectList}</ul>
+				{isOpen && <ul className="select__list">{selectList}</ul>}
 			</div>
-		)
-	}
+		</div>
+	)
+})
+
+Select.displayName = "Select"
+
+Select.propTypes = {
+	items: PropTypes.array.isRequired,
+	icon: PropTypes.node,
+	getSelectValue: PropTypes.func,
+	defaultValue: PropTypes.string,
+	style: PropTypes.object,
+	label: PropTypes.string,
+	name: PropTypes.string
 }
 
-export default onClickOutside(Select)
+Select.defaultProps = {
+	items: [],
+	icon: <ArrowDownIcon />,
+	getSelectValue: () => {},
+	defaultValue: '',
+	label: ''
+}
+
+export default Select
