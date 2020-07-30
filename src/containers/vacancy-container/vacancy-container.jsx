@@ -4,6 +4,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import { vacanciesActions } from 'actions'
 import { withData, withHRMService } from '../../components/hoc'
 
 import {
@@ -13,7 +14,6 @@ import {
 	getReviewSummaryCandidatesSelector,
 } from '../../selectors/candidates'
 
-import { vacanciesActions } from 'actions'
 import CandidateList from './candidate-list'
 import { ToolBar, ToolBarGroupItem } from '../../components/tool-bar'
 import Button from '../../components/button'
@@ -36,51 +36,51 @@ const VacancyContainer = ({
 	}
 
 	return (
-		<>
-			<ToolBar>
-				<ToolBarGroupItem>
-					<Button variant="outlined" color="purple">
-						Добавить резюме
-					</Button>
-					<Button variant="icon">
-						<PencilIcon />
-					</Button>
-					<Button variant="icon" onClick={deleteVacancy}>
-						<RemoveBasketIcon />
-					</Button>
-				</ToolBarGroupItem>
-			</ToolBar>
-			<Grid columns={4} gap="2em">
-				<CandidateList
-					title="Рассмотрение резюме"
-					items={reviewSummaryCandidates}
-					editItem={editCandidate}
-					archiveItem={archiveCandidate}
-					archiveAllItems={archiveAllCandidates}
-				/>
-				<CandidateList
-					title="Телефонное интервью"
-					items={phoneCandidates}
-					editItem={editCandidate}
-					archiveItem={archiveCandidate}
-					archiveAllItems={archiveAllCandidates}
-				/>
-				<CandidateList
-					title="Собеседование"
-					items={interviewCandidates}
-					editItem={editCandidate}
-					archiveItem={archiveCandidate}
-					archiveAllItems={archiveAllCandidates}
-				/>
-				<CandidateList
-					title="Кандидаты"
-					items={finalCandidates}
-					editItem={editCandidate}
-					archiveItem={archiveCandidate}
-					archiveAllItems={archiveAllCandidates}
-				/>
-			</Grid>
-		</>
+  <>
+    <ToolBar>
+      <ToolBarGroupItem>
+        <Button variant="outlined" color="purple">
+          Добавить резюме
+        </Button>
+        <Button variant="icon">
+          <PencilIcon />
+        </Button>
+        <Button variant="icon" onClick={deleteVacancy}>
+          <RemoveBasketIcon />
+        </Button>
+      </ToolBarGroupItem>
+    </ToolBar>
+    <Grid columns={4} gap="2em">
+      <CandidateList
+        title="Рассмотрение резюме"
+        items={reviewSummaryCandidates}
+        editItem={editCandidate}
+        archiveItem={archiveCandidate}
+        archiveAllItems={archiveAllCandidates}
+      />
+      <CandidateList
+        title="Телефонное интервью"
+        items={phoneCandidates}
+        editItem={editCandidate}
+        archiveItem={archiveCandidate}
+        archiveAllItems={archiveAllCandidates}
+      />
+      <CandidateList
+        title="Собеседование"
+        items={interviewCandidates}
+        editItem={editCandidate}
+        archiveItem={archiveCandidate}
+        archiveAllItems={archiveAllCandidates}
+      />
+      <CandidateList
+        title="Кандидаты"
+        items={finalCandidates}
+        editItem={editCandidate}
+        archiveItem={archiveCandidate}
+        archiveAllItems={archiveAllCandidates}
+      />
+    </Grid>
+  </>
 	)
 }
 

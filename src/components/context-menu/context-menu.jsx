@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import onClickOutside from 'react-onclickoutside'
 import { ContextMenuIcon } from '../../svg'
 
 class ContextMenu extends Component {
@@ -30,14 +29,7 @@ class ContextMenu extends Component {
 	}
 
 	render() {
-		const {
-			deleteItem,
-			archiveItem,
-			editItem,
-			itemId,
-			iconVariant,
-			children,
-		} = this.props
+		const { deleteItem, archiveItem, editItem, itemId, iconVariant, children } = this.props
 		const { isOpen } = this.state
 
 		const btnClass = classnames({
@@ -65,4 +57,4 @@ class ContextMenu extends Component {
 	}
 }
 
-export default onClickOutside(ContextMenu)
+export default ContextMenu

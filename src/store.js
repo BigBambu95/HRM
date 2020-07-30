@@ -1,29 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-import reducer from './reducers';
+import reducer from './reducers'
+import saga from './sagas'
 
-const logMiddleware = () => (next) => (action) => {
-  console.log(action.type);
-  return next(action);
-};
+const sagaMiddleware = createSagaMiddleware()
 
-const stringMiddleware = () => (next) => (action) => {
-  if (typeof action === 'string') {
-    return next({
-      type: action,
-    });
-  }
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
 
-  return next(action);
-};
+sagaMiddleware.run(saga)
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk, stringMiddleware),
-  ),
-);
-
-export default store;
+export default store

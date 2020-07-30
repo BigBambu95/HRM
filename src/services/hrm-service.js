@@ -82,14 +82,20 @@ export default class HRMService {
         });
     };
 
-
-
     getWorkers() {
         return this.createPromise(workers);
     };
 
     getVacancies() {
-        return this.createPromise(vacancies);
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    resolve(vacancies);
+                } catch(err) {
+                    reject(err, 'Не удалось загрузить данные')
+                }
+            }, 700);
+        });
     }
 
     getVacancy(url) {
