@@ -3,6 +3,7 @@
     --dark-purple: #6C00BF;
     --gray: #A3A3A3;
     --light-gray: #DFDFDF;
+    --error-color: #EB5757;
     --main-gradient: linear-gradient(135deg, #CC00FF 0%, #6B00BE 100%);
     --transparent-gradient: linear-gradient(135deg, rgba(204, 0, 255, .5) 0%, rgba(107, 0, 190, .5) 100%);
     --main-shadow: 0px 4px 20px rgba(0, 0, 0, .1);

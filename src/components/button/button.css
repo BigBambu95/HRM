@@ -11,7 +11,7 @@
 }
 
 .btn.red {
-    color: #EB5757;
+    color: var(--error-color);
 }
 
 .btn.medium {
@@ -55,7 +55,7 @@
 }
 
 .btn.outlined.red {
-    border-color: #EB5757;
+    border-color: var(--error-color);
 }
 
 .btn.outlined.aqua {

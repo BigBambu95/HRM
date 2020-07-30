@@ -5,7 +5,8 @@ import Button from '../button';
 import { CloseIcon } from '../../svg';
 
 const ModalWindow = ({
-  title, children, width, isOpen, onCancel, onSubmit, submitBtnLabel, className,
+  title, children, width, isOpen, 
+  onCancel, className,
 }) => {
   const handleKeyPress = (event) => {
     if (event.key === 'Escape') {
@@ -19,7 +20,7 @@ const ModalWindow = ({
     return function () {
       document.removeEventListener('keydown', handleKeyPress, false);
     };
-  });
+  }, []);
 
   const clazz = isOpen ? 'modal-window-wrapper active' : 'modal-window-wrapper';
 
@@ -44,26 +45,6 @@ const ModalWindow = ({
         </div>
         <div className="modal-window__body">
           {children}
-        </div>
-        <div className="modal-window__footer">
-          <Button
-            variant="solid"
-            color="purple"
-            size="large"
-            fullWidth
-            onClick={onSubmit}
-          >
-            {submitBtnLabel}
-          </Button>
-          <Button
-            variant="outlined"
-            color="purple"
-            size="large"
-            fullWidth
-            onClick={onCancel}
-          >
-            Отменить
-          </Button>
         </div>
       </div>
     </div>
