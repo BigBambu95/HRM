@@ -7,12 +7,12 @@ const initialState = {
 		filter: {
 			age: 'Все',
 			exp: 'Все',
-			desiredSalary: 'Все'
-		}
+			desiredSalary: 'Все',
+		},
 	},
 	filter: {
 		profession: 'Все',
-		office: 'Все'
+		office: 'Все',
 	},
 	loading: true,
 	error: null,
@@ -32,16 +32,16 @@ const vacancyList = handleActions(
 			loading: false,
 			error: null,
 		}),
-		FETCH_VACANCIES_FAILURE: (state, { payload }) => ({
+		FETCH_VACANCIES_FAILURE: (state) => ({
 			...state,
 			vacancies: [],
 			loading: false,
-			error: payload.err,
+			error: true,
 		}),
 		FETCH_VACANCY_REQUEST: (state) => ({
 			...state,
 			vacancy: {
-				candidates: []
+				candidates: [],
 			},
 			loading: true,
 			error: null,
@@ -52,27 +52,24 @@ const vacancyList = handleActions(
 			loading: false,
 			error: null,
 		}),
-		FETCH_VACANCY_FAILURE: (state, { payload }) => ({
+		FETCH_VACANCY_FAILURE: (state) => ({
 			...state,
-			vacancy: {},
 			loading: false,
-			error: payload.err,
+			error: true,
 		}),
 		SET_FILTER: (state, { payload }) => ({
 			...state,
 			filter: {
 				...state.filter,
-				[payload.params.name]: payload.params.value
-			}
+				[payload.params.name]: payload.params.value,
+			},
 		}),
 		ADD_VACANCY: (state, { payload }) => ({
 			...state,
-			vacancies: state.vacancies.concat(payload.newVacancy)
+			vacancies: state.vacancies.concat(payload.newVacancy),
 		}),
 		REMOVE_VACANCY: (state, { payload }) => {
-			const filterdVacancies = state.vacancies.filter(
-				(vacancy) => vacancy.url !== payload.id
-			)
+			const filterdVacancies = state.vacancies.filter((vacancy) => vacancy.url !== payload.id)
 
 			return {
 				...state,
@@ -81,9 +78,7 @@ const vacancyList = handleActions(
 			}
 		},
 		ARCHIVE_VACANCY_CANDIDATE: (state, { payload }) => {
-			const filteredCandidates = state.vacancy.candidates.filter(
-				(item) => item.id !== payload.id
-			)
+			const filteredCandidates = state.vacancy.candidates.filter((item) => item.id !== payload.id)
 
 			return {
 				...state,
@@ -94,9 +89,7 @@ const vacancyList = handleActions(
 			}
 		},
 		ARCHIVE_VACANCY_CANDIDATES: (state, { payload }) => {
-			const newCandidates = state.vacancy.candidates.filter(
-				(item) => !payload.includes(item)
-			)
+			const newCandidates = state.vacancy.candidates.filter((item) => !payload.includes(item))
 
 			return {
 				...state,

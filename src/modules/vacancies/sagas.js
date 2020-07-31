@@ -1,12 +1,12 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
-import HRMService from 'services/hrm-service'
+import Api from 'services/api'
 import actions from './actions'
 
 export function* fetchVacancies() {
-	const vacancies = yield call(HRMService.getVacancies)
 	try {
-		yield put(actions.fetchVacanciesSuccess(vacancies))
-	} catch(err) {
+		const vacancies = yield call(Api.get, '/vacancies')
+		yield put(actions.fetchVacanciesSuccess(vacancies.data))
+	} catch (err) {
 		yield put(actions.fetchVacanciesFailure(err))
 	}
 }
@@ -16,10 +16,10 @@ export function* watchFetchVacancies() {
 }
 
 export function* fetchVacancy({ payload }) {
-	const vacancy = yield call(HRMService.getVacancy, payload.url)
 	try {
-		yield put(actions.fetchVacancySuccess(vacancy))
-	} catch(err) {
+		const vacancy = yield call(Api.get, `/vacancies/${payload.id}`)
+		yield put(actions.fetchVacancySuccess(vacancy.data))
+	} catch (err) {
 		yield put(actions.fetchVacancyFailure(err))
 	}
 }
