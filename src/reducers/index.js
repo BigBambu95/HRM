@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
+import vacancyList from 'modules/vacancies/reducer';
 import workerList from './workers';
 import worker from './worker';
-import vacancyList from './vacancies';
 import documentList from './documents';
 import salaryList from './salary';
 import candidateList from './candidates';

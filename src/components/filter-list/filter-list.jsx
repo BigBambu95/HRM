@@ -3,16 +3,14 @@ import { FilterIcon, ArrowDownIcon } from '../../svg';
 
 const FilterList = ({ children }) => {
   const [isShowFilterList, showFilterList] = useState(true);
-
   const filterItems = <div className="filter-list__items">{children}</div>;
-
-  const content = isShowFilterList ? filterItems : null;
-
   const btnClassNames = isShowFilterList ? 'filter-list__btn active' : 'filter-list__btn';
 
+  // TODO заменить кнопку на кастомный компонент
   return (
     <div className="filter-list">
       <button
+        type="button"
         className={btnClassNames}
         onClick={() => showFilterList(!isShowFilterList)}
       >
@@ -22,7 +20,7 @@ const FilterList = ({ children }) => {
           <ArrowDownIcon />
         </span>
       </button>
-      {content}
+      {isShowFilterList && filterItems}
     </div>
   );
 };

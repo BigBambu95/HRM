@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Record from '../record';
-import { ContextMenu } from '../context-menu';
 
 const WorkerListItem = ({ item, addTab, match }) => {
   const {
@@ -33,7 +32,6 @@ const WorkerListItem = ({ item, addTab, match }) => {
           <Record label="Офис" field={office} />
         </div>
       </Link>
-      <ContextMenu />
     </div>
   );
 };

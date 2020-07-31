@@ -1,7 +1,6 @@
 import C from '../constants';
 import actionWorkers from './workers';
 import worker from './worker';
-import vacanciesActions from './vacancies';
 import documents from './documents';
 import salary from './salary';
 import candidates from './candidates';
@@ -22,10 +21,12 @@ const removeTab = (payload) => ({
   payload,
 });
 
-const hotVacanciesRequest = () => 'FETCH_HOT_VACANCIES_REQUEST';
+const hotVacanciesRequest = () => ({
+  type: 'FETCH_HOT_VACANCIES_REQUEST'
+})
 
-const hotVacanciesLoaded = (hotVacansy) => ({
-  payload: hotVacansy,
+const hotVacanciesLoaded = (hotVacancy) => ({
+  payload: hotVacancy,
   type: 'FETCH_HOT_VACANCIES_SUCCESS',
 });
 
@@ -47,5 +48,4 @@ export {
   hotVacanciesRequest,
   hotVacanciesLoaded,
   hotVacanciesError,
-  vacanciesActions
 };

@@ -1,4 +1,4 @@
-export const workers = [
+const workers = [
   {
     id: 1,
     name: 'Кирилл Зайцев',
@@ -162,3 +162,5 @@ export const workers = [
     ],
   },
 ];
+
+export default workers 

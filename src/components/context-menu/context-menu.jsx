@@ -1,68 +1,64 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import onClickOutside from 'react-onclickoutside'
 import { ContextMenuIcon } from '../../svg'
+import ContextMenuItem from './context-menu-item';
 
-class ContextMenu extends Component {
-	static defaultProps = {
-		iconVariant: '',
+const ContextMenu = ({
+	iconVariant, children
+}) => {
+	const [isOpen, setIsOpen] = useState(false)
+	const container = useRef(null)
+
+	const onClickOutsideHandler = (e) => {
+		if (isOpen && !container.current.contains(e.target)) {
+			setIsOpen(false)
+		}
 	}
 
-	static propTypes = {
-		iconVariant: PropTypes.string,
-	}
+	useEffect(() => {
+		window.addEventListener('click', onClickOutsideHandler)
 
-	state = {
-		isOpen: false,
-	}
+		return () => {
+			window.removeEventListener('click', onClickOutsideHandler)
+		}
+	}, [isOpen])
 
-	handleClickOutside = (e) => {
-		this.setState({
-			isOpen: false,
-		})
-	}
+	const btnClass = classnames({
+		[`context-menu__btn ${iconVariant}`]: true,
+		active: isOpen,
+	})
 
-	setIsOpen = () => {
-		this.setState({
-			isOpen: !this.state.isOpen,
-		})
-	}
+	const listClass = classnames({
+		[`context-menu__list`]: true,
+		active: isOpen,
+	})
 
-	render() {
-		const {
-			deleteItem,
-			archiveItem,
-			editItem,
-			itemId,
-			iconVariant,
-			children,
-		} = this.props
-		const { isOpen } = this.state
-
-		const btnClass = classnames({
-			[`context-menu__btn ${iconVariant}`]: true,
-			active: isOpen,
-		})
-
-		const listClass = classnames({
-			[`context-menu__list`]: true,
-			active: isOpen,
-		})
-
-		return (
-			<div className="context-menu">
-				<button onClick={this.setIsOpen} className={btnClass}>
-					<ContextMenuIcon />
-				</button>
-				<div className={listClass}>
-					{React.Children.map(children, (child) => {
-						return React.cloneElement(child)
-					})}
-				</div>
-			</div>
-		)
-	}
+	// TODO ЗАменить кнопку на кастомную кнопку
+	return (
+  <div className="context-menu" ref={container}>
+    <button type="button" onClick={() => setIsOpen(!isOpen)} className={btnClass}>
+      <ContextMenuIcon />
+    </button>
+    <div className={listClass}>
+      {React.Children.map(children, (child) => {
+					return React.cloneElement(child)
+				})}
+    </div>
+  </div>
+	)
 }
 
-export default onClickOutside(ContextMenu)
+ContextMenu.propTypes = {
+	iconVariant: PropTypes.string,
+	children: PropTypes.node
+}
+
+ContextMenu.defaultProps = {
+	iconVariant: '',
+	children: null
+}
+
+ContextMenu.Item = ContextMenuItem
+
+export default ContextMenu

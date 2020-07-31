@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { FireIcon, PencilIcon, RemoveBasketIcon } from '../../svg';
-import { ContextMenu, ContextMenuItem } from '../context-menu';
+import { ContextMenu } from 'components';
+import { FireIcon, PencilIcon, RemoveBasketIcon } from 'svg';
 
 const VacancyListItem = ({ item, deleteItem, addTab }) => {
   const {
@@ -27,18 +27,18 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
         </div>
       </Link>
       <ContextMenu>
-        <ContextMenuItem
+        <ContextMenu.Item
           onClick={() => console.log(`edit ${url}`)}
           icon={<PencilIcon width={16} height={16} />}
         >
           Изменить
-        </ContextMenuItem>
-        <ContextMenuItem
+        </ContextMenu.Item>
+        <ContextMenu.Item
           onClick={() => deleteItem(url)}
           icon={<RemoveBasketIcon width={16} height={16} />}
         >
           Удалить
-        </ContextMenuItem>
+        </ContextMenu.Item>
       </ContextMenu>
     </div>
   );

@@ -1,11 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
-import { VacansyListContainer } from '../../containers';
+import { VacancyListContainer } from 'modules/vacancies'
 
 const Vacancies = (props) => (
   <section className="vacancies">
-    <VacansyListContainer {...props} />
+    <VacancyListContainer {...props} />
   </section>
 );
 

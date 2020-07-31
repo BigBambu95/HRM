@@ -31,7 +31,6 @@ import Button from '../components/button'
 import { ToolBar } from '../components/tool-bar'
 import FilterList from '../components/filter-list'
 import Filter from '../components/filter'
-import { ContextMenu } from '../components/context-menu'
 import Spinner from '../components/spinner'
 import ErrorIndicator from '../components/error-indicator'
 
@@ -130,7 +129,6 @@ class SalaryTableContainer extends Component {
 						<Filter label="Отдел" />
 						<Filter label="Должность" />
 					</FilterList>
-					<ContextMenu iconVariant="horizontal" />
 				</ToolBar>
 				{spinner}
 				{errorIndicator}

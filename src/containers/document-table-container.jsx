@@ -7,7 +7,6 @@ import { documents } from '../actions'
 import { withData, withHRMService } from '../components/hoc'
 import { Table } from '../components/table'
 import { ArrowDownIcon, DownloadIcon, PrinterIcon } from '../svg'
-import { ContextMenu } from '../components/context-menu'
 
 const DocumentTableContainer = ({
 	documentsSort,
@@ -20,38 +19,38 @@ const DocumentTableContainer = ({
 	const documentSortButtons = ['Название', 'Дата']
 
 	const documentSortButtonList = documentSortButtons.map((item, idx) => (
-		<div key={idx}>
-			<button className="sort-btn" onClick={() => sort(item)}>
-				{item}
-				<ArrowDownIcon />
-			</button>
-		</div>
+  <div key={idx}>
+    <button className="sort-btn" onClick={() => sort(item)}>
+      {item}
+      <ArrowDownIcon />
+    </button>
+  </div>
 	))
 
 	return (
-		<Table data={documents} sortButtons={documentSortButtonList}>
-			<div>
-				<PrinterIcon />
-			</div>
-			<div className="download-link">
-				<a
-					href={document.link}
-					target="_blank"
-					rel="noopener noreferrer"
-					download
-				>
-					<DownloadIcon />
-				</a>
-			</div>
-			<div className="open-link">
-				<a href={document.link} target="_blank" rel="noopener noreferrer">
-					Открыть
-				</a>
-			</div>
-			<div>
-				<ContextMenu deleteItem={deleteDocument} itemId={document.id} />
-			</div>
-		</Table>
+  <Table data={documents} sortButtons={documentSortButtonList}>
+    <div>
+      <PrinterIcon />
+    </div>
+    <div className="download-link">
+      <a
+        href={document.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        download
+      >
+        <DownloadIcon />
+      </a>
+    </div>
+    <div className="open-link">
+      <a href={document.link} target="_blank" rel="noopener noreferrer">
+        Открыть
+      </a>
+    </div>
+    {/* <div>
+      <ContextMenu deleteItem={deleteDocument} itemId={document.id} />
+    </div> */}
+  </Table>
 	)
 }
 

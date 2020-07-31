@@ -1,9 +1,4 @@
-import ContextMenu from './context-menu';
-import ContextMenuItem from './context-menu-item';
-
+import ContextMenu from './context-menu'
 import './context-menu.css';
 
-export {
-  ContextMenu,
-  ContextMenuItem,
-};
+export default ContextMenu
