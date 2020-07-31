@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import C from '../constants';
 
 const updateObjectInArray = (array, action, index) => array.map((item, idx) => {

@@ -72,7 +72,7 @@ Select.propTypes = {
 	defaultValue: PropTypes.string,
 	style: PropTypes.object,
 	label: PropTypes.string,
-	name: PropTypes.string.isRequired,
+	name: PropTypes.string,
 }
 
 Select.defaultProps = {

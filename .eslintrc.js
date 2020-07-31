@@ -21,5 +21,8 @@ module.exports = {
 		'import/no-unresolved': 'off',
 		'react/prop-types': 'off',
 		'class-methods-use-this': 'off',
+		'no-underscore-dangle': 'off',
+		'react/jsx-indent': 'off',
+		'react/jsx-indent-props': 'off',
 	},
 }

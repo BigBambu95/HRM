@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { Grid, Button, Spinner, FilterList, Filter } from 'components'
 
 import { PencilIcon, RemoveBasketIcon } from 'svg'
+import ErrorIndicator from 'components/error-indicator'
 import {
 	getFinalCandidatesSelector,
 	getInterviewCandidatesSelector,
@@ -19,16 +20,17 @@ import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
 const VacancyContainer = ({
   history,
-	match
+  match
 }) => {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
 	const candidates = useSelector((state) => state.vacancyList.vacancy.candidates)
 	const reviewSummaryCandidates = useSelector((state) => getReviewSummaryCandidatesSelector(state))
 	const phoneCandidates = useSelector((state) => getPhoneCandidatesSelector(state))
 	const interviewCandidates = useSelector((state) => getInterviewCandidatesSelector(state))
 	const finalCandidates = useSelector((state) => getFinalCandidatesSelector(state))	
   const loading = useSelector((state) => state.vacancyList.loading)
-  
+  const error = useSelector((state) => state.vacancyList.error)
+
   const candidateLists = [
     {
       title: 'Рассмотрение резюме',
@@ -58,6 +60,8 @@ const VacancyContainer = ({
   }
 
 	if(loading) return <Spinner />
+
+  if(error) return <ErrorIndicator />
 
 	if (candidates.length === 0) {
 		return <h4>На данную вакансию пока нет кандидатов!</h4>

@@ -1,8 +1,8 @@
 import React from 'react';
 
 const ErrorIndicator = () => (
-  <div>
-    Произошла ошибка!!!
+  <div className="error-indicator">
+    Произошла ошибка
   </div>
 );
 
