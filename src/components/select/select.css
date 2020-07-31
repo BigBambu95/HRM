@@ -10,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: .6em .4em .6em .6em;
+    padding: .6em .4em;
     border: 1px solid var(--gray);
     border-radius: 8px;
     font-weight: var(--thin-weight);
@@ -29,6 +29,7 @@
 }
 
 .select__current-item {
+    margin-right: 8px;
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: var(--small-font);

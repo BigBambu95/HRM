@@ -14,6 +14,6 @@ export const getVacancyProfessions = ({ vacancyList }) => [...new Set(vacancyLis
 export const getVacancyOffices = ({ vacancyList }) => [...new Set(vacancyList.vacancies.map((item) => item.office))]
 
 export const getFilteredVacancies = ({ vacancyList }) => (
-  filterArr(vacancyList.vacancies, vacancyList.filterProfession, vacancyList.filterOffice)
+  filterArr(vacancyList.vacancies, vacancyList.filter.office, vacancyList.filter.profession)
 );
 

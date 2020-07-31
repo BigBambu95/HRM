@@ -19,8 +19,6 @@ import actions from '../actions'
 const VacancyListContainer = () => {
 	// Redux
 	const dispatch = useDispatch()
-	const filterOffice = useSelector((state) => state.vacancyList.filterOffice)
-	const filterProfession = useSelector((state) => state.vacancyList.filterProfession)
 	const filteredVacancies = useSelector((state) => getFilteredVacancies(state))
 	const vacancyProfessions = useSelector((state) => getVacancyProfessions(state))
 	const vacancyOffices = useSelector((state) => getVacancyOffices(state))
@@ -57,15 +55,15 @@ const VacancyListContainer = () => {
       <FilterList>
         <Filter
           label="Должность"
-          items={vacancyProfessions.concat('Все')}
-          filter={(val) => dispatch(actions.setFilterProfessionValue(val))}
-          defaultValue={filterProfession}
+          items={vacancyProfessions}
+          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'profession', value }))}
+          defaultValue="Все"
         />
         <Filter
           label="Офис"
-          items={vacancyOffices.concat('Все')}
-          filter={(val) => dispatch(actions.setFilterOfficeValue(val))}
-          defaultValue={filterOffice}
+          items={vacancyOffices}
+          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'office', value}))}
+          defaultValue="Все"
         />
       </FilterList>
       <Button variant="outlined" color="purple" onClick={() => setIsOpenModal(true)}>

@@ -4,9 +4,16 @@ const initialState = {
 	vacancies: [],
 	vacancy: {
 		candidates: [],
+		filter: {
+			age: 'Все',
+			exp: 'Все',
+			desiredSalary: 'Все'
+		}
 	},
-	filterProfession: 'Все',
-	filterOffice: 'Все',
+	filter: {
+		profession: 'Все',
+		office: 'Все'
+	},
 	loading: true,
 	error: null,
 }
@@ -51,13 +58,12 @@ const vacancyList = handleActions(
 			loading: false,
 			error: payload.err,
 		}),
-		SET_FILTER_PROFESSION_VALUE: (state, { payload }) => ({
+		SET_FILTER: (state, { payload }) => ({
 			...state,
-			filterProfession: payload.val,
-		}),
-		SET_FILTER_OFFICE_VALUE: (state, { payload }) => ({
-			...state,
-			filterOffice: payload.val,
+			filter: {
+				...state.filter,
+				[payload.params.name]: payload.params.value
+			}
 		}),
 		ADD_VACANCY: (state, { payload }) => ({
 			...state,

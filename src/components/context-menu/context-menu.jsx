@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { ContextMenuIcon } from '../../svg'
@@ -8,6 +8,21 @@ const ContextMenu = ({
 	iconVariant, children
 }) => {
 	const [isOpen, setIsOpen] = useState(false)
+	const container = useRef(null)
+
+	const onClickOutsideHandler = (e) => {
+		if (isOpen && !container.current.contains(e.target)) {
+			setIsOpen(false)
+		}
+	}
+
+	useEffect(() => {
+		window.addEventListener('click', onClickOutsideHandler)
+
+		return () => {
+			window.removeEventListener('click', onClickOutsideHandler)
+		}
+	}, [isOpen])
 
 	const btnClass = classnames({
 		[`context-menu__btn ${iconVariant}`]: true,
@@ -21,7 +36,7 @@ const ContextMenu = ({
 
 	// TODO ЗАменить кнопку на кастомную кнопку
 	return (
-  <div className="context-menu">
+  <div className="context-menu" ref={container}>
     <button type="button" onClick={() => setIsOpen(!isOpen)} className={btnClass}>
       <ContextMenuIcon />
     </button>

@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { Grid, Button, Spinner } from 'components'
+import { Grid, Button, Spinner, FilterList, Filter } from 'components'
 
 import { PencilIcon, RemoveBasketIcon } from 'svg'
 import {
@@ -66,6 +66,26 @@ const VacancyContainer = ({
 	return (
   <>
     <ToolBar>
+      <FilterList>
+        <Filter
+          label="Возраст"
+          items={candidates}
+          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'age', value }))}
+          defaultValue="Все"
+        />
+        <Filter
+          label="Опыт"
+          items={candidates}
+          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'exp', value }))}
+          defaultValue="Все"
+        />
+        <Filter
+          label="Желаемая з/п"
+          items={candidates}
+          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'desiredSalary', value }))}
+          defaultValue="Все"
+        />
+      </FilterList>
       <ToolBarGroupItem>
         <Button variant="outlined" color="purple">
           Добавить резюме
@@ -88,9 +108,6 @@ const VacancyContainer = ({
   </>
 	)
 }
-
-
-
 
 export default compose(
 	withRouter,
