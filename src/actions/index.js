@@ -1,7 +1,6 @@
 import C from '../constants';
 import actionWorkers from './workers';
 import worker from './worker';
-import vacanciesActions from './vacancies';
 import documents from './documents';
 import salary from './salary';
 import candidates from './candidates';
@@ -49,5 +48,4 @@ export {
   hotVacanciesRequest,
   hotVacanciesLoaded,
   hotVacanciesError,
-  vacanciesActions
 };

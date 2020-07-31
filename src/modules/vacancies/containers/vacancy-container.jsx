@@ -1,24 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { vacanciesActions } from 'actions'
-import { withData, withHRMService } from '../../components/hoc'
+import { Grid, Button } from 'components'
+import { withData, withHRMService } from 'components/hoc'
 
 import {
 	getFinalCandidatesSelector,
 	getInterviewCandidatesSelector,
 	getPhoneCandidatesSelector,
 	getReviewSummaryCandidatesSelector,
-} from '../../selectors/candidates'
+} from 'selectors/candidates'
 
-import CandidateList from './candidate-list'
-import { ToolBar, ToolBarGroupItem } from '../../components/tool-bar'
-import Button from '../../components/button'
-import Grid from '../../components/grid'
-import { PencilIcon, RemoveBasketIcon } from '../../svg'
+import { PencilIcon, RemoveBasketIcon } from 'svg'
+import actions from '../actions'
+import CandidateList from '../components/candidate-list'
+import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
 const VacancyContainer = ({
 	candidates = [],
@@ -84,10 +82,6 @@ const VacancyContainer = ({
 	)
 }
 
-VacancyContainer.propTypes = {
-	candidates: PropTypes.array.isRequired,
-}
-
 const mapStateToProps = ({ vacancyList: { vacancy, loading, error } }) => ({
 	candidates: vacancy.candidates,
 	reviewSummaryCandidates: getReviewSummaryCandidatesSelector(vacancy),
@@ -104,7 +98,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		fetchVacancySuccess,
 		fetchVacancyFailure,
 		removeVacancy,
-	} = vacanciesActions
+	} = actions
 	const { hrmService, match, history } = ownProps
 
 	return {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { getArchiveCandidatesSelector } from '../../selectors/candidates';
 import Grid from '../grid';
-import CandidateListItem from '../candidate-list-item';
+import CandidateListItem from '../../modules/vacancies/components/candidate-list-item';
 
 const Candidates = ({ candidates }) => {
   const candidateList = candidates.map((candidate) => <CandidateListItem item={candidate} />);

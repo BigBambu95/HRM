@@ -7,7 +7,7 @@ import { HRMServiceProvider } from './components/hrm-service-context'
 
 import store from './store'
 
-import App from './components/app'
+import App from './app'
 import HRMService from './services/hrm-service'
 
 export const hrmService = new HRMService()

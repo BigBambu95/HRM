@@ -1,4 +1,5 @@
 import React from 'react'
+import FormItem from './FormItem'
 
 const Form = ({ children, onSubmit }) => {
   return(
@@ -7,5 +8,7 @@ const Form = ({ children, onSubmit }) => {
     </form>
   )
 }
+
+Form.Item = FormItem
 
 export default Form;

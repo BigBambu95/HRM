@@ -1,60 +1,49 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { ContextMenuIcon } from '../../svg'
+import ContextMenuItem from './context-menu-item';
 
-class ContextMenu extends Component {
-	static defaultProps = {
-		iconVariant: '',
-	}
+const ContextMenu = ({
+	iconVariant, children
+}) => {
+	const [isOpen, setIsOpen] = useState(false)
 
-	static propTypes = {
-		iconVariant: PropTypes.string,
-	}
+	const btnClass = classnames({
+		[`context-menu__btn ${iconVariant}`]: true,
+		active: isOpen,
+	})
 
-	state = {
-		isOpen: false,
-	}
+	const listClass = classnames({
+		[`context-menu__list`]: true,
+		active: isOpen,
+	})
 
-	handleClickOutside = (e) => {
-		this.setState({
-			isOpen: false,
-		})
-	}
-
-	setIsOpen = () => {
-		this.setState({
-			isOpen: !this.state.isOpen,
-		})
-	}
-
-	render() {
-		const { deleteItem, archiveItem, editItem, itemId, iconVariant, children } = this.props
-		const { isOpen } = this.state
-
-		const btnClass = classnames({
-			[`context-menu__btn ${iconVariant}`]: true,
-			active: isOpen,
-		})
-
-		const listClass = classnames({
-			[`context-menu__list`]: true,
-			active: isOpen,
-		})
-
-		return (
-			<div className="context-menu">
-				<button onClick={this.setIsOpen} className={btnClass}>
-					<ContextMenuIcon />
-				</button>
-				<div className={listClass}>
-					{React.Children.map(children, (child) => {
-						return React.cloneElement(child)
-					})}
-				</div>
-			</div>
-		)
-	}
+	// TODO ЗАменить кнопку на кастомную кнопку
+	return (
+  <div className="context-menu">
+    <button type="button" onClick={() => setIsOpen(!isOpen)} className={btnClass}>
+      <ContextMenuIcon />
+    </button>
+    <div className={listClass}>
+      {React.Children.map(children, (child) => {
+					return React.cloneElement(child)
+				})}
+    </div>
+  </div>
+	)
 }
+
+ContextMenu.propTypes = {
+	iconVariant: PropTypes.string,
+	children: PropTypes.node
+}
+
+ContextMenu.defaultProps = {
+	iconVariant: '',
+	children: null
+}
+
+ContextMenu.Item = ContextMenuItem
 
 export default ContextMenu

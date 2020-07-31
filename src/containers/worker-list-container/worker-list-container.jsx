@@ -24,7 +24,6 @@ import FilterList from '../../components/filter-list'
 import Filter from '../../components/filter'
 import { ToolBar, ToolBarGroupItem } from '../../components/tool-bar'
 import Button from '../../components/button'
-import { ContextMenu } from '../../components/context-menu'
 import WorkerContainer from '../worker-container'
 import Grid from '../../components/grid'
 
@@ -54,60 +53,59 @@ const WorkerListContainer = ({
 
 	const workerList = filteredWorkers.map((worker) => {
 		return (
-			<WorkerListItem
-				key={worker.id}
-				item={worker}
-				match={match}
-				addTab={addTab}
-			/>
+  <WorkerListItem
+    key={worker.id}
+    item={worker}
+    match={match}
+    addTab={addTab}
+  />
 		)
 	})
 
 	const itemList =
 		filteredWorkers.length === 0 ? (
-			<p>По данным параметрам фильтрации не найдено результатов!</p>
+  <p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
-			<Grid columns={columns} gap="2em">
-				{workerList}
-			</Grid>
+  <Grid columns={columns} gap="2em">
+    {workerList}
+  </Grid>
 		)
 
 	return (
-		<>
-			<div className={clazz}>
-				<ToolBar>
-					<FilterList>
-						<Filter
-							label="Должность"
-							items={workerProfessions.concat('Все')}
-							filter={setFilterProfessionValue}
-							defaultValue={filterProfession}
-						/>
-						<Filter
-							label="Офис"
-							items={workerOffices.concat('Все')}
-							filter={setFilterOfficeValue}
-							defaultValue={filterOffice}
-						/>
-						<Filter
-							label="Отдел"
-							items={workerDepartments.concat('Все')}
-							filter={setFilterDepartmentValue}
-							defaultValue={filterDepartment}
-						/>
-					</FilterList>
-					<ToolBarGroupItem>
-						<Button variant="outlined" color="purple">
-							Выделить нескольких
-						</Button>
-						<ContextMenu />
-					</ToolBarGroupItem>
-				</ToolBar>
-				<WorkerStatusPanel />
-				{itemList}
-			</div>
-			{workerDetails}
-		</>
+  <>
+    <div className={clazz}>
+      <ToolBar>
+        <FilterList>
+          <Filter
+            label="Должность"
+            items={workerProfessions.concat('Все')}
+            filter={setFilterProfessionValue}
+            defaultValue={filterProfession}
+          />
+          <Filter
+            label="Офис"
+            items={workerOffices.concat('Все')}
+            filter={setFilterOfficeValue}
+            defaultValue={filterOffice}
+          />
+          <Filter
+            label="Отдел"
+            items={workerDepartments.concat('Все')}
+            filter={setFilterDepartmentValue}
+            defaultValue={filterDepartment}
+          />
+        </FilterList>
+        <ToolBarGroupItem>
+          <Button variant="outlined" color="purple">
+            Выделить нескольких
+          </Button>
+        </ToolBarGroupItem>
+      </ToolBar>
+      <WorkerStatusPanel />
+      {itemList}
+    </div>
+    {workerDetails}
+  </>
 	)
 }
 

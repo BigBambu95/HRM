@@ -1,9 +1,9 @@
 import React from 'react';
-import VacansyContainer from '../../containers/vacancy-container';
+import { VacancyContainer } from 'modules/vacancies';
 
 const Vacancy = () => (
   <section className="vacancy-detail">
-    <VacansyContainer />
+    <VacancyContainer />
   </section>
 );
 

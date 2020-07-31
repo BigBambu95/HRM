@@ -1,31 +1,27 @@
 import React from 'react';
-import Record from '../record';
+import { Select, ButtonGroup, Button } from 'components'
 import {
   BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon,
-} from '../../svg';
-import Button from '../button';
+} from 'svg';
+import Record from '../record';
 import WorkerStatus from '../worker-status';
 import { TabBar, TabBarItem } from '../tab-bar';
 import { ToolBar, ToolBarGroupItem } from '../tool-bar';
-import Select from '../select/select';
-import ButtonGroup from '../button-group';
-import { ContextMenu } from '../context-menu';
 
 const WorkerDetails = ({ worker, closeWorker }) => {
   const {
     name, profession, office, email, phone, department, avatar, status, documents = [], history = [],
   } = worker;
 
-  const historyList = history.map((item, idx) => (
-    <div key={idx} className="history__item">
+  const historyList = history.map((item) => (
+    <div key={item.date} className="history__item">
       {item.name}
-      {' '}
       <span className="date">{item.date}</span>
     </div>
   ));
 
-  const documentList = documents.map((document, idx) => (
-    <div key={idx} className="document">
+  const documentList = documents.map((document) => (
+    <div key={document.name} className="document">
       {document.name}
       <span>
         <a href={document.path}>Открыть</a>
@@ -99,7 +95,6 @@ const WorkerDetails = ({ worker, closeWorker }) => {
               <Button variant="outlined" color="red" width="100%" size="large">Оштрафовать</Button>
               <div className="flex align-items-center">
                 <Button variant="outlined" color="aqua" width="100%" size="large">В отпуск</Button>
-                <ContextMenu />
               </div>
               <Button color="red">Уволить</Button>
             </ButtonGroup>
