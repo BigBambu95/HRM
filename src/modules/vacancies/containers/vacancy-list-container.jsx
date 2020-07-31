@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { addTab } from 'actions'
@@ -8,10 +8,9 @@ import { ToolBar } from 'components/tool-bar'
 import {
 	Grid,
 	Button,
-	HRMServiceContext,
 	Spinner,
 } from 'components'
-import { getFilteredVacancies, getVacancyProfessions, getVacancyOffices } from 'selectors'
+import { getFilteredVacancies, getVacancyProfessions, getVacancyOffices } from '../selectors'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
 
@@ -26,16 +25,10 @@ const VacancyListContainer = () => {
 	const vacancyProfessions = useSelector((state) => getVacancyProfessions(state))
 	const vacancyOffices = useSelector((state) => getVacancyOffices(state))
 	const loading = useSelector((state) => state.vacancyList.loading)
-
-	const hrmService = useContext(HRMServiceContext)
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
 		dispatch(actions.fetchVacanciesRequest())
-		hrmService
-			.getVacancies()
-			.then((data) => dispatch(actions.fetchVacanciesSuccess(data)))
-			.catch((err) => dispatch(actions.fetchVacanciesFailure(err)))
 	}, [])
 
 	const vacancyList = filteredVacancies.map((vacancy) => (

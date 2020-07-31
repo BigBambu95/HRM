@@ -11,7 +11,7 @@ import {
 	Salary,
 	Vacancy,
 	Archive,
-	Candidates,
+	// Candidates,
 } from './components/pages'
 
 const App = () => (
@@ -27,7 +27,7 @@ const App = () => (
 				<Route path="/salary/" component={Salary} />
 				<Route path="/documents/" component={Documents} />
 				<Route path="/archive/" component={Archive} />
-				<Route path="/candidates/" component={Candidates} />
+				{/* <Route path="/candidates/" component={Candidates} /> */}
 			</Switch>
 		</main>
 	</div>

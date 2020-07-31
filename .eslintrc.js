@@ -20,5 +20,6 @@ module.exports = {
 		'react/jsx-props-no-spreading': 'off',
 		'import/no-unresolved': 'off',
 		'react/prop-types': 'off',
+		'class-methods-use-this': 'off',
 	},
 }

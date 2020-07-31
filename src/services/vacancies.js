@@ -1,4 +1,4 @@
-export const vacancies = [
+const vacancies = [
   {
     id: 1,
     profession: 'UI/UX дизайнер',
@@ -107,3 +107,5 @@ export const vacancies = [
     candidates: []
   },
 ];
+
+export default vacancies

@@ -65,13 +65,12 @@ const menu = handleActions({
   FETCH_HOT_VACANCIES_SUCCESS: (state, { vacancies }) => {
     const vacancy = state.items.find((item) => item.id === 1);
     const vacancyIdx = state.items.findIndex((item) => item.id === 1);
-    const hotVacancies = vacancies.filter((item) => item.quickly);
 
     const newItems = [
       ...state.items.slice(0, vacancyIdx),
      {
        ...vacancy,
-       subLinks: hotVacancies
+       subLinks: vacancies
      },
       ...state.items.slice(vacancyIdx + 1),
     ];

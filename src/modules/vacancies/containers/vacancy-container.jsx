@@ -1,34 +1,64 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { compose } from 'redux'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { Grid, Button } from 'components'
-import { withData, withHRMService } from 'components/hoc'
+import { Grid, Button, Spinner } from 'components'
 
+import { PencilIcon, RemoveBasketIcon } from 'svg'
 import {
 	getFinalCandidatesSelector,
 	getInterviewCandidatesSelector,
 	getPhoneCandidatesSelector,
 	getReviewSummaryCandidatesSelector,
-} from 'selectors/candidates'
+} from '../selectors'
 
-import { PencilIcon, RemoveBasketIcon } from 'svg'
 import actions from '../actions'
 import CandidateList from '../components/candidate-list'
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
 const VacancyContainer = ({
-	candidates = [],
-	reviewSummaryCandidates,
-	phoneCandidates,
-	interviewCandidates,
-	finalCandidates,
-	editCandidate,
-	archiveCandidate,
-	archiveAllCandidates,
-	deleteVacancy,
+  history,
+	match
 }) => {
+	const dispatch = useDispatch()
+	const candidates = useSelector((state) => state.vacancyList.vacancy.candidates)
+	const reviewSummaryCandidates = useSelector((state) => getReviewSummaryCandidatesSelector(state))
+	const phoneCandidates = useSelector((state) => getPhoneCandidatesSelector(state))
+	const interviewCandidates = useSelector((state) => getInterviewCandidatesSelector(state))
+	const finalCandidates = useSelector((state) => getFinalCandidatesSelector(state))	
+  const loading = useSelector((state) => state.vacancyList.loading)
+  
+  const candidateLists = [
+    {
+      title: 'Рассмотрение резюме',
+      items: reviewSummaryCandidates
+    },
+    {
+      title: 'Телефонное интервью',
+      items: phoneCandidates
+    },
+    {
+      title: 'Собеседование',
+      items: interviewCandidates
+    },
+    {
+      title: 'Кандидаты',
+      items: finalCandidates
+    },
+  ]
+
+	useEffect(() => {
+		dispatch(actions.fetchVacancyRequest(match.params.id))
+  }, [])
+  
+  const deleteVacancy = () => {
+    dispatch(actions.removeVacancy(match.params.id))
+    history.push('/vacancies/')
+  }
+
+	if(loading) return <Spinner />
+
 	if (candidates.length === 0) {
 		return <h4>На данную вакансию пока нет кандидатов!</h4>
 	}
@@ -49,82 +79,19 @@ const VacancyContainer = ({
       </ToolBarGroupItem>
     </ToolBar>
     <Grid columns={4} gap="2em">
-      <CandidateList
-        title="Рассмотрение резюме"
-        items={reviewSummaryCandidates}
-        editItem={editCandidate}
-        archiveItem={archiveCandidate}
-        archiveAllItems={archiveAllCandidates}
-      />
-      <CandidateList
-        title="Телефонное интервью"
-        items={phoneCandidates}
-        editItem={editCandidate}
-        archiveItem={archiveCandidate}
-        archiveAllItems={archiveAllCandidates}
-      />
-      <CandidateList
-        title="Собеседование"
-        items={interviewCandidates}
-        editItem={editCandidate}
-        archiveItem={archiveCandidate}
-        archiveAllItems={archiveAllCandidates}
-      />
-      <CandidateList
-        title="Кандидаты"
-        items={finalCandidates}
-        editItem={editCandidate}
-        archiveItem={archiveCandidate}
-        archiveAllItems={archiveAllCandidates}
-      />
+      {
+        candidateLists.map((props) => {
+          return <CandidateList key={props.title} {...props} />
+        })
+      }
     </Grid>
   </>
 	)
 }
 
-const mapStateToProps = ({ vacancyList: { vacancy, loading, error } }) => ({
-	candidates: vacancy.candidates,
-	reviewSummaryCandidates: getReviewSummaryCandidatesSelector(vacancy),
-	phoneCandidates: getPhoneCandidatesSelector(vacancy),
-	interviewCandidates: getInterviewCandidatesSelector(vacancy),
-	finalCandidates: getFinalCandidatesSelector(vacancy),
-	loading,
-	error,
-})
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-	const {
-		fetchVacancyRequest,
-		fetchVacancySuccess,
-		fetchVacancyFailure,
-		removeVacancy,
-	} = actions
-	const { hrmService, match, history } = ownProps
 
-	return {
-		fetchVacancy: () => {
-			dispatch(fetchVacancyRequest())
-			hrmService
-				.getVacancy(match.params.id)
-				.then((data) => dispatch(fetchVacancySuccess(data)))
-				.catch((err) => dispatch(fetchVacancyFailure(err)))
-		},
-		deleteVacancy: () => {
-			dispatch(removeVacancy(match.params.id))
-			history.push('/vacancies/')
-		},
-		editCandidate: () => dispatch(),
-		// archiveCandidate: (candidate) => {
-		// 	dispatch(archiveCandidate(candidate))
-		// 	pushToast('Кандидат перемещен в архив')
-		// },
-		// archiveAllCandidates: (items) => dispatch(archiveAllCandidates(items)),
-	}
-}
 
 export default compose(
 	withRouter,
-	withHRMService(),
-	connect(mapStateToProps, mapDispatchToProps),
-	withData('fetchVacancy')
 )(VacancyContainer)

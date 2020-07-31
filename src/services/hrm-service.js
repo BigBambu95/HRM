@@ -1,128 +1,62 @@
-import {vacancies} from './vacancies';
-import { workers } from './workers';
+import vacancies from './vacancies';
+import workers from './workers';
+import documents from './documents.json'
+import vacancyTemplates from './vacancy-templates.json'
+import offices from './offices.json'
+
 
 export default class HRMService {
 
+  static getData(data) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                resolve(data);
+            } catch(err) {
+                reject(err, 'Не удалось загрузить данные')
+            }
+        }, 700);
+    });
+  }
 
-    documents = [
-        {
-            id: 1,
-            name: 'План работ на февраль 2019',
-            date: '01.02.19',
-            link: 'https://ufanotarius.ru/tseny.pdf'
-        },
-        {
-            id: 2,
-            name: 'Бизнес-план',
-            date: '21.05.19',
-            link: 'https://docs.google.com/document/d/1yV3ifpzPDBgCLiUuWQ8B26arTLgUWKK6KQI2sjkvAvc/edit'
-        },
-        {
-            id: 3,
-            name: 'Договор UI/UX дизайнер',
-            date: '01.10.19',
-            link: 'https://docs.google.com/document/d/1yV3ifpzPDBgCLiUuWQ8B26arTLgUWKK6KQI2sjkvAvc/edit'
-        },
-        {
-            id: 4,
-            name: 'Премии и штрафы декабрь 2018',
-            date: '11.01.18',
-            link: 'https://docs.google.com/document/d/1yV3ifpzPDBgCLiUuWQ8B26arTLgUWKK6KQI2sjkvAvc/edit'
-        },
-        {
-            id: 5,
-            name: 'План работ на ноябрь 2018',
-            date: '25.05.18',
-            link: 'https://docs.google.com/document/d/1yV3ifpzPDBgCLiUuWQ8B26arTLgUWKK6KQI2sjkvAvc/edit'
-        }
-    ];
+  getWorkers() {
+    return this.getData(workers);
+  }
 
+  static getVacancies() {
+    return HRMService.getData(vacancies)
+  }
 
-    offices = [
-        {
-            id: 1,
-            name: 'Ростов-на-Дону'
-        },
-        {
-            id: 2,
-            name: 'Екатеринбург'
-        },
-        {
-            id: 3,
-            name: 'Москва'
-        },
-        {
-            id: 4,
-            name: 'Уфа'
-        }
-    ];
+  static getHotVacancies() {
+    const filteredVacancies = vacancies.filter(item => item.quickly)
+    return HRMService.getData(filteredVacancies)
+  }
 
+  static getVacancy(url) {
+    const idx = vacancies.findIndex(item => item.url === url);
+    return HRMService.getData(vacancies[idx]);
+  }
 
-    vacancyTemplates = [
-		'UI/UX дизайнер',
-		'Менеджер проектов',
-		'Front-end разработчик',
-		'PHP разработчик',
-		'Back-end разработчик',
-		'Проектировщик',
-		'Аналитик',
-		'Motion дизайнер',
-	]
+  getDocuments() {
+    return this.getData(documents);
+  }
 
+  getWorkersInformationForMonth(month) {
+    const data = workers.map(({name, information}) => {
+        return {
+            name,
+            ...information[0][month]
+        };
+    });
+    return this.getData(data);
+  }
 
-    createPromise = (data) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                try {
-                    resolve(data);
-                } catch(err) {
-                    reject(err, 'Не удалось загрузить данные')
-                }
-            }, 700);
-        });
-    };
+  getWorker(id) {
+    return this.getData(workers[id - 1]);
+  }
 
-    getWorkers() {
-        return this.createPromise(workers);
-    };
+  getOffices() {
+    return this.getData(offices);
+  }
 
-    getVacancies() {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                try {
-                    resolve(vacancies);
-                } catch(err) {
-                    reject(err, 'Не удалось загрузить данные')
-                }
-            }, 700);
-        });
-    }
-
-    getVacancy(url) {
-        const idx = vacancies.findIndex(item => item.url === url);
-        return this.createPromise(vacancies[idx]);
-    }
-
-    getDocuments() {
-        return this.createPromise(this.documents);
-    }
-
-    getWorkersInformationForMonth(month) {
-        const data = workers.map(({name, information}) => {
-           return {
-               name,
-               ...information[0][month]
-           };
-        });
-        return this.createPromise(data);
-    }
-
-    getWorker(id) {
-        return this.createPromise(workers[id - 1]);
-    }
-
-    getOffices() {
-        return this.createPromise(this.offices);
-    }
-
-};
+}

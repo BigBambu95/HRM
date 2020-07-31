@@ -33,7 +33,9 @@ const vacancyList = handleActions(
 		}),
 		FETCH_VACANCY_REQUEST: (state) => ({
 			...state,
-			vacancy: {},
+			vacancy: {
+				candidates: []
+			},
 			loading: true,
 			error: null,
 		}),
