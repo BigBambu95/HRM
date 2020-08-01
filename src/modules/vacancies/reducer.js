@@ -10,6 +10,7 @@ const initialState = {
 			desiredSalary: 'Все',
 		},
 	},
+	vacancyTemplates: [],
 	filter: {
 		profession: 'Все',
 		office: 'Все',
@@ -57,6 +58,25 @@ const vacancyList = handleActions(
 			loading: false,
 			error: true,
 		}),
+		FETCH_VACANCY_TEMPLATES_REQUEST: (state) => ({
+			...state,
+			vacancyTemplates: [],
+			loading: true,
+			error: null,
+		}),
+		FETCH_VACANCY_TEMPLATES_SUCCESS: (state, { payload }) => ({
+			...state,
+			vacancyTemplates: payload.templates,
+			loading: false,
+			error: null,
+		}),
+		FETCH_VACANCY_TEMPLATES_FAILURE: (state) => ({
+			...state,
+			vacancyTemplates: [],
+			loading: false,
+			error: true,
+		}),
+
 		SET_FILTER: (state, { payload }) => ({
 			...state,
 			filter: {

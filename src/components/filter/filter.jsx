@@ -12,7 +12,7 @@ const Filter = ({ label, ...props }) => (
 
 Filter.propTypes = {
 	label: PropTypes.string.isRequired,
-	items: PropTypes.arrayOf(PropTypes.string).isRequired,
+	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default Filter

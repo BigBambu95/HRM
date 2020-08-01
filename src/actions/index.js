@@ -4,7 +4,7 @@ import worker from './worker';
 import documents from './documents';
 import salary from './salary';
 import candidates from './candidates';
-import offices from './offices';
+import officesActions from './offices';
 
 const addTab = (payload) => ({
   type: C.ADD_TAB,
@@ -41,7 +41,7 @@ export {
   documents,
   salary,
   candidates,
-  offices,
+  officesActions,
   addTab,
   removeTab,
   updateTab,

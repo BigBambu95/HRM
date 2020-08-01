@@ -8,7 +8,8 @@ import {
 import actions from '../actions'
 
 const AddVacancyForm = ({ 
-  isOpenModal, setIsOpenModal 
+  isOpenModal, setIsOpenModal,
+  offices, vacancyTemplates
 }) => {
 	const { register, handleSubmit, watch, errors } = useForm()
 	const onSubmit = (data) => {
@@ -28,11 +29,16 @@ const AddVacancyForm = ({
 		>
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Item validation={errors.profession}>
-        <Input name="profession" label="Специальность" ref={register({ required: true })} />
+        <Select 
+          items={vacancyTemplates} 
+          name="profession" 
+          label="Специальность" 
+          ref={register({ required: true })}
+        />
       </Form.Item>
       <Form.Item validation={errors.office}>
         <Select
-          items={['1', '2', '3']}
+          items={offices}
           name="office"
           label="Офис"
           ref={register({ required: true })}

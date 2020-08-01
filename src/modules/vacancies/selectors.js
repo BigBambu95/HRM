@@ -9,10 +9,6 @@ export const getInterviewCandidatesSelector = ({ vacancyList }) => vacancyList.v
 
 export const getFinalCandidatesSelector = ({ vacancyList }) => vacancyList.vacancy.candidates.filter(({ status }) => status.toLowerCase() === 'кандидат');
 
-export const getVacancyProfessions = ({ vacancyList }) => [...new Set(vacancyList.vacancies.map((item) => item.profession))]
-
-export const getVacancyOffices = ({ vacancyList }) => [...new Set(vacancyList.vacancies.map((item) => item.office))]
-
 export const getFilteredVacancies = ({ vacancyList }) => (
   filterArr(vacancyList.vacancies, vacancyList.filter.office, vacancyList.filter.profession)
 );

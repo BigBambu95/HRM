@@ -27,3 +27,16 @@ export function* fetchVacancy({ payload }) {
 export function* watchfetchVacancy() {
 	yield takeEvery('FETCH_VACANCY_REQUEST', fetchVacancy)
 }
+
+export function* fetchVacancyTemplates() {
+	try {
+		const templates = yield call(Api.get, '/vacancies/templates')
+		yield put(actions.fetchVacancyTemplatesSuccess(templates.data))
+	} catch (err) {
+		yield put(actions.fetchVacancyTemplatesFailure(err))
+	}
+}
+
+export function* watchFetchVacancyTemplates() {
+	yield takeEvery('FETCH_VACANCY_TEMPLATES_REQUEST', fetchVacancyTemplates)
+}

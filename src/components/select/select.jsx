@@ -34,17 +34,15 @@ const Select = React.forwardRef(
 			setValue(item)
 			setIsOpen(false)
 		}
-
-		const allItems = defaultValue !== '' ? items.concat(defaultValue) : items
  
-		const selectList = allItems.map((item) => (
-  <li
-    key={item}
-    className="select__list__item"
-    onClick={() => chooseItem(item)}
-  >
-    {item}
-  </li>
+		const selectList = items.map((item) => (
+		<li
+			key={item._id}
+			className="select__list__item"
+			onClick={() => chooseItem(item.name)}
+		>
+				{item.name}
+  </li>	
 		))
 
 		return (
@@ -56,7 +54,12 @@ const Select = React.forwardRef(
       <Button variant="icon" onClick={() => setIsOpen(!isOpen)}>
         {icon}
       </Button>
-      {isOpen && <ul className="select__list">{selectList}</ul>}
+			{isOpen && (
+				<ul className="select__list">
+					{selectList}
+					{defaultValue && <li className="select__list__item" onClick={() => chooseItem(defaultValue)}>{defaultValue}</li>}
+				</ul>
+			)}
     </div>
   </div>
 		)
@@ -66,7 +69,7 @@ const Select = React.forwardRef(
 Select.displayName = 'Select'
 
 Select.propTypes = {
-	items: PropTypes.array.isRequired,
+	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	icon: PropTypes.node,
 	getSelectValue: PropTypes.func,
 	defaultValue: PropTypes.string,

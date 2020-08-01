@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { addTab } from 'actions'
+import { addTab, officesActions } from 'actions'
 import Filter from 'components/filter'
 import FilterList from 'components/filter-list'
 import { ToolBar } from 'components/tool-bar'
 import { Grid, Button, Spinner } from 'components'
 import ErrorIndicator from 'components/error-indicator'
-import { getFilteredVacancies, getVacancyProfessions, getVacancyOffices } from '../selectors'
+import { getFilteredVacancies } from '../selectors'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
 
@@ -15,14 +15,16 @@ const VacancyListContainer = () => {
 	// Redux
 	const dispatch = useDispatch()
 	const filteredVacancies = useSelector((state) => getFilteredVacancies(state))
-	const vacancyProfessions = useSelector((state) => getVacancyProfessions(state))
-	const vacancyOffices = useSelector((state) => getVacancyOffices(state))
+	const vacancyTemplates = useSelector((state) => state.vacancyList.vacancyTemplates)
+	const offices = useSelector((state) => state.officeList.offices)
 	const loading = useSelector((state) => state.vacancyList.loading)
 	const error = useSelector((state) => state.vacancyList.error)
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
 		dispatch(actions.fetchVacanciesRequest())
+		dispatch(officesActions.fetchOfficesRequest())
+		dispatch(actions.fetchVacancyTemplatesRequest())
 	}, [])
 
 	const vacancyList = filteredVacancies.map((vacancy) => (
@@ -53,13 +55,13 @@ const VacancyListContainer = () => {
 				<FilterList>
 					<Filter
 						label="Должность"
-						items={vacancyProfessions}
+						items={vacancyTemplates}
 						getSelectValue={(value) => dispatch(actions.setFilter({ name: 'profession', value }))}
 						defaultValue="Все"
 					/>
 					<Filter
 						label="Офис"
-						items={vacancyOffices}
+						items={offices}
 						getSelectValue={(value) => dispatch(actions.setFilter({ name: 'office', value }))}
 						defaultValue="Все"
 					/>
@@ -69,7 +71,12 @@ const VacancyListContainer = () => {
 				</Button>
 			</ToolBar>
 			{itemList}
-			<AddVacancyForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+			<AddVacancyForm 
+				isOpenModal={isOpenModal} 
+				setIsOpenModal={setIsOpenModal}
+				vacancyTemplates={vacancyTemplates}
+				offices={offices}
+			/>
 		</>
 	)
 }
