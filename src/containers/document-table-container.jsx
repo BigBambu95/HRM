@@ -6,10 +6,7 @@ import { withData, withHRMService } from '../components/hoc'
 import { Table } from '../components/table'
 import { ArrowDownIcon, DownloadIcon, PrinterIcon } from '../svg'
 
-const DocumentTableContainer = ({
-	sort,
-	documents,
-}) => {
+const DocumentTableContainer = ({ sort, documents }) => {
 	// const classNames = `document-table__sort-row ${documentsSort}`
 
 	const documentSortButtons = ['Название', 'Дата']
