@@ -133,3 +133,7 @@ input {
     grid-area: content;
     background: #f9f9f9;
 }
+
+.validation-error {
+    border-color: var(--error-color) !important;
+}

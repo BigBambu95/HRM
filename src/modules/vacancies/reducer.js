@@ -94,17 +94,16 @@ const vacancyList = handleActions(
 		ADD_VACANCY_FAILURE: (state) => ({
 			...state,
 		}),
-		REMOVE_VACANCY: (state, { payload }) => {
-			const filterdVacancies = state.vacancies.filter(
-				(vacancy) => vacancy.url !== payload.id
-			)
-
-			return {
-				...state,
-				vacancies: filterdVacancies,
-				vacancy: {},
-			}
-		},
+		REMOVE_VACANCY_REQUEST: (state) => ({
+			...state,
+		}),
+		REMOVE_VACANCY_SUCCESS: (state, { payload }) => ({
+			...state,
+			vacancies: state.vacancies.filter((v) => v._id !== payload.id),
+		}),
+		REMOVE_VACANCY_FAILURE: (state) => ({
+			...state,
+		}),
 		ARCHIVE_VACANCY_CANDIDATE: (state, { payload }) => {
 			const filteredCandidates = state.vacancy.candidates.filter(
 				(v) => v.id !== payload.id

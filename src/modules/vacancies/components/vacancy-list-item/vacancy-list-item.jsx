@@ -11,9 +11,7 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
 	return (
 		<div className='vacancy-list__item'>
 			<Link
-				to={{
-					pathname: `/vacancies/${_id}`,
-				}}
+				to={`/vacancies/${_id}`}
 				onClick={() =>
 					addTab(profession, `/vacancies/${url}`, office, 'Вакансии')
 				}
@@ -32,13 +30,12 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
 			</Link>
 			<ContextMenu>
 				<ContextMenu.Item
-					// onClick={() => console.log(`edit ${url}`)}
 					icon={<PencilIcon width={16} height={16} />}
 				>
 					Изменить
 				</ContextMenu.Item>
 				<ContextMenu.Item
-					onClick={() => deleteItem(url)}
+					onClick={() => deleteItem(_id)}
 					icon={<RemoveBasketIcon width={16} height={16} />}
 				>
 					Удалить

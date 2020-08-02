@@ -7,7 +7,7 @@ import { ArrowDownIcon } from '../../svg'
 import Button from '../button'
 
 const Select = React.forwardRef(
-	({ defaultValue, items, icon, name, getSelectValue, style, label }, ref) => {
+	({ defaultValue, items, icon, name, getSelectValue, style, className }, ref) => {
 		const [isOpen, setIsOpen] = useState(false)
 		const [value, setValue] = useState(defaultValue)
 		const container = useRef(null)
@@ -46,32 +46,25 @@ const Select = React.forwardRef(
 		))
 
 		return (
-			<div className='select-wrapper'>
-				{label && (
-					<label htmlFor={name} className='select__label'>
-						{label}
-					</label>
+			<div className={`select ${className}`} style={style} ref={container}>
+				<div className='select__current-item'>{value.toString()}</div>
+				<input type='hidden' id={name} name={name} value={value} ref={ref} />
+				<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
+					{icon}
+				</Button>
+				{isOpen && (
+					<ul className='select__list'>
+						{selectList}
+						{defaultValue && (
+							<li
+								className='select__list__item'
+								onClick={() => chooseItem(defaultValue)}
+							>
+								{defaultValue}
+							</li>
+						)}
+					</ul>
 				)}
-				<div className='select' style={style} ref={container}>
-					<div className='select__current-item'>{value.toString()}</div>
-					<input type='hidden' id={name} name={name} value={value} ref={ref} />
-					<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
-						{icon}
-					</Button>
-					{isOpen && (
-						<ul className='select__list'>
-							{selectList}
-							{defaultValue && (
-								<li
-									className='select__list__item'
-									onClick={() => chooseItem(defaultValue)}
-								>
-									{defaultValue}
-								</li>
-							)}
-						</ul>
-					)}
-				</div>
 			</div>
 		)
 	}
@@ -85,7 +78,6 @@ Select.propTypes = {
 	getSelectValue: PropTypes.func,
 	defaultValue: PropTypes.string,
 	style: PropTypes.object,
-	label: PropTypes.string,
 	name: PropTypes.string,
 }
 
@@ -93,7 +85,6 @@ Select.defaultProps = {
 	icon: <ArrowDownIcon />,
 	getSelectValue: () => {},
 	defaultValue: '',
-	label: '',
 	style: null,
 }
 

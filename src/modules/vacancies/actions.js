@@ -14,7 +14,9 @@ const actions = createActions({
 	ADD_VACANCY_REQUEST: (params) => ({ params }),
 	ADD_VACANCY_SUCCESS: (newVacancy) => ({ newVacancy }),
 	ADD_VACANCY_FAILURE: (err) => ({ err }),
-	REMOVE_VACANCY: (id) => ({ id }),
+	REMOVE_VACANCY_REQUEST: (id) => ({ id }),
+	REMOVE_VACANCY_SUCCESS: (id) => ({ id }),
+	REMOVE_VACANCY_FAILURE: (err) => ({ err }),
 	ARCHIVE_VACANCY_CANDIDATE: (candidate) => ({ candidate }),
 	ARCHIVE_VACANCY_CANDIDATES: (newArchiveCandidates) => ({
 		newArchiveCandidates,

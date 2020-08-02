@@ -39,7 +39,7 @@ const VacancyListContainer = () => {
 			addTab={(label, path, office, prevPage) =>
 				dispatch(addTab(label, path, office, prevPage))
 			}
-			deleteItem={(url) => dispatch(actions.removeVacancy(url))}
+			deleteItem={(id) => dispatch(actions.removeVacancyRequest(id))}
 		/>
 	))
 
