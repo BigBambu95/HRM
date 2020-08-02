@@ -1,0 +1,38 @@
+{
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "indentation": 4,
+    "number-leading-zero": "never",
+    "order/properties-order": [
+      [
+        "position",
+        "top",
+        "right",
+        "bottom",
+        "left",
+        "z-index",
+        "display",
+        "justify-content",
+        "align-items",
+        "flex",
+        "flex-basis",
+        "width",
+        "height",
+        "margin",
+        "padding",
+        "border",
+        "background",
+        "color",
+        "font-size",
+        "font-weight",
+        "line-height",
+        "transition"
+      ]
+    ]
+  }
+}

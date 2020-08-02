@@ -10,33 +10,32 @@
     flex-flow: row wrap;
     align-items: center;
     padding: 1.8em 1em;
-    color: #B1B1B1;
+    color: #b1b1b1;
     font-weight: 300;
 }
 
 .tab-list__item.active {
+    padding: .8em .5em;
     background: #fff;
     color: #000;
+    font-size: 2em;
     box-shadow: var(--second-shadow);
     border-radius: 8px;
-    padding: .8em .5em;
-    font-size: 2em;
 }
 
 .tab-list__item::after {
-    content: '';
     position: absolute;
     top: calc(50% - 20px);
     right: -1px;
-    height: 40px;
     width: 1px;
+    height: 40px;
     background: var(--light-gray);
+    content: '';
 }
 
 .tab-list__item.active::after {
     content: none;
 }
-
 
 .tab-list__item .close-btn {
     margin-left: 1em;
@@ -48,7 +47,7 @@
 }
 
 .tab-list__item .close-btn:hover {
-    background: #F2F2F2;
+    background: #f2f2f2;
     border-radius: 2px;
 }
 

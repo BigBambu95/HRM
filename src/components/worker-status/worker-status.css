@@ -1,6 +1,6 @@
 .worker-status {
-    display: inline-block;
     position: relative;
+    display: inline-block;
     margin: 0 1.5em;
 }
 
@@ -15,21 +15,21 @@
 }
 
 .worker-status.work::before {
-    background: #27AE60;
+    background: #27ae60;
 }
 
 .worker-status.blue::before {
-    background: #4285F4;
+    background: #4285f4;
 }
 
 .worker-status.orange::before {
-    background: #EB5757;
+    background: #eb5757;
 }
 
 .worker-status.aqua::before {
-    background: #74EEEE;
+    background: #74eeee;
 }
 
 .worker-status.yellow::before {
-    background: #F2C94C;
+    background: #f2c94c;
 }

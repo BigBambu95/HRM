@@ -7,14 +7,14 @@
 .tab-bar__nav__item {
     position: relative;
     padding: 0;
-    margin-right: 1.4em;
-    font-size: var(--very-big-font);
     color: var(--gray);
+    font-size: var(--very-big-font);
+    margin-right: 1.4em;
 }
 
 .tab-bar__nav__item.active {
-    font-weight: var(--bold-weight);
     color: #000;
+    font-weight: var(--bold-weight);
 }
 
 .tab-bar__nav__item.active::after {

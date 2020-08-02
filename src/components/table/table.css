@@ -47,6 +47,11 @@
     text-align: left;
 }
 
+.table-cell {
+    border-bottom: 1px solid var(--light-gray);
+    font-weight: var(--thin-weight);
+}
+
 .table-column:first-child .table-cell {
     font-size: var(--big-font);
     font-weight: var(--normal-weight);
@@ -65,9 +70,3 @@
 .table-column__label .btn svg {
     margin-left: .5em;
 }
-
-.table-cell {
-    border-bottom: 1px solid var(--light-gray);
-    font-weight: var(--thin-weight);
-}
-
