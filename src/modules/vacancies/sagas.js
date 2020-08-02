@@ -40,3 +40,17 @@ export function* fetchVacancyTemplates() {
 export function* watchFetchVacancyTemplates() {
 	yield takeEvery('FETCH_VACANCY_TEMPLATES_REQUEST', fetchVacancyTemplates)
 }
+
+export function* addVacancy({ payload }) {
+	try {
+		const vacancy = yield call(Api.post, '/vacancies', payload.params)
+
+		yield put(actions.addVacancySuccess(vacancy.data))
+	} catch (err) {
+		yield put(actions.addVacancyFailure(err))
+	}
+}
+
+export function* watchAddVacancy() {
+	yield takeEvery('ADD_VACANCY_REQUEST', addVacancy)
+}

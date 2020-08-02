@@ -9,7 +9,7 @@
     align-items: center;
     width: 100%;
     height: var(--select-height);
-    padding: .6em .4em;
+    padding: .6em 12px;
     border: 1px solid var(--gray);
     border-radius: 8px;
     font-weight: var(--thin-weight);
@@ -61,4 +61,8 @@
 .select__label {
     display: block;
     margin-bottom: 8px;
+}
+
+.select .btn.icon {
+    margin: -4px;
 }

@@ -48,7 +48,7 @@ Button.propTypes = {
 	color: PropTypes.string,
 	font: PropTypes.string,
 	fullWidth: PropTypes.bool,
-	type: PropTypes.oneOf('submit', 'reset', 'button'),
+	type: PropTypes.oneOf(['submit', 'reset', 'button']),
 }
 
 export default Button

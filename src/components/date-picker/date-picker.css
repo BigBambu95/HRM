@@ -13,3 +13,7 @@
 .react-date-picker__button:hover svg {
     fill: var(--dark-purple);
 }
+
+.react-date-picker__inputGroup__leadingZero {
+    padding: 1px;
+}
