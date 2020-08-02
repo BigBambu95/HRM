@@ -18,7 +18,7 @@
 }
 
 .filter-list__btn:hover {
-     color: var(--purple);
+    color: var(--purple);
 }
 
 .filter-list__btn:hover path {

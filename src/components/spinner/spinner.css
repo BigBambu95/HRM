@@ -1,28 +1,28 @@
 .spinner {
     display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     width: 2em;
     margin: 5% auto;
+    flex-flow: row nowrap;
 }
 
 .spinner span {
-    width: 0.3em;
+    width: .3em;
     height: 1em;
-    background: linear-gradient(131.8deg, #CC00FF 2.5%, #6B00BE 96.67%);
+    background: linear-gradient(131.8deg, #c0f 2.5%, #6b00be 96.67%);
 }
 
 .spinner span:nth-of-type(1) {
-    animation: grow 1s -0.45s ease-in-out infinite;
+    animation: grow 1s -.45s ease-in-out infinite;
 }
 
 .spinner span:nth-of-type(2) {
-    animation: grow 1s -0.3s ease-in-out infinite;
+    animation: grow 1s -.3s ease-in-out infinite;
 }
 
 .spinner span:nth-of-type(3) {
-    animation: grow 1s -0.15s ease-in-out infinite;
+    animation: grow 1s -.15s ease-in-out infinite;
 }
 
 .spinner span:nth-of-type(4) {

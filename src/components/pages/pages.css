@@ -32,7 +32,7 @@
 }
 
 .worker-list.opened-worker .filter-list__items {
-   width: 60%;
+    width: 60%;
 }
 
 .worker-list.opened-worker .filter {

@@ -1,16 +1,16 @@
 .toast {
-    z-index: 90;
     position: absolute;
     top: 20px;
     left: 50%;
-    transform: translateX(-50%);
+    z-index: 90;
     display: flex;
     align-items: center;
     padding: 1.15em 1.7em;
-    border-radius: var(--main-border-radius);
-    background: rgba(51, 51, 51, 0.8);
+    background: rgba(51, 51, 51, .8);
     color: #fff;
     font-weight: var(--thin-weight);
+    transform: translateX(-50%);
+    border-radius: var(--main-border-radius);
     user-select: none;
 }
 

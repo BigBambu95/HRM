@@ -1,13 +1,13 @@
 .col {
-  position: relative;
+    position: relative;
 }
 
 .col-12 {
-  flex: 0 0 50%;
-  max-width: 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
 }
 
 .col-6 {
-  flex: 0 0 25%;
-  max-width: 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
 }

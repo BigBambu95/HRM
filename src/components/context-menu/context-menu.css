@@ -22,11 +22,11 @@
 }
 
 .context-menu__btn:hover::after {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, .05);
 }
 
 .context-menu__btn.active::after {
-    border: 1px solid #6B00BE;
+    border: 1px solid #6b00be;
 }
 
 .context-menu__btn.horizontal {
@@ -34,17 +34,17 @@
 }
 
 .context-menu__list {
-    visibility: hidden;
-    transform: translateY(-10px);
-    z-index: 10;
     position: absolute;
     top: 40px;
     right: -6px;
+    z-index: 10;
     padding: 1em;
     background: #fff;
+    font-weight: 300;
+    visibility: hidden;
+    transform: translateY(-10px);
     box-shadow: var(--second-shadow);
     border-radius: 10px;
-    font-weight: 300;
 }
 
 .context-menu__list.active {
@@ -71,12 +71,10 @@
     margin-right: 10px;
 }
 
-
 .context-menu__list__item:hover button {
-    color: #6B00BE;
+    color: #6b00be;
 }
 
-
 .context-menu__list__item:hover path {
-    fill: #6B00BE;
+    fill: #6b00be;
 }

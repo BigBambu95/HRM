@@ -1,12 +1,12 @@
 .btn {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding: .5em 1.7em;
+    color: #000;
     font-size: var(--normal-font);
     font-weight: var(--thin-weight);
-    padding: 0.5em 1.7em;
     border-radius: 8px;
-    color: #000;
     white-space: nowrap;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .btn.outlined.green {
-    border-color: #27AE60;
+    border-color: #27ae60;
 }
 
 .btn.outlined.red {
@@ -59,7 +59,7 @@
 }
 
 .btn.outlined.aqua {
-    border-color: #74EEEE;
+    border-color: #74eeee;
 }
 
 .btn.outlined.purple {
@@ -67,13 +67,13 @@
 }
 
 .btn.outlined.purple:hover {
-    color: #fff;
     background: var(--purple);
+    color: #fff;
 }
 
 .btn.outlined.purple:active {
-    color: #fff;
     background: var(--dark-purple);
+    color: #fff;
 }
 
 .btn.icon,
