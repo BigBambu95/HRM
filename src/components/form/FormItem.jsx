@@ -9,11 +9,9 @@ const FormItem = ({ children, validation, label }) => {
 	return (
 		<div className='form-item'>
 			<div className='form-item__label'>{label}</div>
-			{
-				React.cloneElement(children, {
-					className: validation && 'validation-error'
-				})
-			}
+			{React.cloneElement(children, {
+				className: validation && 'validation-error',
+			})}
 			{validation && errorMessage}
 		</div>
 	)

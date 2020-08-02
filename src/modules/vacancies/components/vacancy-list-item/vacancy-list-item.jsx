@@ -29,9 +29,7 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
 				</div>
 			</Link>
 			<ContextMenu>
-				<ContextMenu.Item
-					icon={<PencilIcon width={16} height={16} />}
-				>
+				<ContextMenu.Item icon={<PencilIcon width={16} height={16} />}>
 					Изменить
 				</ContextMenu.Item>
 				<ContextMenu.Item

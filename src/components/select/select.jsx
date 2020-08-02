@@ -7,7 +7,10 @@ import { ArrowDownIcon } from '../../svg'
 import Button from '../button'
 
 const Select = React.forwardRef(
-	({ defaultValue, items, icon, name, getSelectValue, style, className }, ref) => {
+	(
+		{ defaultValue, items, icon, name, getSelectValue, style, className },
+		ref
+	) => {
 		const [isOpen, setIsOpen] = useState(false)
 		const [value, setValue] = useState(defaultValue)
 		const container = useRef(null)
