@@ -5,16 +5,15 @@ import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { actionWorkers, addTab, worker } from '../../actions'
-import { withData, withHRMService } from '../../components/hoc'
+import { actionWorkers, addTab } from 'actions'
+import { withData, withHRMService } from 'components/hoc'
 
 import {
 	getFilteredWorkers,
 	getWorkerProfessions,
 	getWorkerOffices,
 	getWorkerDepartments,
-	getWorker,
-} from '../../selectors/workers'
+} from 'selectors/workers'
 
 import WorkerListItem from '../../components/worker-list-item'
 
@@ -29,9 +28,7 @@ import Grid from '../../components/grid'
 
 const WorkerListContainer = ({
 	filteredWorkers,
-	openWorker,
 	isWorker,
-	addTab,
 	workerProfessions,
 	workerOffices,
 	workerDepartments,
@@ -44,7 +41,7 @@ const WorkerListContainer = ({
 	filterDepartment,
 }) => {
 	useEffect(() => {
-		match.params.id !== undefined && openWorker(match.params.id)
+		// match.params.id !== undefined && openWorker(match.params.id)
 	}, [match.params.id])
 
 	const columns = isWorker ? 1 : 2
@@ -53,59 +50,59 @@ const WorkerListContainer = ({
 
 	const workerList = filteredWorkers.map((worker) => {
 		return (
-  <WorkerListItem
-    key={worker.id}
-    item={worker}
-    match={match}
-    addTab={addTab}
-  />
+			<WorkerListItem
+				key={worker.id}
+				item={worker}
+				match={match}
+				addTab={addTab}
+			/>
 		)
 	})
 
 	const itemList =
 		filteredWorkers.length === 0 ? (
-  <p>По данным параметрам фильтрации не найдено результатов!</p>
+			<p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
-  <Grid columns={columns} gap="2em">
-    {workerList}
-  </Grid>
+			<Grid columns={columns} gap='2em'>
+				{workerList}
+			</Grid>
 		)
 
 	return (
-  <>
-    <div className={clazz}>
-      <ToolBar>
-        <FilterList>
-          <Filter
-            label="Должность"
-            items={workerProfessions.concat('Все')}
-            filter={setFilterProfessionValue}
-            defaultValue={filterProfession}
-          />
-          <Filter
-            label="Офис"
-            items={workerOffices.concat('Все')}
-            filter={setFilterOfficeValue}
-            defaultValue={filterOffice}
-          />
-          <Filter
-            label="Отдел"
-            items={workerDepartments.concat('Все')}
-            filter={setFilterDepartmentValue}
-            defaultValue={filterDepartment}
-          />
-        </FilterList>
-        <ToolBarGroupItem>
-          <Button variant="outlined" color="purple">
-            Выделить нескольких
-          </Button>
-        </ToolBarGroupItem>
-      </ToolBar>
-      <WorkerStatusPanel />
-      {itemList}
-    </div>
-    {workerDetails}
-  </>
+		<>
+			<div className={clazz}>
+				<ToolBar>
+					<FilterList>
+						<Filter
+							label='Должность'
+							items={workerProfessions.concat('Все')}
+							filter={setFilterProfessionValue}
+							defaultValue={filterProfession}
+						/>
+						<Filter
+							label='Офис'
+							items={workerOffices.concat('Все')}
+							filter={setFilterOfficeValue}
+							defaultValue={filterOffice}
+						/>
+						<Filter
+							label='Отдел'
+							items={workerDepartments.concat('Все')}
+							filter={setFilterDepartmentValue}
+							defaultValue={filterDepartment}
+						/>
+					</FilterList>
+					<ToolBarGroupItem>
+						<Button variant='outlined' color='purple'>
+							Выделить нескольких
+						</Button>
+					</ToolBarGroupItem>
+				</ToolBar>
+				<WorkerStatusPanel />
+				{itemList}
+			</div>
+			{workerDetails}
+		</>
 	)
 }
 

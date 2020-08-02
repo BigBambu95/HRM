@@ -34,34 +34,45 @@ const Select = React.forwardRef(
 			setValue(item)
 			setIsOpen(false)
 		}
- 
+
 		const selectList = items.map((item) => (
-		<li
-			key={item._id}
-			className="select__list__item"
-			onClick={() => chooseItem(item.name)}
-		>
+			<li
+				key={item._id}
+				className='select__list__item'
+				onClick={() => chooseItem(item.name)}
+			>
 				{item.name}
-  </li>	
+			</li>
 		))
 
 		return (
-  <div className="select-wrapper">
-    {label && <label htmlFor={name} className="select__label">{label}</label>}
-    <div className="select" style={style} ref={container}>
-      <div className="select__current-item">{value.toString()}</div>
-      <input type="hidden" id={name} name={name} value={value} ref={ref} />
-      <Button variant="icon" onClick={() => setIsOpen(!isOpen)}>
-        {icon}
-      </Button>
-			{isOpen && (
-				<ul className="select__list">
-					{selectList}
-					{defaultValue && <li className="select__list__item" onClick={() => chooseItem(defaultValue)}>{defaultValue}</li>}
-				</ul>
-			)}
-    </div>
-  </div>
+			<div className='select-wrapper'>
+				{label && (
+					<label htmlFor={name} className='select__label'>
+						{label}
+					</label>
+				)}
+				<div className='select' style={style} ref={container}>
+					<div className='select__current-item'>{value.toString()}</div>
+					<input type='hidden' id={name} name={name} value={value} ref={ref} />
+					<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
+						{icon}
+					</Button>
+					{isOpen && (
+						<ul className='select__list'>
+							{selectList}
+							{defaultValue && (
+								<li
+									className='select__list__item'
+									onClick={() => chooseItem(defaultValue)}
+								>
+									{defaultValue}
+								</li>
+							)}
+						</ul>
+					)}
+				</div>
+			</div>
 		)
 	}
 )
@@ -83,7 +94,7 @@ Select.defaultProps = {
 	getSelectValue: () => {},
 	defaultValue: '',
 	label: '',
-	style: null
+	style: null,
 }
 
 export default Select

@@ -18,101 +18,110 @@ import actions from '../actions'
 import CandidateList from '../components/candidate-list'
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
-const VacancyContainer = ({
-  history,
-  match
-}) => {
-  const dispatch = useDispatch()
-	const candidates = useSelector((state) => state.vacancyList.vacancy.candidates)
-	const reviewSummaryCandidates = useSelector((state) => getReviewSummaryCandidatesSelector(state))
-	const phoneCandidates = useSelector((state) => getPhoneCandidatesSelector(state))
-	const interviewCandidates = useSelector((state) => getInterviewCandidatesSelector(state))
-	const finalCandidates = useSelector((state) => getFinalCandidatesSelector(state))	
-  const loading = useSelector((state) => state.vacancyList.loading)
-  const error = useSelector((state) => state.vacancyList.error)
+const VacancyContainer = ({ history, match }) => {
+	const dispatch = useDispatch()
+	const candidates = useSelector(
+		(state) => state.vacancyList.vacancy.candidates
+	)
+	const reviewSummaryCandidates = useSelector((state) =>
+		getReviewSummaryCandidatesSelector(state)
+	)
+	const phoneCandidates = useSelector((state) =>
+		getPhoneCandidatesSelector(state)
+	)
+	const interviewCandidates = useSelector((state) =>
+		getInterviewCandidatesSelector(state)
+	)
+	const finalCandidates = useSelector((state) =>
+		getFinalCandidatesSelector(state)
+	)
+	const loading = useSelector((state) => state.vacancyList.loading)
+	const error = useSelector((state) => state.vacancyList.error)
 
-  const candidateLists = [
-    {
-      title: 'Рассмотрение резюме',
-      items: reviewSummaryCandidates
-    },
-    {
-      title: 'Телефонное интервью',
-      items: phoneCandidates
-    },
-    {
-      title: 'Собеседование',
-      items: interviewCandidates
-    },
-    {
-      title: 'Кандидаты',
-      items: finalCandidates
-    },
-  ]
+	const candidateLists = [
+		{
+			title: 'Рассмотрение резюме',
+			items: reviewSummaryCandidates,
+		},
+		{
+			title: 'Телефонное интервью',
+			items: phoneCandidates,
+		},
+		{
+			title: 'Собеседование',
+			items: interviewCandidates,
+		},
+		{
+			title: 'Кандидаты',
+			items: finalCandidates,
+		},
+	]
 
 	useEffect(() => {
 		dispatch(actions.fetchVacancyRequest(match.params.id))
-  }, [])
-  
-  const deleteVacancy = () => {
-    dispatch(actions.removeVacancy(match.params.id))
-    history.push('/vacancies/')
-  }
+	}, [])
 
-	if(loading) return <Spinner />
+	const deleteVacancy = () => {
+		dispatch(actions.removeVacancy(match.params.id))
+		history.push('/vacancies/')
+	}
 
-  if(error) return <ErrorIndicator />
+	if (loading) return <Spinner />
+
+	if (error) return <ErrorIndicator />
 
 	if (candidates.length === 0) {
 		return <h4>На данную вакансию пока нет кандидатов!</h4>
 	}
 
 	return (
-  <>
-    <ToolBar>
-      <FilterList>
-        <Filter
-          label="Возраст"
-          items={candidates}
-          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'age', value }))}
-          defaultValue="Все"
-        />
-        <Filter
-          label="Опыт"
-          items={candidates}
-          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'exp', value }))}
-          defaultValue="Все"
-        />
-        <Filter
-          label="Желаемая з/п"
-          items={candidates}
-          getSelectValue={(value) => dispatch(actions.setFilter({ name: 'desiredSalary', value }))}
-          defaultValue="Все"
-        />
-      </FilterList>
-      <ToolBarGroupItem>
-        <Button variant="outlined" color="purple">
-          Добавить резюме
-        </Button>
-        <Button variant="icon">
-          <PencilIcon />
-        </Button>
-        <Button variant="icon" onClick={deleteVacancy}>
-          <RemoveBasketIcon />
-        </Button>
-      </ToolBarGroupItem>
-    </ToolBar>
-    <Grid columns={4} gap="2em">
-      {
-        candidateLists.map((props) => {
-          return <CandidateList key={props.title} {...props} />
-        })
-      }
-    </Grid>
-  </>
+		<>
+			<ToolBar>
+				<FilterList>
+					<Filter
+						label='Возраст'
+						items={candidates}
+						getSelectValue={(value) =>
+							dispatch(actions.setFilter({ name: 'age', value }))
+						}
+						defaultValue='Все'
+					/>
+					<Filter
+						label='Опыт'
+						items={candidates}
+						getSelectValue={(value) =>
+							dispatch(actions.setFilter({ name: 'exp', value }))
+						}
+						defaultValue='Все'
+					/>
+					<Filter
+						label='Желаемая з/п'
+						items={candidates}
+						getSelectValue={(value) =>
+							dispatch(actions.setFilter({ name: 'desiredSalary', value }))
+						}
+						defaultValue='Все'
+					/>
+				</FilterList>
+				<ToolBarGroupItem>
+					<Button variant='outlined' color='purple'>
+						Добавить резюме
+					</Button>
+					<Button variant='icon'>
+						<PencilIcon />
+					</Button>
+					<Button variant='icon' onClick={deleteVacancy}>
+						<RemoveBasketIcon />
+					</Button>
+				</ToolBarGroupItem>
+			</ToolBar>
+			<Grid columns={4} gap='2em'>
+				{candidateLists.map((props) => {
+					return <CandidateList key={props.title} {...props} />
+				})}
+			</Grid>
+		</>
 	)
 }
 
-export default compose(
-	withRouter,
-)(VacancyContainer)
+export default compose(withRouter)(VacancyContainer)

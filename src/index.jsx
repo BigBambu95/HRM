@@ -13,12 +13,12 @@ import HRMService from './services/hrm-service'
 export const hrmService = new HRMService()
 
 ReactDOM.render(
-  <Provider store={store}>
-    <HRMServiceProvider value={hrmService}>
-      <Router>
-        <App />
-      </Router>
-    </HRMServiceProvider>
-  </Provider>,
+	<Provider store={store}>
+		<HRMServiceProvider value={hrmService}>
+			<Router>
+				<App />
+			</Router>
+		</HRMServiceProvider>
+	</Provider>,
 	document.getElementById('root')
 )

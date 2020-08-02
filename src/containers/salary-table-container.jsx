@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { compose } from 'redux'
-import { withHRMService, withData } from '../components/hoc'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { withHRMService } from '../components/hoc'
 import 'moment/locale/ru'
 
 import { salary } from '../actions'
@@ -50,49 +49,39 @@ const SalaryTable = ({
 	month,
 }) => {
 	return (
-		<Fragment>
+		<>
 			<Table data={workersHours}>
-				<TableColumn data={workersNames} label="Имя" />
-				<TableColumn data={workersHours} label="Часы" />
-				<TableColumn data={workersSalary} label="Отработано" />
-				<TableColumn data={workersOtherFees} label="Прочее" />
-				<TableColumn data={workersIncomeTax} label="НДФЛ" />
-				<TableColumn data={workersPensionInsurance} label="ПФР" />
-				<TableColumn data={workersSocialInsurance} label="ФСС" />
-				<TableColumn data={workersHealthInsurance} label="ФФОМС" />
-				<TableColumn data={workersAccidentInsurance} label="НСиПЗ" />
-				<TableColumn data={workersPrepayment} label="Аванс" />
-				<TableColumn data={workersFinalSalary} label="К выдаче" />
+				<TableColumn data={workersNames} label='Имя' />
+				<TableColumn data={workersHours} label='Часы' />
+				<TableColumn data={workersSalary} label='Отработано' />
+				<TableColumn data={workersOtherFees} label='Прочее' />
+				<TableColumn data={workersIncomeTax} label='НДФЛ' />
+				<TableColumn data={workersPensionInsurance} label='ПФР' />
+				<TableColumn data={workersSocialInsurance} label='ФСС' />
+				<TableColumn data={workersHealthInsurance} label='ФФОМС' />
+				<TableColumn data={workersAccidentInsurance} label='НСиПЗ' />
+				<TableColumn data={workersPrepayment} label='Аванс' />
+				<TableColumn data={workersFinalSalary} label='К выдаче' />
 			</Table>
-			<footer className="salary__footer">
-				<div className="salary__footer__total-sum">
-					За {month} к выдаче: {workersTotalSalary} ₽
+			<footer className='salary__footer'>
+				<div className='salary__footer__total-sum'>
+					{`За ${month} к выдаче ${workersTotalSalary} ₽`}
 				</div>
-				<Button size="medium" variant="solid" color="purple" font="large">
+				<Button size='medium' variant='solid' color='purple' font='large'>
 					Выдать
 				</Button>
 			</footer>
-		</Fragment>
+		</>
 	)
 }
 
 class SalaryTableContainer extends Component {
-	static propTypes = {
-		workersHours: PropTypes.array,
-		workersSalary: PropTypes.array,
-	}
-
-	static defaultProps = {
-		workersHours: [],
-		workersSalary: [],
-	}
-
 	componentDidMount() {
 		const { month, fetchSalary } = this.props
 		fetchSalary(month)
 	}
 
-	componentDidUpdate(prevProps, prevState, snapshot) {
+	componentDidUpdate(prevProps) {
 		const { month, fetchSalary } = this.props
 
 		if (month !== prevProps.month) {
@@ -101,7 +90,7 @@ class SalaryTableContainer extends Component {
 	}
 
 	render() {
-		const { setMonth, loading, error, workersHours } = this.props
+		const { setMonth, loading, error } = this.props
 
 		moment.locale('en')
 		const monthsEn = moment.months()
@@ -121,19 +110,19 @@ class SalaryTableContainer extends Component {
 		const content = !(loading || error) ? <SalaryTable {...this.props} /> : null
 
 		return (
-			<Fragment>
+			<>
 				<ToolBar>
 					<FilterList>
 						<Filter items={months} filter={setMonth} icon={<CalendarIcon />} />
-						<Filter label="Офис" />
-						<Filter label="Отдел" />
-						<Filter label="Должность" />
+						<Filter label='Офис' />
+						<Filter label='Отдел' />
+						<Filter label='Должность' />
 					</FilterList>
 				</ToolBar>
 				{spinner}
 				{errorIndicator}
 				{content}
-			</Fragment>
+			</>
 		)
 	}
 }

@@ -16,11 +16,11 @@
 
 .tab-list__item.active {
     padding: .8em .5em;
+    border-radius: 8px;
     background: #fff;
     color: #000;
     font-size: 2em;
     box-shadow: var(--second-shadow);
-    border-radius: 8px;
 }
 
 .tab-list__item::after {
@@ -47,8 +47,8 @@
 }
 
 .tab-list__item .close-btn:hover {
-    background: #f2f2f2;
     border-radius: 2px;
+    background: #f2f2f2;
 }
 
 .tab-list__item .close-btn:hover path {

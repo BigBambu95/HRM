@@ -2,11 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { ContextMenuIcon } from '../../svg'
-import ContextMenuItem from './context-menu-item';
+import ContextMenuItem from './context-menu-item'
 
-const ContextMenu = ({
-	iconVariant, children
-}) => {
+const ContextMenu = ({ iconVariant, children }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const container = useRef(null)
 
@@ -36,27 +34,31 @@ const ContextMenu = ({
 
 	// TODO ЗАменить кнопку на кастомную кнопку
 	return (
-  <div className="context-menu" ref={container}>
-    <button type="button" onClick={() => setIsOpen(!isOpen)} className={btnClass}>
-      <ContextMenuIcon />
-    </button>
-    <div className={listClass}>
-      {React.Children.map(children, (child) => {
+		<div className='context-menu' ref={container}>
+			<button
+				type='button'
+				onClick={() => setIsOpen(!isOpen)}
+				className={btnClass}
+			>
+				<ContextMenuIcon />
+			</button>
+			<div className={listClass}>
+				{React.Children.map(children, (child) => {
 					return React.cloneElement(child)
 				})}
-    </div>
-  </div>
+			</div>
+		</div>
 	)
 }
 
 ContextMenu.propTypes = {
 	iconVariant: PropTypes.string,
-	children: PropTypes.node
+	children: PropTypes.node,
 }
 
 ContextMenu.defaultProps = {
 	iconVariant: '',
-	children: null
+	children: null,
 }
 
 ContextMenu.Item = ContextMenuItem

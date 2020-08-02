@@ -26,6 +26,7 @@
         "margin",
         "padding",
         "border",
+        "border-radius",
         "background",
         "color",
         "font-size",

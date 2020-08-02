@@ -12,13 +12,13 @@
 }
 
 .context-menu__btn::after {
-    content: '';
     position: absolute;
     top: -2px;
     width: 30px;
     height: 30px;
-    background: transparent;
     border-radius: 10px;
+    background: transparent;
+    content: '';
 }
 
 .context-menu__btn:hover::after {
@@ -39,12 +39,12 @@
     right: -6px;
     z-index: 10;
     padding: 1em;
+    border-radius: 10px;
     background: #fff;
     font-weight: 300;
     visibility: hidden;
     transform: translateY(-10px);
     box-shadow: var(--second-shadow);
-    border-radius: 10px;
 }
 
 .context-menu__list.active {

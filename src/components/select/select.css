@@ -11,10 +11,10 @@
     height: var(--select-height);
     padding: .6em .4em;
     border: 1px solid var(--gray);
+    border-radius: 8px;
     font-weight: var(--thin-weight);
     transition: .2s all;
     min-width: 140px;
-    border-radius: 8px;
     white-space: nowrap;
     user-select: none;
 }
@@ -41,10 +41,10 @@
     left: 0;
     z-index: 10;
     padding: 1em 0;
+    border-radius: 10px;
     background: #fff;
     min-width: 100%;
     box-shadow: var(--second-shadow);
-    border-radius: 10px;
 }
 
 .select__list__item {

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 const Row = ({ children, gutter = [], justify, align, style }) => {
-	const className = classnames('flex wrap', `justify-${justify}`, `align-${align}`)
+	const className = classnames(
+		'flex wrap',
+		`justify-${justify}`,
+		`align-${align}`
+	)
 
 	const styles = {
 		...style,
@@ -25,7 +29,13 @@ const Row = ({ children, gutter = [], justify, align, style }) => {
 
 Row.propTypes = {
 	children: PropTypes.node,
-	justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between']),
+	justify: PropTypes.oneOf([
+		'start',
+		'end',
+		'center',
+		'space-around',
+		'space-between',
+	]),
 	align: PropTypes.oneOf(['top', 'center', 'bottom']),
 	gutter: PropTypes.array,
 	style: PropTypes.object,

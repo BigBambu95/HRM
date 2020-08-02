@@ -9,28 +9,30 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
 	const { _id, profession, url, office, date, quickly = false } = item
 
 	return (
-		<div className="vacancy-list__item">
+		<div className='vacancy-list__item'>
 			<Link
 				to={{
 					pathname: `/vacancies/${_id}`,
 				}}
-				onClick={() => addTab(profession, `/vacancies/${url}`, office, 'Вакансии')}
+				onClick={() =>
+					addTab(profession, `/vacancies/${url}`, office, 'Вакансии')
+				}
 			>
-				<div className="vacancy-list__item__description">
-					<div className="vacancy-list__item__city">{office}</div>
-					<h3 className="vacancy-list__item__title">{profession}</h3>
+				<div className='vacancy-list__item__description'>
+					<div className='vacancy-list__item__city'>{office}</div>
+					<h3 className='vacancy-list__item__title'>{profession}</h3>
 				</div>
-				<div className="vacancy-list__item__right">
-					<div className="label">Крайний срок до:</div>
-					<div className="vacancy-list__item__date">
+				<div className='vacancy-list__item__right'>
+					<div className='label'>Крайний срок до:</div>
+					<div className='vacancy-list__item__date'>
 						{quickly && <FireIcon />}
-						<Moment format="DD.MM.YY">{date}</Moment>
+						<Moment format='DD.MM.YY'>{date}</Moment>
 					</div>
 				</div>
 			</Link>
 			<ContextMenu>
 				<ContextMenu.Item
-					onClick={() => console.log(`edit ${url}`)}
+					// onClick={() => console.log(`edit ${url}`)}
 					icon={<PencilIcon width={16} height={16} />}
 				>
 					Изменить

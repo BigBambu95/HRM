@@ -12,20 +12,16 @@ const Button = ({
 	width,
 	classname,
 	fullWidth,
-	style,
-	type
+	type,
+	...otherProps
 }) => {
 	const btnClass = classNames('btn', classname, size, variant, color, {
 		largeFont: font === 'large',
+		fullWidth,
 	})
 
-	const styles = {
-		width: fullWidth ? '100%' : width,
-		...style
-	}
-
 	return (
-		<button className={btnClass} type={type} onClick={onClick} style={styles}>
+		<button className={btnClass} onClick={onClick} type={type} {...otherProps}>
 			{children}
 		</button>
 	)
@@ -39,12 +35,11 @@ Button.defaultProps = {
 	variant: '',
 	color: '',
 	font: '',
+	fullWidth: false,
 	type: 'button',
-	fullWidth: false
 }
 
 Button.propTypes = {
-	width: PropTypes.string,
 	classname: PropTypes.string,
 	children: PropTypes.node,
 	onClick: PropTypes.func,
@@ -53,8 +48,7 @@ Button.propTypes = {
 	color: PropTypes.string,
 	font: PropTypes.string,
 	fullWidth: PropTypes.bool,
-	style: PropTypes.object,
-	type: PropTypes.oneOf(['button', 'reset', 'submit'])
+	type: PropTypes.oneOf('submit', 'reset', 'button'),
 }
 
 export default Button
