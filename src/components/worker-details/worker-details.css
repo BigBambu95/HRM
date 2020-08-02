@@ -1,15 +1,16 @@
 .worker-details {
     flex: 3 1 75%;
-    background: #fff;
     padding: 2em;
+    background: #fff;
+    font-weight: var(--thin-weight);
     box-shadow: var(--main-shadow);
     border-bottom-left-radius: 10px;
-    font-weight: var(--thin-weight);
 }
 
 .worker-details__header {
-    /*display: grid;*/
-    /*grid-template-columns: 195px 1fr 150px;*/
+    /* display: grid; */
+
+    /* grid-template-columns: 195px 1fr 150px; */
     align-items: center;
     margin-bottom: 3em;
     font-size: var(--small-font);
@@ -22,11 +23,11 @@
 
 .worker-details__content__left {
     display: grid;
-    grid-template-areas: "worker-avatar worker-description"
-                         "worker-info worker-info";
+    grid-template-areas:
+        "worker-avatar worker-description"
+        "worker-info worker-info";
     grid-template-columns: 195px 1fr;
 }
-
 
 .worker-details__content__picture {
     grid-area: worker-avatar;
@@ -100,11 +101,12 @@
 .worker-details__content__right .document span {
     display: flex;
 }
+
 .worker-details__content__right .document .download-link {
     margin-left: 1em;
 }
 
 .worker-details__content__right .history__item .date {
-    font-size: var(--small-font);
     color: var(--gray);
+    font-size: var(--small-font);
 }

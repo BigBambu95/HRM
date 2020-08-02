@@ -11,12 +11,12 @@
 }
 
 .worker-list__item::before {
-    content: '';
     position: absolute;
-    left: 5px;
     top: 50%;
+    left: 5px;
     width: 4px;
     height: 70%;
+    content: '';
     border-radius: 46px;
     transform: translateY(-50%);
 }
@@ -62,21 +62,20 @@
     margin-left: 75px;
 }
 
-
 .worker-list__item.work::before {
-     background: #27AE60;
- }
+    background: #27ae60;
+}
 
 .worker-list__item.mission::before {
-    background: #4285F4;
+    background: #4285f4;
 }
 
 .worker-list__item.vacation::before {
-    background: #74EEEE;
+    background: #74eeee;
 }
 
 .worker-list__item.reason::before {
-    background: #F2C94C;
+    background: #f2c94c;
 }
 
 .worker-list__item .context-menu {
