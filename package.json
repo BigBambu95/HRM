@@ -57,6 +57,10 @@
     "*.css": [
       "npm run stylelint:fix",
       "git add"
+    ],
+    "*.js": [
+      "npm run eslint:fix",
+      "git add"
     ]
   },
   "devDependencies": {
