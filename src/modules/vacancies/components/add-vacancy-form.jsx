@@ -72,7 +72,7 @@ const AddVacancyForm = ({
 					</Form.Item>
 				</Row>
 				<Row justify='center' style={{ marginTop: '25px' }}>
-					<Button variant='solid' size='large' color='purple' type='submit'>
+					<Button variant='solid' size='large' font='large' type='submit'>
 						Создать
 					</Button>
 				</Row>
