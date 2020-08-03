@@ -3,10 +3,10 @@
     justify-content: center;
     align-items: center;
     padding: .5em 1.7em;
+    border-radius: 8px;
     color: #000;
     font-size: var(--normal-font);
     font-weight: var(--thin-weight);
-    border-radius: 8px;
     white-space: nowrap;
 }
 

@@ -27,3 +27,47 @@ export function* fetchVacancy({ payload }) {
 export function* watchfetchVacancy() {
 	yield takeEvery('FETCH_VACANCY_REQUEST', fetchVacancy)
 }
+
+export function* fetchVacancyTemplates() {
+	try {
+		const templates = yield call(Api.get, '/vacancies/templates')
+		yield put(actions.fetchVacancyTemplatesSuccess(templates.data))
+	} catch (err) {
+		yield put(actions.fetchVacancyTemplatesFailure(err))
+	}
+}
+
+export function* watchFetchVacancyTemplates() {
+	yield takeEvery('FETCH_VACANCY_TEMPLATES_REQUEST', fetchVacancyTemplates)
+}
+
+export function* addVacancy({ payload }) {
+	try {
+		const vacancy = yield call(Api.post, '/vacancies', payload.params)
+
+		yield put(actions.addVacancySuccess(vacancy.data))
+	} catch (err) {
+		yield put(actions.addVacancyFailure(err))
+	}
+}
+
+export function* watchAddVacancy() {
+	yield takeEvery('ADD_VACANCY_REQUEST', addVacancy)
+}
+
+export function* removeVacancy({ payload }) {
+	try {
+		const res = yield call(Api.delete, `/vacancies/${payload.id}`)
+		if (!res.data.status) {
+			throw new Error('Произошла ошибка при удалении вакансии')
+		}
+
+		yield put(actions.removeVacancySuccess(payload.id))
+	} catch (err) {
+		yield put(actions.removeVacancyFailure(err))
+	}
+}
+
+export function* watchRemoveVacancy() {
+	yield takeEvery('REMOVE_VACANCY_REQUEST', removeVacancy)
+}

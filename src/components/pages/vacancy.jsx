@@ -1,10 +1,10 @@
-import React from 'react';
-import { VacancyContainer } from 'modules/vacancies';
+import React from 'react'
+import { VacancyContainer } from 'modules/vacancies'
 
 const Vacancy = () => (
-  <section className="vacancy-detail">
-    <VacancyContainer />
-  </section>
-);
+	<section className='vacancy-detail'>
+		<VacancyContainer />
+	</section>
+)
 
-export default Vacancy;
+export default Vacancy

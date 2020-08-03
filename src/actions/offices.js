@@ -1,16 +1,10 @@
-import C from '../constants';
+import { createActions } from 'redux-actions'
 
-const offices = {
-  officesRequest: () => C.FETCH_OFFICES_REQUEST,
-  officesLoaded: (offices) => ({
-    payload: offices,
-    type: C.FETCH_OFFICES_SUCCESS,
-  }),
-  officesError: (err) => ({
-    payload: err,
-    type: C.FETCH_OFFICES_FAILURE,
-  }),
+const officesActions = createActions({
+  FETCH_OFFICES_REQUEST: () => ({}),
+  FETCH_OFFICES_SUCCESS: (offices) => ({ offices }),
+  FETCH_OFFICES_FAILURE: (err) => ({ err }),
+})
 
-};
 
-export default offices;
+export default officesActions;

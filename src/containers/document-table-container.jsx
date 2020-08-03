@@ -1,56 +1,49 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { documents } from '../actions'
+import { documentsActions } from '../actions'
 import { withData, withHRMService } from '../components/hoc'
 import { Table } from '../components/table'
 import { ArrowDownIcon, DownloadIcon, PrinterIcon } from '../svg'
 
-const DocumentTableContainer = ({
-	documentsSort,
-	sort,
-	documents,
-	deleteDocument,
-}) => {
-	const classNames = `document-table__sort-row ${documentsSort}`
+const DocumentTableContainer = ({ sort, documents }) => {
+	// const classNames = `document-table__sort-row ${documentsSort}`
 
 	const documentSortButtons = ['Название', 'Дата']
 
-	const documentSortButtonList = documentSortButtons.map((item, idx) => (
-  <div key={idx}>
-    <button className="sort-btn" onClick={() => sort(item)}>
-      {item}
-      <ArrowDownIcon />
-    </button>
-  </div>
+	const documentSortButtonList = documentSortButtons.map((item) => (
+		<div key={item}>
+			<button className='sort-btn' onClick={() => sort(item)}>
+				{item}
+				<ArrowDownIcon />
+			</button>
+		</div>
 	))
 
 	return (
-  <Table data={documents} sortButtons={documentSortButtonList}>
-    <div>
-      <PrinterIcon />
-    </div>
-    <div className="download-link">
-      <a
-        href={document.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        download
-      >
-        <DownloadIcon />
-      </a>
-    </div>
-    <div className="open-link">
-      <a href={document.link} target="_blank" rel="noopener noreferrer">
-        Открыть
-      </a>
-    </div>
-    {/* <div>
+		<Table data={documents} sortButtons={documentSortButtonList}>
+			<div>
+				<PrinterIcon />
+			</div>
+			<div className='download-link'>
+				<a
+					href={document.link}
+					target='_blank'
+					rel='noopener noreferrer'
+					download
+				>
+					<DownloadIcon />
+				</a>
+			</div>
+			<div className='open-link'>
+				<a href={document.link} target='_blank' rel='noopener noreferrer'>
+					Открыть
+				</a>
+			</div>
+			{/* <div>
       <ContextMenu deleteItem={deleteDocument} itemId={document.id} />
     </div> */}
-  </Table>
+		</Table>
 	)
 }
 
@@ -71,7 +64,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		documentsError,
 		removeDocument,
 		sortDocuments,
-	} = documents
+	} = documentsActions
 
 	return {
 		fetchDocuments: () => {

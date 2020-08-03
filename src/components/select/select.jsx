@@ -7,7 +7,10 @@ import { ArrowDownIcon } from '../../svg'
 import Button from '../button'
 
 const Select = React.forwardRef(
-	({ defaultValue, items, icon, name, getSelectValue, style, label }, ref) => {
+	(
+		{ defaultValue, items, icon, name, getSelectValue, style, className },
+		ref
+	) => {
 		const [isOpen, setIsOpen] = useState(false)
 		const [value, setValue] = useState(defaultValue)
 		const container = useRef(null)
@@ -35,30 +38,37 @@ const Select = React.forwardRef(
 			setIsOpen(false)
 		}
 
-		const allItems = defaultValue !== '' ? items.concat(defaultValue) : items
- 
-		const selectList = allItems.map((item) => (
-  <li
-    key={item}
-    className="select__list__item"
-    onClick={() => chooseItem(item)}
-  >
-    {item}
-  </li>
+		const selectList = items.map((item) => (
+			<li
+				key={item._id}
+				className='select__list__item'
+				onClick={() => chooseItem(item.name)}
+			>
+				{item.name}
+			</li>
 		))
 
 		return (
-  <div className="select-wrapper">
-    {label && <label htmlFor={name} className="select__label">{label}</label>}
-    <div className="select" style={style} ref={container}>
-      <div className="select__current-item">{value.toString()}</div>
-      <input type="hidden" id={name} name={name} value={value} ref={ref} />
-      <Button variant="icon" onClick={() => setIsOpen(!isOpen)}>
-        {icon}
-      </Button>
-      {isOpen && <ul className="select__list">{selectList}</ul>}
-    </div>
-  </div>
+			<div className={`select ${className}`} style={style} ref={container}>
+				<div className='select__current-item'>{value.toString()}</div>
+				<input type='hidden' id={name} name={name} value={value} ref={ref} />
+				<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
+					{icon}
+				</Button>
+				{isOpen && (
+					<ul className='select__list'>
+						{selectList}
+						{defaultValue && (
+							<li
+								className='select__list__item'
+								onClick={() => chooseItem(defaultValue)}
+							>
+								{defaultValue}
+							</li>
+						)}
+					</ul>
+				)}
+			</div>
 		)
 	}
 )
@@ -66,12 +76,11 @@ const Select = React.forwardRef(
 Select.displayName = 'Select'
 
 Select.propTypes = {
-	items: PropTypes.array.isRequired,
+	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	icon: PropTypes.node,
 	getSelectValue: PropTypes.func,
 	defaultValue: PropTypes.string,
 	style: PropTypes.object,
-	label: PropTypes.string,
 	name: PropTypes.string,
 }
 
@@ -79,8 +88,7 @@ Select.defaultProps = {
 	icon: <ArrowDownIcon />,
 	getSelectValue: () => {},
 	defaultValue: '',
-	label: '',
-	style: null
+	style: null,
 }
 
 export default Select

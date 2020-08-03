@@ -1,9 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const ToolBarGroupItem = ({ children }) => (
-  <div className="tool-bar__group-item">
-    {children}
-  </div>
-);
+	<div className='tool-bar__group-item'>{children}</div>
+)
 
-export default ToolBarGroupItem;
+export default ToolBarGroupItem

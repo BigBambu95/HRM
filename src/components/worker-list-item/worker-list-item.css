@@ -2,11 +2,11 @@
     position: relative;
     display: flex;
     padding: 1em;
-    background: #fff;
     border-radius: 10px;
+    background: #fff;
+    transition: .2s box-shadow;
     box-shadow: var(--main-shadow);
     cursor: pointer;
-    transition: .2s box-shadow;
     user-select: none;
 }
 
@@ -44,12 +44,12 @@
 }
 
 .worker-list__item__picture {
-    min-width: 50px;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
     margin: 0 1.6em 0 .8em;
+    border-radius: 50%;
+    min-width: 50px;
+    overflow: hidden;
 }
 
 .worker-list__item__picture img {

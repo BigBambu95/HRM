@@ -5,3 +5,7 @@
 .form-item__error {
     margin-top: 8px;
 }
+
+.form-item__label {
+    margin-bottom: var(--base-margin);
+}

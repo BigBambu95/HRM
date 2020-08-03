@@ -9,6 +9,7 @@
     "moment-timezone": "^0.5.31",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-date-picker": "^8.0.1",
     "react-dom": "^16.8.6",
     "react-hook-form": "^6.1.2",
     "react-moment": "^0.9.2",
@@ -58,8 +59,9 @@
       "npm run stylelint:fix",
       "git add"
     ],
-    "*.js": [
+    "*.{js, jsx}": [
       "npm run eslint:fix",
+      "npm run prettier:fix",
       "git add"
     ]
   },

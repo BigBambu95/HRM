@@ -1,19 +1,15 @@
-import React, { Component, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { worker } from '../../actions'
-import {
-	getWorker,
-	getWorkerInformationForMonth,
-} from '../../selectors/workers'
+import { getWorker } from '../../selectors/workers'
 import WorkerDetails from '../../components/worker-details'
 import Spinner from '../../components/spinner'
 import { withHRMService } from '../../components/hoc'
 
 const WorkerContainer = ({
 	loading,
-	worker,
 	match,
 	closeWorker,
 	fetchWorker,

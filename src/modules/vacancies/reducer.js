@@ -10,6 +10,7 @@ const initialState = {
 			desiredSalary: 'Все',
 		},
 	},
+	vacancyTemplates: [],
 	filter: {
 		profession: 'Все',
 		office: 'Все',
@@ -57,6 +58,25 @@ const vacancyList = handleActions(
 			loading: false,
 			error: true,
 		}),
+		FETCH_VACANCY_TEMPLATES_REQUEST: (state) => ({
+			...state,
+			vacancyTemplates: [],
+			loading: true,
+			error: null,
+		}),
+		FETCH_VACANCY_TEMPLATES_SUCCESS: (state, { payload }) => ({
+			...state,
+			vacancyTemplates: payload.templates,
+			loading: false,
+			error: null,
+		}),
+		FETCH_VACANCY_TEMPLATES_FAILURE: (state) => ({
+			...state,
+			vacancyTemplates: [],
+			loading: false,
+			error: true,
+		}),
+
 		SET_FILTER: (state, { payload }) => ({
 			...state,
 			filter: {
@@ -64,21 +84,30 @@ const vacancyList = handleActions(
 				[payload.params.name]: payload.params.value,
 			},
 		}),
-		ADD_VACANCY: (state, { payload }) => ({
+		ADD_VACANCY_REQUEST: (state) => ({
+			...state,
+		}),
+		ADD_VACANCY_SUCCESS: (state, { payload }) => ({
 			...state,
 			vacancies: state.vacancies.concat(payload.newVacancy),
 		}),
-		REMOVE_VACANCY: (state, { payload }) => {
-			const filterdVacancies = state.vacancies.filter((vacancy) => vacancy.url !== payload.id)
-
-			return {
-				...state,
-				vacancies: filterdVacancies,
-				vacancy: {},
-			}
-		},
+		ADD_VACANCY_FAILURE: (state) => ({
+			...state,
+		}),
+		REMOVE_VACANCY_REQUEST: (state) => ({
+			...state,
+		}),
+		REMOVE_VACANCY_SUCCESS: (state, { payload }) => ({
+			...state,
+			vacancies: state.vacancies.filter((v) => v._id !== payload.id),
+		}),
+		REMOVE_VACANCY_FAILURE: (state) => ({
+			...state,
+		}),
 		ARCHIVE_VACANCY_CANDIDATE: (state, { payload }) => {
-			const filteredCandidates = state.vacancy.candidates.filter((item) => item.id !== payload.id)
+			const filteredCandidates = state.vacancy.candidates.filter(
+				(v) => v.id !== payload.id
+			)
 
 			return {
 				...state,
@@ -89,7 +118,9 @@ const vacancyList = handleActions(
 			}
 		},
 		ARCHIVE_VACANCY_CANDIDATES: (state, { payload }) => {
-			const newCandidates = state.vacancy.candidates.filter((item) => !payload.includes(item))
+			const newCandidates = state.vacancy.candidates.filter(
+				(item) => !payload.includes(item)
+			)
 
 			return {
 				...state,
