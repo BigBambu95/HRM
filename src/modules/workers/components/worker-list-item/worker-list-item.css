@@ -1,7 +1,7 @@
 .worker-list__item {
     position: relative;
     display: flex;
-    padding: 1em;
+    padding: calc(var(--base-padding) * 2);
     border-radius: 10px;
     background: #fff;
     transition: .2s box-shadow;

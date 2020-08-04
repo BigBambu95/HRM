@@ -1,5 +1,5 @@
 .record {
-    line-height: 1;
+    line-height: 17px;
 }
 
 .record span {
@@ -12,5 +12,5 @@
 }
 
 .record:not(:first-child):not(:last-child) {
-    margin: .6em 0;
+    margin: var(--base-margin) 0;
 }
