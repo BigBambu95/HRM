@@ -4,7 +4,14 @@ import { withRouter } from 'react-router-dom'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
 import { addTab } from 'actions'
-import { Button, Grid, Filter, FilterList, Spinner, ErorIndicator } from 'components'
+import {
+	Button,
+	Grid,
+	Filter,
+	FilterList,
+	Spinner,
+	ErorIndicator,
+} from 'components'
 import actions from '../actions'
 import {
 	getFilteredWorkers,
@@ -19,13 +26,13 @@ import WorkerStatusPanel from '../components/worker-status-panel'
 
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
-const WorkerListContainer = ({
-	match
-}) => {
+const WorkerListContainer = ({ match }) => {
 	const dispatch = useDispatch()
 
 	const filteredWorkers = useSelector((state) => getFilteredWorkers(state))
-	const workerProfessions = useSelector((state) => selectWorkerProfessions(state))
+	const workerProfessions = useSelector((state) =>
+		selectWorkerProfessions(state)
+	)
 	const workerOffices = useSelector((state) => getWorkerOffices(state))
 	const workerDepartments = useSelector((state) => getWorkerDepartments(state))
 	const isWorker = useSelector((state) => state.workerList.isWorker)
@@ -63,9 +70,9 @@ const WorkerListContainer = ({
 			</Grid>
 		)
 
-	if(loading) return <Spinner />
+	if (loading) return <Spinner />
 
-	if(error) return <ErorIndicator />
+	if (error) return <ErorIndicator />
 
 	return (
 		<>
@@ -76,25 +83,23 @@ const WorkerListContainer = ({
 							label='Должность'
 							items={workerProfessions.concat('Все')}
 							filter={() => {}}
-							defaultValue="Все"
+							defaultValue='Все'
 						/>
 						<Filter
 							label='Офис'
 							items={workerOffices.concat('Все')}
 							filter={() => {}}
-							defaultValue="Все"
+							defaultValue='Все'
 						/>
 						<Filter
 							label='Отдел'
 							items={workerDepartments.concat('Все')}
 							filter={() => {}}
-							defaultValue="Все"
+							defaultValue='Все'
 						/>
 					</FilterList>
 					<ToolBarGroupItem>
-						<Button>
-							Выделить нескольких
-						</Button>
+						<Button>Выделить нескольких</Button>
 					</ToolBarGroupItem>
 				</ToolBar>
 				<WorkerStatusPanel />
@@ -105,8 +110,6 @@ const WorkerListContainer = ({
 }
 
 const mapDispatchToProps = (dispatch) => {
-
-
 	return {
 		// openWorker: (id) => {
 		// 	dispatch(openWorker())
@@ -121,11 +124,11 @@ const mapDispatchToProps = (dispatch) => {
 					prevPage,
 				})
 			)
-		}
+		},
 	}
 }
 
 export default compose(
 	withRouter,
-	connect(null, mapDispatchToProps),
+	connect(null, mapDispatchToProps)
 )(WorkerListContainer)

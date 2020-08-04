@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import { WorkerListContainer } from 'modules/workers';
+import { WorkerListContainer } from 'modules/workers'
 
 const Workers = () => (
-	<section className="workers">
+	<section className='workers'>
 		<WorkerListContainer />
 	</section>
-);
+)
 
-export default Workers;
+export default Workers

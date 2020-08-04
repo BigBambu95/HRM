@@ -65,6 +65,6 @@ const WorkerContainer = ({
 
 export default compose(
 	withRouter,
-	withHRMService(),
+	withHRMService()
 	// connect(mapStateToProps, mapDispatchToProps)
 )(WorkerContainer)
