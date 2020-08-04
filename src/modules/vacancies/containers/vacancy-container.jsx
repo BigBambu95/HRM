@@ -8,10 +8,11 @@ import { Grid, Button, Spinner, FilterList, Filter } from 'components'
 import { PencilIcon, RemoveBasketIcon } from 'svg'
 import ErrorIndicator from 'components/error-indicator'
 import {
-	getFinalCandidatesSelector,
-	getInterviewCandidatesSelector,
-	getPhoneCandidatesSelector,
-	getReviewSummaryCandidatesSelector,
+	selectCandidates,
+	selectInterviewCandidates,
+	selectPhoneCandidates,
+	selectReviewSummaryCandidates,
+	selectFinalCandidates,
 } from '../selectors'
 
 import actions from '../actions'
@@ -20,21 +21,12 @@ import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
 const VacancyContainer = ({ history, match }) => {
 	const dispatch = useDispatch()
-	const candidates = useSelector(
-		(state) => state.vacancyList.vacancy.candidates
-	)
-	const reviewSummaryCandidates = useSelector((state) =>
-		getReviewSummaryCandidatesSelector(state)
-	)
-	const phoneCandidates = useSelector((state) =>
-		getPhoneCandidatesSelector(state)
-	)
-	const interviewCandidates = useSelector((state) =>
-		getInterviewCandidatesSelector(state)
-	)
-	const finalCandidates = useSelector((state) =>
-		getFinalCandidatesSelector(state)
-	)
+
+	const candidates = useSelector(selectCandidates)
+	const reviewSummaryCandidates = useSelector(selectReviewSummaryCandidates)
+	const phoneCandidates = useSelector(selectPhoneCandidates)
+	const interviewCandidates = useSelector(selectInterviewCandidates)
+	const finalCandidates = useSelector(selectFinalCandidates)
 	const loading = useSelector((state) => state.vacancyList.loading)
 	const error = useSelector((state) => state.vacancyList.error)
 
