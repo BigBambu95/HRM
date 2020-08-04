@@ -1,10 +1,9 @@
 import React from 'react'
-import { Select, ButtonGroup, Button } from 'components'
+import { Select, ButtonGroup, Button, Record } from 'components'
 import { BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon } from 'svg'
-import Record from '../record'
 import WorkerStatus from '../worker-status'
-import { TabBar, TabBarItem } from '../tab-bar'
-import { ToolBar, ToolBarGroupItem } from '../tool-bar'
+import { TabBar, TabBarItem } from '../../../../components/tab-bar'
+import { ToolBar, ToolBarGroupItem } from '../../../../components/tool-bar'
 
 const WorkerDetails = ({ worker, closeWorker }) => {
 	const {

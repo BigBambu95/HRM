@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Record from '../record'
+import { Record } from 'components'
 
 const WorkerListItem = ({ item, addTab, match }) => {
 	const {
