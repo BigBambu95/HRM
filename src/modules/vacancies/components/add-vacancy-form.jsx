@@ -1,15 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { Controller } from 'react-hook-form'
-import {
-	ModalWindow,
-	Form,
-	Input,
-	Select,
-	Row,
-	Button,
-	DatePicker,
-} from 'components'
+import { ModalWindow, Form, Input, Select, Row, DatePicker } from 'components'
 import actions from '../actions'
 
 const AddVacancyForm = ({
@@ -35,8 +27,10 @@ const AddVacancyForm = ({
 			className='vacancy-list__modal-window'
 			isOpen={isOpenModal}
 			onCancel={() => setIsOpenModal(false)}
+			onSubmit={handleSubmit(onSubmit)}
+			submitBtnText='Создать'
 		>
-			<Form onSubmit={handleSubmit(onSubmit)}>
+			<Form>
 				<Form.Item validation={errors.profession} label='Специальность'>
 					<Select
 						items={vacancyTemplates}
@@ -70,11 +64,6 @@ const AddVacancyForm = ({
 					<Form.Item validation={errors.salary} label='Зарплата'>
 						<Input name='salary' ref={register()} />
 					</Form.Item>
-				</Row>
-				<Row justify='center' style={{ marginTop: '25px' }}>
-					<Button variant='solid' size='large' font='large' type='submit'>
-						Создать
-					</Button>
 				</Row>
 			</Form>
 		</ModalWindow>
