@@ -76,7 +76,6 @@ const vacancyList = handleActions(
 			loading: false,
 			error: true,
 		}),
-
 		SET_FILTER: (state, { payload }) => ({
 			...state,
 			filter: {

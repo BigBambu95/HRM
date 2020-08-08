@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Record from '../record'
+import { Record } from 'components'
 
 const WorkerListItem = ({ item, addTab, match }) => {
 	const {
-		id,
+		_id,
 		name,
 		department,
 		phone,
@@ -16,15 +16,15 @@ const WorkerListItem = ({ item, addTab, match }) => {
 	} = item
 
 	const clazz =
-		parseFloat(match.params.id) === id
+		match.params.id === _id
 			? `worker-list__item ${status} active`
 			: `worker-list__item ${status}`
 
 	return (
 		<div className={clazz}>
 			<Link
-				to={`/workers/${id}`}
-				onClick={() => addTab(name, `/workers/${id}`, office, 'Сотрудники')}
+				to={`/workers/${_id}`}
+				onClick={() => addTab(name, `/workers/${_id}`, office, 'Сотрудники')}
 			>
 				<div className='worker-list__item__left'>
 					<div className='worker-list__item__picture'>
