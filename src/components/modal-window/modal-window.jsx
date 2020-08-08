@@ -2,15 +2,17 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import Button from '../button'
+import classnames from 'classnames'
 import { CloseIcon } from '../../svg'
+import Button from '../button'
 
 const ModalWindow = ({
 	title,
 	children,
 	width,
 	isOpen,
+	onSubmit,
+	submitBtnText,
 	onCancel,
 	className,
 }) => {
@@ -28,18 +30,18 @@ const ModalWindow = ({
 		}
 	}, [])
 
-	const clazz = isOpen ? 'modal-window-wrapper active' : 'modal-window-wrapper'
-
-	const modalWindowClass = classNames('modal-window', className)
+	const modalClassName = classnames('modal-window', className)
 
 	const styles = {
 		maxWidth: `${width}px`,
 	}
 
+	if (!isOpen) return null
+
 	return (
-		<div className={clazz}>
+		<div className='modal-window-wrapper'>
 			<div className='overlay' onClick={onCancel} />
-			<div className={modalWindowClass} style={styles}>
+			<div className={modalClassName} style={styles}>
 				<div className='modal-window__header'>
 					<h2>{title}</h2>
 					<Button
@@ -51,6 +53,14 @@ const ModalWindow = ({
 					</Button>
 				</div>
 				<div className='modal-window__body'>{children}</div>
+				<div className='modal-window__footer'>
+					<Button onClick={onSubmit} size='large' variant='solid' font='large'>
+						{submitBtnText}
+					</Button>
+					<Button onClick={onCancel} size='large'>
+						Отменить
+					</Button>
+				</div>
 			</div>
 		</div>
 	)
@@ -62,12 +72,15 @@ ModalWindow.propTypes = {
 	width: PropTypes.number,
 	isOpen: PropTypes.bool,
 	onCancel: PropTypes.func,
+	onSubmit: PropTypes.func,
+	submitBtnText: PropTypes.string,
 }
 
 ModalWindow.defaultProps = {
-	title: 'Всплывающее окно',
+	title: 'Сформировать приказ',
 	isOpen: false,
-	onCancel() {},
+	children: null,
+	submitBtnText: 'Отправить',
 }
 
 export default ModalWindow
