@@ -1,5 +1,5 @@
-import Spinner from './spinner';
+import Spinner from './spinner'
 
-import './spinner.css';
+import './spinner.css'
 
-export default Spinner;
+export default Spinner

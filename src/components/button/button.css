@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     padding: .5em 1.7em;
-    border-radius: 8px;
+    border-radius: var(--main-border-radius);
     color: #000;
     font-size: var(--normal-font);
     font-weight: var(--thin-weight);
@@ -15,13 +15,12 @@
 }
 
 .btn.medium {
-    padding: .65em 2em;
-    border-radius: var(--main-border-radius);
+    padding: 8px 16px;
 }
 
 .btn.large {
-    padding: 1em 1.7em;
-    border-radius: var(--main-border-radius);
+    padding: 8px 16px;
+    line-height: 30px;
 }
 
 .btn.largeFont {
@@ -83,4 +82,11 @@
 
 .btn.icon:hover path {
     fill: var(--purple);
+}
+
+.btn:disabled {
+    border: 1px solid var(--light-gray) !important;
+    background: transparent !important;
+    color: var(--gray) !important;
+    cursor: not-allowed;
 }

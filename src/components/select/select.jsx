@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-
+import classnames from 'classnames'
 import { ArrowDownIcon } from '../../svg'
 import Button from '../button'
 
@@ -48,8 +48,10 @@ const Select = React.forwardRef(
 			</li>
 		))
 
+		const classNames = classnames('select', className)
+
 		return (
-			<div className={`select ${className}`} style={style} ref={container}>
+			<div className={classNames} style={style} ref={container}>
 				<div className='select__current-item'>{value.toString()}</div>
 				<input type='hidden' id={name} name={name} value={value} ref={ref} />
 				<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
@@ -77,8 +79,8 @@ Select.displayName = 'Select'
 
 Select.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
-	icon: PropTypes.node,
 	getSelectValue: PropTypes.func,
+	icon: PropTypes.node,
 	defaultValue: PropTypes.string,
 	style: PropTypes.object,
 	name: PropTypes.string,
@@ -87,8 +89,9 @@ Select.propTypes = {
 Select.defaultProps = {
 	icon: <ArrowDownIcon />,
 	getSelectValue: () => {},
-	defaultValue: '',
+	defaultValue: 'Все',
 	style: null,
+	name: null,
 }
 
 export default Select

@@ -1,9 +1,4 @@
-import TabBar from './tab-bar';
-import TabBarItem from './tab-bar-item';
+import TabBar from './tab-bar'
+import './tab-bar.css'
 
-import './tab-bar.css';
-
-export {
-  TabBar,
-  TabBarItem,
-};
+export default TabBar

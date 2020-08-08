@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { withHRMService } from '../hoc'
 import SidebarLink from '../sidebar-link'
-import { addTab, hotVacanciesRequest } from '../../actions'
+import { addTab } from '../../actions'
 
 const Sidebar = ({ activeTab, history, location }) => {
-	const dispatch = useDispatch()
 	const menu = useSelector((state) => state.menu.items)
 
 	useEffect(() => {
-		dispatch(hotVacanciesRequest())
+		// dispatch(hotVacanciesRequest())
 	}, [])
 
 	useEffect(() => {

@@ -1,0 +1,35 @@
+.worker-status {
+    position: relative;
+    display: inline-block;
+    margin: 0 1.5em;
+}
+
+.worker-status::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 5px);
+    left: -20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.worker-status.work::before {
+    background: #27ae60;
+}
+
+.worker-status.mission::before {
+    background: #4285f4;
+}
+
+.worker-status.orange::before {
+    background: #eb5757;
+}
+
+.worker-status.vacation::before {
+    background: #74eeee;
+}
+
+.worker-status.yellow::before {
+    background: #f2c94c;
+}

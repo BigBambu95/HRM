@@ -1,16 +1,16 @@
 .record {
-    line-height: 1;
+    line-height: 17px;
 }
 
-.record span {
+.record span:first-child {
     color: #b1b1b1;
     margin-right: 5px;
 }
 
-.record span::after {
+.record span:first-child::after {
     content: ':';
 }
 
 .record:not(:first-child):not(:last-child) {
-    margin: .6em 0;
+    margin: var(--base-margin) 0;
 }

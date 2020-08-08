@@ -82,13 +82,7 @@ const VacancyListContainer = () => {
 						defaultValue='Все'
 					/>
 				</FilterList>
-				<Button
-					variant='outlined'
-					color='purple'
-					onClick={() => setIsOpenModal(true)}
-				>
-					Добавить вакансию
-				</Button>
+				<Button onClick={() => setIsOpenModal(true)}>Добавить вакансию</Button>
 			</ToolBar>
 			{itemList}
 			<AddVacancyForm
