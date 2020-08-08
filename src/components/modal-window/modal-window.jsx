@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { CloseIcon } from 'svg'
+import { CloseIcon } from '../../svg'
 import Button from '../button'
 
 const ModalWindow = ({
@@ -30,18 +30,16 @@ const ModalWindow = ({
 		}
 	}, [])
 
-	const wrapperClassName = classnames('modal-window-wrapper', {
-		active: isOpen,
-	})
-
 	const modalClassName = classnames('modal-window', className)
 
 	const styles = {
 		maxWidth: `${width}px`,
 	}
 
+	if (!isOpen) return null
+
 	return (
-		<div className={wrapperClassName}>
+		<div className='modal-window-wrapper'>
 			<div className='overlay' onClick={onCancel} />
 			<div className={modalClassName} style={styles}>
 				<div className='modal-window__header'>
