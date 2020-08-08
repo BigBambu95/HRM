@@ -30,7 +30,7 @@ const Button = ({
 Button.defaultProps = {
 	classname: '',
 	children: null,
-	onClick() {},
+	onClick: () => {},
 	size: 'medium',
 	variant: 'outlined',
 	color: 'purple',
