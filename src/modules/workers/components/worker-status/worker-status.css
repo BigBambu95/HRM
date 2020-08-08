@@ -18,7 +18,7 @@
     background: #27ae60;
 }
 
-.worker-status.blue::before {
+.worker-status.mission::before {
     background: #4285f4;
 }
 
@@ -26,7 +26,7 @@
     background: #eb5757;
 }
 
-.worker-status.aqua::before {
+.worker-status.vacation::before {
     background: #74eeee;
 }
 

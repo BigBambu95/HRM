@@ -20,9 +20,9 @@ export const getWorkerDepartments = (state) => {
 export const getFilteredWorkers = (state) =>
 	filterArr(
 		state.workerList.workers,
-		state.workerList.filterProfession,
-		state.workerList.filterOffice,
-		state.workerList.filterDepartment
+		state.workerList.filter.profession,
+		state.workerList.filter.office,
+		state.workerList.filter.department
 	)
 
 export const getWorkersInformation = (state) =>

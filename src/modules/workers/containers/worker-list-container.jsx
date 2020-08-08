@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { addTab } from 'actions'
 import {
@@ -21,9 +20,7 @@ import {
 } from '../selectors'
 
 import WorkerListItem from '../components/worker-list-item'
-
 import WorkerStatusPanel from '../components/worker-status-panel'
-
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
 const WorkerListContainer = ({ match }) => {
@@ -35,7 +32,7 @@ const WorkerListContainer = ({ match }) => {
 	)
 	const workerOffices = useSelector((state) => getWorkerOffices(state))
 	const workerDepartments = useSelector((state) => getWorkerDepartments(state))
-	const isWorker = useSelector((state) => state.workerList.isWorker)
+	const worker = useSelector((state) => state.workerList.worker)
 	const loading = useSelector((state) => state.workerList.loading)
 	const error = useSelector((state) => state.workerList.error)
 
@@ -43,20 +40,18 @@ const WorkerListContainer = ({ match }) => {
 		dispatch(actions.fetchWorkersRequest())
 	}, [])
 
-	useEffect(() => {
-		// match.params.id !== undefined && openWorker(match.params.id)
-	}, [match.params.id])
+	const columns = worker ? 1 : 2
+	const clazz = worker ? 'worker-list opened-worker' : 'worker-list'
 
-	const columns = isWorker ? 1 : 2
-	const clazz = isWorker ? 'worker-list opened-worker' : 'worker-list'
-
-	const workerList = filteredWorkers.map((worker) => {
+	const workerList = filteredWorkers.map((w) => {
 		return (
 			<WorkerListItem
-				key={worker.id}
-				item={worker}
+				key={w._id}
+				item={w}
 				match={match}
-				addTab={addTab}
+				addTab={(label, path, office, prevPage) =>
+					dispatch(addTab(label, path, office, prevPage))
+				}
 			/>
 		)
 	})
@@ -75,60 +70,36 @@ const WorkerListContainer = ({ match }) => {
 	if (error) return <ErorIndicator />
 
 	return (
-		<>
-			<div className={clazz}>
-				<ToolBar>
-					<FilterList>
-						<Filter
-							label='Должность'
-							items={workerProfessions.concat('Все')}
-							filter={() => {}}
-							defaultValue='Все'
-						/>
-						<Filter
-							label='Офис'
-							items={workerOffices.concat('Все')}
-							filter={() => {}}
-							defaultValue='Все'
-						/>
-						<Filter
-							label='Отдел'
-							items={workerDepartments.concat('Все')}
-							filter={() => {}}
-							defaultValue='Все'
-						/>
-					</FilterList>
-					<ToolBarGroupItem>
-						<Button>Выделить нескольких</Button>
-					</ToolBarGroupItem>
-				</ToolBar>
-				<WorkerStatusPanel />
-				{itemList}
-			</div>
-		</>
+		<div className={clazz}>
+			<ToolBar>
+				<FilterList>
+					<Filter
+						label='Должность'
+						items={workerProfessions.concat('Все')}
+						filter={() => {}}
+						defaultValue='Все'
+					/>
+					<Filter
+						label='Офис'
+						items={workerOffices.concat('Все')}
+						filter={() => {}}
+						defaultValue='Все'
+					/>
+					<Filter
+						label='Отдел'
+						items={workerDepartments.concat('Все')}
+						filter={() => {}}
+						defaultValue='Все'
+					/>
+				</FilterList>
+				<ToolBarGroupItem>
+					<Button>Добавить сотрудника</Button>
+				</ToolBarGroupItem>
+			</ToolBar>
+			<WorkerStatusPanel />
+			{itemList}
+		</div>
 	)
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		// openWorker: (id) => {
-		// 	dispatch(openWorker())
-		// 	history.push(`/workers/${id}`)
-		// },
-		addTab: (label, path, office, prevPage) => {
-			dispatch(
-				addTab({
-					label,
-					path,
-					office,
-					prevPage,
-				})
-			)
-		},
-	}
-}
-
-export default compose(
-	withRouter,
-	connect(null, mapDispatchToProps)
-)(WorkerListContainer)
+export default withRouter(WorkerListContainer)

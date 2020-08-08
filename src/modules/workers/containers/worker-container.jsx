@@ -1,70 +1,33 @@
 import React, { useEffect } from 'react'
-import { compose } from 'redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Spinner } from 'components'
-import { withHRMService } from 'components/hoc'
+import ErrorIndicator from 'components/error-indicator'
+import actions from '../actions'
 import WorkerDetails from '../components/worker-details'
 
-const WorkerContainer = ({
-	loading,
-	match,
-	closeWorker,
-	fetchWorker,
-	history,
-}) => {
+const WorkerContainer = ({ match, closeWorker, history }) => {
+	const dispatch = useDispatch()
+
+	const worker = useSelector((state) => state.workerList.worker)
+	const loading = useSelector((state) => state.workerList.loading)
+	const error = useSelector((state) => state.workerList.error)
+
 	useEffect(() => {
-		fetchWorker()
+		dispatch(actions.fetchWorkerRequest(match.params.id))
 	}, [match.params.id])
 
-	if (loading) {
-		return <Spinner />
-	}
+	if (loading) return <Spinner />
 
-	if (match.params.id === undefined) {
-		return null
-	}
+	if (error) return <ErrorIndicator />
 
 	return (
-		<>
-			<WorkerDetails
-				// worker={worker}
-				closeWorker={closeWorker}
-				history={history}
-			/>
-		</>
+		<WorkerDetails
+			worker={worker}
+			closeWorker={closeWorker}
+			history={history}
+		/>
 	)
 }
 
-// const mapStateToProps = (state) => {
-// 	return {
-// 		worker: getWorker(state),
-// 		loading: state.worker.loading,
-// 		error: state.worker.error,
-// 	}
-// }
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-// 	const { hrmService, match, history } = ownProps
-// 	const { workerRequest, workerLoaded, workerError, closeWorker } = actions
-
-// 	return {
-// 		fetchWorker: () => {
-// 			dispatch(workerRequest())
-// 			hrmService
-// 				.getWorker(match.params.id)
-// 				.then((data) => dispatch(workerLoaded(data)))
-// 				.catch((err) => dispatch(workerError(err)))
-// 		},
-
-// 		closeWorker: () => {
-// 			dispatch(closeWorker())
-// 			history.push('/workers/')
-// 		},
-// 	}
-// }
-
-export default compose(
-	withRouter,
-	withHRMService()
-	// connect(mapStateToProps, mapDispatchToProps)
-)(WorkerContainer)
+export default withRouter(WorkerContainer)

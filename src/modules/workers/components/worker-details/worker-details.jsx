@@ -1,8 +1,7 @@
 import React from 'react'
-import { Select, ButtonGroup, Button, Record } from 'components'
+import { ButtonGroup, Button, Record, TabBar } from 'components'
 import { BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon } from 'svg'
 import WorkerStatus from '../worker-status'
-import { TabBar, TabBarItem } from '../../../../components/tab-bar'
 import { ToolBar, ToolBarGroupItem } from '../../../../components/tool-bar'
 
 const WorkerDetails = ({ worker, closeWorker }) => {
@@ -77,17 +76,16 @@ const WorkerDetails = ({ worker, closeWorker }) => {
 					</div>
 					<div className='worker-details__content__info'>
 						<TabBar>
-							<TabBarItem label='Общее'>
+							<TabBar.Item label='Общее'>
 								<ButtonGroup className='worker-details__content__info__btn-group'>
 									<Button variant='text'>Всего</Button>
 									<Button variant='text'>Месяц</Button>
 									<Button variant='text'>Квартал</Button>
 									<Button variant='text'>Год</Button>
 								</ButtonGroup>
-								<Select />
-							</TabBarItem>
-							<TabBarItem label='Личная информация' />
-							<TabBarItem label='Учет рабочего времени' />
+							</TabBar.Item>
+							<TabBar.Item label='Личная информация' />
+							<TabBar.Item label='Учет рабочего времени' />
 						</TabBar>
 					</div>
 				</div>
@@ -109,17 +107,14 @@ const WorkerDetails = ({ worker, closeWorker }) => {
 							<Button variant='outlined' color='red' width='100%' size='large'>
 								Оштрафовать
 							</Button>
-							<div className='flex align-items-center'>
-								<Button
-									variant='outlined'
-									color='aqua'
-									width='100%'
-									size='large'
-								>
-									В отпуск
-								</Button>
-							</div>
-							<Button color='red'>Уволить</Button>
+
+							<Button variant='outlined' color='aqua' width='100%' size='large'>
+								В отпуск
+							</Button>
+
+							<Button color='red' variant='text'>
+								Уволить
+							</Button>
 						</ButtonGroup>
 					</div>
 					<div>

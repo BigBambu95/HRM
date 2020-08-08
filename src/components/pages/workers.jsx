@@ -1,10 +1,11 @@
 import React from 'react'
 
-import { WorkerListContainer } from 'modules/workers'
+import { WorkerListContainer, WorkerContainer } from 'modules/workers'
 
 const Workers = () => (
 	<section className='workers'>
 		<WorkerListContainer />
+		<WorkerContainer />
 	</section>
 )
 

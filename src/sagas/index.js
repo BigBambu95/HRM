@@ -7,7 +7,8 @@ import {
 	watchAddVacancy,
 	watchRemoveVacancy,
 } from 'modules/vacancies/sagas'
-import { watchFetchWorkers } from 'modules/workers/sagas'
+
+import { watchFetchWorkers, watchFetchWorker } from 'modules/workers/sagas'
 import { officesActions } from 'actions'
 import Api from 'services/api'
 
@@ -47,5 +48,6 @@ export default function* rootSaga() {
 		watchAddVacancy(),
 		watchRemoveVacancy(),
 		watchFetchWorkers(),
+		watchFetchWorker(),
 	])
 }

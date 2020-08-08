@@ -2,10 +2,12 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
 	workers: [],
-	isWorker: false,
-	filterProfession: 'Все',
-	filterOffice: 'Все',
-	filterDepartment: 'Все',
+	worker: {},
+	filter: {
+		profession: 'Все',
+		office: 'Все',
+		department: 'Все',
+	},
 	loading: true,
 	error: null,
 }
@@ -30,13 +32,23 @@ const workersList = handleActions(
 			loading: false,
 			error: true,
 		}),
-		OPEN_WORKER: (state) => ({
+		FETCH_WORKER_REQUEST: (state) => ({
 			...state,
-			isWorker: true,
+			worker: {},
+			loading: true,
+			error: null,
 		}),
-		CLOSE_WORKER: (state) => ({
+		FETCH_WORKER_SUCCESS: (state, { payload }) => ({
 			...state,
-			isWorker: false,
+			worker: payload.worker,
+			loading: false,
+			error: null,
+		}),
+		FETCH_WORKER_FAILURE: (state) => ({
+			...state,
+			worker: {},
+			loading: false,
+			error: true,
 		}),
 		SET_FILTER: (state, { payload }) => ({
 			...state,

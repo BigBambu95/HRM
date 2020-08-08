@@ -14,3 +14,16 @@ export function* fetchWorkers() {
 export function* watchFetchWorkers() {
 	yield takeEvery('FETCH_WORKERS_REQUEST', fetchWorkers)
 }
+
+export function* fetchWorker({ payload }) {
+	try {
+		const worker = yield call(Api.get, `/workers/${payload.id}`)
+		yield put(actions.fetchWorkerSuccess(worker.data))
+	} catch (err) {
+		yield put(actions.fetchWorkerFailure(err))
+	}
+}
+
+export function* watchFetchWorker() {
+	yield takeEvery('FETCH_WORKER_REQUEST', fetchWorker)
+}
