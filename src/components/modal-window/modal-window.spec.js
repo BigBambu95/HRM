@@ -2,19 +2,34 @@ import React from 'react'
 import Modal from './modal-window'
 
 describe('Modal', () => {
-	let modal
-	beforeAll(() => {
-		modal = mount(<Modal>Modal window children</Modal>)
-	})
+	const setUp = (props, children) =>
+		shallow(
+			<Modal isOpen={false} onSubmit={() => {}} onCancel={() => {}} {...props}>
+				{children}
+			</Modal>
+		)
 
 	it('Проверка что модальное окно не отрендерено по умолчанию', () => {
-		expect(modal.isEmptyRender()).toEqual(true)
-		expect(modal.props().isOpen).toEqual(false)
+		const modal = setUp()
+		expect(modal).toMatchSnapshot()
 	})
 
-	it('Симуляция рендера окна', () => {
-		modal.setProps({ isOpen: true })
-		expect(modal.props().isOpen).toEqual(true)
-		expect(modal.props().children).toEqual('Modal window children')
+	it('Рендер окна с пропсами по умолчанию', () => {
+		const modal = setUp({ isOpen: true })
+		expect(modal).toMatchSnapshot()
+	})
+
+	it('Рендер окна с переданными пропсами', () => {
+		const modal = setUp(
+			{
+				isOpen: true,
+				title: 'Создать вакансию',
+				submitBtnText: 'Создать',
+				width: 800,
+			},
+			<div>Custom children</div>
+		)
+
+		expect(modal).toMatchSnapshot()
 	})
 })

@@ -2,12 +2,12 @@
     line-height: 1;
 }
 
-.record span {
+.record span:first-child {
     color: #b1b1b1;
     margin-right: 5px;
 }
 
-.record span::after {
+.record span:first-child::after {
     content: ':';
 }
 

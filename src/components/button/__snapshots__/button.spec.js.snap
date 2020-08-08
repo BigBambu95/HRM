@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Кнопка с переданными пропсами 1`] = `
+<button
+  className="btn large solid red largeFont fullWidth"
+  onClick={[Function]}
+  type="submit"
+>
+  Click
+</button>
+`;
+
+exports[`Button Рендер кнопки c дефолтными значениями 1`] = `
+<button
+  className="btn medium outlined purple"
+  onClick={[Function]}
+  type="button"
+/>
+`;

@@ -70,17 +70,17 @@ ModalWindow.propTypes = {
 	title: PropTypes.string,
 	children: PropTypes.node,
 	width: PropTypes.number,
-	isOpen: PropTypes.bool,
-	onCancel: PropTypes.func,
-	onSubmit: PropTypes.func,
 	submitBtnText: PropTypes.string,
+	isOpen: PropTypes.bool.isRequired,
+	onCancel: PropTypes.func.isRequired,
+	onSubmit: PropTypes.func.isRequired,
 }
 
 ModalWindow.defaultProps = {
 	title: 'Сформировать приказ',
-	isOpen: false,
 	children: null,
 	submitBtnText: 'Отправить',
+	width: 600,
 }
 
 export default ModalWindow
