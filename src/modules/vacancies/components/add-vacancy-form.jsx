@@ -17,7 +17,7 @@ const AddVacancyForm = ({
 
 	const onSubmit = (data) => {
 		setIsOpenModal(false)
-		return dispatch(actions.addVacancyRequest(data))
+		return dispatch(actions.vacancies.addVacancyRequest(data))
 	}
 
 	return (

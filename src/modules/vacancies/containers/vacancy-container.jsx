@@ -50,7 +50,7 @@ const VacancyContainer = ({ history, match }) => {
 	]
 
 	useEffect(() => {
-		dispatch(actions.fetchVacancyRequest(match.params.id))
+		dispatch(actions.vacancies.fetchVacancyRequest(match.params.id))
 	}, [])
 
 	const deleteVacancy = () => {
@@ -74,7 +74,7 @@ const VacancyContainer = ({ history, match }) => {
 						label='Возраст'
 						items={candidates}
 						getSelectValue={(value) =>
-							dispatch(actions.setFilter({ name: 'age', value }))
+							dispatch(actions.vacancies.setFilter({ name: 'age', value }))
 						}
 						defaultValue='Все'
 					/>
@@ -82,7 +82,7 @@ const VacancyContainer = ({ history, match }) => {
 						label='Опыт'
 						items={candidates}
 						getSelectValue={(value) =>
-							dispatch(actions.setFilter({ name: 'exp', value }))
+							dispatch(actions.vacancies.setFilter({ name: 'exp', value }))
 						}
 						defaultValue='Все'
 					/>
@@ -90,7 +90,9 @@ const VacancyContainer = ({ history, match }) => {
 						label='Желаемая з/п'
 						items={candidates}
 						getSelectValue={(value) =>
-							dispatch(actions.setFilter({ name: 'desiredSalary', value }))
+							dispatch(
+								actions.vacancies.setFilter({ name: 'desiredSalary', value })
+							)
 						}
 						defaultValue='Все'
 					/>

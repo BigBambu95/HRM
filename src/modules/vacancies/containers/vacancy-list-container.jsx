@@ -27,9 +27,9 @@ const VacancyListContainer = () => {
 	const form = useForm()
 
 	useEffect(() => {
-		dispatch(actions.fetchVacanciesRequest())
+		dispatch(actions.vacancies.fetchVacanciesRequest())
 		dispatch(officesActions.fetchOfficesRequest())
-		dispatch(actions.fetchVacancyTemplatesRequest())
+		dispatch(actions.vacancies.fetchVacancyTemplatesRequest())
 	}, [])
 
 	const vacancyList = filteredVacancies.map((vacancy) => (
@@ -39,7 +39,7 @@ const VacancyListContainer = () => {
 			addTab={(label, path, office, prevPage) =>
 				dispatch(addTab(label, path, office, prevPage))
 			}
-			deleteItem={(id) => dispatch(actions.removeVacancyRequest(id))}
+			deleteItem={(id) => dispatch(actions.vacancies.removeVacancyRequest(id))}
 		/>
 	))
 
@@ -65,7 +65,7 @@ const VacancyListContainer = () => {
 						items={vacancyTemplates}
 						getSelectValue={(value) =>
 							dispatch(
-								actions.setFilter({
+								actions.vacancies.setFilter({
 									name: 'profession',
 									value,
 								})
@@ -77,7 +77,7 @@ const VacancyListContainer = () => {
 						label='Офис'
 						items={offices}
 						getSelectValue={(value) =>
-							dispatch(actions.setFilter({ name: 'office', value }))
+							dispatch(actions.vacancies.setFilter({ name: 'office', value }))
 						}
 						defaultValue='Все'
 					/>
