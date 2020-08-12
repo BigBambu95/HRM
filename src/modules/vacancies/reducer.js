@@ -1,4 +1,13 @@
 import { handleActions } from 'redux-actions'
+import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
+import {
+	FETCH_VACANCIES,
+	FETCH_VACANCY,
+	FETCH_VACANCY_TEMPLATES,
+	ADD_VACANCY,
+	REMOVE_VACANCY,
+	SET_FILTER,
+} from './types'
 
 const initialState = {
 	vacancies: [],
@@ -21,25 +30,25 @@ const initialState = {
 
 const vacancyList = handleActions(
 	{
-		FETCH_VACANCIES_REQUEST: (state) => ({
+		[REQUEST(FETCH_VACANCIES)]: (state) => ({
 			...state,
 			vacancies: [],
 			loading: true,
 			error: null,
 		}),
-		FETCH_VACANCIES_SUCCESS: (state, { payload }) => ({
+		[SUCCESS(FETCH_VACANCIES)]: (state, { payload }) => ({
 			...state,
-			vacancies: payload.newVacancies,
+			vacancies: payload,
 			loading: false,
 			error: null,
 		}),
-		FETCH_VACANCIES_FAILURE: (state) => ({
+		[FAILURE(FETCH_VACANCIES)]: (state) => ({
 			...state,
 			vacancies: [],
 			loading: false,
 			error: true,
 		}),
-		FETCH_VACANCY_REQUEST: (state) => ({
+		[REQUEST(FETCH_VACANCY)]: (state) => ({
 			...state,
 			vacancy: {
 				candidates: [],
@@ -47,88 +56,78 @@ const vacancyList = handleActions(
 			loading: true,
 			error: null,
 		}),
-		FETCH_VACANCY_SUCCESS: (state, { payload }) => ({
+		[SUCCESS(FETCH_VACANCY)]: (state, { payload }) => ({
 			...state,
-			vacancy: payload.vacancy,
+			vacancy: payload,
 			loading: false,
 			error: null,
 		}),
-		FETCH_VACANCY_FAILURE: (state) => ({
+		[FAILURE(FETCH_VACANCY)]: (state) => ({
 			...state,
 			loading: false,
 			error: true,
 		}),
-		FETCH_VACANCY_TEMPLATES_REQUEST: (state) => ({
+		[REQUEST(FETCH_VACANCY_TEMPLATES)]: (state) => ({
 			...state,
 			vacancyTemplates: [],
 			loading: true,
 			error: null,
 		}),
-		FETCH_VACANCY_TEMPLATES_SUCCESS: (state, { payload }) => ({
+		[SUCCESS(FETCH_VACANCY_TEMPLATES)]: (state, { payload }) => ({
 			...state,
-			vacancyTemplates: payload.templates,
+			vacancyTemplates: payload,
 			loading: false,
 			error: null,
 		}),
-		FETCH_VACANCY_TEMPLATES_FAILURE: (state) => ({
+		[FAILURE(FETCH_VACANCY_TEMPLATES)]: (state) => ({
 			...state,
 			vacancyTemplates: [],
 			loading: false,
 			error: true,
 		}),
-		SET_FILTER: (state, { payload }) => ({
+		[SET_FILTER]: (state, { payload }) => ({
 			...state,
 			filter: {
 				...state.filter,
-				[payload.params.name]: payload.params.value,
+				[payload.name]: payload.value,
 			},
 		}),
-		ADD_VACANCY_REQUEST: (state) => ({
+		[REQUEST(ADD_VACANCY)]: (state) => ({
 			...state,
 		}),
-		ADD_VACANCY_SUCCESS: (state, { payload }) => ({
+		[SUCCESS(ADD_VACANCY)]: (state, { payload }) => ({
 			...state,
-			vacancies: state.vacancies.concat(payload.newVacancy),
+			vacancies: state.vacancies.concat(payload),
 		}),
-		ADD_VACANCY_FAILURE: (state) => ({
-			...state,
-		}),
-		REMOVE_VACANCY_REQUEST: (state) => ({
+		[FAILURE(ADD_VACANCY)]: (state) => ({
 			...state,
 		}),
-		REMOVE_VACANCY_SUCCESS: (state, { payload }) => ({
-			...state,
-			vacancies: state.vacancies.filter((v) => v._id !== payload.id),
-		}),
-		REMOVE_VACANCY_FAILURE: (state) => ({
+		[REQUEST(REMOVE_VACANCY)]: (state) => ({
 			...state,
 		}),
-		ARCHIVE_VACANCY_CANDIDATE: (state, { payload }) => {
-			const filteredCandidates = state.vacancy.candidates.filter(
-				(v) => v.id !== payload.id
-			)
-
-			return {
-				...state,
-				vacancy: {
-					...state.vacancy,
-					candidates: filteredCandidates,
-				},
-			}
-		},
-		ARCHIVE_VACANCY_CANDIDATES: (state, { payload }) => {
-			const newCandidates = state.vacancy.candidates.filter(
-				(item) => !payload.includes(item)
-			)
-
-			return {
-				...state,
-				vacancy: {
-					...state.vacancy,
-					candidates: newCandidates,
-				},
-			}
-		},
+		[SUCCESS(REMOVE_VACANCY)]: (state, { payload }) => ({
+			...state,
+			vacancies: state.vacancies.filter((v) => v._id !== payload),
+		}),
+		[FAILURE(REMOVE_VACANCY)]: (state) => ({
+			...state,
+		}),
+		ARCHIVE_VACANCY_CANDIDATE: (state, { payload }) => ({
+			...state,
+			vacancy: {
+				...state.vacancy,
+				candidates: state.vacancy.candidates.filter((v) => v._id !== payload),
+			},
+		}),
+		ARCHIVE_VACANCY_CANDIDATES: (state, { payload }) => ({
+			...state,
+			vacancy: {
+				...state.vacancy,
+				candidates: state.vacancy.candidates.filter(
+					(i) => !payload.includes(i)
+				),
+			},
+		}),
 	},
 	initialState
 )
