@@ -1,13 +1,15 @@
 import { createActions } from 'redux-actions'
+import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
+import { FETCH_WORKER, FETCH_WORKERS, SET_FILTER } from './types'
 
 const actions = createActions({
-	FETCH_WORKERS_REQUEST: () => ({}),
-	FETCH_WORKERS_SUCCESS: (workers) => ({ workers }),
-	FETCH_WORKERS_FAILURE: (err) => ({ err }),
-	FETCH_WORKER_REQUEST: (id) => ({ id }),
-	FETCH_WORKER_SUCCESS: (worker) => ({ worker }),
-	FETCH_WORKER_FAILURE: (err) => ({ err }),
-	SET_FILTER: (params) => ({ params }),
+	[REQUEST(FETCH_WORKERS)]: () => ({}),
+	[SUCCESS(FETCH_WORKERS)]: (workers) => workers,
+	[FAILURE(FETCH_WORKERS)]: (err) => err,
+	[REQUEST(FETCH_WORKER)]: (id) => id,
+	[SUCCESS(FETCH_WORKER)]: (worker) => worker,
+	[FAILURE(FETCH_WORKER)]: (err) => err,
+	[SET_FILTER]: (params) => params,
 })
 
 export default actions

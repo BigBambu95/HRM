@@ -1,6 +1,5 @@
 export const FETCH_VACANCIES = 'vacancies/FETCH_VACANCIES'
 export const FETCH_VACANCY = 'vacancies/FETCH_VACANCY'
-export const FETCH_VACANCY_TEMPLATES = 'vacancies/FETCH_VACANCY_TEMPLATES'
 export const ADD_VACANCY = 'vacancies/ADD_VACANCY'
 export const REMOVE_VACANCY = 'vacancies/REMOVE_VACANCY'
 export const SET_FILTER = 'vacancies/SET_FILTER'

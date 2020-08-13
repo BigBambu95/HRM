@@ -1,4 +1,6 @@
 import { handleActions } from 'redux-actions'
+import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
+import { FETCH_WORKER, FETCH_WORKERS, SET_FILTER } from './types'
 
 const initialState = {
 	workers: [],
@@ -14,47 +16,47 @@ const initialState = {
 
 const workersList = handleActions(
 	{
-		FETCH_WORKERS_REQUEST: (state) => ({
+		[REQUEST(FETCH_WORKERS)]: (state) => ({
 			...state,
 			workers: [],
 			loading: true,
 			error: null,
 		}),
-		FETCH_WORKERS_SUCCESS: (state, { payload }) => ({
+		[SUCCESS(FETCH_WORKERS)]: (state, { payload }) => ({
 			...state,
-			workers: payload.workers,
+			workers: payload,
 			loading: false,
 			error: null,
 		}),
-		FETCH_WORKERS_FAILURE: (state) => ({
+		[FAILURE(FETCH_WORKERS)]: (state) => ({
 			...state,
 			workers: [],
 			loading: false,
 			error: true,
 		}),
-		FETCH_WORKER_REQUEST: (state) => ({
+		[REQUEST(FETCH_WORKER)]: (state) => ({
 			...state,
 			worker: {},
 			loading: true,
 			error: null,
 		}),
-		FETCH_WORKER_SUCCESS: (state, { payload }) => ({
+		[SUCCESS(FETCH_WORKER)]: (state, { payload }) => ({
 			...state,
-			worker: payload.worker,
+			worker: payload,
 			loading: false,
 			error: null,
 		}),
-		FETCH_WORKER_FAILURE: (state) => ({
+		[FAILURE(FETCH_WORKER)]: (state) => ({
 			...state,
 			worker: {},
 			loading: false,
 			error: true,
 		}),
-		SET_FILTER: (state, { payload }) => ({
+		[SET_FILTER]: (state, { payload }) => ({
 			...state,
 			filter: {
 				...state.filter,
-				[payload.params.name]: payload.params.value,
+				[payload.name]: payload.value,
 			},
 		}),
 	},

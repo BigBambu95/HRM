@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-import { addTab, officesActions } from 'actions'
+import { addTab } from 'actions'
 import Filter from 'components/filter'
 import FilterList from 'components/filter-list'
 import { ToolBar } from 'components/tool-bar'
 import { Grid, Button, Spinner } from 'components'
 import ErrorIndicator from 'components/error-indicator'
+import { dictionaryActions } from 'dictionaries'
 import { getFilteredVacancies } from '../selectors'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
@@ -15,10 +16,8 @@ const VacancyListContainer = () => {
 	// Redux
 	const dispatch = useDispatch()
 	const filteredVacancies = useSelector((state) => getFilteredVacancies(state))
-	const vacancyTemplates = useSelector(
-		(state) => state.vacancyList.vacancyTemplates
-	)
-	const offices = useSelector((state) => state.officeList.offices)
+	const professions = useSelector((state) => state.dictionaries.professions)
+	const offices = useSelector((state) => state.dictionaries.offices)
 	const loading = useSelector((state) => state.vacancyList.loading)
 	const error = useSelector((state) => state.vacancyList.error)
 
@@ -28,8 +27,8 @@ const VacancyListContainer = () => {
 
 	useEffect(() => {
 		dispatch(actions.vacancies.fetchVacanciesRequest())
-		dispatch(officesActions.fetchOfficesRequest())
-		dispatch(actions.vacancies.fetchVacancyTemplatesRequest())
+		dispatch(dictionaryActions.fetchOfficesRequest())
+		dispatch(dictionaryActions.fetchProfessionsRequest())
 	}, [])
 
 	const vacancyList = filteredVacancies.map((vacancy) => (
@@ -62,7 +61,7 @@ const VacancyListContainer = () => {
 				<FilterList>
 					<Filter
 						label='Должность'
-						items={vacancyTemplates}
+						items={professions}
 						getSelectValue={(value) =>
 							dispatch(
 								actions.vacancies.setFilter({
@@ -89,7 +88,7 @@ const VacancyListContainer = () => {
 				dispatch={dispatch}
 				isOpenModal={isOpenModal}
 				setIsOpenModal={setIsOpenModal}
-				vacancyTemplates={vacancyTemplates}
+				vacancyTemplates={professions}
 				offices={offices}
 				form={form}
 			/>
