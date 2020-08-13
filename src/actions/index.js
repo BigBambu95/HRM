@@ -3,7 +3,6 @@ import worker from './worker'
 import documentsActions from './documents'
 import salary from './salary'
 import candidates from './candidates'
-import officesActions from './offices'
 
 const addTab = (payload) => ({
 	type: C.ADD_TAB,
@@ -39,7 +38,6 @@ export {
 	documentsActions,
 	salary,
 	candidates,
-	officesActions,
 	addTab,
 	removeTab,
 	updateTab,

@@ -7,7 +7,6 @@ import {
 	FETCH_VACANCY,
 	ADD_VACANCY,
 	REMOVE_VACANCY,
-	FETCH_VACANCY_TEMPLATES,
 } from './types'
 
 export function* fetchVacancies() {
@@ -34,19 +33,6 @@ export function* fetchVacancy({ payload }) {
 
 export function* watchfetchVacancy() {
 	yield takeEvery(REQUEST(FETCH_VACANCY), fetchVacancy)
-}
-
-export function* fetchVacancyTemplates() {
-	try {
-		const templates = yield call(Api.get, '/vacancies/templates')
-		yield put(actions.vacancies.fetchVacancyTemplatesSuccess(templates.data))
-	} catch (err) {
-		yield put(actions.vacancies.fetchVacancyTemplatesFailure(err))
-	}
-}
-
-export function* watchFetchVacancyTemplates() {
-	yield takeEvery(REQUEST(FETCH_VACANCY_TEMPLATES), fetchVacancyTemplates)
 }
 
 export function* addVacancy({ payload }) {

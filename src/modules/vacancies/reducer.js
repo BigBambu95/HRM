@@ -3,7 +3,6 @@ import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import {
 	FETCH_VACANCIES,
 	FETCH_VACANCY,
-	FETCH_VACANCY_TEMPLATES,
 	ADD_VACANCY,
 	REMOVE_VACANCY,
 	SET_FILTER,
@@ -19,7 +18,6 @@ const initialState = {
 			desiredSalary: 'Все',
 		},
 	},
-	vacancyTemplates: [],
 	filter: {
 		profession: 'Все',
 		office: 'Все',
@@ -64,24 +62,6 @@ const vacancyList = handleActions(
 		}),
 		[FAILURE(FETCH_VACANCY)]: (state) => ({
 			...state,
-			loading: false,
-			error: true,
-		}),
-		[REQUEST(FETCH_VACANCY_TEMPLATES)]: (state) => ({
-			...state,
-			vacancyTemplates: [],
-			loading: true,
-			error: null,
-		}),
-		[SUCCESS(FETCH_VACANCY_TEMPLATES)]: (state, { payload }) => ({
-			...state,
-			vacancyTemplates: payload,
-			loading: false,
-			error: null,
-		}),
-		[FAILURE(FETCH_VACANCY_TEMPLATES)]: (state) => ({
-			...state,
-			vacancyTemplates: [],
 			loading: false,
 			error: true,
 		}),

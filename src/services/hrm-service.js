@@ -14,10 +14,6 @@ export default class HRMService {
 		})
 	}
 
-	getWorkers() {
-		return this.getData(workers)
-	}
-
 	getDocuments() {
 		return this.getData(documents)
 	}
@@ -30,9 +26,5 @@ export default class HRMService {
 			}
 		})
 		return this.getData(data)
-	}
-
-	getWorker(id) {
-		return this.getData(workers[id - 1])
 	}
 }

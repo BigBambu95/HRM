@@ -1,12 +1,13 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 import { WorkerListContainer, WorkerContainer } from 'modules/workers'
 
-const Workers = () => (
+const Workers = ({ match }) => (
 	<section className='workers'>
-		<WorkerListContainer />
-		<WorkerContainer />
+		<WorkerListContainer match={match} />
+		{match.params.id && <WorkerContainer />}
 	</section>
 )
 
-export default Workers
+export default withRouter(Workers)

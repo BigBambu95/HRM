@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { addTab } from 'actions'
@@ -11,13 +10,9 @@ import {
 	Spinner,
 	ErorIndicator,
 } from 'components'
+import { dictionaryActions } from 'dictionaries'
 import actions from '../actions'
-import {
-	getFilteredWorkers,
-	selectWorkerProfessions,
-	getWorkerOffices,
-	getWorkerDepartments,
-} from '../selectors'
+import { getFilteredWorkers, getWorkerDepartments } from '../selectors'
 
 import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
@@ -27,21 +22,20 @@ const WorkerListContainer = ({ match }) => {
 	const dispatch = useDispatch()
 
 	const filteredWorkers = useSelector((state) => getFilteredWorkers(state))
-	const workerProfessions = useSelector((state) =>
-		selectWorkerProfessions(state)
-	)
-	const workerOffices = useSelector((state) => getWorkerOffices(state))
+	const professions = useSelector((state) => state.dictionaries.professions)
+	const offices = useSelector((state) => state.dictionaries.offices)
 	const workerDepartments = useSelector((state) => getWorkerDepartments(state))
-	const worker = useSelector((state) => state.workerList.worker)
 	const loading = useSelector((state) => state.workerList.loading)
 	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
 		dispatch(actions.workers.fetchWorkersRequest())
+		dispatch(dictionaryActions.fetchOfficesRequest())
+		dispatch(dictionaryActions.fetchProfessionsRequest())
 	}, [])
 
-	const columns = worker ? 1 : 2
-	const clazz = worker ? 'worker-list opened-worker' : 'worker-list'
+	const columns = match.params.id ? 1 : 2
+	const clazz = match.params.id ? 'worker-list opened-worker' : 'worker-list'
 
 	const workerList = filteredWorkers.map((w) => {
 		return (
@@ -75,20 +69,24 @@ const WorkerListContainer = ({ match }) => {
 				<FilterList>
 					<Filter
 						label='Должность'
-						items={workerProfessions.concat('Все')}
-						filter={() => {}}
+						items={professions}
+						getSelectValue={(value) =>
+							dispatch(actions.workers.setFilter({ name: 'profession', value }))
+						}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Офис'
-						items={workerOffices.concat('Все')}
-						filter={() => {}}
+						items={offices}
+						getSelectValue={(value) =>
+							dispatch(actions.workers.setFilter({ name: 'office', value }))
+						}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Отдел'
 						items={workerDepartments.concat('Все')}
-						filter={() => {}}
+						getSelectValue={() => {}}
 						defaultValue='Все'
 					/>
 				</FilterList>
@@ -102,4 +100,4 @@ const WorkerListContainer = ({ match }) => {
 	)
 }
 
-export default withRouter(WorkerListContainer)
+export default WorkerListContainer
