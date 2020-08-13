@@ -14,7 +14,7 @@ const WorkerContainer = ({ match, closeWorker, history }) => {
 	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
-		dispatch(actions.fetchWorkerRequest(match.params.id))
+		dispatch(actions.workers.fetchWorkerRequest(match.params.id))
 	}, [match.params.id])
 
 	if (loading) return <Spinner />

@@ -37,7 +37,7 @@ const WorkerListContainer = ({ match }) => {
 	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
-		dispatch(actions.fetchWorkersRequest())
+		dispatch(actions.workers.fetchWorkersRequest())
 	}, [])
 
 	const columns = worker ? 1 : 2

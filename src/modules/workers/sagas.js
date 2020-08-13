@@ -1,29 +1,31 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import Api from 'services/api'
+import { REQUEST } from 'helpers/redux'
 import actions from './actions'
+import { FETCH_WORKER, FETCH_WORKERS } from './types'
 
 export function* fetchWorkers() {
 	try {
 		const workers = yield call(Api.get, '/workers')
-		yield put(actions.fetchWorkersSuccess(workers.data))
+		yield put(actions.workers.fetchWorkersSuccess(workers.data))
 	} catch (err) {
-		yield put(actions.fetchWorkersFailure(err))
+		yield put(actions.workers.fetchWorkersFailure(err))
 	}
 }
 
 export function* watchFetchWorkers() {
-	yield takeEvery('FETCH_WORKERS_REQUEST', fetchWorkers)
+	yield takeEvery(REQUEST(FETCH_WORKERS), fetchWorkers)
 }
 
 export function* fetchWorker({ payload }) {
 	try {
-		const worker = yield call(Api.get, `/workers/${payload.id}`)
-		yield put(actions.fetchWorkerSuccess(worker.data))
+		const worker = yield call(Api.get, `/workers/${payload}`)
+		yield put(actions.workers.fetchWorkerSuccess(worker.data))
 	} catch (err) {
-		yield put(actions.fetchWorkerFailure(err))
+		yield put(actions.workers.fetchWorkerFailure(err))
 	}
 }
 
 export function* watchFetchWorker() {
-	yield takeEvery('FETCH_WORKER_REQUEST', fetchWorker)
+	yield takeEvery(REQUEST(FETCH_WORKER), fetchWorker)
 }
