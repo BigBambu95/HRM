@@ -1,59 +1,52 @@
 /* eslint-disable no-case-declarations */
-import C from '../constants';
+import { handleActions } from 'redux-actions'
 
-const updateObjectInArray = (array, action, index) => array.map((item, idx) => {
-  if (idx !== index) {
-    return item;
-  }
+const updateObjectInArray = (array, payload, index) =>
+	array.map((item, idx) => {
+		if (idx !== index) {
+			return item
+		}
 
-  return {
-    ...item,
-    ...action.payload,
-  };
-});
+		return {
+			...item,
+			...payload,
+		}
+	})
 
-const tabList = (state, action) => {
-  if (state === undefined) {
-    return {
-      tabs: [],
-      activeTab: '',
-    };
-  }
+const initialState = {
+	tabs: [],
+	activeTab: '',
+}
 
-  switch (action.type) {
-    case C.ADD_TAB:
+const tabList = handleActions(
+	{
+		ADD_TAB: (state, { payload }) => {
+			const tabIdx = state.tabs.findIndex((tab) =>
+				payload.path?.includes(tab.path)
+			)
 
-      const tabIdx = state.tabs.findIndex((tab) => action.payload.path.includes(tab.path));
+			if (tabIdx !== -1) {
+				return {
+					tabs: updateObjectInArray(state.tabs, payload, tabIdx),
+					activeTab: payload,
+				}
+			}
 
-      if (tabIdx !== -1) {
-        return {
-          tabs: updateObjectInArray(state.tabs, action, tabIdx),
-          activeTab: action.payload,
-        };
-      }
+			return {
+				tabs: [...state.tabs, payload],
+				activeTab: payload,
+			}
+		},
+		REMOVE_TAB: (state, { payload }) => {
+			const filterTabs = state.tabs.filter((tab, idx) => idx !== payload)
 
-      const newTabs = [
-        ...state.tabs,
-        action.payload,
-      ];
+			return {
+				tabs: filterTabs,
+				activeTab: filterTabs[filterTabs.length - 1],
+			}
+		},
+	},
+	initialState
+)
 
-      return {
-        tabs: newTabs,
-        activeTab: action.payload,
-      };
-
-    case C.REMOVE_TAB:
-
-      const filterTabs = state.tabs.filter((tab, idx) => idx !== action.payload);
-
-      return {
-        tabs: filterTabs,
-        activeTab: filterTabs[filterTabs.length - 1],
-      };
-
-    default:
-      return state;
-  }
-};
-
-export default tabList;
+export default tabList
