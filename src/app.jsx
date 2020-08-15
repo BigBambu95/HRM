@@ -2,8 +2,6 @@ import React from 'react'
 import 'moment-timezone'
 import { Switch, Route } from 'react-router-dom'
 import './app.css'
-import Header from './components/header'
-import Sidebar from './components/sidebar'
 import {
 	Workers,
 	Vacancies,
@@ -13,7 +11,9 @@ import {
 	Vacancy,
 	Archive,
 	// Candidates,
-} from './components/pages'
+} from 'components/pages'
+import Header from './components/header'
+import Sidebar from './components/sidebar'
 
 const App = () => (
 	<div className='HRM-app'>
