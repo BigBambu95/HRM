@@ -17,6 +17,7 @@
     display: inherit;
     justify-content: inherit;
     width: 100%;
+    color: #000;
 }
 
 .vacancy-list__item__title {

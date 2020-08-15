@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Spinner, ErorIndicator } from 'components'
+import {
+	Spinner,
+	ErorIndicator,
+	ContextMenu,
+	FilterList,
+	Filter,
+	Button,
+	Row,
+} from 'components'
 import { Table } from 'components/table'
-import { ArrowDownIcon, DownloadIcon, PrinterIcon } from 'svg'
+import { DownloadIcon, PrinterIcon } from 'svg'
+import Moment from 'react-moment'
+import { ToolBar } from 'components/tool-bar'
 import actions from '../actions'
 
-const DocumentListContainer = ({ sort }) => {
-	// const classNames = `document-table__sort-row ${documentsSort}`
-
+const DocumentListContainer = () => {
 	const dispatch = useDispatch()
 	const documents = useSelector((state) => state.documentList.documents)
 	const error = useSelector((state) => state.documentList.error)
@@ -17,45 +25,57 @@ const DocumentListContainer = ({ sort }) => {
 		dispatch(actions.documents.fetchDocumentsRequest())
 	}, [])
 
-	const documentSortButtons = ['Название', 'Дата']
-
-	const documentSortButtonList = documentSortButtons.map((item) => (
-		<div key={item}>
-			<button className='sort-btn' onClick={() => sort(item)}>
-				{item}
-				<ArrowDownIcon />
-			</button>
-		</div>
-	))
+	const columns = [
+		{
+			title: 'Название',
+			dataIndex: 'name',
+		},
+		{
+			title: 'Дата',
+			dataIndex: 'date',
+			render: (date) => <Moment format='DD.MM.YY'>{date}</Moment>,
+		},
+		{
+			title: '',
+			dataIndex: 'file',
+			key: 'download',
+			render: (file) => {
+				return (
+					<Row justify='end' gutter={[24, 0]}>
+						<a href={`http://localhost:8080/${file?.id}.${file?.ext}`}>
+							<PrinterIcon />
+						</a>
+						<a
+							href={`http://localhost:8080/${file?.id}.${file?.ext}`}
+							target='_blank'
+							rel='noreferrer'
+							download
+						>
+							<DownloadIcon />
+						</a>
+						<ContextMenu>
+							<ContextMenu.Item>Удалить</ContextMenu.Item>
+						</ContextMenu>
+					</Row>
+				)
+			},
+		},
+	]
 
 	if (loading) return <Spinner />
 
 	if (error) return <ErorIndicator />
 
 	return (
-		<Table data={documents} sortButtons={documentSortButtonList}>
-			<div>
-				<PrinterIcon />
-			</div>
-			<div className='download-link'>
-				<a
-					href={document.link}
-					target='_blank'
-					rel='noopener noreferrer'
-					download
-				>
-					<DownloadIcon />
-				</a>
-			</div>
-			<div className='open-link'>
-				<a href={document.link} target='_blank' rel='noopener noreferrer'>
-					Открыть
-				</a>
-			</div>
-			{/* <div>
-      <ContextMenu deleteItem={deleteDocument} itemId={document.id} />
-    </div> */}
-		</Table>
+		<>
+			<ToolBar>
+				<FilterList>
+					<Filter items={[]} getSelectValue={() => {}} defaultValue='Все' />
+				</FilterList>
+				<Button>Добавить документ</Button>
+			</ToolBar>
+			<Table data={documents} columns={columns} />
+		</>
 	)
 }
 

@@ -12,6 +12,7 @@
 .sidebar__link a {
     display: inherit;
     padding: .5em .25em .5em 2em;
+    color: #000;
 }
 
 .sidebar__link span {

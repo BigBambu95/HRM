@@ -1,13 +1,16 @@
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, put, call } from 'redux-saga/effects'
 import { REQUEST } from 'helpers/redux'
-import HRMService from 'services/hrm-service'
+import Api from 'services/api'
 import actions from './actions'
 import { FETCH_DOCUMENTS } from './types'
 
-function fetchDocuments() {
-	HRMService.getDocuments()
-		.then((data) => data.documents)
-		.then((documents) => actions.documents.fetchDocumentsSuccess(documents))
+function* fetchDocuments() {
+	try {
+		const documents = yield call(Api.get, '/documents')
+		yield put(actions.documents.fetchDocumentsSuccess(documents.data))
+	} catch (err) {
+		yield put(actions.documents.fetchDocumentsFailure(err))
+	}
 }
 
 export function* watchFetchDocuments() {
