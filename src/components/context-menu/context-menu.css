@@ -42,15 +42,8 @@
     border-radius: 10px;
     background: #fff;
     font-weight: 300;
-    visibility: hidden;
     transform: translateY(-10px);
     box-shadow: var(--second-shadow);
-}
-
-.context-menu__list.active {
-    visibility: visible;
-    transform: translateY(0);
-    transition: .2s all;
 }
 
 .context-menu__list__item {

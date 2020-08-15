@@ -14,7 +14,7 @@ export default class HRMService {
 		})
 	}
 
-	getDocuments() {
+	static getDocuments() {
 		return this.getData(documents)
 	}
 

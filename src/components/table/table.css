@@ -1,14 +1,21 @@
-.table {
-    display: grid;
-    padding: 1.8em 2em;
+.table-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0 calc(var(--base-padding) * 4);
     border-radius: 10px;
     background: #fff;
-    line-height: 40px;
     box-shadow: var(--main-shadow);
 }
 
-.table__body {
-    display: grid;
+.table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+    text-align: left;
+}
+
+.table__row {
+    height: 48px;
 }
 
 .table-sort-row {
@@ -48,11 +55,20 @@
 }
 
 .table-cell {
-    border-bottom: 1px solid var(--light-gray);
     font-weight: var(--thin-weight);
 }
 
-.table-column:first-child .table-cell {
+th.table-cell {
+    padding: calc(var(--base-padding) * 3) 0;
+    font-size: var(--small-font);
+}
+
+td.table-cell {
+    padding: var(--base-padding) 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+td.table-cell:first-child {
     font-size: var(--big-font);
     font-weight: var(--normal-weight);
 }

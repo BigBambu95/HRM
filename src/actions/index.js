@@ -1,6 +1,5 @@
 import C from '../constants'
 import worker from './worker'
-import documentsActions from './documents'
 import salary from './salary'
 import candidates from './candidates'
 
@@ -35,7 +34,6 @@ const hotVacanciesError = (err) => ({
 
 export {
 	worker,
-	documentsActions,
 	salary,
 	candidates,
 	addTab,

@@ -3,6 +3,7 @@
 .documents,
 .vacancy-detail,
 .candidates {
+    height: 100%;
     padding: 2em;
 }
 

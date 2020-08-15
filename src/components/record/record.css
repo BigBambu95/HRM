@@ -14,3 +14,7 @@
 .record:not(:first-child):not(:last-child) {
     margin: var(--base-margin) 0;
 }
+
+.record span:last-child {
+    color: #000;
+}
