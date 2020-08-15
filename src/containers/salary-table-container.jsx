@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { withHRMService } from '../components/hoc'
 import 'moment/locale/ru'
 
 import { salary } from '../actions'
@@ -164,7 +163,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-export default compose(
-	withHRMService(),
-	connect(mapStateToProps, mapDispatchToProps)
-)(SalaryTableContainer)
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+	SalaryTableContainer
+)

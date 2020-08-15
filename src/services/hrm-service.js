@@ -1,5 +1,4 @@
 import workers from './workers'
-import documents from './documents.json'
 
 export default class HRMService {
 	static getData(data) {
@@ -12,10 +11,6 @@ export default class HRMService {
 				}
 			}, 700)
 		})
-	}
-
-	static getDocuments() {
-		return this.getData(documents)
 	}
 
 	getWorkersInformationForMonth(month) {

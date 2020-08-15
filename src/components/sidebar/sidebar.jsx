@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect, useSelector } from 'react-redux'
-import { withHRMService } from '../hoc'
 import SidebarLink from '../sidebar-link'
 import { addTab } from '../../actions'
 
@@ -67,6 +66,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
 	withRouter,
-	withHRMService(),
 	connect(mapStateToProps, mapDispatchToProps)
 )(Sidebar)

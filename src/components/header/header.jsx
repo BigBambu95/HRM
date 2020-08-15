@@ -6,17 +6,17 @@ import { connect } from 'react-redux'
 import { removeTab } from 'actions'
 
 import { BellIcon, ChatIcon, SearchIcon } from 'svg'
-import logo from './logo.svg'
-import menu from './menu.svg'
+import Logo from './logo'
+import MenuIcon from './menu'
 
 import PageTabList from '../page-tab-list'
 
 const Header = (props) => (
 	<header className='header'>
 		<div style={{ display: 'flex' }}>
-			<img src={menu} alt='Меню' />
+			<MenuIcon />
 			<Link to='/' className='header__logo'>
-				<img src={logo} alt='HRM' />
+				<Logo />
 			</Link>
 		</div>
 		<div className='header__tabs'>

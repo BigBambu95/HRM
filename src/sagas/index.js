@@ -10,7 +10,7 @@ import { sagas } from 'dictionaries'
 import { watchFetchWorkers, watchFetchWorker } from 'modules/workers/sagas'
 import { watchFetchDocuments } from 'modules/documents/sagas'
 
-export function* fetchHotVacancies() {
+function* fetchHotVacancies() {
 	const vacancies = yield call(HRMService.getHotVacancies)
 	try {
 		yield put({ type: 'FETCH_HOT_VACANCIES_SUCCESS', vacancies })
@@ -19,7 +19,7 @@ export function* fetchHotVacancies() {
 	}
 }
 
-export function* watchFetchHotVacancies() {
+function* watchFetchHotVacancies() {
 	yield takeEvery('FETCH_HOT_VACANCIES_REQUEST', fetchHotVacancies)
 }
 
