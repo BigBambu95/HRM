@@ -7,7 +7,7 @@
     align-items: center;
     padding: 1.15em 1.7em;
     border-radius: var(--main-border-radius);
-    background: rgba(51, 51, 51, .8);
+    background: rgba(0, 0, 0, .3);
     color: #fff;
     font-weight: var(--thin-weight);
     transform: translateX(-50%);
@@ -16,4 +16,5 @@
 
 .toast .btn {
     margin-left: 1em;
+    color: var(--link-color);
 }

@@ -1,8 +1,4 @@
-import { Toast, pushToast } from './toast';
+import Toast from './toast'
+import './toast.css'
 
-import './toast.css';
-
-export {
-  Toast,
-  pushToast,
-};
+export default Toast
