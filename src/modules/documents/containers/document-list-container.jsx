@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
 	Spinner,
 	ErorIndicator,
-	ContextMenu,
 	FilterList,
 	Filter,
 	Button,
 	Row,
 } from 'components'
 import { Table } from 'components/table'
-import { DownloadIcon, PrinterIcon } from 'svg'
+import { DownloadIcon } from 'svg'
 import Moment from 'react-moment'
 import { ToolBar } from 'components/tool-bar'
+import { RemoveBasketIcon } from 'svg/index'
 import actions from '../actions'
 
 const DocumentListContainer = () => {
@@ -42,9 +42,6 @@ const DocumentListContainer = () => {
 			render: (file) => {
 				return (
 					<Row justify='end' gutter={[24, 0]}>
-						<a href={`http://localhost:8080/${file?.id}.${file?.ext}`}>
-							<PrinterIcon />
-						</a>
 						<a
 							href={`http://localhost:8080/${file?.id}.${file?.ext}`}
 							target='_blank'
@@ -53,9 +50,9 @@ const DocumentListContainer = () => {
 						>
 							<DownloadIcon />
 						</a>
-						<ContextMenu>
-							<ContextMenu.Item>Удалить</ContextMenu.Item>
-						</ContextMenu>
+						<Button variant='icon'>
+							<RemoveBasketIcon />
+						</Button>
 					</Row>
 				)
 			},
