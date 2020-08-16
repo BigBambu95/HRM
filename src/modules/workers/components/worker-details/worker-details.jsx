@@ -1,8 +1,23 @@
 import React from 'react'
-import { ButtonGroup, Button, Record, TabBar } from 'components'
-import { BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon } from 'svg'
+import {
+	ButtonGroup,
+	Button,
+	Record,
+	TabBar,
+	List,
+	Row,
+	Typography,
+} from 'components'
+import {
+	BackIcon,
+	PencilIcon,
+	CalendarIcon,
+	MailIcon,
+	DownloadIcon,
+	RemoveBasketIcon,
+} from 'svg'
+import { ToolBar, ToolBarGroupItem } from 'components/tool-bar'
 import WorkerStatus from '../worker-status'
-import { ToolBar, ToolBarGroupItem } from '../../../../components/tool-bar'
 
 const WorkerDetails = ({ worker, closeWorker }) => {
 	const {
@@ -14,28 +29,47 @@ const WorkerDetails = ({ worker, closeWorker }) => {
 		department,
 		avatar,
 		status,
-		documents = [],
-		history = [],
+		tags,
 	} = worker
 
-	const historyList = history.map((item) => (
-		<div key={item.date} className='history__item'>
-			{item.name}
-			<span className='date'>{item.date}</span>
-		</div>
-	))
+	// MockData
+	const history = [
+		{
+			_id: '1',
+			name: 'Увеличили часовую ставку',
+			date: '15.11.18',
+		},
+		{
+			_id: '2',
+			name: 'Прошел испытательный срок',
+			date: '15.11.18',
+		},
+		{
+			_id: '3',
+			name: 'Устроился на работу',
+			date: '15.09.18',
+		},
+	]
 
-	const documentList = documents.map((document) => (
-		<div key={document.name} className='document'>
-			{document.name}
-			<span>
-				<a href={document.path}>Открыть</a>
-				<a href={document.path} className='download-link'>
-					<DownloadIcon width='18px' height='18px' />
-				</a>
-			</span>
-		</div>
-	))
+	// MockData
+	const documents = [
+		{
+			_id: '1',
+			name: 'Тестовая работа',
+		},
+		{
+			_id: '2',
+			name: 'Анкета',
+		},
+		{
+			_id: '3',
+			name: 'Резюме',
+		},
+		{
+			_id: 4,
+			name: 'Портфолио',
+		},
+	]
 
 	return (
 		<div className='worker-details'>
@@ -45,13 +79,25 @@ const WorkerDetails = ({ worker, closeWorker }) => {
 						<BackIcon />
 					</Button>
 					<div>
-						<span>{profession}</span>
-						<span>{office}</span>
+						{tags?.map((tag) => {
+							return (
+								<Typography.Text type='secondary' key={tag}>
+									{tag}
+								</Typography.Text>
+							)
+						})}
 					</div>
+					<Button variant='text'>Добавить метку</Button>
 					<ToolBarGroupItem>
-						<MailIcon />
-						<CalendarIcon />
-						<PencilIcon />
+						<Button variant='icon'>
+							<MailIcon />
+						</Button>
+						<Button variant='icon'>
+							<CalendarIcon />
+						</Button>
+						<Button variant='icon'>
+							<PencilIcon />
+						</Button>
 					</ToolBarGroupItem>
 				</ToolBar>
 			</header>
@@ -60,7 +106,7 @@ const WorkerDetails = ({ worker, closeWorker }) => {
 					<div className='worker-details__content__picture'>
 						<img src={avatar} alt={name} />
 					</div>
-					<div className='worker-details__content__description'>
+					<div className='worker-details__description'>
 						<div>
 							<h1>{name}</h1>
 							<h3>{profession}</h3>
@@ -107,23 +153,46 @@ const WorkerDetails = ({ worker, closeWorker }) => {
 							<Button variant='outlined' color='red' width='100%' size='large'>
 								Оштрафовать
 							</Button>
-
 							<Button variant='outlined' color='aqua' width='100%' size='large'>
 								В отпуск
 							</Button>
-
 							<Button color='red' variant='text'>
 								Уволить
 							</Button>
 						</ButtonGroup>
 					</div>
-					<div>
+					<div className='worker-details__documents'>
 						<h3>Документы</h3>
-						{documentList}
+						<List
+							items={documents}
+							renderItem={(item) => (
+								<>
+									<span>{item.name}</span>
+									<Row gutter={[8, 0]}>
+										<Button variant='icon'>
+											<DownloadIcon />
+										</Button>
+										<Button variant='icon'>
+											<RemoveBasketIcon />
+										</Button>
+									</Row>
+								</>
+							)}
+						/>
 					</div>
-					<div>
+					<div className='worker-details__history'>
 						<h3>История</h3>
-						{historyList}
+						<List
+							items={history}
+							renderItem={(item) => (
+								<>
+									<span>{item.name}</span>
+									<Typography.Text type='secondary'>
+										{item.date}
+									</Typography.Text>
+								</>
+							)}
+						/>
 					</div>
 				</div>
 			</div>

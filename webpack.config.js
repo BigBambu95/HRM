@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
 const config = {
 	mode: 'development',
@@ -40,6 +41,7 @@ const config = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, 'public/index.html'),
 		}),
+		new StylelintPlugin({}),
 	],
 }
 

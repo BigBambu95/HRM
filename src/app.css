@@ -11,10 +11,10 @@
     --alternate-shadow: 0 -4px 20px rgba(0, 0, 0, .1);
     --second-shadow: 0 0 10px rgba(0, 0, 0, .15);
     --main-font-family: roboto, sans-serif;
-    --small-font: .85rem;
-    --normal-font: 1rem;
-    --big-font: 1.15rem;
-    --very-big-font: 1.3rem;
+    --small-font: 12px;
+    --normal-font: 14px;
+    --big-font: 16px;
+    --very-big-font: 18px;
     --thin-weight: 300;
     --normal-weight: 500;
     --bold-weight: 700;
@@ -45,9 +45,9 @@ body {
 
 h1 {
     margin: 0;
-    font-size: 2.6rem;
+    font-size: calc(var(--very-big-font) * 2);
     font-weight: var(--very-bold-weight);
-    line-height: 1.5;
+    line-height: 1.2;
 }
 
 h2 {
@@ -60,7 +60,7 @@ h3 {
     margin: 0;
     font-size: var(--very-big-font);
     font-weight: var(--bold-weight);
-    line-height: 1.5;
+    line-height: 1.2;
 }
 
 h4 {
@@ -138,6 +138,14 @@ input {
 
 .validation-error {
     border-color: var(--error-color) !important;
+}
+
+.small {
+    font-size: var(--small-font);
+}
+
+.gray {
+    color: var(--gray);
 }
 
 /* ------------- PAGES STYLES ------------- */

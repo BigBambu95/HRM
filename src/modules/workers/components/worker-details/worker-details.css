@@ -1,6 +1,6 @@
 .worker-details {
     flex: 3 1 75%;
-    padding: 2em;
+    padding: calc(var(--base-padding) * 4);
     background: #fff;
     font-weight: var(--thin-weight);
     box-shadow: var(--main-shadow);
@@ -8,9 +8,6 @@
 }
 
 .worker-details__header {
-    /* display: grid; */
-
-    /* grid-template-columns: 195px 1fr 150px; */
     align-items: center;
     margin-bottom: 3em;
     font-size: var(--small-font);
@@ -27,6 +24,7 @@
         "worker-avatar worker-description"
         "worker-info worker-info";
     grid-template-columns: 195px 1fr;
+    grid-template-rows: 290px 1fr;
 }
 
 .worker-details__content__picture {
@@ -42,21 +40,17 @@
     border-radius: 10px;
 }
 
-.worker-details__content__description {
+.worker-details__description {
     grid-area: worker-description;
 }
 
-.worker-details__content__description h3 {
-    margin-top: .55em;
+.worker-details__description h3 {
+    margin-top: var(--base-margin);
     font-weight: var(--thin-weight);
 }
 
-.worker-details__content__description > div {
-    margin-bottom: 2.3em;
-}
-
-.worker-details__content__description .record {
-    margin: .55em 0;
+.worker-details__description > * {
+    margin-bottom: calc(var(--base-margin) * 4);
 }
 
 .worker-details__content__info {
@@ -68,12 +62,12 @@
     justify-content: space-between;
 }
 
-.worker-details__content__right > div:not(:first-child) {
-    margin: 3em 0;
+.worker-details__content__right > * {
+    margin-bottom: calc(var(--base-margin) * 5);
 }
 
 .worker-details__content__right h3 {
-    margin: .9em 0;
+    margin: calc(var(--base-margin) * 2) 0;
 }
 
 .worker-details__content__actions {
