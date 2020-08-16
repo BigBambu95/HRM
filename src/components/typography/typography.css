@@ -1,0 +1,4 @@
+.text_secondary {
+    color: var(--gray);
+    font-size: var(--small-font);
+}

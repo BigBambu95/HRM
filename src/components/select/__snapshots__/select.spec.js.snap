@@ -6,12 +6,9 @@ exports[`Выпадающий список Рендер выпадающего �
 >
   <div
     class="select__current-item"
-  >
-    Все
-  </div>
+  />
   <input
     type="hidden"
-    value="Все"
   />
   <button
     class="btn medium icon purple"

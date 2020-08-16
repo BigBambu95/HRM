@@ -58,7 +58,7 @@ const Select = React.forwardRef(
 
 		return (
 			<div className={classNames} style={style} ref={container}>
-				<div className='select__current-item'>{value.toString()}</div>
+				<div className='select__current-item'>{value}</div>
 				<input type='hidden' id={name} name={name} value={value} ref={ref} />
 				<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
 					{icon}
@@ -95,7 +95,7 @@ Select.propTypes = {
 Select.defaultProps = {
 	icon: <ArrowDownIcon />,
 	getSelectValue: () => {},
-	defaultValue: 'Все',
+	defaultValue: null,
 	style: null,
 	name: null,
 }

@@ -44,7 +44,7 @@ Button.propTypes = {
 	children: PropTypes.node,
 	onClick: PropTypes.func,
 	size: PropTypes.oneOf(['large', 'medium']),
-	variant: PropTypes.oneOf(['solid', 'outlined', 'icon']),
+	variant: PropTypes.oneOf(['solid', 'outlined', 'icon', 'text']),
 	color: PropTypes.oneOf(['purple', 'green', 'red', 'aqua']),
 	font: PropTypes.oneOf(['large', 'medium']),
 	fullWidth: PropTypes.bool,

@@ -11,8 +11,8 @@
     content: ':';
 }
 
-.record:not(:first-child):not(:last-child) {
-    margin: var(--base-margin) 0;
+.record:not(:last-child) {
+    margin-bottom: var(--base-margin);
 }
 
 .record span:last-child {
