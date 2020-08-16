@@ -6,6 +6,12 @@ import classnames from 'classnames'
 import { ArrowDownIcon } from '../../svg'
 import Button from '../button'
 
+const getSelectItemClass = (item, currentItem) => {
+	return classnames('select__item', {
+		'select__item--active': item === currentItem,
+	})
+}
+
 const Select = React.forwardRef(
 	(
 		{ defaultValue, items, icon, name, getSelectValue, style, className },
@@ -41,7 +47,7 @@ const Select = React.forwardRef(
 		const selectList = items.map((item) => (
 			<li
 				key={item._id}
-				className='select__list__item'
+				className={getSelectItemClass(item.name, value)}
 				onClick={() => chooseItem(item.name)}
 			>
 				{item.name}
@@ -62,7 +68,7 @@ const Select = React.forwardRef(
 						{selectList}
 						{defaultValue && (
 							<li
-								className='select__list__item'
+								className={getSelectItemClass(defaultValue, value)}
 								onClick={() => chooseItem(defaultValue)}
 							>
 								{defaultValue}

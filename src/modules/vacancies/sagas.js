@@ -1,6 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import Api from 'services/api'
 import { REQUEST } from 'helpers/redux'
+import { Toast } from 'components'
 import actions from './actions'
 import {
 	FETCH_VACANCIES,
@@ -40,6 +41,7 @@ export function* addVacancy({ payload }) {
 		const vacancy = yield call(Api.post, '/vacancies', payload)
 
 		yield put(actions.vacancies.addVacancySuccess(vacancy.data))
+		Toast.push({ label: 'Вакансия добавлена' })
 	} catch (err) {
 		yield put(actions.vacancies.addVacancyFailure(err))
 	}
@@ -55,8 +57,8 @@ export function* removeVacancy({ payload }) {
 		if (!res.data.status) {
 			throw new Error('Произошла ошибка при удалении вакансии')
 		}
-
 		yield put(actions.vacancies.removeVacancySuccess(payload))
+		Toast.push({ label: 'Вакансия удалена' })
 	} catch (err) {
 		yield put(actions.vacancies.removeVacancyFailure(err))
 	}

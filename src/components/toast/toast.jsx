@@ -1,14 +1,31 @@
-import React from 'react'
-import Button from '../button'
-import { CloseIcon } from '../../svg'
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 
-export const Toast = ({ children }) => {
-	return (
-		<div className='toast'>
-			<span>{children}</span>
-			<Button variant='icon'>
-				<CloseIcon width={16} height={16} fill='#a3a3a3' />
-			</Button>
-		</div>
-	)
+const ToastView = ({ label }) => (
+	<div className='toast'>
+		<span>{label}</span>
+	</div>
+)
+
+export default class Toast extends Component {
+	static push(props) {
+		this._container = document.getElementById('portal-root')
+		this._el = document.createElement('div')
+		this._container.appendChild(this._el)
+		ReactDOM.render(<ToastView {...props} />, this._el)
+
+		setTimeout(() => {
+			this._container.removeChild(this._el)
+		}, props.timeout ?? 3000)
+	}
+
+	constructor() {
+		super()
+		this._container = null
+		this._el = null
+	}
+
+	componentWillUnmount() {
+		this._container.removeChild(this._el)
+	}
 }
