@@ -29,7 +29,7 @@
 }
 
 .select__current-item {
-    margin-right: 8px;
+    margin-right: var(--base-margin);
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: var(--small-font);
@@ -40,27 +40,31 @@
     top: var(--select-height);
     left: 0;
     z-index: 10;
-    padding: 1em 0;
+    padding: var(--base-padding) 0;
     border-radius: 10px;
     background: #fff;
     min-width: 100%;
     box-shadow: var(--second-shadow);
 }
 
-.select__list__item {
-    padding: .6em;
+.select__item {
+    padding: var(--base-padding);
     cursor: pointer;
     transition: .2s background;
 }
 
-.select__list__item:hover {
+.select__item:hover {
     background: var(--main-gradient);
     color: #fff;
 }
 
+.select__item--active {
+    font-weight: var(--normal-weight);
+}
+
 .select__label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: var(--base-margin);
 }
 
 .select .btn.icon {
