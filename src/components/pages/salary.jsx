@@ -1,9 +1,9 @@
 import React from 'react'
-import { SalaryTableContainer } from 'containers'
+import { SalaryContainer } from 'modules/salary'
 
 const Salary = () => (
 	<section className='salary'>
-		<SalaryTableContainer />
+		<SalaryContainer />
 	</section>
 )
 

@@ -30,6 +30,7 @@ export default function* rootSaga() {
 		watchfetchVacancy(),
 		sagas.watchFetchOffices(),
 		sagas.watchFetchProfessions(),
+		sagas.watchFetchDepartments(),
 		watchFetchDocuments(),
 		watchAddVacancy(),
 		watchRemoveVacancy(),
