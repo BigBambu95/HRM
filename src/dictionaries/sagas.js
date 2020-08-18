@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { REQUEST } from 'helpers/redux'
 import Api from 'services/api'
-import { FETCH_OFFICES, FETCH_PROFESSIONS } from './types'
+import { FETCH_OFFICES, FETCH_PROFESSIONS, FETCH_DEPARTMENTS } from './types'
 import dictionaryActions from './actions'
 
 function* fetchOffices() {
@@ -19,8 +19,8 @@ export function* watchFetchOffices() {
 
 function* fetchProfessions() {
 	try {
-		const templates = yield call(Api.get, '/vacancies/templates')
-		yield put(dictionaryActions.fetchProfessionsSuccess(templates.data))
+		const professions = yield call(Api.get, '/vacancies/templates')
+		yield put(dictionaryActions.fetchProfessionsSuccess(professions.data))
 	} catch (err) {
 		yield put(dictionaryActions.fetchProfessionsFailure(err))
 	}
@@ -28,4 +28,17 @@ function* fetchProfessions() {
 
 export function* watchFetchProfessions() {
 	yield takeEvery(REQUEST(FETCH_PROFESSIONS), fetchProfessions)
+}
+
+function* fetchDepartments() {
+	try {
+		const departments = yield call(Api.get, '/departments')
+		yield put(dictionaryActions.fetchDepartmentsSuccess(departments.data))
+	} catch (err) {
+		yield put(dictionaryActions.fetchDepartmentsFailure(err))
+	}
+}
+
+export function* watchFetchDepartments() {
+	yield takeEvery(REQUEST(FETCH_DEPARTMENTS), fetchDepartments)
 }

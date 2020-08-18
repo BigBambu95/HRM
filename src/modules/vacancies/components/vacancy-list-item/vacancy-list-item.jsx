@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 
 import { ContextMenu } from 'components'
 import { FireIcon, PencilIcon, RemoveBasketIcon } from 'svg'
+import { getDictionaryValueById } from 'helpers/dictionaries'
 
-const VacancyListItem = ({ item, deleteItem, addTab }) => {
+const VacancyListItem = ({ item, deleteItem, addTab, offices }) => {
 	const { _id, profession, url, office, date, quickly = false } = item
 
 	return (
@@ -17,7 +18,9 @@ const VacancyListItem = ({ item, deleteItem, addTab }) => {
 				}
 			>
 				<div className='vacancy-list__item__description'>
-					<div className='vacancy-list__item__city'>{office}</div>
+					<div className='vacancy-list__item__city'>
+						{getDictionaryValueById(offices, office)}
+					</div>
 					<h3 className='vacancy-list__item__title'>{profession}</h3>
 				</div>
 				<div className='vacancy-list__item__right'>

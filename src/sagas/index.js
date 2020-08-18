@@ -9,6 +9,7 @@ import {
 import { sagas } from 'dictionaries'
 import { watchFetchWorkers, watchFetchWorker } from 'modules/workers/sagas'
 import { watchFetchDocuments } from 'modules/documents/sagas'
+import { watchFetchSalary } from 'modules/salary/sagas'
 
 function* fetchHotVacancies() {
 	const vacancies = yield call(HRMService.getHotVacancies)
@@ -30,7 +31,9 @@ export default function* rootSaga() {
 		watchfetchVacancy(),
 		sagas.watchFetchOffices(),
 		sagas.watchFetchProfessions(),
+		sagas.watchFetchDepartments(),
 		watchFetchDocuments(),
+		watchFetchSalary(),
 		watchAddVacancy(),
 		watchRemoveVacancy(),
 		watchFetchWorkers(),

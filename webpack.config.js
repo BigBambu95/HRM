@@ -41,7 +41,10 @@ const config = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, 'public/index.html'),
 		}),
-		new StylelintPlugin({}),
+		new StylelintPlugin({
+			configFile: './.stylelintrc.json',
+			files: '**/*.css',
+		}),
 	],
 }
 
