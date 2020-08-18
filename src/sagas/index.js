@@ -7,7 +7,11 @@ import {
 	watchRemoveVacancy,
 } from 'modules/vacancies/sagas'
 import { sagas } from 'dictionaries'
-import { watchFetchWorkers, watchFetchWorker } from 'modules/workers/sagas'
+import {
+	watchFetchWorkers,
+	watchFetchWorker,
+	watchFetchWorkerSalary,
+} from 'modules/workers/sagas'
 import { watchFetchDocuments } from 'modules/documents/sagas'
 import { watchFetchSalary } from 'modules/salary/sagas'
 
@@ -38,5 +42,6 @@ export default function* rootSaga() {
 		watchRemoveVacancy(),
 		watchFetchWorkers(),
 		watchFetchWorker(),
+		watchFetchWorkerSalary(),
 	])
 }

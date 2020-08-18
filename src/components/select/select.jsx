@@ -21,10 +21,6 @@ const Select = React.forwardRef(
 		const [value, setValue] = useState(defaultValue)
 		const container = useRef(null)
 
-		useEffect(() => {
-			getSelectValue(value)
-		}, [value])
-
 		const onClickOutsideHandler = (e) => {
 			if (isOpen && !container.current.contains(e.target)) {
 				setIsOpen(false)
@@ -40,15 +36,16 @@ const Select = React.forwardRef(
 		}, [isOpen])
 
 		const chooseItem = (item) => {
-			setValue(item)
+			setValue(item.name ?? item)
+			getSelectValue(item)
 			setIsOpen(false)
 		}
 
-		const selectList = items.map((item) => (
+		const selectList = items?.map((item) => (
 			<li
 				key={item._id}
 				className={getSelectItemClass(item.name, value)}
-				onClick={() => chooseItem(item.name)}
+				onClick={() => chooseItem(item)}
 			>
 				{item.name}
 			</li>
@@ -59,7 +56,9 @@ const Select = React.forwardRef(
 		return (
 			<div className={classNames} style={style} ref={container}>
 				<div className='select__current-item'>{value}</div>
-				<input type='hidden' id={name} name={name} value={value} ref={ref} />
+				{ref && (
+					<input type='hidden' id={name} name={name} value={value} ref={ref} />
+				)}
 				<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
 					{icon}
 				</Button>
@@ -100,4 +99,4 @@ Select.defaultProps = {
 	name: null,
 }
 
-export default Select
+export default React.memo(Select)

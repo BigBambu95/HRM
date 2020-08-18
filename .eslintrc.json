@@ -35,6 +35,7 @@
 		"jsx-a11y/label-has-associated-control": "off",
 		"import/prefer-default-export": "off",
 		"react/button-has-type": "off",
-		"react/require-default-props": "off"
+		"react/require-default-props": "off",
+		"camelcase": "warn"
 	}
 }

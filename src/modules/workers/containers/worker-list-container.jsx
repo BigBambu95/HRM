@@ -8,42 +8,45 @@ import {
 	Filter,
 	FilterList,
 	Spinner,
-	ErorIndicator,
+	ErrorIndicator,
 } from 'components'
 import { dictionaryActions } from 'dictionaries'
 import actions from '../actions'
-import { getFilteredWorkers } from '../selectors'
 import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
 const WorkerListContainer = ({ match }) => {
 	const dispatch = useDispatch()
-
-	const filteredWorkers = useSelector((state) => getFilteredWorkers(state))
 	const professions = useSelector((state) => state.dictionaries.professions)
 	const offices = useSelector((state) => state.dictionaries.offices)
 	const departments = useSelector((state) => state.dictionaries.departments)
+	const filter = useSelector((state) => state.workerList.filter)
+	const workers = useSelector((state) => state.workerList.workers)
 	const loading = useSelector((state) => state.workerList.loading)
 	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
-		dispatch(actions.workers.fetchWorkersRequest())
 		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchProfessionsRequest())
 		dispatch(dictionaryActions.fetchDepartmentsRequest())
 	}, [])
 
+	useEffect(() => {
+		dispatch(actions.workers.fetchWorkersRequest(filter))
+	}, [filter])
+
 	const columns = match.params.id ? 1 : 2
 	const clazz = match.params.id ? 'worker-list opened-worker' : 'worker-list'
 
-	const workerList = filteredWorkers.map((w) => {
+	const workerList = workers.map((w) => {
 		return (
 			<WorkerListItem
 				key={w._id}
 				item={w}
 				departments={departments}
 				offices={offices}
+				professions={professions}
 				match={match}
 				addTab={(label, path, office, prevPage) =>
 					dispatch(addTab(label, path, office, prevPage))
@@ -53,7 +56,7 @@ const WorkerListContainer = ({ match }) => {
 	})
 
 	const itemList =
-		filteredWorkers.length === 0 ? (
+		workers.length === 0 ? (
 			<p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
 			<Grid columns={columns} gap='2em'>
@@ -61,9 +64,9 @@ const WorkerListContainer = ({ match }) => {
 			</Grid>
 		)
 
-	if (loading) return <Spinner />
-
-	if (error) return <ErorIndicator />
+	const spinner = loading && <Spinner />
+	const errorIndicator = error && <ErrorIndicator />
+	const content = !(loading || error) && itemList
 
 	return (
 		<div className={clazz}>
@@ -72,23 +75,40 @@ const WorkerListContainer = ({ match }) => {
 					<Filter
 						label='Должность'
 						items={professions}
-						getSelectValue={(value) =>
-							dispatch(actions.workers.setFilter({ name: 'profession', value }))
+						getSelectValue={({ _id }) =>
+							dispatch(
+								actions.workers.setFilter({
+									name: 'profession',
+									value: _id ?? 'Все',
+								})
+							)
 						}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Офис'
 						items={offices}
-						getSelectValue={(value) =>
-							dispatch(actions.workers.setFilter({ name: 'office', value }))
+						getSelectValue={({ _id }) =>
+							dispatch(
+								actions.workers.setFilter({
+									name: 'office',
+									value: _id ?? 'Все',
+								})
+							)
 						}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Отдел'
 						items={departments}
-						getSelectValue={() => {}}
+						getSelectValue={({ _id }) =>
+							dispatch(
+								actions.workers.setFilter({
+									name: 'department',
+									value: _id ?? 'Все',
+								})
+							)
+						}
 						defaultValue='Все'
 					/>
 				</FilterList>
@@ -97,7 +117,9 @@ const WorkerListContainer = ({ match }) => {
 				</ToolBarGroupItem>
 			</ToolBar>
 			<WorkerStatusPanel />
-			{itemList}
+			{spinner}
+			{errorIndicator}
+			{content}
 		</div>
 	)
 }

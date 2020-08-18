@@ -1,9 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Record } from 'components'
+import { Record, Typography } from 'components'
 import { getDictionaryValueById } from 'helpers/dictionaries'
 
-const WorkerListItem = ({ item, addTab, match, departments, offices }) => {
+const WorkerListItem = ({
+	item,
+	addTab,
+	match,
+	departments,
+	offices,
+	professions,
+}) => {
 	const {
 		_id,
 		name,
@@ -33,7 +40,9 @@ const WorkerListItem = ({ item, addTab, match, departments, offices }) => {
 					</div>
 					<div>
 						<h3 className='worker-list__item__name'>{name}</h3>
-						<div className='worker-list__item__profession'>{profession}</div>
+						<Typography.Text type='secondary'>
+							{getDictionaryValueById(professions, profession)}
+						</Typography.Text>
 					</div>
 				</div>
 				<div className='worker-list__item__right'>

@@ -36,6 +36,6 @@
     transition: .2s all;
 }
 
-.filter-list__btn.active span svg {
+.filter-list__btn_active span svg {
     transform: rotate(90deg);
 }

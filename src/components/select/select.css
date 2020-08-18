@@ -7,7 +7,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     height: var(--select-height);
     padding: .6em 12px;
     border: 1px solid var(--gray);

@@ -1,12 +1,15 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import Api from 'services/api'
 import { REQUEST } from 'helpers/redux'
+import { createQueryString } from 'helpers/sagas'
 import actions from './actions'
-import { FETCH_WORKER, FETCH_WORKERS } from './types'
+import { FETCH_WORKER, FETCH_WORKERS, FETCH_WORKER_SALARY } from './types'
 
-export function* fetchWorkers() {
+// Загрузка списка сотрудников
+function* fetchWorkers({ payload }) {
 	try {
-		const workers = yield call(Api.get, '/workers')
+		const query = createQueryString(payload)
+		const workers = yield call(Api.get, `/workers/${query}`)
 		yield put(actions.workers.fetchWorkersSuccess(workers.data))
 	} catch (err) {
 		yield put(actions.workers.fetchWorkersFailure(err))
@@ -17,7 +20,8 @@ export function* watchFetchWorkers() {
 	yield takeEvery(REQUEST(FETCH_WORKERS), fetchWorkers)
 }
 
-export function* fetchWorker({ payload }) {
+// Загрузка данных детальной страницы сотрудника
+function* fetchWorker({ payload }) {
 	try {
 		const worker = yield call(Api.get, `/workers/${payload}`)
 		yield put(actions.workers.fetchWorkerSuccess(worker.data))
@@ -28,4 +32,21 @@ export function* fetchWorker({ payload }) {
 
 export function* watchFetchWorker() {
 	yield takeEvery(REQUEST(FETCH_WORKER), fetchWorker)
+}
+
+// Загрузка данных по зарплате сотрудника
+function* fetchWorkerSalary({ payload }) {
+	try {
+		const salary = yield call(
+			Api.get,
+			`/salaries/${payload}?month=July&year=2020`
+		)
+		yield put(actions.workers.fetchWorkerSalarySuccess(salary.data))
+	} catch (err) {
+		yield put(actions.workers.fetchWorkerSalaryFailure(err))
+	}
+}
+
+export function* watchFetchWorkerSalary() {
+	yield takeEvery(REQUEST(FETCH_WORKER_SALARY), fetchWorkerSalary)
 }

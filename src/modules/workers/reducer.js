@@ -1,10 +1,17 @@
 import { handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
-import { FETCH_WORKER, FETCH_WORKERS, SET_FILTER } from './types'
+import {
+	FETCH_WORKER,
+	FETCH_WORKERS,
+	SET_FILTER,
+	FETCH_WORKER_SALARY,
+} from './types'
 
 const initialState = {
 	workers: [],
-	worker: {},
+	worker: {
+		salary: [],
+	},
 	filter: {
 		profession: 'Все',
 		office: 'Все',
@@ -36,19 +43,44 @@ const workersList = handleActions(
 		}),
 		[REQUEST(FETCH_WORKER)]: (state) => ({
 			...state,
-			worker: {},
 			loading: true,
 			error: null,
 		}),
 		[SUCCESS(FETCH_WORKER)]: (state, { payload }) => ({
 			...state,
-			worker: payload,
+			worker: {
+				...state.worker,
+				...payload,
+			},
 			loading: false,
 			error: null,
 		}),
 		[FAILURE(FETCH_WORKER)]: (state) => ({
 			...state,
 			worker: {},
+			loading: false,
+			error: true,
+		}),
+		[REQUEST(FETCH_WORKER_SALARY)]: (state) => ({
+			...state,
+			loading: true,
+			error: null,
+		}),
+		[SUCCESS(FETCH_WORKER_SALARY)]: (state, { payload }) => ({
+			...state,
+			worker: {
+				...state.worker,
+				salary: payload,
+			},
+			loading: false,
+			error: null,
+		}),
+		[FAILURE(FETCH_WORKER_SALARY)]: (state) => ({
+			...state,
+			worker: {
+				...state.worker,
+				salary: [],
+			},
 			loading: false,
 			error: true,
 		}),

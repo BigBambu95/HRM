@@ -19,7 +19,7 @@ export function* watchFetchOffices() {
 
 function* fetchProfessions() {
 	try {
-		const professions = yield call(Api.get, '/vacancies/templates')
+		const professions = yield call(Api.get, '/professions')
 		yield put(dictionaryActions.fetchProfessionsSuccess(professions.data))
 	} catch (err) {
 		yield put(dictionaryActions.fetchProfessionsFailure(err))
