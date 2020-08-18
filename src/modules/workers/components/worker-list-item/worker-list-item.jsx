@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Record } from 'components'
+import { getDictionaryValueById } from 'helpers/dictionaries'
 
-const WorkerListItem = ({ item, addTab, match }) => {
+const WorkerListItem = ({ item, addTab, match, departments, offices }) => {
 	const {
 		_id,
 		name,
@@ -38,8 +39,14 @@ const WorkerListItem = ({ item, addTab, match }) => {
 				<div className='worker-list__item__right'>
 					<Record label='E-mail' field={email} />
 					<Record label='Телефон' field={phone} />
-					<Record label='Отдел' field={department} />
-					<Record label='Офис' field={office} />
+					<Record
+						label='Отдел'
+						field={getDictionaryValueById(departments, department)}
+					/>
+					<Record
+						label='Офис'
+						field={getDictionaryValueById(offices, office)}
+					/>
 				</div>
 			</Link>
 		</div>

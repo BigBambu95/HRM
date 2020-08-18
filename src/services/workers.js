@@ -10,30 +10,6 @@ const workers = [
 		avatar:
 			'https://s3-alpha-sig.figma.com/img/d0eb/c21d/2d1c34371e75b7aa01d307de087e7a12?Expires=1562544000&Signature=E5T3-wP8TkHHCeyZF00VQWO5mZz6xA~jOLpWRvDB5q6j9RgcnOqe39DQTuDU8N-yEVCfLvynzUe7Rs0xDNrc80Tw12df1-K3R955aZ2i9FHctyWHjGZI66w7iFpFpwYuyh~7L9upOeAiTrTnVi3BT9~i4gtBR43fIUIf6Yrtj309eHCFW2YQXRdoWFJyUD5N~G~gxYkrEBzNTr6jL~JHYOtLr5otvyX6TsolJevCRM-d5aCn33YkWe9IGVOF8LlvYOyn5wifmbmdsCoNRij3Bq9fcSNXBAseV5jaoOQhiyTU6EVtMRxaro~eXFDZq-mvxQJpz9D5SRBhVPDqtK5kMA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
 		status: 'mission',
-		information: [
-			{
-				2019: [
-					{
-						July: {
-							hourlySalary: 1000,
-							hoursWorked: 120,
-							kpi: 96,
-							otherFees: 20000,
-							lateness: 2,
-							absenteeism: 0,
-						},
-						April: {
-							hourlySalary: 900,
-							hoursWorked: 110,
-							kpi: 90,
-							otherFees: 15000,
-							lateness: 0,
-							absenteeism: 0,
-						},
-					},
-				],
-			},
-		],
 	},
 	{
 		id: 2,

@@ -35,6 +35,7 @@ const VacancyListContainer = () => {
 		<VacancyListItem
 			key={vacancy._id}
 			item={vacancy}
+			offices={offices}
 			addTab={(label, path, office, prevPage) =>
 				dispatch(addTab(label, path, office, prevPage))
 			}

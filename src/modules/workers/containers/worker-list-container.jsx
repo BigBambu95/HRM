@@ -12,8 +12,7 @@ import {
 } from 'components'
 import { dictionaryActions } from 'dictionaries'
 import actions from '../actions'
-import { getFilteredWorkers, getWorkerDepartments } from '../selectors'
-
+import { getFilteredWorkers } from '../selectors'
 import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
@@ -24,7 +23,7 @@ const WorkerListContainer = ({ match }) => {
 	const filteredWorkers = useSelector((state) => getFilteredWorkers(state))
 	const professions = useSelector((state) => state.dictionaries.professions)
 	const offices = useSelector((state) => state.dictionaries.offices)
-	const workerDepartments = useSelector((state) => getWorkerDepartments(state))
+	const departments = useSelector((state) => state.dictionaries.departments)
 	const loading = useSelector((state) => state.workerList.loading)
 	const error = useSelector((state) => state.workerList.error)
 
@@ -32,6 +31,7 @@ const WorkerListContainer = ({ match }) => {
 		dispatch(actions.workers.fetchWorkersRequest())
 		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchProfessionsRequest())
+		dispatch(dictionaryActions.fetchDepartmentsRequest())
 	}, [])
 
 	const columns = match.params.id ? 1 : 2
@@ -42,6 +42,8 @@ const WorkerListContainer = ({ match }) => {
 			<WorkerListItem
 				key={w._id}
 				item={w}
+				departments={departments}
+				offices={offices}
 				match={match}
 				addTab={(label, path, office, prevPage) =>
 					dispatch(addTab(label, path, office, prevPage))
@@ -85,7 +87,7 @@ const WorkerListContainer = ({ match }) => {
 					/>
 					<Filter
 						label='Отдел'
-						items={workerDepartments.concat('Все')}
+						items={departments}
 						getSelectValue={() => {}}
 						defaultValue='Все'
 					/>

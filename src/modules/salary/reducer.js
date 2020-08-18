@@ -3,7 +3,7 @@ import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import { FETCH_SALARY } from './types'
 
 const initialState = {
-	salary: [],
+	salaries: [],
 	filter: {
 		month: null,
 		profession: 'Все',
@@ -19,19 +19,19 @@ const salaryList = handleActions(
 	{
 		[REQUEST(FETCH_SALARY)]: (state) => ({
 			...state,
-			salary: [],
+			salaries: [],
 			loading: true,
 			error: null,
 		}),
 		[SUCCESS(FETCH_SALARY)]: (state, { payload }) => ({
 			...state,
-			salary: payload,
+			salaries: payload,
 			loading: false,
 			error: null,
 		}),
 		[FAILURE(FETCH_SALARY)]: (state, { payload }) => ({
 			...state,
-			salary: [],
+			salaries: [],
 			loading: false,
 			error: payload,
 		}),

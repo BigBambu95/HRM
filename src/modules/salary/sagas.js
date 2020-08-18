@@ -6,8 +6,8 @@ import { FETCH_SALARY } from './types'
 
 function* fetchSalary() {
 	try {
-		const salary = yield call(Api.get, '/salary')
-		yield put(actions.salary.fetchSalarySuccess(salary.data))
+		const salaries = yield call(Api.get, '/salaries')
+		yield put(actions.salary.fetchSalarySuccess(salaries.data))
 	} catch (err) {
 		yield put(actions.salary.fetchSalaryFailure(err))
 	}

@@ -1,12 +1,5 @@
 import { filterArr } from 'reducers/reducers-utils'
 
-export const selectWorkers = (state) => state.workerList.workers
-
-export const getWorkerDepartments = (state) => {
-	const departmentList = state.workerList.workers.map((item) => item.department)
-	return [...new Set(departmentList)]
-}
-
 export const getFilteredWorkers = (state) =>
 	filterArr(
 		state.workerList.workers,
