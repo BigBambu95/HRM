@@ -57,8 +57,9 @@
     color: #fff;
 }
 
-.select__item--active {
+.select__item_active {
     font-weight: var(--normal-weight);
+    pointer-events: none;
 }
 
 .select__label {

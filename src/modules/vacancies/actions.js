@@ -9,7 +9,7 @@ import {
 } from './types'
 
 const actions = createActions({
-	[REQUEST(FETCH_VACANCIES)]: () => ({}),
+	[REQUEST(FETCH_VACANCIES)]: (params) => params,
 	[SUCCESS(FETCH_VACANCIES)]: (newVacancies) => newVacancies,
 	[FAILURE(FETCH_VACANCIES)]: (err) => err,
 	[REQUEST(FETCH_VACANCY)]: (id) => id,

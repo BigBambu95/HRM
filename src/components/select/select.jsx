@@ -8,7 +8,7 @@ import Button from '../button'
 
 const getSelectItemClass = (item, currentItem) => {
 	return classnames('select__item', {
-		'select__item--active': item === currentItem,
+		select__item_active: item === currentItem,
 	})
 }
 

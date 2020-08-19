@@ -25,6 +25,7 @@ exports[`Modal Рендер окна с переданными пропсами 
         Создать вакансию
       </h2>
       <Button
+        className={null}
         classname="modal-window__close-btn"
         color="purple"
         font="medium"
@@ -48,7 +49,7 @@ exports[`Modal Рендер окна с переданными пропсами 
       className="modal-window__footer"
     >
       <Button
-        classname=""
+        className={null}
         color="purple"
         font="large"
         fullWidth={false}
@@ -60,7 +61,7 @@ exports[`Modal Рендер окна с переданными пропсами 
         Создать
       </Button>
       <Button
-        classname=""
+        className={null}
         color="purple"
         font="medium"
         fullWidth={false}
@@ -99,6 +100,7 @@ exports[`Modal Рендер окна с пропсами по умолчанию
         Сформировать приказ
       </h2>
       <Button
+        className={null}
         classname="modal-window__close-btn"
         color="purple"
         font="medium"
@@ -118,7 +120,7 @@ exports[`Modal Рендер окна с пропсами по умолчанию
       className="modal-window__footer"
     >
       <Button
-        classname=""
+        className={null}
         color="purple"
         font="large"
         fullWidth={false}
@@ -130,7 +132,7 @@ exports[`Modal Рендер окна с пропсами по умолчанию
         Отправить
       </Button>
       <Button
-        classname=""
+        className={null}
         color="purple"
         font="medium"
         fullWidth={false}

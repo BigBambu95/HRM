@@ -1,6 +1,7 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects'
 import Api from 'services/api'
 import { REQUEST } from 'helpers/redux'
+import { createQueryString } from 'helpers/sagas'
 import { Toast } from 'components'
 import actions from './actions'
 import {
@@ -10,9 +11,10 @@ import {
 	REMOVE_VACANCY,
 } from './types'
 
-function* fetchVacancies() {
+function* fetchVacancies({ payload }) {
 	try {
-		const vacancies = yield call(Api.get, '/vacancies')
+		const query = createQueryString(payload)
+		const vacancies = yield call(Api.get, `/vacancies/${query}`)
 		yield put(actions.vacancies.fetchVacanciesSuccess(vacancies.data))
 	} catch (err) {
 		yield put(actions.vacancies.fetchVacanciesFailure(err))

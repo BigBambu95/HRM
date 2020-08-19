@@ -12,16 +12,16 @@ import {
 	ErrorIndicator,
 } from 'components'
 import { dictionaryActions } from 'dictionaries'
-import { getFilteredVacancies } from '../selectors'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
 
 const VacancyListContainer = () => {
 	// Redux
 	const dispatch = useDispatch()
-	const filteredVacancies = useSelector((state) => getFilteredVacancies(state))
 	const professions = useSelector((state) => state.dictionaries.professions)
 	const offices = useSelector((state) => state.dictionaries.offices)
+	const vacancies = useSelector((state) => state.vacancyList.vacancies)
+	const filter = useSelector((state) => state.vacancyList.filter)
 	const loading = useSelector((state) => state.vacancyList.loading)
 	const error = useSelector((state) => state.vacancyList.error)
 
@@ -35,7 +35,11 @@ const VacancyListContainer = () => {
 		dispatch(dictionaryActions.fetchProfessionsRequest())
 	}, [])
 
-	const vacancyList = filteredVacancies.map((vacancy) => (
+	useEffect(() => {
+		dispatch(actions.vacancies.fetchVacanciesRequest(filter))
+	}, [filter])
+
+	const vacancyList = vacancies.map((vacancy) => (
 		<VacancyListItem
 			key={vacancy._id}
 			item={vacancy}
@@ -49,7 +53,7 @@ const VacancyListContainer = () => {
 	))
 
 	const itemList =
-		filteredVacancies.length === 0 ? (
+		vacancies.length === 0 ? (
 			<p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
 			<Grid columns={3} gap='2em'>
@@ -57,9 +61,9 @@ const VacancyListContainer = () => {
 			</Grid>
 		)
 
-	if (loading) return <Spinner />
-
-	if (error) return <ErrorIndicator />
+	const spinner = loading && <Spinner />
+	const errorIndicator = error && <ErrorIndicator />
+	const content = !(loading || error) && itemList
 
 	return (
 		<>
@@ -68,11 +72,11 @@ const VacancyListContainer = () => {
 					<Filter
 						label='Должность'
 						items={professions}
-						getSelectValue={(value) =>
+						getSelectValue={({ _id }) =>
 							dispatch(
 								actions.vacancies.setFilter({
 									name: 'profession',
-									value,
+									value: _id ?? 'Все',
 								})
 							)
 						}
@@ -81,15 +85,22 @@ const VacancyListContainer = () => {
 					<Filter
 						label='Офис'
 						items={offices}
-						getSelectValue={(value) =>
-							dispatch(actions.vacancies.setFilter({ name: 'office', value }))
+						getSelectValue={({ _id }) =>
+							dispatch(
+								actions.vacancies.setFilter({
+									name: 'office',
+									value: _id ?? 'Все',
+								})
+							)
 						}
 						defaultValue='Все'
 					/>
 				</FilterList>
 				<Button onClick={() => setIsOpenModal(true)}>Добавить вакансию</Button>
 			</ToolBar>
-			{itemList}
+			{spinner}
+			{errorIndicator}
+			{content}
 			<AddVacancyForm
 				dispatch={dispatch}
 				isOpenModal={isOpenModal}
