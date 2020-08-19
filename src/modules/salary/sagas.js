@@ -1,4 +1,4 @@
-import { takeEvery, put, call } from 'redux-saga/effects'
+import { takeEvery, put, call, all } from 'redux-saga/effects'
 import { REQUEST } from 'helpers/redux'
 import Api from 'services/api'
 import actions from './actions'
@@ -13,6 +13,10 @@ function* fetchSalary() {
 	}
 }
 
-export function* watchFetchSalary() {
+function* watchFetchSalary() {
 	yield takeEvery(REQUEST(FETCH_SALARY), fetchSalary)
+}
+
+export default function* rootSaga() {
+	yield all([watchFetchSalary()])
 }

@@ -10,12 +10,12 @@ const Button = ({
 	variant,
 	color,
 	width,
-	classname,
+	className,
 	fullWidth,
 	type,
 	...otherProps
 }) => {
-	const btnClass = classNames('btn', classname, size, variant, color, {
+	const btnClass = classNames('btn', className, size, variant, color, {
 		largeFont: font === 'large',
 		fullWidth,
 	})
@@ -28,7 +28,7 @@ const Button = ({
 }
 
 Button.defaultProps = {
-	classname: '',
+	className: null,
 	children: null,
 	onClick: () => {},
 	size: 'medium',
@@ -40,7 +40,7 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-	classname: PropTypes.string,
+	className: PropTypes.string,
 	children: PropTypes.node,
 	onClick: PropTypes.func,
 	size: PropTypes.oneOf(['large', 'medium']),

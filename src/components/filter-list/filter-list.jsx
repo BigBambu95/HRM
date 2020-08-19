@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
-import { FilterIcon, ArrowDownIcon } from '../../svg'
+import classnames from 'classnames'
+import { Button } from 'components'
+import { FilterIcon, ArrowDownIcon } from 'svg'
 
 const FilterList = ({ children }) => {
 	const [isShowFilterList, showFilterList] = useState(true)
-	const filterItems = <div className='filter-list__items'>{children}</div>
-	const btnClassNames = isShowFilterList
-		? 'filter-list__btn active'
-		: 'filter-list__btn'
+	const btnClassNames = classnames('filter-list__btn', {
+		'filter-list__btn_active': isShowFilterList,
+	})
 
-	// TODO заменить кнопку на кастомный компонент
 	return (
 		<div className='filter-list'>
-			<button
-				type='button'
+			<Button
+				variant='text'
 				className={btnClassNames}
 				onClick={() => showFilterList(!isShowFilterList)}
 			>
@@ -21,10 +21,10 @@ const FilterList = ({ children }) => {
 					Фильтр
 					<ArrowDownIcon />
 				</span>
-			</button>
-			{isShowFilterList && filterItems}
+			</Button>
+			{isShowFilterList && <div className='filter-list__items'>{children}</div>}
 		</div>
 	)
 }
 
-export default FilterList
+export default React.memo(FilterList)

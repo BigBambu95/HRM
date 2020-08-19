@@ -165,7 +165,7 @@ input {
 
 .worker-list {
     flex: 1 1 100%;
-    padding: 2em;
+    padding: calc(var(--base-padding) * 4);
 }
 
 .worker-list.opened-worker {

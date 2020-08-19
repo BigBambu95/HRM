@@ -6,7 +6,13 @@ import { ContextMenu } from 'components'
 import { FireIcon, PencilIcon, RemoveBasketIcon } from 'svg'
 import { getDictionaryValueById } from 'helpers/dictionaries'
 
-const VacancyListItem = ({ item, deleteItem, addTab, offices }) => {
+const VacancyListItem = ({
+	item,
+	deleteItem,
+	addTab,
+	offices,
+	professions,
+}) => {
 	const { _id, profession, url, office, date, quickly = false } = item
 
 	return (
@@ -21,7 +27,9 @@ const VacancyListItem = ({ item, deleteItem, addTab, offices }) => {
 					<div className='vacancy-list__item__city'>
 						{getDictionaryValueById(offices, office)}
 					</div>
-					<h3 className='vacancy-list__item__title'>{profession}</h3>
+					<h3 className='vacancy-list__item__title'>
+						{getDictionaryValueById(professions, profession)}
+					</h3>
 				</div>
 				<div className='vacancy-list__item__right'>
 					<div className='label'>Крайний срок до:</div>

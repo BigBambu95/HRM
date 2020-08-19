@@ -7,6 +7,7 @@ import {
 	List,
 	Row,
 	Typography,
+	Select,
 } from 'components'
 import {
 	BackIcon,
@@ -17,9 +18,17 @@ import {
 	RemoveBasketIcon,
 } from 'svg'
 import { ToolBar, ToolBarGroupItem } from 'components/tool-bar'
+import { getDictionaryValueById } from 'helpers/dictionaries'
+
 import WorkerStatus from '../worker-status'
 
-const WorkerDetails = ({ worker, closeWorker }) => {
+const WorkerDetails = ({
+	worker,
+	closeWorker,
+	departments,
+	offices,
+	professions,
+}) => {
 	const {
 		name,
 		profession,
@@ -109,26 +118,38 @@ const WorkerDetails = ({ worker, closeWorker }) => {
 					<div className='worker-details__description'>
 						<div>
 							<h1>{name}</h1>
-							<h3>{profession}</h3>
+							<h3>{getDictionaryValueById(professions, profession)}</h3>
 						</div>
 						<div>
 							<Record label='E-mail' field={email} />
 							<Record label='Телефон' field={phone} />
 						</div>
 						<div>
-							<Record label='Отдел' field={department} />
-							<Record label='Офис' field={office} />
+							<Record
+								label='Отдел'
+								field={getDictionaryValueById(departments, department)}
+							/>
+							<Record
+								label='Офис'
+								field={getDictionaryValueById(offices, office)}
+							/>
 						</div>
 					</div>
 					<div className='worker-details__content__info'>
 						<TabBar>
 							<TabBar.Item label='Общее'>
-								<ButtonGroup className='worker-details__content__info__btn-group'>
-									<Button variant='text'>Всего</Button>
-									<Button variant='text'>Месяц</Button>
-									<Button variant='text'>Квартал</Button>
-									<Button variant='text'>Год</Button>
-								</ButtonGroup>
+								<Row justify='space-between'>
+									<ButtonGroup>
+										<Button variant='text'>Всего</Button>
+										<Button variant='text'>Месяц</Button>
+										<Button variant='text'>Квартал</Button>
+										<Button variant='text'>Год</Button>
+									</ButtonGroup>
+									<Select items={[]} icon={<CalendarIcon />} />
+								</Row>
+								{/* <div>
+									<Statistic title='Отработанные часы' value={salary?.hours} />
+								</div> */}
 							</TabBar.Item>
 							<TabBar.Item label='Личная информация' />
 							<TabBar.Item label='Учет рабочего времени' />

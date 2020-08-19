@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { addTab } from 'actions'
-import Filter from 'components/filter'
-import FilterList from 'components/filter-list'
 import { ToolBar } from 'components/tool-bar'
-import { Grid, Button, Spinner } from 'components'
-import ErrorIndicator from 'components/error-indicator'
+import {
+	Grid,
+	Button,
+	Spinner,
+	Filter,
+	FilterList,
+	ErrorIndicator,
+} from 'components'
 import { dictionaryActions } from 'dictionaries'
 import { getFilteredVacancies } from '../selectors'
 import { AddVacancyForm, VacancyListItem } from '../components'
@@ -36,6 +40,7 @@ const VacancyListContainer = () => {
 			key={vacancy._id}
 			item={vacancy}
 			offices={offices}
+			professions={professions}
 			addTab={(label, path, office, prevPage) =>
 				dispatch(addTab(label, path, office, prevPage))
 			}

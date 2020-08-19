@@ -9,12 +9,16 @@ import WorkerDetails from '../components/worker-details'
 const WorkerContainer = ({ match, closeWorker, history }) => {
 	const dispatch = useDispatch()
 
+	const offices = useSelector((state) => state.dictionaries.offices)
+	const departments = useSelector((state) => state.dictionaries.departments)
+	const professions = useSelector((state) => state.dictionaries.professions)
 	const worker = useSelector((state) => state.workerList.worker)
 	const loading = useSelector((state) => state.workerList.loading)
 	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
 		dispatch(actions.workers.fetchWorkerRequest(match.params.id))
+		dispatch(actions.workers.fetchWorkerSalaryRequest(match.params.id))
 	}, [match.params.id])
 
 	if (loading) return <Spinner />
@@ -24,6 +28,9 @@ const WorkerContainer = ({ match, closeWorker, history }) => {
 	return (
 		<WorkerDetails
 			worker={worker}
+			offices={offices}
+			professions={professions}
+			departments={departments}
 			closeWorker={closeWorker}
 			history={history}
 		/>
