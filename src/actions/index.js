@@ -1,7 +1,4 @@
 import C from '../constants'
-import worker from './worker'
-import salary from './salary'
-import candidates from './candidates'
 
 const addTab = (payload) => ({
 	type: C.ADD_TAB,
@@ -33,9 +30,6 @@ const hotVacanciesError = (err) => ({
 })
 
 export {
-	worker,
-	salary,
-	candidates,
 	addTab,
 	removeTab,
 	updateTab,

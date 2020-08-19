@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, call, put, all } from 'redux-saga/effects'
 import Api from 'services/api'
 import { REQUEST } from 'helpers/redux'
 import { createQueryString } from 'helpers/sagas'
@@ -16,7 +16,7 @@ function* fetchWorkers({ payload }) {
 	}
 }
 
-export function* watchFetchWorkers() {
+function* watchFetchWorkers() {
 	yield takeEvery(REQUEST(FETCH_WORKERS), fetchWorkers)
 }
 
@@ -30,7 +30,7 @@ function* fetchWorker({ payload }) {
 	}
 }
 
-export function* watchFetchWorker() {
+function* watchFetchWorker() {
 	yield takeEvery(REQUEST(FETCH_WORKER), fetchWorker)
 }
 
@@ -47,6 +47,10 @@ function* fetchWorkerSalary({ payload }) {
 	}
 }
 
-export function* watchFetchWorkerSalary() {
+function* watchFetchWorkerSalary() {
 	yield takeEvery(REQUEST(FETCH_WORKER_SALARY), fetchWorkerSalary)
+}
+
+export default function* rootSaga() {
+	yield all([watchFetchWorkers(), watchFetchWorker(), watchFetchWorkerSalary])
 }
