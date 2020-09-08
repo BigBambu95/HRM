@@ -14,10 +14,18 @@ const AddVacancyForm = ({
 }) => {
 	const [term, onChangeTerm] = useState()
 	const { register, errors, handleSubmit, control } = form
+	const [profession, setProfession] = useState()
+	const [office, setOffice] = useState()
 
 	const onSubmit = (data) => {
 		setIsOpenModal(false)
-		return dispatch(actions.vacancies.addVacancyRequest(data))
+		return dispatch(
+			actions.vacancies.addVacancyRequest({
+				...data,
+				profession,
+				office,
+			})
+		)
 	}
 
 	return (
@@ -36,6 +44,7 @@ const AddVacancyForm = ({
 						items={vacancyTemplates}
 						name='profession'
 						ref={register({ required: true })}
+						getSelectValue={({ _id }) => setProfession(_id)}
 					/>
 				</Form.Item>
 				<Form.Item validation={errors.office} label='Офис'>
@@ -43,6 +52,7 @@ const AddVacancyForm = ({
 						items={offices}
 						name='office'
 						ref={register({ required: true })}
+						getSelectValue={({ _id }) => setOffice(_id)}
 					/>
 				</Form.Item>
 				<Row justify='space-between'>

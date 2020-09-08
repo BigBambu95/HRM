@@ -46,6 +46,7 @@ function* addVacancy({ payload }) {
 		Toast.push({ label: 'Вакансия добавлена' })
 	} catch (err) {
 		yield put(actions.vacancies.addVacancyFailure(err))
+		Toast.push({ label: 'Произошла ошибка' })
 	}
 }
 
