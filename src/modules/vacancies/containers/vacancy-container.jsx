@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { compose } from 'redux'
 import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -16,7 +16,7 @@ import {
 } from '../selectors'
 
 import actions from '../actions'
-import CandidateList from '../components/candidate-list'
+import { CandidateList, AddSummaryForm } from '../components'
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
 const VacancyContainer = ({ history, match }) => {
@@ -29,6 +29,9 @@ const VacancyContainer = ({ history, match }) => {
 	const finalCandidates = useSelector(selectFinalCandidates)
 	const loading = useSelector((state) => state.vacancyList.loading)
 	const error = useSelector((state) => state.vacancyList.error)
+
+	// Local state
+	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	const candidateLists = [
 		{
@@ -98,7 +101,7 @@ const VacancyContainer = ({ history, match }) => {
 					/>
 				</FilterList>
 				<ToolBarGroupItem>
-					<Button variant='outlined' color='purple'>
+					<Button variant='outlined' color='purple' onClick={() => setIsOpenModal(true)}>
 						Добавить резюме
 					</Button>
 					<Button variant='icon'>
@@ -114,6 +117,7 @@ const VacancyContainer = ({ history, match }) => {
 					return <CandidateList key={props.title} {...props} />
 				})}
 			</Grid>
+			<AddSummaryForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
 		</>
 	)
 }

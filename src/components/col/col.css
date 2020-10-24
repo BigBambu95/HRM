@@ -2,6 +2,11 @@
     position: relative;
 }
 
+.col-24 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
 .col-12 {
     flex: 0 0 50%;
     max-width: 50%;

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import { Controller } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { ModalWindow, Form, Input, Select, Row, DatePicker } from 'components'
 import actions from '../actions'
 
@@ -10,10 +10,9 @@ const AddVacancyForm = ({
 	offices,
 	vacancyTemplates,
 	dispatch,
-	form,
 }) => {
 	const [term, onChangeTerm] = useState()
-	const { register, errors, handleSubmit, control } = form
+	const { register, errors, handleSubmit, control } = useForm()
 	const [profession, setProfession] = useState()
 	const [office, setOffice] = useState()
 
@@ -31,7 +30,7 @@ const AddVacancyForm = ({
 	return (
 		<ModalWindow
 			title='Создать вакансию'
-			width={843}
+			width={840}
 			className='vacancy-list__modal-window'
 			isOpen={isOpenModal}
 			onCancel={() => setIsOpenModal(false)}

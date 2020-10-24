@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Input = React.forwardRef(({ name, rightIcon, style }, ref) => {
+const Input = React.forwardRef(({ name, rightIcon, style, ...props }, ref) => {
 	return (
 		<div className='input' style={style}>
-			<input ref={ref} type='text' name={name} className='input__field' />
+			<input {...props} ref={ref} type='text' name={name} className='input__field' />
 			<span className='input__right-icon'>{rightIcon}</span>
 		</div>
 	)

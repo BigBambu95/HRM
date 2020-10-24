@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form'
 import { addTab } from 'actions'
 import { ToolBar } from 'components/tool-bar'
 import {
@@ -27,7 +26,6 @@ const VacancyListContainer = () => {
 
 	// Local state
 	const [isOpenModal, setIsOpenModal] = useState(false)
-	const form = useForm()
 
 	useEffect(() => {
 		dispatch(actions.vacancies.fetchVacanciesRequest())
@@ -107,7 +105,6 @@ const VacancyListContainer = () => {
 				setIsOpenModal={setIsOpenModal}
 				vacancyTemplates={professions}
 				offices={offices}
-				form={form}
 			/>
 		</>
 	)
