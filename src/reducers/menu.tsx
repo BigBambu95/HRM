@@ -16,7 +16,7 @@ const initialState = {
     {
       id: 2,
       label: 'Календарь',
-      icon: <CalendarIcon />,
+      icon: <CalendarIcon fill='none'/>,
       path: '/calendar/',
       subLinks: [],
     },
