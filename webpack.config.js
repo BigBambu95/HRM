@@ -4,7 +4,7 @@ const StylelintPlugin = require('stylelint-webpack-plugin')
 
 const config = {
 	mode: 'development',
-	entry: path.resolve(__dirname, 'src/index.jsx'),
+	entry: path.resolve(__dirname, 'src/index.tsx'),
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].bundle.js',
@@ -22,6 +22,11 @@ const config = {
 	module: {
 		rules: [
 			{
+				test: /\.tsx?$/,
+				exclude: '/node_modules',
+				loader: 'ts-loader',
+			},
+			{
 				test: /\.jsx?$/,
 				exclude: '/node_modules',
 				use: 'babel-loader',
@@ -35,7 +40,7 @@ const config = {
 	},
 	resolve: {
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-		extensions: ['.jsx', '.js'],
+		extensions: ['.jsx', '.js', '.ts', '.tsx'],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
