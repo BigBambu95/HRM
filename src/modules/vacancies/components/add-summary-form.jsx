@@ -4,29 +4,25 @@ import { useForm } from 'react-hook-form'
 import { ModalWindow, Form, Input, Select, Row, Col } from 'components'
 import actions from '../actions'
 
-const AddSummaryForm = ({
-	isOpenModal,
-	setIsOpenModal,
-	dispatch,
-}) => {
+const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }) => {
 	const { handleSubmit } = useForm()
 
 	const employment = [
 		{
 			_id: 1,
-			name: 'Полная'
+			name: 'Полная',
 		},
 		{
 			_id: 2,
-			name: 'Неполная'
+			name: 'Неполная',
 		},
 		{
 			_id: 3,
-			name: 'Частичная'
+			name: 'Частичная',
 		},
 		{
 			_id: 4,
-			name: 'Сезонная'
+			name: 'Сезонная',
 		},
 	]
 
@@ -34,7 +30,7 @@ const AddSummaryForm = ({
 		setIsOpenModal(false)
 		return dispatch(
 			actions.vacancies.addVacancyRequest({
-				...data
+				...data,
 			})
 		)
 	}
@@ -50,56 +46,58 @@ const AddSummaryForm = ({
 			submitBtnText='Создать'
 		>
 			<Form>
-				<h3>Общая информация</h3>
-				<Row justify="space-between" gutter={[20, 0]}>
-					<Col size={12}>
-						<Form.Item label='Фамилия'>
-							<Input placeholder="Введите фамилию" />
+				<h4>Общая информация</h4>
+				<Row justify='space-between' gutter={[20, 20]}>
+					<Col size={8}>
+						<Form.Item>
+							<Input placeholder='Фамилия' />
 						</Form.Item>
 					</Col>
-					<Col size={12}>
-						<Form.Item label='Имя'>
-							<Input placeholder="Введите имя" />
+					<Col size={8}>
+						<Form.Item>
+							<Input placeholder='Имя' />
 						</Form.Item>
 					</Col>
-					<Col size={12}>
-						<Form.Item label='Отчество'>
-							<Input placeholder="Введите отчество" />
-						</Form.Item>
-					</Col>
-					<Col size={12}>
-						<Form.Item label='Возраст'>
-							<Input placeholder="Введите возраст" />
+					<Col size={8}>
+						<Form.Item>
+							<Input placeholder='Отчество' />
 						</Form.Item>
 					</Col>
 				</Row>
-				<h3>Контактная информация</h3>
-				<Row justify="space-between" gutter={[20, 0]}>
-					<Col size={12}>
-						<Form.Item label='E-mail'>
-							<Input placeholder="Введите E-mail" />
-						</Form.Item>
-					</Col>
-					<Col size={12}>
-						<Form.Item label='Телефон'>
-							<Input placeholder="Введите телефон" />
+				<Row justify='space-between' gutter={[20, 20]}>
+					<Col size={8}>
+						<Form.Item>
+							<Input placeholder='Возраст' />
 						</Form.Item>
 					</Col>
 				</Row>
-				<h3>Рабочие моменты</h3>
-				<Row justify="space-between" gutter={[20, 0]}>
+				<h4 style={{ marginTop: "32px" }}>Контактная информация</h4>
+				<Row justify='space-between' gutter={[20, 20]}>
 					<Col size={12}>
-						<Form.Item label='Опыт работы'>
-							<Input placeholder="Введите опыт" />
+						<Form.Item>
+							<Input placeholder='E-mail' />
 						</Form.Item>
 					</Col>
 					<Col size={12}>
-						<Form.Item label='Желаемая з/п'>
-							<Input placeholder="Введите желаемую зарплату" />
+						<Form.Item>
+							<Input placeholder='Телефон' />
+						</Form.Item>
+					</Col>
+				</Row>
+				<h4 style={{ marginTop: "32px" }}>Рабочие моменты</h4>
+				<Row justify='space-between' gutter={[20, 20]}>
+					<Col size={12}>
+						<Form.Item>
+							<Input placeholder='Опыт' />
+						</Form.Item>
+					</Col>
+					<Col size={12}>
+						<Form.Item>
+							<Input placeholder='Желаемая зарплата' />
 						</Form.Item>
 					</Col>
 					<Col size={24}>
-						<Form.Item label='Занятость'>
+						<Form.Item>
 							<Select items={employment} />
 						</Form.Item>
 					</Col>

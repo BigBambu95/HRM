@@ -101,7 +101,11 @@ const VacancyContainer = ({ history, match }) => {
 					/>
 				</FilterList>
 				<ToolBarGroupItem>
-					<Button variant='outlined' color='purple' onClick={() => setIsOpenModal(true)}>
+					<Button
+						variant='outlined'
+						color='purple'
+						onClick={() => setIsOpenModal(true)}
+					>
 						Добавить резюме
 					</Button>
 					<Button variant='icon'>
@@ -117,7 +121,10 @@ const VacancyContainer = ({ history, match }) => {
 					return <CandidateList key={props.title} {...props} />
 				})}
 			</Grid>
-			<AddSummaryForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+			<AddSummaryForm
+				isOpenModal={isOpenModal}
+				setIsOpenModal={setIsOpenModal}
+			/>
 		</>
 	)
 }

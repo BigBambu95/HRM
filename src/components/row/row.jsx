@@ -10,9 +10,8 @@ const Row = ({ children, gutter = [], justify, align, style }) => {
 	)
 
 	const styles = {
-        ...style,
-
         margin: `0 -${gutter[0] / 2}px`,
+        ...style
     }
 
 	return (

@@ -1,11 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-const Input = React.forwardRef(({ name, rightIcon, style, ...props }, ref) => {
+const Input = React.forwardRef(({ 
+	name, rightIcon, 
+	style, className, placeholder, ...props 
+}, ref) => {
+	const classes = classnames('input', className)
+
 	return (
-		<div className='input' style={style}>
-			<input {...props} ref={ref} type='text' name={name} className='input__field' />
-			<span className='input__right-icon'>{rightIcon}</span>
+		<div className={classes} style={style}>
+			<input
+				type='text'
+				{...props}
+				ref={ref}
+				name={name}
+				className='input__field'
+				required
+			/>
+			{placeholder && <span className="input__placeholder">{placeholder}</span>}
+			{rightIcon && <span className='input__right-icon'>{rightIcon}</span>}
 		</div>
 	)
 })

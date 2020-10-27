@@ -12,7 +12,7 @@ const CandidateList = (props) => {
 
 	return (
 		<div>
-			<Row justify='space-between' gutter={[0, 16]}>
+			<Row justify='space-between' style={{ marginBottom: '24px' }}>
 				<h4>{title}</h4>
 				<ContextMenu iconVariant='horizontal'>
 					<ContextMenu.Item
