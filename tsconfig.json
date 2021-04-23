@@ -4,9 +4,10 @@
         "target": "ES5",
         "allowJs": true,
         "checkJs": true,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
+        "strict": true,
         "include": [
             "./src/**/*"
         ],
