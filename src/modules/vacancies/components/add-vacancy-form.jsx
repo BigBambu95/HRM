@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { Controller } from 'react-hook-form'
-import { ModalWindow, Form, Input, Select, Row, DatePicker } from 'components'
+import { Modal, Form, Input, Select, Row, DatePicker } from 'components'
 import actions from '../actions'
 
 const AddVacancyForm = ({
@@ -21,7 +21,7 @@ const AddVacancyForm = ({
 	}
 
 	return (
-		<ModalWindow
+		<Modal
 			title='Создать вакансию'
 			width={843}
 			className='vacancy-list__modal-window'
@@ -66,7 +66,7 @@ const AddVacancyForm = ({
 					</Form.Item>
 				</Row>
 			</Form>
-		</ModalWindow>
+		</Modal>
 	)
 }
 

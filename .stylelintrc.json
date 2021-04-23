@@ -5,6 +5,7 @@
   "plugins": [
     "stylelint-order"
   ],
+  "ignoreFiles": ["**/*.tsx"],
   "rules": {
     "indentation": 4,
     "number-leading-zero": "never",

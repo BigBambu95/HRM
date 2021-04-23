@@ -2,7 +2,6 @@ import React, { ButtonHTMLAttributes } from 'react'
 import classNames from 'classnames'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	className?: string;
 	size?: 'large' | 'medium';
 	variant?: 'solid' | 'outlined' | 'icon' | 'text';
 	color?: 'purple' | 'green' | 'red' | 'aqua';

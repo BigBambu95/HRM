@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from './modal-window'
+import Modal from './modal'
 
 describe('Modal', () => {
 	const setUp = (props, children) =>

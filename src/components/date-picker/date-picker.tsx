@@ -1,8 +1,8 @@
 import React from 'react'
-import DatePicker from 'react-date-picker'
+import DatePicker, { DatePickerProps } from 'react-date-picker'
 import { CalendarIcon } from 'svg'
 
-const HRMDatePicker = (props) => {
+const HRMDatePicker = (props: DatePickerProps) => {
 	return (
 		<DatePicker clearIcon={null} calendarIcon={<CalendarIcon />} {...props} />
 	)
