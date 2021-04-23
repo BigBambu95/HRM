@@ -22,6 +22,11 @@ const config = {
 	module: {
 		rules: [
 			{
+				test: /\.tsx?$/,
+				exclude: '/node_modules',
+				use: 'ts-loader',
+			},
+			{
 				test: /\.jsx?$/,
 				exclude: '/node_modules',
 				use: 'babel-loader',
@@ -35,7 +40,7 @@ const config = {
 	},
 	resolve: {
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-		extensions: ['.jsx', '.js'],
+		extensions: ['.jsx', '.js', '.tsx', '.ts'],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
