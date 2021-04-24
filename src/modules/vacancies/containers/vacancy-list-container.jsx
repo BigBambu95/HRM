@@ -72,7 +72,7 @@ const VacancyListContainer = () => {
 					<Filter
 						label='Должность'
 						items={professions}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.vacancies.setFilter({
 									name: 'profession',
@@ -85,7 +85,7 @@ const VacancyListContainer = () => {
 					<Filter
 						label='Офис'
 						items={offices}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.vacancies.setFilter({
 									name: 'office',

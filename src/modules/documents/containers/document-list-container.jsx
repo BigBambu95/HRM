@@ -70,7 +70,7 @@ const DocumentListContainer = () => {
 		<>
 			<ToolBar>
 				<FilterList>
-					<Filter items={[]} getSelectValue={() => {}} defaultValue='Все' />
+					<Filter items={[]} onChange={() => {}} defaultValue='Все' />
 				</FilterList>
 				<Button>Добавить документ</Button>
 			</ToolBar>

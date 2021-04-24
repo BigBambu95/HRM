@@ -75,7 +75,7 @@ const WorkerListContainer = ({ match }) => {
 					<Filter
 						label='Должность'
 						items={professions}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.workers.setFilter({
 									name: 'profession',
@@ -88,7 +88,7 @@ const WorkerListContainer = ({ match }) => {
 					<Filter
 						label='Офис'
 						items={offices}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.workers.setFilter({
 									name: 'office',
@@ -101,7 +101,7 @@ const WorkerListContainer = ({ match }) => {
 					<Filter
 						label='Отдел'
 						items={departments}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.workers.setFilter({
 									name: 'department',
