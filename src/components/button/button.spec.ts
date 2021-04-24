@@ -12,14 +12,7 @@ describe('Button', () => {
 
 	it('Кнопка с переданными пропсами', () => {
 		const button = shallow(
-			<Button
-				variant='solid'
-				size='large'
-				font='large'
-				type='submit'
-				color='red'
-				fullWidth
-			>
+			<Button variant='solid' size='large' font='large' type='submit' color='red' fullWidth>
 				Click
 			</Button>
 		)

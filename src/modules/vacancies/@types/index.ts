@@ -10,7 +10,7 @@ interface Vacancy {
 type Vacancies = Array<Vacancy>
 
 interface Candidate {
-	id: string;
+	_id: string;
 	name: string;
 	avatar: string;
 	age: string;

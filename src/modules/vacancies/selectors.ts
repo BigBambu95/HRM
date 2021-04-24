@@ -1,19 +1,19 @@
 import { createSelector } from 'reselect'
 
-export const selectCandidates = (state) => state.vacancyList.vacancy.candidates
+export const selectCandidates = (state: ANY_MIGRATION_TYPE) => state.vacancyList.vacancy.candidates
 
 export const selectReviewSummaryCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }) => status.toLowerCase() === 'рассмотрение резюме')
+	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'рассмотрение резюме')
 )
 
 export const selectPhoneCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }) => status.toLowerCase() === 'телефонное интервью')
+	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'телефонное интервью')
 )
 
 export const selectInterviewCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }) => status.toLowerCase() === 'собеседование')
+	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'собеседование')
 )
 
 export const selectFinalCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }) => status.toLowerCase() === 'кандидат')
+	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'кандидат')
 )

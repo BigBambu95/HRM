@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions'
+import { Action, handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import VacancyTypes from './types'
 
@@ -39,9 +39,9 @@ const vacancyList = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(VacancyTypes.FETCH_VACANCIES)]: (state, { payload }) => ({
+		[SUCCESS(VacancyTypes.FETCH_VACANCIES)]: (state, action: Action<Vacancies>) => ({
 			...state,
-			vacancies: payload,
+			vacancies: action.payload,
 			loading: false,
 			error: null,
 		}),
@@ -59,9 +59,9 @@ const vacancyList = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(VacancyTypes.FETCH_VACANCY)]: (state, { payload }) => ({
+		[SUCCESS(VacancyTypes.FETCH_VACANCY)]: (state, action: Action<Vacancy>) => ({
 			...state,
-			vacancy: payload,
+			vacancy: action.payload,
 			loading: false,
 			error: null,
 		}),
@@ -70,19 +70,20 @@ const vacancyList = handleActions(
 			loading: false,
 			error: true,
 		}),
-		[VacancyTypes.SET_FILTER]: (state, { payload }) => ({
+		//@ts-ignore
+		[VacancyTypes.SET_FILTER]: (state, action: Action<Record<string, string>>) => ({
 			...state,
 			filter: {
 				...state.filter,
-				[payload.name]: payload.value,
+				[action.payload.name]: action.payload.value,
 			},
 		}),
 		[REQUEST(VacancyTypes.ADD_VACANCY)]: (state) => ({
 			...state,
 		}),
-		[SUCCESS(VacancyTypes.ADD_VACANCY)]: (state, { payload }) => ({
+		[SUCCESS(VacancyTypes.ADD_VACANCY)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
 			...state,
-			vacancies: state.vacancies.concat(payload),
+			vacancies: state.vacancies.concat(action.payload),
 		}),
 		[FAILURE(VacancyTypes.ADD_VACANCY)]: (state) => ({
 			...state,
@@ -90,25 +91,27 @@ const vacancyList = handleActions(
 		[REQUEST(VacancyTypes.REMOVE_VACANCY)]: (state) => ({
 			...state,
 		}),
-		[SUCCESS(VacancyTypes.REMOVE_VACANCY)]: (state, { payload }) => ({
+		[SUCCESS(VacancyTypes.REMOVE_VACANCY)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
 			...state,
-			vacancies: state.vacancies.filter((v) => v._id !== payload),
+			vacancies: state.vacancies.filter((v) => v._id !== action.payload),
 		}),
 		[FAILURE(VacancyTypes.REMOVE_VACANCY)]: (state) => ({
 			...state,
 		}),
-		ARCHIVE_VACANCY_CANDIDATE: (state, { payload }) => ({
+		ARCHIVE_VACANCY_CANDIDATE: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
 			...state,
 			vacancy: {
 				...state.vacancy,
-				candidates: state.vacancy.candidates.filter((v) => v._id !== payload),
+				candidates: state.vacancy.candidates.filter((v) => v._id !== action.payload),
 			},
 		}),
-		ARCHIVE_VACANCY_CANDIDATES: (state, { payload }) => ({
+		ARCHIVE_VACANCY_CANDIDATES: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
 			...state,
 			vacancy: {
 				...state.vacancy,
-				candidates: state.vacancy.candidates.filter((i) => !payload.includes(i)),
+				candidates: state.vacancy.candidates.filter(
+					(candidate) => !action.payload.includes(candidate)
+				),
 			},
 		}),
 	},
