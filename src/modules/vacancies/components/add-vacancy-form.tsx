@@ -1,19 +1,25 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import { Controller } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { Modal, Form, Input, Select, Row, DatePicker } from 'components'
 import actions from '../actions'
 
-const AddVacancyForm = ({
+export interface AddVacancyFormProps {
+	isOpenModal: boolean;
+	setIsOpenModal: (isOpen: boolean) => void;
+	offices: ANY_MIGRATION_TYPE;
+	vacancyTemplates: ANY_MIGRATION_TYPE;
+	dispatch: ANY_MIGRATION_TYPE;
+}
+
+const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 	isOpenModal,
 	setIsOpenModal,
 	offices,
 	vacancyTemplates,
 	dispatch,
-	form,
 }) => {
 	const [term, onChangeTerm] = useState()
-	const { register, errors, handleSubmit, control } = form
+	const { register, errors, handleSubmit, control } = useForm()
 
 	const onSubmit = (data) => {
 		setIsOpenModal(false)
@@ -32,18 +38,10 @@ const AddVacancyForm = ({
 		>
 			<Form>
 				<Form.Item validation={errors.profession} label='Специальность'>
-					<Select
-						items={vacancyTemplates}
-						name='profession'
-						ref={register({ required: true })}
-					/>
+					<Select items={vacancyTemplates} name='profession' ref={register({ required: true })} />
 				</Form.Item>
 				<Form.Item validation={errors.office} label='Офис'>
-					<Select
-						items={offices}
-						name='office'
-						ref={register({ required: true })}
-					/>
+					<Select items={offices} name='office' ref={register({ required: true })} />
 				</Form.Item>
 				<Row justify='space-between'>
 					<Form.Item validation={errors.date} label='Крайний срок'>
@@ -52,12 +50,7 @@ const AddVacancyForm = ({
 							control={control}
 							rules={{ required: true }}
 							render={(props) => (
-								<DatePicker
-									format='dd.MM.yy'
-									value={term}
-									onChange={onChangeTerm}
-									{...props}
-								/>
+								<DatePicker format='dd.MM.yy' {...props} value={term} onChange={onChangeTerm} />
 							)}
 						/>
 					</Form.Item>

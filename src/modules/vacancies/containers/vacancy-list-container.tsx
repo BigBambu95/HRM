@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form'
 import { addTab } from 'actions'
 import { ToolBar } from 'components/tool-bar'
-import {
-	Grid,
-	Button,
-	Spinner,
-	Filter,
-	FilterList,
-	ErrorIndicator,
-} from 'components'
+import { Grid, Button, Spinner, Filter, FilterList, ErrorIndicator } from 'components'
 import { dictionaryActions } from 'dictionaries'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
@@ -27,7 +19,6 @@ const VacancyListContainer = () => {
 
 	// Local state
 	const [isOpenModal, setIsOpenModal] = useState(false)
-	const form = useForm()
 
 	useEffect(() => {
 		dispatch(actions.vacancies.fetchVacanciesRequest())
@@ -39,15 +30,13 @@ const VacancyListContainer = () => {
 		dispatch(actions.vacancies.fetchVacanciesRequest(filter))
 	}, [filter])
 
-	const vacancyList = vacancies.map((vacancy) => (
+	const vacancyList = vacancies.map((vacancy: Vacancy) => (
 		<VacancyListItem
 			key={vacancy._id}
 			item={vacancy}
 			offices={offices}
 			professions={professions}
-			addTab={(label, path, office, prevPage) =>
-				dispatch(addTab(label, path, office, prevPage))
-			}
+			addTab={(label, path, office, prevPage) => dispatch(addTab(label, path, office, prevPage))}
 			deleteItem={(id) => dispatch(actions.vacancies.removeVacancyRequest(id))}
 		/>
 	))
@@ -107,7 +96,6 @@ const VacancyListContainer = () => {
 				setIsOpenModal={setIsOpenModal}
 				vacancyTemplates={professions}
 				offices={offices}
-				form={form}
 			/>
 		</>
 	)

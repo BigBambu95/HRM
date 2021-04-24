@@ -4,7 +4,7 @@ const StylelintPlugin = require('stylelint-webpack-plugin')
 
 const config = {
 	mode: 'development',
-	entry: path.resolve(__dirname, 'src/index.jsx'),
+	entry: path.resolve(__dirname, 'src/index.tsx'),
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].bundle.js',
@@ -40,7 +40,7 @@ const config = {
 	},
 	resolve: {
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-		extensions: ['.jsx', '.js', '.tsx', '.ts'],
+		extensions: ['.tsx', '.ts', '.jsx', '.js'],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

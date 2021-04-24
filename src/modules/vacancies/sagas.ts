@@ -4,12 +4,7 @@ import { REQUEST } from 'helpers/redux'
 import { createQueryString } from 'helpers/sagas'
 import { Toast } from 'components'
 import actions from './actions'
-import {
-	FETCH_VACANCIES,
-	FETCH_VACANCY,
-	ADD_VACANCY,
-	REMOVE_VACANCY,
-} from './types'
+import VacancyTypes from './types'
 
 function* fetchVacancies({ payload }) {
 	try {
@@ -22,7 +17,7 @@ function* fetchVacancies({ payload }) {
 }
 
 function* watchFetchVacancies() {
-	yield takeEvery(REQUEST(FETCH_VACANCIES), fetchVacancies)
+	yield takeEvery(REQUEST(VacancyTypes.FETCH_VACANCIES), fetchVacancies)
 }
 
 function* fetchVacancy({ payload }) {
@@ -35,7 +30,7 @@ function* fetchVacancy({ payload }) {
 }
 
 function* watchfetchVacancy() {
-	yield takeEvery(REQUEST(FETCH_VACANCY), fetchVacancy)
+	yield takeEvery(REQUEST(VacancyTypes.FETCH_VACANCY), fetchVacancy)
 }
 
 function* addVacancy({ payload }) {
@@ -50,7 +45,7 @@ function* addVacancy({ payload }) {
 }
 
 function* watchAddVacancy() {
-	yield takeEvery(REQUEST(ADD_VACANCY), addVacancy)
+	yield takeEvery(REQUEST(VacancyTypes.ADD_VACANCY), addVacancy)
 }
 
 function* removeVacancy({ payload }) {
@@ -67,14 +62,9 @@ function* removeVacancy({ payload }) {
 }
 
 function* watchRemoveVacancy() {
-	yield takeEvery(REQUEST(REMOVE_VACANCY), removeVacancy)
+	yield takeEvery(REQUEST(VacancyTypes.REMOVE_VACANCY), removeVacancy)
 }
 
 export default function* rootSaga() {
-	yield all([
-		watchFetchVacancies(),
-		watchfetchVacancy(),
-		watchAddVacancy(),
-		watchRemoveVacancy(),
-	])
+	yield all([watchFetchVacancies(), watchfetchVacancy(), watchAddVacancy(), watchRemoveVacancy()])
 }

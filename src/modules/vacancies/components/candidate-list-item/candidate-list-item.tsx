@@ -2,7 +2,13 @@ import React from 'react'
 import { ArchiveIcon, PencilIcon } from 'svg'
 import { ContextMenu, Record } from 'components'
 
-const CandidateListItem = ({ item, editItem, archiveItem }) => {
+export interface CandidateListItemProps {
+	item: Candidate;
+	editItem?: ANY_MIGRATION_TYPE;
+	archiveItem?: ANY_MIGRATION_TYPE;
+}
+
+const CandidateListItem: React.FC<CandidateListItemProps> = ({ item, editItem, archiveItem }) => {
 	const { id, name, avatar, age, exp, desiredSalary } = item
 
 	return (
@@ -16,17 +22,15 @@ const CandidateListItem = ({ item, editItem, archiveItem }) => {
 				<Record label='Опыт' field={exp} />
 				<Record label='Желаемая з/п' field={desiredSalary} />
 			</div>
-			<ContextMenu editItem={editItem} archiveItem={archiveItem} itemId={id}>
-				<ContextMenu.Item icon={<PencilIcon width={16} height={16} />}>
-					Изменить
-				</ContextMenu.Item>
+			{/* <ContextMenu editItem={editItem} archiveItem={archiveItem} itemId={id}>
+				<ContextMenu.Item icon={<PencilIcon width={16} height={16} />}>Изменить</ContextMenu.Item>
 				<ContextMenu.Item
 					icon={<ArchiveIcon width={16} height={16} />}
 					handleClick={() => archiveItem(item)}
 				>
 					Архивировать
 				</ContextMenu.Item>
-			</ContextMenu>
+			</ContextMenu> */}
 		</div>
 	)
 }

@@ -7,10 +7,11 @@ import store from './store'
 
 import App from './app'
 
-ReactDOM.unstable_createRoot(document.getElementById('root')).render(
+ReactDOM.render(
 	<Provider store={store}>
 		<Router>
 			<App />
 		</Router>
-	</Provider>
+	</Provider>,
+	document.getElementById('root')
 )

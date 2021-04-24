@@ -1,0 +1,1 @@
+type ANY_MIGRATION_TYPE = any

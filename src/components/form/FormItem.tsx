@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 
 export interface FormItemProps {
-	validation: object; // TODO: Type it
+	validation: boolean; // TODO: Type it
 	label?: string;
 	children: ReactElement;
 }

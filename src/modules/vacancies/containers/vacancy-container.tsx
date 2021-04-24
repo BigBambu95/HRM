@@ -73,26 +73,20 @@ const VacancyContainer = ({ history, match }) => {
 					<Filter
 						label='Возраст'
 						items={candidates}
-						onChange={(value) =>
-							dispatch(actions.vacancies.setFilter({ name: 'age', value }))
-						}
+						onChange={(value) => dispatch(actions.vacancies.setFilter({ name: 'age', value }))}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Опыт'
 						items={candidates}
-						onChange={(value) =>
-							dispatch(actions.vacancies.setFilter({ name: 'exp', value }))
-						}
+						onChange={(value) => dispatch(actions.vacancies.setFilter({ name: 'exp', value }))}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Желаемая з/п'
 						items={candidates}
 						onChange={(value) =>
-							dispatch(
-								actions.vacancies.setFilter({ name: 'desiredSalary', value })
-							)
+							dispatch(actions.vacancies.setFilter({ name: 'desiredSalary', value }))
 						}
 						defaultValue='Все'
 					/>

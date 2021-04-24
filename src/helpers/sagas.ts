@@ -1,4 +1,4 @@
-export const createQueryString = (obj) => {
+export const createQueryString = (obj: ANY_MIGRATION_TYPE) => {
 	let query = '?'
 	const arr = Object.entries(obj).filter((item) => item[1] !== 'Все')
 	arr?.forEach((el) => {
