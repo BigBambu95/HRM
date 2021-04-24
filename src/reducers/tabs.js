@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { handleActions } from 'redux-actions'
 
 const updateObjectInArray = (array, payload, index) =>
@@ -21,9 +20,7 @@ const initialState = {
 const tabList = handleActions(
 	{
 		ADD_TAB: (state, { payload }) => {
-			const tabIdx = state.tabs.findIndex((tab) =>
-				payload.path?.includes(tab.path)
-			)
+			const tabIdx = state.tabs.findIndex((tab) => payload.path?.includes(tab.path))
 
 			if (tabIdx !== -1) {
 				return {
