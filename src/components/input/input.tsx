@@ -4,9 +4,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	rightIcon?: ReactNode;
 }
 
-const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
-	name, rightIcon, style
-}, ref) => {
+const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+	{ name, rightIcon, style },
+	ref
+) => {
 	return (
 		<div className='input' style={style}>
 			<input ref={ref} type='text' name={name} className='input__field' />

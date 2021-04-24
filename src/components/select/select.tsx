@@ -1,13 +1,18 @@
 import React, {
-	useState, useRef, ForwardRefRenderFunction,
-	HTMLAttributes, memo, forwardRef, useEffect
+	useState,
+	useRef,
+	ForwardRefRenderFunction,
+	HTMLAttributes,
+	memo,
+	forwardRef,
+	useEffect,
 } from 'react'
 import classnames from 'classnames'
 import { ArrowDownIcon } from '../../svg'
 import Button from '../button'
 import { useClickAway } from 'ahooks'
 
-export type SelectValue = Record<'name' | '_id', string> | string;
+export type SelectValue = Record<'name' | '_id', string> | string
 
 export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
 	items: Array<SelectValue>;
@@ -31,18 +36,21 @@ const getSelectId = (item: SelectValue) => {
 	return typeof item === 'object' ? item._id : item
 }
 
-const Select: ForwardRefRenderFunction<HTMLInputElement, SelectProps> = ({
-	defaultValue,
-	items,
-	icon = <ArrowDownIcon />,
-	name,
-	onChange,
-	style,
-	className,
-	...otherProps
-}, ref) => {
+const Select: ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
+	{
+		defaultValue,
+		items,
+		icon = <ArrowDownIcon />,
+		name,
+		onChange,
+		style,
+		className,
+		...otherProps
+	},
+	ref
+) => {
 	const [isOpen, setIsOpen] = useState(false)
-	const [value, setValue] = useState("")
+	const [value, setValue] = useState('')
 	const container = useRef(null)
 
 	useClickAway(() => {
@@ -72,16 +80,7 @@ const Select: ForwardRefRenderFunction<HTMLInputElement, SelectProps> = ({
 	return (
 		<div className={classnames('select', className)} style={style} ref={container}>
 			<div className='select__current-item'>{value}</div>
-			{ref && (
-				<input
-					type='hidden'
-					id={name}
-					name={name}
-					value={value}
-					ref={ref}
-					{...otherProps}
-				/>
-			)}
+			{ref && <input type='hidden' id={name} name={name} value={value} ref={ref} {...otherProps} />}
 			<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
 				{icon}
 			</Button>

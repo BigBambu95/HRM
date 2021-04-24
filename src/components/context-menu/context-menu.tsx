@@ -16,22 +16,15 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ iconVariant, children, ...pro
 		setIsOpen(false)
 	}, container)
 
-	const btnClass = classnames('context-menu__btn', iconVariant)
-
-	// TODO ЗАменить кнопку на кастомную кнопку
 	return (
 		<div className='context-menu' ref={container} {...props}>
 			<Button
 				onClick={() => setIsOpen(!isOpen)}
-				className={btnClass}
+				className={classnames('context-menu__btn', iconVariant)}
 			>
 				<ContextMenuIcon />
 			</Button>
-			{isOpen && (
-				<div className='context-menu__list'>
-					{children}
-				</div>
-			)}
+			{isOpen && <div className='context-menu__list'>{children}</div>}
 		</div>
 	)
 }

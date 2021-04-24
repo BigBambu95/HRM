@@ -8,13 +8,7 @@ export interface ColProps extends HTMLAttributes<HTMLDivElement> {
 	size?: number;
 }
 
-const Col: React.FC<ColProps> = ({
-	children,
-	style,
-	size,
-	className,
-	...otherProps
-}) => {
+const Col: React.FC<ColProps> = ({ children, style, size, className, ...otherProps }) => {
 	const classNames = classnames(className, 'col', size && `col-${size}`)
 
 	return (
