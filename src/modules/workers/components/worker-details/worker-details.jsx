@@ -1,45 +1,13 @@
 import React from 'react'
-import {
-	ButtonGroup,
-	Button,
-	Record,
-	TabBar,
-	List,
-	Row,
-	Typography,
-	Select,
-} from 'components'
-import {
-	BackIcon,
-	PencilIcon,
-	CalendarIcon,
-	MailIcon,
-	DownloadIcon,
-	RemoveBasketIcon,
-} from 'svg'
+import { ButtonGroup, Button, Record, TabBar, List, Row, Typography, Select } from 'components'
+import { BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon, RemoveBasketIcon } from 'svg'
 import { ToolBar, ToolBarGroupItem } from 'components/tool-bar'
 import { getDictionaryValueById } from 'helpers/dictionaries'
 
 import WorkerStatus from '../worker-status'
 
-const WorkerDetails = ({
-	worker,
-	closeWorker,
-	departments,
-	offices,
-	professions,
-}) => {
-	const {
-		name,
-		profession,
-		office,
-		email,
-		phone,
-		department,
-		avatar,
-		status,
-		tags,
-	} = worker
+const WorkerDetails = ({ worker, closeWorker, departments, offices, professions }) => {
+	const { name, profession, office, email, phone, department, avatar, status, tags } = worker
 
 	// MockData
 	const history = [
@@ -125,14 +93,8 @@ const WorkerDetails = ({
 							<Record label='Телефон' field={phone} />
 						</div>
 						<div>
-							<Record
-								label='Отдел'
-								field={getDictionaryValueById(departments, department)}
-							/>
-							<Record
-								label='Офис'
-								field={getDictionaryValueById(offices, office)}
-							/>
+							<Record label='Отдел' field={getDictionaryValueById(departments, department)} />
+							<Record label='Офис' field={getDictionaryValueById(offices, office)} />
 						</div>
 					</div>
 					<div className='worker-details__content__info'>
@@ -159,16 +121,8 @@ const WorkerDetails = ({
 				<div className='worker-details__content__right'>
 					<div className='worker-details__content__actions'>
 						<WorkerStatus color={status}>На работе</WorkerStatus>
-						<ButtonGroup
-							className='worker-details__content__actions__btn-group'
-							vertical
-						>
-							<Button
-								variant='outlined'
-								color='green'
-								width='100%'
-								size='large'
-							>
+						<ButtonGroup className='worker-details__content__actions__btn-group' vertical>
+							<Button variant='outlined' color='green' width='100%' size='large'>
 								Премировать
 							</Button>
 							<Button variant='outlined' color='red' width='100%' size='large'>
@@ -208,9 +162,7 @@ const WorkerDetails = ({
 							renderItem={(item) => (
 								<>
 									<span>{item.name}</span>
-									<Typography.Text type='secondary'>
-										{item.date}
-									</Typography.Text>
+									<Typography.Text type='secondary'>{item.date}</Typography.Text>
 								</>
 							)}
 						/>

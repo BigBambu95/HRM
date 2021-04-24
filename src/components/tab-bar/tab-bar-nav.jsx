@@ -7,11 +7,7 @@ const TabBarNav = ({ children, setActiveTab, className }) => {
 	const btnClass = classNames('tab-bar__nav__item', className)
 
 	return (
-		<Button
-			variant='text'
-			classname={btnClass}
-			onClick={() => setActiveTab(children)}
-		>
+		<Button variant='text' classname={btnClass} onClick={() => setActiveTab(children)}>
 			{children}
 		</Button>
 	)

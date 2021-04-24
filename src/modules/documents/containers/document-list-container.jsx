@@ -1,14 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-	Spinner,
-	ErorIndicator,
-	ContextMenu,
-	FilterList,
-	Filter,
-	Button,
-	Row,
-} from 'components'
+import { Spinner, ErorIndicator, ContextMenu, FilterList, Filter, Button, Row } from 'components'
 import { Table } from 'components/table'
 import { DownloadIcon, PrinterIcon } from 'svg'
 import Moment from 'react-moment'

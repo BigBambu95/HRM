@@ -3,30 +3,11 @@ import { Link } from 'react-router-dom'
 import { Record, Typography } from 'components'
 import { getDictionaryValueById } from 'helpers/dictionaries'
 
-const WorkerListItem = ({
-	item,
-	addTab,
-	match,
-	departments,
-	offices,
-	professions,
-}) => {
-	const {
-		_id,
-		name,
-		department,
-		phone,
-		email,
-		office,
-		profession,
-		avatar,
-		status,
-	} = item
+const WorkerListItem = ({ item, addTab, match, departments, offices, professions }) => {
+	const { _id, name, department, phone, email, office, profession, avatar, status } = item
 
 	const clazz =
-		match.params.id === _id
-			? `worker-list__item ${status} active`
-			: `worker-list__item ${status}`
+		match.params.id === _id ? `worker-list__item ${status} active` : `worker-list__item ${status}`
 
 	return (
 		<div className={clazz}>
@@ -48,14 +29,8 @@ const WorkerListItem = ({
 				<div className='worker-list__item__right'>
 					<Record label='E-mail' field={email} />
 					<Record label='Телефон' field={phone} />
-					<Record
-						label='Отдел'
-						field={getDictionaryValueById(departments, department)}
-					/>
-					<Record
-						label='Офис'
-						field={getDictionaryValueById(offices, office)}
-					/>
+					<Record label='Отдел' field={getDictionaryValueById(departments, department)} />
+					<Record label='Офис' field={getDictionaryValueById(offices, office)} />
 				</div>
 			</Link>
 		</div>

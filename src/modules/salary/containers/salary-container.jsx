@@ -48,24 +48,9 @@ const SalaryContainer = () => {
 			<ToolBar>
 				<FilterList>
 					<Filter items={months} filter={() => {}} icon={<CalendarIcon />} />
-					<Filter
-						label='Офис'
-						items={offices}
-						filter={() => {}}
-						defaultValue='Все'
-					/>
-					<Filter
-						label='Отдел'
-						items={departments}
-						filter={() => {}}
-						defaultValue='Все'
-					/>
-					<Filter
-						label='Должность'
-						items={professions}
-						filter={() => {}}
-						defaultValue='Все'
-					/>
+					<Filter label='Офис' items={offices} filter={() => {}} defaultValue='Все' />
+					<Filter label='Отдел' items={departments} filter={() => {}} defaultValue='Все' />
+					<Filter label='Должность' items={professions} filter={() => {}} defaultValue='Все' />
 				</FilterList>
 			</ToolBar>
 			{spinner}

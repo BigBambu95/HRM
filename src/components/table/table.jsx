@@ -9,9 +9,7 @@ const Table = ({ data, columns }) => (
 			<thead>
 				<tr>
 					{columns.map((column) => {
-						return (
-							<TableColumn key={column.key || column.dataIndex} data={column} />
-						)
+						return <TableColumn key={column.key || column.dataIndex} data={column} />
 					})}
 				</tr>
 			</thead>
