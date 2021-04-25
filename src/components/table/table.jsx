@@ -5,20 +5,18 @@ import TableCell from './table-cell'
 
 const Table = ({ data, columns }) => (
 	<div className='table-wrapper'>
-		<table className='table'>
-			<thead>
-				<tr>
+		<div className='table'>
+			<div>
+				<div>
 					{columns.map((column) => {
-						return (
-							<TableColumn key={column.key || column.dataIndex} data={column} />
-						)
+						return <TableColumn key={column.key || column.dataIndex} data={column} />
 					})}
-				</tr>
-			</thead>
-			<tbody>
+				</div>
+			</div>
+			<div>
 				{data.map((row) => {
 					return (
-						<tr key={row._id} className='table__row'>
+						<div key={row._id} className='table__row'>
 							{columns.map((column) => (
 								<TableCell
 									key={column.key || column.dataIndex}
@@ -26,11 +24,11 @@ const Table = ({ data, columns }) => (
 									render={column.render}
 								/>
 							))}
-						</tr>
+						</div>
 					)
 				})}
-			</tbody>
-		</table>
+			</div>
+		</div>
 	</div>
 )
 

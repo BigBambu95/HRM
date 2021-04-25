@@ -11,7 +11,7 @@ describe('Выпадающий список', () => {
 	it('Рендер выпадающего списка с несколькими элементами', () => {
 		const select = render(<Select items={items} />)
 		expect(select).toMatchSnapshot()
-		const result = Select.defaultProps.getSelectValue()
+		const result = Select.defaultProps.onChange()
 		expect(result).toBe(undefined)
 	})
 })

@@ -2,14 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { addTab } from 'actions'
-import {
-	Button,
-	Grid,
-	Filter,
-	FilterList,
-	Spinner,
-	ErrorIndicator,
-} from 'components'
+import { Button, Grid, Filter, FilterList, Spinner, ErrorIndicator } from 'components'
 import { dictionaryActions } from 'dictionaries'
 import actions from '../actions'
 import WorkerListItem from '../components/worker-list-item'
@@ -33,7 +26,7 @@ const WorkerListContainer = ({ match }) => {
 	}, [])
 
 	useEffect(() => {
-		dispatch(actions.workers.fetchWorkersRequest(filter))
+		dispatch(actions.fetchWorkersRequest(filter))
 	}, [filter])
 
 	const columns = match.params.id ? 1 : 2
@@ -43,14 +36,12 @@ const WorkerListContainer = ({ match }) => {
 		return (
 			<WorkerListItem
 				key={w._id}
-				item={w}
+				worker={w}
 				departments={departments}
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={(label, path, office, prevPage) =>
-					dispatch(addTab(label, path, office, prevPage))
-				}
+				addTab={(label, path, office, prevPage) => dispatch(addTab(label, path, office, prevPage))}
 			/>
 		)
 	})
@@ -75,7 +66,7 @@ const WorkerListContainer = ({ match }) => {
 					<Filter
 						label='Должность'
 						items={professions}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.workers.setFilter({
 									name: 'profession',
@@ -88,7 +79,7 @@ const WorkerListContainer = ({ match }) => {
 					<Filter
 						label='Офис'
 						items={offices}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.workers.setFilter({
 									name: 'office',
@@ -101,7 +92,7 @@ const WorkerListContainer = ({ match }) => {
 					<Filter
 						label='Отдел'
 						items={departments}
-						getSelectValue={({ _id }) =>
+						onChange={({ _id }) =>
 							dispatch(
 								actions.workers.setFilter({
 									name: 'department',

@@ -24,12 +24,7 @@ const Sidebar = ({ activeTab, history, location }) => {
 
 		return (
 			<li className={className} key={link.id}>
-				<SidebarLink
-					path={link.path}
-					icon={link.icon}
-					addTab={addTab}
-					subLinks={link.subLinks}
-				>
+				<SidebarLink path={link.path} icon={link.icon} addTab={addTab} subLinks={link.subLinks}>
 					{link.label}
 				</SidebarLink>
 			</li>
@@ -64,7 +59,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default compose(
-	withRouter,
-	connect(mapStateToProps, mapDispatchToProps)
-)(Sidebar)
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(Sidebar)
