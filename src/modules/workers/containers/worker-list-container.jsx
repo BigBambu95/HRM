@@ -36,7 +36,7 @@ const WorkerListContainer = ({ match }) => {
 		return (
 			<WorkerListItem
 				key={w._id}
-				item={w}
+				worker={w}
 				departments={departments}
 				offices={offices}
 				professions={professions}

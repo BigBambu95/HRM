@@ -3,50 +3,63 @@ import { ButtonGroup, Button, Record, TabBar, List, Row, Typography, Select } fr
 import { BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon, RemoveBasketIcon } from 'svg'
 import { ToolBar, ToolBarGroupItem } from 'components/tool-bar'
 import { getDictionaryValueById } from 'helpers/dictionaries'
-
 import WorkerStatus from '../worker-status'
 
-const WorkerDetails = ({ worker, closeWorker, departments, offices, professions }) => {
+export interface WorkerDetailsProps {
+	worker: Worker;
+	departments: Departments;
+	offices: Offices;
+	professions: Professions;
+	closeWorker: () => void;
+}
+
+// MockData
+const history = [
+	{
+		_id: '1',
+		name: 'Увеличили часовую ставку',
+		date: '15.11.18',
+	},
+	{
+		_id: '2',
+		name: 'Прошел испытательный срок',
+		date: '15.11.18',
+	},
+	{
+		_id: '3',
+		name: 'Устроился на работу',
+		date: '15.09.18',
+	},
+]
+
+// MockData
+const documents: Documents = [
+	{
+		_id: '1',
+		name: 'Тестовая работа',
+	},
+	{
+		_id: '2',
+		name: 'Анкета',
+	},
+	{
+		_id: '3',
+		name: 'Резюме',
+	},
+	{
+		_id: 4,
+		name: 'Портфолио',
+	},
+]
+
+const WorkerDetails: React.FC<WorkerDetailsProps> = ({
+	worker,
+	closeWorker,
+	departments,
+	offices,
+	professions,
+}) => {
 	const { name, profession, office, email, phone, department, avatar, status, tags } = worker
-
-	// MockData
-	const history = [
-		{
-			_id: '1',
-			name: 'Увеличили часовую ставку',
-			date: '15.11.18',
-		},
-		{
-			_id: '2',
-			name: 'Прошел испытательный срок',
-			date: '15.11.18',
-		},
-		{
-			_id: '3',
-			name: 'Устроился на работу',
-			date: '15.09.18',
-		},
-	]
-
-	// MockData
-	const documents = [
-		{
-			_id: '1',
-			name: 'Тестовая работа',
-		},
-		{
-			_id: '2',
-			name: 'Анкета',
-		},
-		{
-			_id: '3',
-			name: 'Резюме',
-		},
-		{
-			_id: 4,
-			name: 'Портфолио',
-		},
-	]
 
 	return (
 		<div className='worker-details'>
@@ -122,13 +135,13 @@ const WorkerDetails = ({ worker, closeWorker, departments, offices, professions 
 					<div className='worker-details__content__actions'>
 						<WorkerStatus color={status}>На работе</WorkerStatus>
 						<ButtonGroup className='worker-details__content__actions__btn-group' vertical>
-							<Button variant='outlined' color='green' width='100%' size='large'>
+							<Button variant='outlined' color='green' fullWidth size='large'>
 								Премировать
 							</Button>
-							<Button variant='outlined' color='red' width='100%' size='large'>
+							<Button variant='outlined' color='red' fullWidth size='large'>
 								Оштрафовать
 							</Button>
-							<Button variant='outlined' color='aqua' width='100%' size='large'>
+							<Button variant='outlined' color='aqua' fullWidth size='large'>
 								В отпуск
 							</Button>
 							<Button color='red' variant='text'>
@@ -171,10 +184,6 @@ const WorkerDetails = ({ worker, closeWorker, departments, offices, professions 
 			</div>
 		</div>
 	)
-}
-
-WorkerDetails.defaultProps = {
-	worker: {},
 }
 
 export default WorkerDetails

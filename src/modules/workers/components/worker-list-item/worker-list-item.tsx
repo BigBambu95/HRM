@@ -1,10 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, match } from 'react-router-dom'
 import { Record, Typography } from 'components'
 import { getDictionaryValueById } from 'helpers/dictionaries'
 
-const WorkerListItem = ({ item, addTab, match, departments, offices, professions }) => {
-	const { _id, name, department, phone, email, office, profession, avatar, status } = item
+export interface WorkerListItemProps {
+	worker: Worker;
+	addTab: (label: string, path: string, office: string, prevPage?: string) => void;
+	match: match<Record<'id', string>>;
+}
+
+const WorkerListItem: React.FC<PropsWithDictionaries<WorkerListItemProps>> = ({
+	worker,
+	addTab,
+	match,
+	departments,
+	offices,
+	professions,
+}) => {
+	const { _id, name, department, phone, email, office, profession, avatar, status } = worker
 
 	const clazz =
 		match.params.id === _id ? `worker-list__item ${status} active` : `worker-list__item ${status}`

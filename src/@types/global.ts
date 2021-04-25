@@ -6,3 +6,8 @@ interface Tab {
 }
 
 type Tabs = Array<Tab>
+
+interface BaseState {
+	loading: boolean;
+	error: boolean | null;
+}

@@ -1,21 +1,12 @@
 import React, { HTMLAttributes } from 'react'
 import classnames from 'classnames'
 
-export interface ListItemProps<T> extends HTMLAttributes<HTMLDivElement> {
-	_id: string;
-}
-
 export interface ListProps<T> extends HTMLAttributes<HTMLDivElement> {
-	items: Array<ListItemProps<T>>;
-	renderItem: (item: ListItemProps<T>) => JSX.Element;
+	items: Array<T>;
+	renderItem: (item: T) => JSX.Element;
 }
 
-function List<T>({
-	items,
-	className,
-	renderItem,
-	...otherProps
-}: ListProps<T>) {
+function List<T extends Record<'_id', React.Key>>({ items, className, renderItem, ...otherProps }: ListProps<T>) {
 	const listClasses = classnames('list', className)
 
 	return (
