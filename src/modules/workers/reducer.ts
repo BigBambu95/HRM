@@ -1,6 +1,6 @@
 import { Action, handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
-import WorkerTypes from './types'
+import { FETCH_WORKERS, FETCH_WORKER_SALARY, FETCH_WORKER, SET_FILTER } from './types'
 
 export type FilterType = Record<string, string>
 
@@ -28,30 +28,30 @@ const initialState: WorkersListState = {
 
 const workersList = handleActions(
 	{
-		[REQUEST(WorkerTypes.FETCH_WORKERS)]: (state) => ({
+		[REQUEST(FETCH_WORKERS)]: (state) => ({
 			...state,
 			workers: [],
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(WorkerTypes.FETCH_WORKERS)]: (state, action: Action<Workers>) => ({
+		[SUCCESS(FETCH_WORKERS)]: (state, action: Action<Workers>) => ({
 			...state,
 			workers: action.payload,
 			loading: false,
 			error: null,
 		}),
-		[FAILURE(WorkerTypes.FETCH_WORKERS)]: (state) => ({
+		[FAILURE(FETCH_WORKERS)]: (state) => ({
 			...state,
 			workers: [],
 			loading: false,
 			error: true,
 		}),
-		[REQUEST(WorkerTypes.FETCH_WORKER)]: (state) => ({
+		[REQUEST(FETCH_WORKER)]: (state) => ({
 			...state,
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(WorkerTypes.FETCH_WORKER)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
+		[SUCCESS(FETCH_WORKER)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
 			...state,
 			worker: {
 				...state.worker,
@@ -60,7 +60,7 @@ const workersList = handleActions(
 			loading: false,
 			error: null,
 		}),
-		[FAILURE(WorkerTypes.FETCH_WORKER)]: (state) => ({
+		[FAILURE(FETCH_WORKER)]: (state) => ({
 			...state,
 			worker: {
 				salary: [],
@@ -68,12 +68,12 @@ const workersList = handleActions(
 			loading: false,
 			error: true,
 		}),
-		[REQUEST(WorkerTypes.FETCH_WORKER_SALARY)]: (state) => ({
+		[REQUEST(FETCH_WORKER_SALARY)]: (state) => ({
 			...state,
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(WorkerTypes.FETCH_WORKER_SALARY)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
+		[SUCCESS(FETCH_WORKER_SALARY)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
 			...state,
 			worker: {
 				...state.worker,
@@ -82,7 +82,7 @@ const workersList = handleActions(
 			loading: false,
 			error: null,
 		}),
-		[FAILURE(WorkerTypes.FETCH_WORKER_SALARY)]: (state) => ({
+		[FAILURE(FETCH_WORKER_SALARY)]: (state) => ({
 			...state,
 			worker: {
 				...state.worker,
@@ -92,7 +92,7 @@ const workersList = handleActions(
 			error: true,
 		}),
 		//@ts-ignore
-		[WorkerTypes.SET_FILTER]: (state, action: Action<FilterType>) => ({
+		[SET_FILTER]: (state, action: Action<FilterType>) => ({
 			...state,
 			filter: {
 				...state.filter,

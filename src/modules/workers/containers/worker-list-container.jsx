@@ -26,7 +26,7 @@ const WorkerListContainer = ({ match }) => {
 	}, [])
 
 	useEffect(() => {
-		dispatch(actions.workers.fetchWorkersRequest(filter))
+		dispatch(actions.fetchWorkersRequest(filter))
 	}, [filter])
 
 	const columns = match.params.id ? 1 : 2

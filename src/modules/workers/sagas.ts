@@ -11,9 +11,9 @@ function* fetchWorkers({ payload }) {
 		console.log(payload)
 		const query = createQueryString(payload)
 		const workers = yield call(Api.get, `/workers/${query}`)
-		yield put(actions.workers.fetchWorkersSuccess(workers.data))
+		yield put(actions.fetchWorkersSuccess(workers.data))
 	} catch (err) {
-		yield put(actions.workers.fetchWorkersFailure(err))
+		yield put(actions.fetchWorkersFailure(err))
 	}
 }
 
@@ -25,9 +25,9 @@ function* watchFetchWorkers() {
 function* fetchWorker({ payload }) {
 	try {
 		const worker = yield call(Api.get, `/workers/${payload}`)
-		yield put(actions.workers.fetchWorkerSuccess(worker.data))
+		yield put(actions.fetchWorkerSuccess(worker.data))
 	} catch (err) {
-		yield put(actions.workers.fetchWorkerFailure(err))
+		yield put(actions.fetchWorkerFailure(err))
 	}
 }
 
@@ -39,9 +39,9 @@ function* watchFetchWorker() {
 function* fetchWorkerSalary({ payload }) {
 	try {
 		const salary = yield call(Api.get, `/salaries/${payload}?month=July&year=2020`)
-		yield put(actions.workers.fetchWorkerSalarySuccess(salary.data))
+		yield put(actions.fetchWorkerSalarySuccess(salary.data))
 	} catch (err) {
-		yield put(actions.workers.fetchWorkerSalaryFailure(err))
+		yield put(actions.fetchWorkerSalaryFailure(err))
 	}
 }
 

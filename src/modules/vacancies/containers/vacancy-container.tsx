@@ -50,7 +50,7 @@ const VacancyContainer = ({ history, match }) => {
 	]
 
 	useEffect(() => {
-		dispatch(actions.vacancies.fetchVacancyRequest(match.params.id))
+		dispatch(actions.fetchVacancyRequest(match.params.id))
 	}, [])
 
 	const deleteVacancy = () => {
