@@ -71,7 +71,7 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }) => {
 						</Form.Item>
 					</Col>
 				</Row>
-				<h4 style={{ marginTop: "32px" }}>Контактная информация</h4>
+				<h4 style={{ marginTop: '32px' }}>Контактная информация</h4>
 				<Row justify='space-between' gutter={[20, 20]}>
 					<Col size={12}>
 						<Form.Item>
@@ -84,7 +84,7 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }) => {
 						</Form.Item>
 					</Col>
 				</Row>
-				<h4 style={{ marginTop: "32px" }}>Рабочие моменты</h4>
+				<h4 style={{ marginTop: '32px' }}>Рабочие моменты</h4>
 				<Row justify='space-between' gutter={[20, 20]}>
 					<Col size={12}>
 						<Form.Item>

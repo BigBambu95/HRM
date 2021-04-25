@@ -2,7 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { addTab } from 'actions'
-import { Button, Grid, Filter, FilterList, Spinner, ErrorIndicator } from 'components'
+import {
+	Button,
+	Grid,
+	Filter,
+	FilterList,
+	Spinner,
+	ErrorIndicator,
+} from 'components'
 import { dictionaryActions } from 'dictionaries'
 import actions from '../actions'
 import WorkerListItem from '../components/worker-list-item'
@@ -41,9 +48,9 @@ const WorkerListContainer = ({ match }) => {
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={(label, path, office, prevPage) => (
+				addTab={(label, path, office, prevPage) =>
 					dispatch(addTab(label, path, office, prevPage))
-				)}
+				}
 			/>
 		)
 	})
