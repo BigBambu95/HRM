@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export default axios.create({
-	baseURL: 'http://localhost:8080/api/',
+	// baseURL: 'https://hrmapi2020.herokuapp.com/api/',
+	baseURL: 'http://localhost:8080/api',
 	responseType: 'json',
 })

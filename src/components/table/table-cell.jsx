@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TableCell = ({ render, record }) => <div className='table-cell'>{render(record) || record}</div>
+const TableCell = ({ render, record }) => (
+	<div className='table-cell'>{render(record) || record}</div>
+)
 
 TableCell.propTypes = {
 	record: PropTypes.string,

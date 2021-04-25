@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import React, { ForwardRefRenderFunction, InputHTMLAttributes, ReactNode } from 'react'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -5,13 +6,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-	{ name, rightIcon, style },
+	{ name, rightIcon, style, className, placeholder, ...props },
 	ref
 ) => {
 	return (
-		<div className='input' style={style}>
-			<input ref={ref} type='text' name={name} className='input__field' />
-			<span className='input__right-icon'>{rightIcon}</span>
+		<div className={classnames('input', className)} style={style}>
+			<input {...props} ref={ref} type='text' name={name} className='input__field' required />
+			{placeholder && <span className='input__placeholder'>{placeholder}</span>}
+			{rightIcon && <span className='input__right-icon'>{rightIcon}</span>}
 		</div>
 	)
 }

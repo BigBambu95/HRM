@@ -20,16 +20,24 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 }) => {
 	const [term, onChangeTerm] = useState()
 	const { register, errors, handleSubmit, control } = useForm()
+	const [profession, setProfession] = useState()
+	const [office, setOffice] = useState()
 
 	const onSubmit = (data) => {
 		setIsOpenModal(false)
-		return dispatch(actions.vacancies.addVacancyRequest(data))
+		return dispatch(
+			actions.addVacancyRequest({
+				...data,
+				profession,
+				office,
+			})
+		)
 	}
 
 	return (
 		<Modal
 			title='Создать вакансию'
-			width={843}
+			width={840}
 			className='vacancy-list__modal-window'
 			isOpen={isOpenModal}
 			onCancel={() => setIsOpenModal(false)}
@@ -38,10 +46,20 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 		>
 			<Form>
 				<Form.Item validation={errors.profession} label='Специальность'>
-					<Select items={vacancyTemplates} name='profession' ref={register({ required: true })} />
+					<Select
+						items={vacancyTemplates}
+						name='profession'
+						ref={register({ required: true })}
+						onChange={({ _id }) => setProfession(_id)}
+					/>
 				</Form.Item>
 				<Form.Item validation={errors.office} label='Офис'>
-					<Select items={offices} name='office' ref={register({ required: true })} />
+					<Select
+						items={offices}
+						name='office'
+						ref={register({ required: true })}
+						onChange={({ _id }) => setOffice(_id)}
+					/>
 				</Form.Item>
 				<Row justify='space-between'>
 					<Form.Item validation={errors.date} label='Крайний срок'>
@@ -50,7 +68,12 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 							control={control}
 							rules={{ required: true }}
 							render={(props) => (
-								<DatePicker format='dd.MM.yy' {...props} value={term} onChange={onChangeTerm} />
+								<DatePicker
+									format='dd.MM.yy'
+									{...props}
+									value={term}
+									onChange={onChangeTerm}
+								/>
 							)}
 						/>
 					</Form.Item>
