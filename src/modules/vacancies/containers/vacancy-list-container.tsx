@@ -21,13 +21,13 @@ const VacancyListContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
-		dispatch(actions.vacancies.fetchVacanciesRequest())
+		dispatch(actions.fetchVacanciesRequest())
 		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchProfessionsRequest())
 	}, [])
 
 	useEffect(() => {
-		dispatch(actions.vacancies.fetchVacanciesRequest(filter))
+		dispatch(actions.fetchVacanciesRequest(filter))
 	}, [filter])
 
 	const vacancyList = vacancies.map((vacancy: Vacancy) => (
@@ -37,7 +37,7 @@ const VacancyListContainer = () => {
 			offices={offices}
 			professions={professions}
 			addTab={(label, path, office, prevPage) => dispatch(addTab(label, path, office, prevPage))}
-			deleteItem={(id) => dispatch(actions.vacancies.removeVacancyRequest(id))}
+			deleteItem={(id) => dispatch(actions.removeVacancyRequest(id))}
 		/>
 	))
 

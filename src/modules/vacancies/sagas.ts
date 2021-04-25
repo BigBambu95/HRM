@@ -4,7 +4,7 @@ import { REQUEST } from 'helpers/redux'
 import { createQueryString } from 'helpers/sagas'
 import { Toast } from 'components'
 import actions from './actions'
-import VacancyTypes from './types'
+import { FETCH_VACANCY, FETCH_VACANCIES, ADD_VACANCY, REMOVE_VACANCY } from './types'
 import { Action } from 'redux-actions'
 
 function* fetchVacancies(action: Action<ANY_MIGRATION_TYPE>): ANY_MIGRATION_TYPE {
@@ -18,7 +18,7 @@ function* fetchVacancies(action: Action<ANY_MIGRATION_TYPE>): ANY_MIGRATION_TYPE
 }
 
 function* watchFetchVacancies() {
-	yield takeEvery(REQUEST(VacancyTypes.FETCH_VACANCIES), fetchVacancies)
+	yield takeEvery(REQUEST(FETCH_VACANCIES), fetchVacancies)
 }
 
 function* fetchVacancy(action: Action<string>): ANY_MIGRATION_TYPE {
@@ -31,7 +31,7 @@ function* fetchVacancy(action: Action<string>): ANY_MIGRATION_TYPE {
 }
 
 function* watchfetchVacancy() {
-	yield takeEvery(REQUEST(VacancyTypes.FETCH_VACANCY), fetchVacancy)
+	yield takeEvery(REQUEST(FETCH_VACANCY), fetchVacancy)
 }
 
 function* addVacancy(action: Action<Vacancy>): ANY_MIGRATION_TYPE {
@@ -46,7 +46,7 @@ function* addVacancy(action: Action<Vacancy>): ANY_MIGRATION_TYPE {
 }
 
 function* watchAddVacancy() {
-	yield takeEvery(REQUEST(VacancyTypes.ADD_VACANCY), addVacancy)
+	yield takeEvery(REQUEST(ADD_VACANCY), addVacancy)
 }
 
 function* removeVacancy(action: Action<string>): ANY_MIGRATION_TYPE {
@@ -63,7 +63,7 @@ function* removeVacancy(action: Action<string>): ANY_MIGRATION_TYPE {
 }
 
 function* watchRemoveVacancy() {
-	yield takeEvery(REQUEST(VacancyTypes.REMOVE_VACANCY), removeVacancy)
+	yield takeEvery(REQUEST(REMOVE_VACANCY), removeVacancy)
 }
 
 export default function* rootSaga() {

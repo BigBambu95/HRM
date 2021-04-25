@@ -8,6 +8,7 @@ import { FETCH_WORKER, FETCH_WORKERS, FETCH_WORKER_SALARY } from './types'
 // Загрузка списка сотрудников
 function* fetchWorkers({ payload }) {
 	try {
+		console.log(payload)
 		const query = createQueryString(payload)
 		const workers = yield call(Api.get, `/workers/${query}`)
 		yield put(actions.workers.fetchWorkersSuccess(workers.data))
@@ -37,10 +38,7 @@ function* watchFetchWorker() {
 // Загрузка данных по зарплате сотрудника
 function* fetchWorkerSalary({ payload }) {
 	try {
-		const salary = yield call(
-			Api.get,
-			`/salaries/${payload}?month=July&year=2020`
-		)
+		const salary = yield call(Api.get, `/salaries/${payload}?month=July&year=2020`)
 		yield put(actions.workers.fetchWorkerSalarySuccess(salary.data))
 	} catch (err) {
 		yield put(actions.workers.fetchWorkerSalaryFailure(err))

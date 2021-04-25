@@ -1,10 +1,5 @@
-const enum VacancyTypes {
-	FETCH_VACANCIES = 'vacancies/FETCH_VACANCIES',
-	FETCH_VACANCY = 'vacancies/FETCH_VACANCY',
-	ADD_VACANCY = 'vacancies/ADD_VACANCY',
-	REMOVE_VACANCY = 'vacancies/REMOVE_VACANCY',
-	SET_FILTER = 'vacancies/SET_FILTER',
-}
-
-
-export default VacancyTypes
+export const FETCH_VACANCIES = 'FETCH_VACANCIES'
+export const FETCH_VACANCY = 'FETCH_VACANCY'
+export const ADD_VACANCY = 'ADD_VACANCY'
+export const REMOVE_VACANCY = 'REMOVE_VACANCY'
+export const SET_FILTER = 'SET_FILTER'
