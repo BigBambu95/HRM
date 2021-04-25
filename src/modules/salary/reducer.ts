@@ -1,11 +1,17 @@
-import { handleActions } from 'redux-actions'
+import { Action, handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import { FETCH_SALARY } from './types'
 
-const initialState = {
+export interface SalaryListState extends BaseState {
+	salaries: Salaries;
+	sort: string;
+	filter: FilterType;
+}
+
+const initialState: SalaryListState = {
 	salaries: [],
 	filter: {
-		month: null,
+		month: '',
 		profession: 'Все',
 		office: 'Все',
 		department: 'Все',
@@ -23,17 +29,17 @@ const salaryList = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(FETCH_SALARY)]: (state, { payload }) => ({
+		[SUCCESS(FETCH_SALARY)]: (state, action: Action<Salaries>) => ({
 			...state,
-			salaries: payload,
+			salaries: action.payload,
 			loading: false,
 			error: null,
 		}),
-		[FAILURE(FETCH_SALARY)]: (state, { payload }) => ({
+		[FAILURE(FETCH_SALARY)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
 			...state,
 			salaries: [],
 			loading: false,
-			error: payload,
+			error: action.payload,
 		}),
 	},
 	initialState

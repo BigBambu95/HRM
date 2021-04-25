@@ -11,3 +11,5 @@ interface BaseState {
 	loading: boolean;
 	error: boolean | null;
 }
+
+type FilterType = Record<string, string>
