@@ -47,20 +47,24 @@ const SalaryContainer = () => {
 		<>
 			<ToolBar>
 				<FilterList>
-					<Filter items={months} filter={() => {}} icon={<CalendarIcon />} />
-					<Filter
+					<Filter 
+						items={months}
+						filter={() => {}}
+						icon={<CalendarIcon />}
+					/>
+					<Filter 
 						label='Офис'
 						items={offices}
 						filter={() => {}}
 						defaultValue='Все'
 					/>
-					<Filter
+					<Filter 
 						label='Отдел'
 						items={departments}
 						filter={() => {}}
 						defaultValue='Все'
 					/>
-					<Filter
+					<Filter 
 						label='Должность'
 						items={professions}
 						filter={() => {}}

@@ -1,0 +1,7 @@
+enum DictionariesTypes {
+	FETCH_OFFICES = 'FETCH_OFFICES',
+	FETCH_PROFESSIONS = 'FETCH_PROFESSIONS',
+	FETCH_DEPARTMENTS = 'FETCH_DEPARTMENTS',
+}
+
+export default DictionariesTypes

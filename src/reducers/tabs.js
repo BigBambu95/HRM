@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { handleActions } from 'redux-actions'
 
 const updateObjectInArray = (array, payload, index) =>

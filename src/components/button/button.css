@@ -90,3 +90,7 @@
     color: var(--gray) !important;
     cursor: not-allowed;
 }
+
+.btn.fullWidth {
+    width: 100%;
+}
