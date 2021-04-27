@@ -2,16 +2,6 @@ import { Action, handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import { FETCH_WORKERS, FETCH_WORKER_SALARY, FETCH_WORKER, SET_FILTER } from './types'
 
-export type FilterType = Record<string, string>
-
-export interface WorkersListState extends BaseState {
-	workers: Workers;
-	worker: {
-		salary: ANY_MIGRATION_TYPE,
-	};
-	filter: FilterType;
-}
-
 const initialState: WorkersListState = {
 	workers: [],
 	worker: {

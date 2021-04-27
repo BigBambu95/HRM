@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'reducers'
 import { addTab } from 'actions'
 import { ToolBar } from 'components/tool-bar'
 import { Grid, Button, Spinner, Filter, FilterList, ErrorIndicator } from 'components'
@@ -59,12 +60,17 @@ const VacancyListContainer = () => {
 				<FilterList>
 					<Filter
 						label='Должность'
-						items={professions}
-						onChange={({ _id }) =>
+						items={professions.map(({ _id, name }) => {
+							return {
+								id: _id,
+								value: name,
+							}
+						})}
+						onChange={({ value }) =>
 							dispatch(
 								actions.setFilter({
 									name: 'profession',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}
@@ -72,12 +78,17 @@ const VacancyListContainer = () => {
 					/>
 					<Filter
 						label='Офис'
-						items={offices}
-						onChange={({ _id }) =>
+						items={offices.map(({ _id, name }) => {
+							return {
+								id: _id,
+								value: name,
+							}
+						})}
+						onChange={({ value }) =>
 							dispatch(
 								actions.setFilter({
 									name: 'office',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}

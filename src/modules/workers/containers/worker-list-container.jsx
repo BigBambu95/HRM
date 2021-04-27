@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'reducers'
 import { addTab } from 'actions'
 import {
 	Button,
@@ -27,7 +27,6 @@ const WorkerListContainer = ({ match }) => {
 	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
-		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchProfessionsRequest())
 		dispatch(dictionaryActions.fetchDepartmentsRequest())
 	}, [])

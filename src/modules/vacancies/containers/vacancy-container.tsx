@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { compose } from 'redux'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'reducers'
 import { withRouter } from 'react-router-dom'
-
 import { Grid, Button, Spinner, FilterList, Filter } from 'components'
-
 import { PencilIcon, RemoveBasketIcon } from 'svg'
 import ErrorIndicator from 'components/error-indicator'
 import {
@@ -14,7 +13,6 @@ import {
 	selectReviewSummaryCandidates,
 	selectFinalCandidates,
 } from '../selectors'
-
 import actions from '../actions'
 import { CandidateList, AddSummaryForm } from '../components'
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
@@ -54,10 +52,10 @@ const VacancyContainer = ({ history, match }) => {
 
 	useEffect(() => {
 		dispatch(actions.fetchVacancyRequest(match.params.id))
-	}, [])
+	}, [match.params.id])
 
 	const deleteVacancy = () => {
-		dispatch(actions.removeVacancy(match.params.id))
+		dispatch(actions.removeVacancyRequest(match.params.id))
 		history.push('/vacancies/')
 	}
 
@@ -76,30 +74,24 @@ const VacancyContainer = ({ history, match }) => {
 					<Filter
 						label='Возраст'
 						items={candidates}
-						onChange={(value) => dispatch(actions.vacancies.setFilter({ name: 'age', value }))}
+						onChange={({ value }) => dispatch(actions.setFilter({ name: 'age', value }))}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Опыт'
 						items={candidates}
-						onChange={(value) => dispatch(actions.vacancies.setFilter({ name: 'exp', value }))}
+						onChange={({ value }) => dispatch(actions.setFilter({ name: 'exp', value }))}
 						defaultValue='Все'
 					/>
 					<Filter
 						label='Желаемая з/п'
 						items={candidates}
-						onChange={(value) =>
-							dispatch(actions.vacancies.setFilter({ name: 'desiredSalary', value }))
-						}
+						onChange={({ value }) => dispatch(actions.setFilter({ name: 'desiredSalary', value }))}
 						defaultValue='Все'
 					/>
 				</FilterList>
 				<ToolBarGroupItem>
-					<Button
-						variant='outlined'
-						color='purple'
-						onClick={() => setIsOpenModal(true)}
-					>
+					<Button variant='outlined' color='purple' onClick={() => setIsOpenModal(true)}>
 						Добавить резюме
 					</Button>
 					<Button variant='icon'>
@@ -115,10 +107,7 @@ const VacancyContainer = ({ history, match }) => {
 					return <CandidateList key={props.title} {...props} />
 				})}
 			</Grid>
-			<AddSummaryForm
-				isOpenModal={isOpenModal}
-				setIsOpenModal={setIsOpenModal}
-			/>
+			<AddSummaryForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
 		</>
 	)
 }

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'reducers'
 import { withRouter } from 'react-router-dom'
 import { Spinner } from 'components'
 import ErrorIndicator from 'components/error-indicator'
