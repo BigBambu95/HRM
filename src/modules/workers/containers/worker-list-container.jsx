@@ -11,6 +11,7 @@ import {
 	ErrorIndicator,
 } from 'components'
 import { dictionaryActions } from 'dictionaries'
+import { transformDictionaryValues } from 'helpers/dictionaries'
 import actions from '../actions'
 import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
@@ -73,12 +74,12 @@ const WorkerListContainer = ({ match }) => {
 				<FilterList>
 					<Filter
 						label='Должность'
-						items={professions}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(professions)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.workers.setFilter({
+								actions.setFilter({
 									name: 'profession',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}
@@ -86,12 +87,12 @@ const WorkerListContainer = ({ match }) => {
 					/>
 					<Filter
 						label='Офис'
-						items={offices}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(offices)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.workers.setFilter({
+								actions.setFilter({
 									name: 'office',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}
@@ -99,12 +100,12 @@ const WorkerListContainer = ({ match }) => {
 					/>
 					<Filter
 						label='Отдел'
-						items={departments}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(departments)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.workers.setFilter({
+								actions.setFilter({
 									name: 'department',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}

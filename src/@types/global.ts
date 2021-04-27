@@ -35,21 +35,8 @@ interface WorkersListState extends BaseState {
 	filter: FilterType;
 }
 
-interface DictionariesState {
+interface DictionariesState extends BaseState {
 	offices: Offices;
 	professions: Professions;
 	departments: Departments;
-	loading: boolean;
-	error: boolean | null;
-}
-
-interface GlobalState {
-	workerList: WorkersListState;
-	documentList: ANY_MIGRATION_TYPE;
-	vacancyList: VacancyListState;
-	salaryList: ANY_MIGRATION_TYPE;
-	candidateList: ANY_MIGRATION_TYPE;
-	menu: ANY_MIGRATION_TYPE;
-	tabList: ANY_MIGRATION_TYPE;
-	dictionaries: DictionariesState;
 }

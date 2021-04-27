@@ -7,6 +7,7 @@ import { Grid, Button, Spinner, Filter, FilterList, ErrorIndicator } from 'compo
 import { dictionaryActions } from 'dictionaries'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
+import { transformDictionaryValues } from 'helpers/dictionaries'
 
 const VacancyListContainer = () => {
 	// Redux
@@ -60,12 +61,7 @@ const VacancyListContainer = () => {
 				<FilterList>
 					<Filter
 						label='Должность'
-						items={professions.map(({ _id, name }) => {
-							return {
-								id: _id,
-								value: name,
-							}
-						})}
+						items={transformDictionaryValues(professions)}
 						onChange={({ value }) =>
 							dispatch(
 								actions.setFilter({
@@ -78,12 +74,7 @@ const VacancyListContainer = () => {
 					/>
 					<Filter
 						label='Офис'
-						items={offices.map(({ _id, name }) => {
-							return {
-								id: _id,
-								value: name,
-							}
-						})}
+						items={transformDictionaryValues(offices)}
 						onChange={({ value }) =>
 							dispatch(
 								actions.setFilter({
