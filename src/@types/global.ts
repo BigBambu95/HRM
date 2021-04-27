@@ -13,3 +13,7 @@ interface BaseState {
 }
 
 type FilterType = Record<string, string>
+
+type SetFilterParamsType = Record<'name' | 'value', string>
+
+type ErrorType = boolean | null

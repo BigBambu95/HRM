@@ -3,9 +3,7 @@ import { compose } from 'redux'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeTab } from 'actions'
-import { BellIcon, ChatIcon, SearchIcon } from 'svg'
-import Logo from './logo'
-import MenuIcon from './menu'
+import { BellIcon, ChatIcon, SearchIcon, LogoIcon, MenuIcon } from 'svg'
 import PageTabList from '../page-tab-list'
 
 export interface HeaderProps {
@@ -21,7 +19,7 @@ const Header: React.FC<HeaderProps> = (props) => (
 		<div style={{ display: 'flex' }}>
 			<MenuIcon />
 			<Link to='/' className='header__logo'>
-				<Logo />
+				<LogoIcon />
 			</Link>
 		</div>
 		<div className='header__tabs'>

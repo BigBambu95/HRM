@@ -6,7 +6,7 @@ const Logo = ({ fill = '#000', width = 78, height = 26 }) => (
 		width={width}
 		height={height}
 		viewBox='0 0 78 26'
-		file='none'
+		fill='none'
 		xmlns='http://www.w3.org/2000/svg'
 	>
 		<path

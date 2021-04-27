@@ -47,3 +47,5 @@ export {
 }
 
 export { default as TagIcon } from './tag-icon'
+export { default as LogoIcon } from './logo'
+export { default as MenuIcon } from './menu'

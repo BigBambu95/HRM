@@ -21,7 +21,6 @@ const VacancyListContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
-		dispatch(actions.fetchVacanciesRequest())
 		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchProfessionsRequest())
 	}, [])
@@ -63,7 +62,7 @@ const VacancyListContainer = () => {
 						items={professions}
 						onChange={({ _id }) =>
 							dispatch(
-								actions.vacancies.setFilter({
+								actions.setFilter({
 									name: 'profession',
 									value: _id ?? 'Все',
 								})
@@ -76,7 +75,7 @@ const VacancyListContainer = () => {
 						items={offices}
 						onChange={({ _id }) =>
 							dispatch(
-								actions.vacancies.setFilter({
+								actions.setFilter({
 									name: 'office',
 									value: _id ?? 'Все',
 								})

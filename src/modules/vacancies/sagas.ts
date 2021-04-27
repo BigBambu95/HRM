@@ -4,17 +4,10 @@ import { REQUEST } from 'helpers/redux'
 import { createQueryString } from 'helpers/sagas'
 import { Toast } from 'components'
 import actions from './actions'
-import {
-	FETCH_VACANCY,
-	FETCH_VACANCIES,
-	ADD_VACANCY,
-	REMOVE_VACANCY,
-} from './types'
+import { FETCH_VACANCY, FETCH_VACANCIES, ADD_VACANCY, REMOVE_VACANCY } from './types'
 import { Action } from 'redux-actions'
 
-function* fetchVacancies(
-	action: Action<ANY_MIGRATION_TYPE>
-): ANY_MIGRATION_TYPE {
+function* fetchVacancies(action: Action<FilterType>): ANY_MIGRATION_TYPE {
 	try {
 		const query = createQueryString(action.payload)
 		const vacancies = yield call(Api.get, `/vacancies/${query}`)
@@ -54,7 +47,7 @@ function* addVacancy(action: Action<Vacancy>): ANY_MIGRATION_TYPE {
 }
 
 function* watchAddVacancy() {
-	yield takeEvery(REQUEST(ADD_VACANCY), addVacancy)
+	yield takeEvery(REQUEST(ADD_VACANCY), actions.addVacancyRequest)
 }
 
 function* removeVacancy(action: Action<string>): ANY_MIGRATION_TYPE {
@@ -75,10 +68,5 @@ function* watchRemoveVacancy() {
 }
 
 export default function* rootSaga() {
-	yield all([
-		watchFetchVacancies(),
-		watchfetchVacancy(),
-		watchAddVacancy(),
-		watchRemoveVacancy(),
-	])
+	yield all([watchFetchVacancies(), watchfetchVacancy(), watchAddVacancy(), watchRemoveVacancy()])
 }

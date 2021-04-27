@@ -8,7 +8,7 @@ export interface VacancyState {
 		candidates: Candidates | [],
 		filter: Record<string, string>,
 	};
-	filter: Record<string, string>;
+	filter: FilterType;
 	loading: boolean;
 	error: boolean | null;
 }
@@ -109,9 +109,7 @@ const vacancyList = handleActions(
 			...state,
 			vacancy: {
 				...state.vacancy,
-				candidates: state.vacancy.candidates.filter(
-					(candidate) => !action.payload.includes(candidate)
-				),
+				candidates: state.vacancy.candidates.filter((candidate) => !action.payload.includes(candidate)),
 			},
 		}),
 	},

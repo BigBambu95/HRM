@@ -1,7 +1,12 @@
 import React from 'react'
 import { Typography } from 'components/index'
 
-const Statistic = ({ title, value }) => {
+export interface StatisticProps {
+	title: string;
+	value: string;
+}
+
+const Statistic: React.FC<StatisticProps> = ({ title, value }) => {
 	return (
 		<div className='statistic'>
 			<Typography.Text type='secondary'>{title}</Typography.Text>
