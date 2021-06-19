@@ -27,14 +27,6 @@ interface VacancyListState extends BaseState {
 	filter: FilterType;
 }
 
-interface WorkersListState extends BaseState {
-	workers: Workers;
-	worker: {
-		salary: ANY_MIGRATION_TYPE,
-	};
-	filter: FilterType;
-}
-
 interface DictionariesState extends BaseState {
 	offices: Offices;
 	professions: Professions;

@@ -1,5 +1,5 @@
-import Sidebar from './sidebar';
+import Sidebar from './sidebar'
 
-import './sidebar.css';
+import './sidebar.css'
 
-export default Sidebar;
+export default Sidebar

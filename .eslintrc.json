@@ -33,7 +33,6 @@
 		"react/jsx-indent": "off",
 		"react/jsx-indent-props": "off",
 		"react/jsx-curly-newline": "off",
-		"react/jsx-max-props-per-line": ["error", { "maximum": 1, "when": "always" }],
 		"react/button-has-type": "off",
 		"react/require-default-props": "off",
 		"react/forbid-prop-types": "off",

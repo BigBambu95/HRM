@@ -8,7 +8,7 @@
   "ignoreFiles": ["**/*.tsx"],
   "rules": {
     "indentation": 4,
-    "number-leading-zero": "never",
+    "number-leading-zero": null,
     "order/properties-order": [
       [
         "position",

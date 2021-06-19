@@ -2,14 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'reducers'
 import { addTab } from 'actions'
-import {
-	Button,
-	Grid,
-	Filter,
-	FilterList,
-	Spinner,
-	ErrorIndicator,
-} from 'components'
+import { Button, Grid, Filter, FilterList, Spinner, ErrorIndicator } from 'components'
 import { dictionaryActions } from 'dictionaries'
 import { transformDictionaryValues } from 'helpers/dictionaries'
 import actions from '../actions'
@@ -48,8 +41,9 @@ const WorkerListContainer = ({ match }) => {
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={(label, path, office, prevPage) =>
-					dispatch(addTab(label, path, office, prevPage))
+				addTab={
+					(label, path, office, prevPage) =>
+						dispatch(addTab(label, path, office, prevPage))
 				}
 			/>
 		)
@@ -59,7 +53,10 @@ const WorkerListContainer = ({ match }) => {
 		workers.length === 0 ? (
 			<p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
-			<Grid columns={columns} gap='2em'>
+			<Grid
+				columns={columns}
+				gap='2em'
+			>
 				{workerList}
 			</Grid>
 		)

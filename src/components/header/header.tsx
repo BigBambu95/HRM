@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { removeTab } from 'actions'
 import { BellIcon, ChatIcon, SearchIcon, LogoIcon, MenuIcon } from 'svg'
 import PageTabList from '../page-tab-list'
+import { RootState } from '../../reducers'
 
 export interface HeaderProps {
 	tabs: Tabs;
@@ -52,7 +53,7 @@ const Header: React.FC<HeaderProps> = (props) => (
 	</header>
 )
 
-const mapStateToProps = ({ tabList }) => ({
+const mapStateToProps = ({ tabList }: RootState) => ({
 	tabs: tabList.tabs,
 	activeTab: tabList.activeTab,
 })

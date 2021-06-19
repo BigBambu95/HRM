@@ -17,7 +17,7 @@ import actions from '../actions'
 import { CandidateList, AddSummaryForm } from '../components'
 import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
-const VacancyContainer = ({ history, match }) => {
+const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
 	const dispatch = useDispatch()
 
 	const candidates = useSelector(selectCandidates)
@@ -72,42 +72,42 @@ const VacancyContainer = ({ history, match }) => {
 			<ToolBar>
 				<FilterList>
 					<Filter
-						label='Возраст'
+						label="Возраст"
 						items={candidates}
 						onChange={({ value }) => dispatch(actions.setFilter({ name: 'age', value }))}
-						defaultValue='Все'
+						defaultValue="Все"
 					/>
 					<Filter
-						label='Опыт'
+						label="Опыт"
 						items={candidates}
 						onChange={({ value }) => dispatch(actions.setFilter({ name: 'exp', value }))}
-						defaultValue='Все'
+						defaultValue="Все"
 					/>
 					<Filter
-						label='Желаемая з/п'
+						label="Желаемая з/п"
 						items={candidates}
 						onChange={({ value }) => dispatch(actions.setFilter({ name: 'desiredSalary', value }))}
-						defaultValue='Все'
+						defaultValue="Все"
 					/>
 				</FilterList>
 				<ToolBarGroupItem>
-					<Button variant='outlined' color='purple' onClick={() => setIsOpenModal(true)}>
+					<Button variant="outlined" color="purple" onClick={() => setIsOpenModal(true)}>
 						Добавить резюме
 					</Button>
-					<Button variant='icon'>
+					<Button variant="icon">
 						<PencilIcon />
 					</Button>
-					<Button variant='icon' onClick={deleteVacancy}>
+					<Button variant="icon" onClick={deleteVacancy}>
 						<RemoveBasketIcon />
 					</Button>
 				</ToolBarGroupItem>
 			</ToolBar>
-			<Grid columns={4} gap='2em'>
+			<Grid columns={4} gap="2em">
 				{candidateLists.map((props) => {
 					return <CandidateList key={props.title} {...props} />
 				})}
 			</Grid>
-			<AddSummaryForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+			<AddSummaryForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} dispatch={dispatch} />
 		</>
 	)
 }

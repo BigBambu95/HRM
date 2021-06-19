@@ -18,12 +18,12 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 	vacancyTemplates,
 	dispatch,
 }) => {
-	const [term, onChangeTerm] = useState()
+	const [term, onChangeTerm] = useState<Date | Date[]>()
 	const { register, errors, handleSubmit, control } = useForm()
-	const [profession, setProfession] = useState()
-	const [office, setOffice] = useState()
+	const [profession, setProfession] = useState<React.Key>()
+	const [office, setOffice] = useState<React.Key>()
 
-	const onSubmit = (data) => {
+	const onSubmit = (data: ANY_MIGRATION_TYPE) => {
 		setIsOpenModal(false)
 		return dispatch(
 			actions.addVacancyRequest({
@@ -36,49 +36,42 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 
 	return (
 		<Modal
-			title='Создать вакансию'
+			title="Создать вакансию"
 			width={840}
-			className='vacancy-list__modal-window'
+			className="vacancy-list__modal-window"
 			isOpen={isOpenModal}
 			onCancel={() => setIsOpenModal(false)}
 			onSubmit={handleSubmit(onSubmit)}
-			submitBtnText='Создать'
+			submitBtnText="Создать"
 		>
 			<Form>
-				<Form.Item validation={errors.profession} label='Специальность'>
+				<Form.Item validation={errors.profession} label="Специальность">
 					<Select
 						items={vacancyTemplates}
-						name='profession'
+						name="profession"
 						ref={register({ required: true })}
-						onChange={({ _id }) => setProfession(_id)}
+						onChange={({ id }) => setProfession(id)}
 					/>
 				</Form.Item>
-				<Form.Item validation={errors.office} label='Офис'>
+				<Form.Item validation={errors.office} label="Офис">
 					<Select
 						items={offices}
-						name='office'
+						name="office"
 						ref={register({ required: true })}
-						onChange={({ _id }) => setOffice(_id)}
+						onChange={({ id }) => setOffice(id)}
 					/>
 				</Form.Item>
-				<Row justify='space-between'>
-					<Form.Item validation={errors.date} label='Крайний срок'>
+				<Row justify="space-between">
+					<Form.Item validation={errors.date} label="Крайний срок">
 						<Controller
-							name='date'
+							name="date"
 							control={control}
 							rules={{ required: true }}
-							render={(props) => (
-								<DatePicker
-									format='dd.MM.yy'
-									{...props}
-									value={term}
-									onChange={onChangeTerm}
-								/>
-							)}
+							render={(props) => <DatePicker format="dd.MM.yy" {...props} value={term} onChange={onChangeTerm} />}
 						/>
 					</Form.Item>
-					<Form.Item validation={errors.salary} label='Зарплата'>
-						<Input name='salary' ref={register()} />
+					<Form.Item validation={errors.salary} label="Зарплата">
+						<Input name="salary" ref={register()} />
 					</Form.Item>
 				</Row>
 			</Form>

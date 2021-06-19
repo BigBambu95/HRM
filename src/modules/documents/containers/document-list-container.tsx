@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Spinner, ErorIndicator, ContextMenu, FilterList, Filter, Button, Row } from 'components'
+import { useDispatch } from 'react-redux'
+import { Spinner, ContextMenu, FilterList, Filter, Button, Row, ErrorIndicator } from 'components'
 import { Table } from 'components/table'
 import { DownloadIcon, PrinterIcon } from 'svg'
 import Moment from 'react-moment'
 import { ToolBar } from 'components/tool-bar'
 import actions from '../actions'
+import { useSelector } from 'reducers'
+import type { ColumnsType } from 'components/table'
 
 const DocumentListContainer = () => {
 	const dispatch = useDispatch()
@@ -14,35 +16,32 @@ const DocumentListContainer = () => {
 	const loading = useSelector((state) => state.documentList.loading)
 
 	useEffect(() => {
-		dispatch(actions.documents.fetchDocumentsRequest())
+		dispatch(actions.fetchDocumentsRequest())
 	}, [])
 
-	const columns = [
+	const columns: ColumnsType = [
 		{
+			key: 'name',
 			title: 'Название',
-			dataIndex: 'name',
+			dataIndex: 0,
 		},
 		{
+			key: 'date',
 			title: 'Дата',
-			dataIndex: 'date',
-			render: (date) => <Moment format='DD.MM.YY'>{date}</Moment>,
+			dataIndex: 1,
+			render: (date) => <Moment format="DD.MM.YY">{date}</Moment>,
 		},
 		{
-			title: '',
-			dataIndex: 'file',
 			key: 'download',
+			title: '',
+			dataIndex: 3,
 			render: (file) => {
 				return (
-					<Row justify='end' gutter={[24, 0]}>
+					<Row justify="end" gutter={[24, 0]}>
 						<a href={`http://localhost:8080/${file?.id}.${file?.ext}`}>
 							<PrinterIcon />
 						</a>
-						<a
-							href={`http://localhost:8080/${file?.id}.${file?.ext}`}
-							target='_blank'
-							rel='noreferrer'
-							download
-						>
+						<a href={`http://localhost:8080/${file?.id}.${file?.ext}`} target="_blank" rel="noreferrer" download>
 							<DownloadIcon />
 						</a>
 						<ContextMenu>
@@ -56,13 +55,13 @@ const DocumentListContainer = () => {
 
 	if (loading) return <Spinner />
 
-	if (error) return <ErorIndicator />
+	if (error) return <ErrorIndicator />
 
 	return (
 		<>
 			<ToolBar>
 				<FilterList>
-					<Filter items={[]} onChange={() => {}} defaultValue='Все' />
+					<Filter items={[]} onChange={() => {}} defaultValue="Все" />
 				</FilterList>
 				<Button>Добавить документ</Button>
 			</ToolBar>
