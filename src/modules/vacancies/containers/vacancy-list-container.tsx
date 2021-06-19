@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'reducers'
 import { addTab } from 'actions'
 import { ToolBar } from 'components/tool-bar'
 import { Grid, Button, Spinner, Filter, FilterList, ErrorIndicator } from 'components'
 import { dictionaryActions } from 'dictionaries'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
+import { transformDictionaryValues } from 'helpers/dictionaries'
 
 const VacancyListContainer = () => {
 	// Redux
@@ -21,7 +23,6 @@ const VacancyListContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
 	useEffect(() => {
-		dispatch(actions.fetchVacanciesRequest())
 		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchProfessionsRequest())
 	}, [])
@@ -60,12 +61,12 @@ const VacancyListContainer = () => {
 				<FilterList>
 					<Filter
 						label='Должность'
-						items={professions}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(professions)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.vacancies.setFilter({
+								actions.setFilter({
 									name: 'profession',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}
@@ -73,12 +74,12 @@ const VacancyListContainer = () => {
 					/>
 					<Filter
 						label='Офис'
-						items={offices}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(offices)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.vacancies.setFilter({
+								actions.setFilter({
 									name: 'office',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}

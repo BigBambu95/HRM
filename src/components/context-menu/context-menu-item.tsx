@@ -7,8 +7,8 @@ export interface ContextMenuItemProps {
 }
 
 const ContextMenuItem: React.FC<ContextMenuItemProps> = ({ icon, children, ...otherProps }) => (
-	<span className='context-menu__list__item'>
-		<Button variant='icon' {...otherProps}>
+	<span className="context-menu__list__item">
+		<Button variant="icon" {...otherProps}>
 			{icon}
 			{children}
 		</Button>

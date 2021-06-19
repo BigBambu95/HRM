@@ -22,21 +22,21 @@
 	"plugins": ["react"],
 	"rules": {
 		"indent": ["error", "tab"],
-		"react/jsx-props-no-spreading": "off",
 		"import/no-unresolved": "off",
-		"react/prop-types": "off",
 		"class-methods-use-this": "off",
 		"no-underscore-dangle": "off",
-		"react/jsx-indent": "off",
-		"react/jsx-indent-props": "off",
-		"max-len": ["error", {"code": 100, "ignoreUrls": true}],
-		"react/forbid-prop-types": "off",
-		"react/jsx-curly-newline": "off",
+		"max-len": ["error", {"code": 120, "ignoreUrls": true}],
 		"jsx-a11y/label-has-associated-control": "off",
 		"import/prefer-default-export": "off",
+		"camelcase": "warn",
+		"import/extensions": 0,
+		"react/jsx-indent": "off",
+		"react/jsx-indent-props": "off",
+		"react/jsx-curly-newline": "off",
 		"react/button-has-type": "off",
 		"react/require-default-props": "off",
-		"camelcase": "warn",
-		"import/extensions": 0
+		"react/forbid-prop-types": "off",
+		"react/prop-types": "off",
+		"react/jsx-props-no-spreading": "off"
 	}
 }

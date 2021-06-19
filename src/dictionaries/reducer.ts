@@ -2,14 +2,6 @@ import { handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import DictionariesTypes from './types'
 
-export interface DictionariesState {
-	offices: Offices;
-	professions: Professions;
-	departments: Departments;
-	loading: boolean;
-	error: boolean | null;
-}
-
 const initialState: DictionariesState = {
 	offices: [],
 	professions: [],

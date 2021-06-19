@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Проверка что модальное окно не отрендерено по умолчанию 1`] = `""`;
+
+exports[`Modal Рендер окна с переданными пропсами 1`] = `
+<div
+  className="modal-window-wrapper"
+>
+  <div
+    className="overlay"
+    onClick={[Function]}
+  />
+  <div
+    className="modal-window"
+    style={
+      Object {
+        "maxWidth": 800,
+      }
+    }
+  >
+    <div
+      className="modal-window__header"
+    >
+      <h2>
+        Создать вакансию
+      </h2>
+      <Button
+        className="modal-window__close-btn"
+        onClick={[Function]}
+        variant="icon"
+      >
+        <CloseIcon />
+      </Button>
+    </div>
+    <div
+      className="modal-window__body"
+    >
+      <div>
+        Custom children
+      </div>
+    </div>
+    <div
+      className="modal-window__footer"
+    >
+      <Button
+        font="large"
+        onClick={[Function]}
+        size="large"
+        variant="solid"
+      >
+        Создать
+      </Button>
+      <Button
+        onClick={[Function]}
+        size="large"
+      >
+        Отменить
+      </Button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Modal Рендер окна с пропсами по умолчанию 1`] = `
+<div
+  className="modal-window-wrapper"
+>
+  <div
+    className="overlay"
+    onClick={[Function]}
+  />
+  <div
+    className="modal-window"
+    style={
+      Object {
+        "maxWidth": 600,
+      }
+    }
+  >
+    <div
+      className="modal-window__header"
+    >
+      <h2>
+        Сформировать приказ
+      </h2>
+      <Button
+        className="modal-window__close-btn"
+        onClick={[Function]}
+        variant="icon"
+      >
+        <CloseIcon />
+      </Button>
+    </div>
+    <div
+      className="modal-window__body"
+    />
+    <div
+      className="modal-window__footer"
+    >
+      <Button
+        font="large"
+        onClick={[Function]}
+        size="large"
+        variant="solid"
+      >
+        Отправить
+      </Button>
+      <Button
+        onClick={[Function]}
+        size="large"
+      >
+        Отменить
+      </Button>
+    </div>
+  </div>
+</div>
+`;

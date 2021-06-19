@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'reducers'
 import { addTab } from 'actions'
-import {
-	Button,
-	Grid,
-	Filter,
-	FilterList,
-	Spinner,
-	ErrorIndicator,
-} from 'components'
+import { Button, Grid, Filter, FilterList, Spinner, ErrorIndicator } from 'components'
 import { dictionaryActions } from 'dictionaries'
+import { transformDictionaryValues } from 'helpers/dictionaries'
 import actions from '../actions'
 import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
@@ -27,7 +21,6 @@ const WorkerListContainer = ({ match }) => {
 	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
-		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchProfessionsRequest())
 		dispatch(dictionaryActions.fetchDepartmentsRequest())
 	}, [])
@@ -48,8 +41,9 @@ const WorkerListContainer = ({ match }) => {
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={(label, path, office, prevPage) =>
-					dispatch(addTab(label, path, office, prevPage))
+				addTab={
+					(label, path, office, prevPage) =>
+						dispatch(addTab(label, path, office, prevPage))
 				}
 			/>
 		)
@@ -59,7 +53,10 @@ const WorkerListContainer = ({ match }) => {
 		workers.length === 0 ? (
 			<p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
-			<Grid columns={columns} gap='2em'>
+			<Grid
+				columns={columns}
+				gap='2em'
+			>
 				{workerList}
 			</Grid>
 		)
@@ -74,12 +71,12 @@ const WorkerListContainer = ({ match }) => {
 				<FilterList>
 					<Filter
 						label='Должность'
-						items={professions}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(professions)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.workers.setFilter({
+								actions.setFilter({
 									name: 'profession',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}
@@ -87,12 +84,12 @@ const WorkerListContainer = ({ match }) => {
 					/>
 					<Filter
 						label='Офис'
-						items={offices}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(offices)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.workers.setFilter({
+								actions.setFilter({
 									name: 'office',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}
@@ -100,12 +97,12 @@ const WorkerListContainer = ({ match }) => {
 					/>
 					<Filter
 						label='Отдел'
-						items={departments}
-						onChange={({ _id }) =>
+						items={transformDictionaryValues(departments)}
+						onChange={({ value }) =>
 							dispatch(
-								actions.workers.setFilter({
+								actions.setFilter({
 									name: 'department',
-									value: _id ?? 'Все',
+									value: value ?? 'Все',
 								})
 							)
 						}

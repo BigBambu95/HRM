@@ -1,4 +1,4 @@
-import Modal from './modal';
-import './modal.css';
+import Modal from './modal'
+import './modal.css'
 
-export default Modal;
+export default Modal

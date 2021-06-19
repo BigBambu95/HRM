@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-redux'
 import vacancyList from 'modules/vacancies/reducer'
 import workerList from 'modules/workers/reducer'
 import { dictionaries } from 'dictionaries'
@@ -8,7 +9,7 @@ import candidateList from './candidates'
 import tabList from './tabs'
 import menu from './menu'
 
-export default combineReducers({
+const rootReducer = combineReducers({
 	workerList,
 	documentList,
 	vacancyList,
@@ -18,3 +19,9 @@ export default combineReducers({
 	tabList,
 	dictionaries,
 })
+
+export type RootState = ReturnType<typeof rootReducer>
+
+export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector
+
+export default rootReducer

@@ -2,18 +2,7 @@ import { Action, handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import { FETCH_VACANCIES, FETCH_VACANCY, SET_FILTER, ADD_VACANCY, REMOVE_VACANCY } from './types'
 
-export interface VacancyState {
-	vacancies: Vacancies | [];
-	vacancy: {
-		candidates: Candidates | [],
-		filter: Record<string, string>,
-	};
-	filter: Record<string, string>;
-	loading: boolean;
-	error: boolean | null;
-}
-
-const initialState: VacancyState = {
+const initialState: VacancyListState = {
 	vacancies: [],
 	vacancy: {
 		candidates: [],
@@ -70,8 +59,7 @@ const vacancyList = handleActions(
 			loading: false,
 			error: true,
 		}),
-		//@ts-ignore
-		[SET_FILTER]: (state, action: Action<Record<string, string>>) => ({
+		[SET_FILTER]: (state, action) => ({
 			...state,
 			filter: {
 				...state.filter,
@@ -109,9 +97,7 @@ const vacancyList = handleActions(
 			...state,
 			vacancy: {
 				...state.vacancy,
-				candidates: state.vacancy.candidates.filter(
-					(candidate) => !action.payload.includes(candidate)
-				),
+				candidates: state.vacancy.candidates.filter((candidate) => !action.payload.includes(candidate)),
 			},
 		}),
 	},
