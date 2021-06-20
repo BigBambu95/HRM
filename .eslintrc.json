@@ -1,12 +1,16 @@
 {
+	"parser": "@typescript-eslint/parser",
 	"env": {
 		"browser": true,
-		"es6": true
+		"es6": true,
+		"node": true
 	},
 	"extends": [
 		"plugin:react/recommended", 
 		"airbnb", 
-		"prettier"
+		"prettier",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended"
 	],
 	"globals": {
 		"Atomics": "readonly",
@@ -16,10 +20,10 @@
 		"ecmaFeatures": {
 			"jsx": true
 		},
-		"ecmaVersion": 11,
+		"ecmaVersion": 2020,
 		"sourceType": "module"
 	},
-	"plugins": ["react"],
+	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
 		"indent": ["error", "tab"],
 		"import/no-unresolved": "off",
@@ -37,6 +41,9 @@
 		"react/require-default-props": "off",
 		"react/forbid-prop-types": "off",
 		"react/prop-types": "off",
-		"react/jsx-props-no-spreading": "off"
+		"react/jsx-props-no-spreading": "off",
+		"@typescript-eslint/no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars-experimental": "error",
+		"no-unused-vars": "off"
 	}
 }
