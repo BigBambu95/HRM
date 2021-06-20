@@ -17,7 +17,7 @@ const fetchWorkerSalaryRequest = createAction(REQUEST(FETCH_WORKER_SALARY), (id:
 const fetchWorkerSalarySuccess = createAction(SUCCESS(FETCH_WORKER_SALARY), (salary: Salary) => salary)
 const fetchWorkerSalaryFailure = createAction(FAILURE(FETCH_WORKER_SALARY), (err: ErrorType) => err)
 
-const setFilter = createAction(REQUEST(SET_FILTER), (params: SetFilterParamsType) => params)
+const setFilter = createAction(SET_FILTER, (params: SetFilterParamsType) => params)
 
 export default {
 	fetchWorkersRequest,
