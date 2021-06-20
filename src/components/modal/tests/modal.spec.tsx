@@ -5,7 +5,7 @@ import { shallow } from 'enzyme'
 describe('Modal', () => {
 	const setUp = (props?: ModalProps, children?: React.ReactNode) =>
 		shallow(
-			<Modal isOpen={false} onSubmit={() => {}} onCancel={() => {}} {...props}>
+			<Modal isOpen={false} {...props}>
 				{children}
 			</Modal>
 		)
@@ -32,5 +32,17 @@ describe('Modal', () => {
 		)
 
 		expect(modal).toMatchSnapshot()
+	})
+
+	it('Проверка функционала закрытия окна разными способами', () => {
+		const onCancel = jest.fn()
+		const modal = setUp({ isOpen: true, onCancel })
+
+		modal.find('.overlay').simulate('click')
+		modal.find('.modal-window__close-btn').simulate('click')
+		modal.find('.modal-window__cancel-btn').simulate('click')
+
+		//TODO: Протестить нажатии клавиши Escape
+		expect(onCancel).toHaveBeenCalledTimes(3)
 	})
 })

@@ -24,8 +24,7 @@ describe('Button', () => {
 		const button = shallow(<Button onClick={onButtonClick}>Click</Button>)
 
 		button.simulate('click')
-		button.simulate('click')
 
-		expect(onButtonClick).toBeCalled()
+		expect(onButtonClick).toHaveBeenCalled()
 	})
 })

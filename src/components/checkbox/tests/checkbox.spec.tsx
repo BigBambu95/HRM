@@ -17,4 +17,13 @@ describe('Checkbox', () => {
 
 		expect(check).toMatchSnapshot()
 	})
+
+	it('Симуляция нажатия чекбокса', () => {
+		const onChange = jest.fn()
+		const check = shallow(<Checkbox onChange={onChange} />)
+
+		check.find('.checkbox__input').simulate('change')
+
+		expect(onChange).toHaveBeenCalled()
+	})
 })

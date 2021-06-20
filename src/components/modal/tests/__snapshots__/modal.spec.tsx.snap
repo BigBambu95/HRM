@@ -8,7 +8,6 @@ exports[`Modal Рендер окна с переданными пропсами 
 >
   <div
     className="overlay"
-    onClick={[Function]}
   />
   <div
     className="modal-window"
@@ -26,7 +25,6 @@ exports[`Modal Рендер окна с переданными пропсами 
       </h2>
       <Button
         className="modal-window__close-btn"
-        onClick={[Function]}
         variant="icon"
       >
         <CloseIcon />
@@ -44,14 +42,13 @@ exports[`Modal Рендер окна с переданными пропсами 
     >
       <Button
         font="large"
-        onClick={[Function]}
         size="large"
         variant="solid"
       >
         Создать
       </Button>
       <Button
-        onClick={[Function]}
+        className="modal-window__cancel-btn"
         size="large"
       >
         Отменить
@@ -67,7 +64,6 @@ exports[`Modal Рендер окна с пропсами по умолчанию
 >
   <div
     className="overlay"
-    onClick={[Function]}
   />
   <div
     className="modal-window"
@@ -85,7 +81,6 @@ exports[`Modal Рендер окна с пропсами по умолчанию
       </h2>
       <Button
         className="modal-window__close-btn"
-        onClick={[Function]}
         variant="icon"
       >
         <CloseIcon />
@@ -99,14 +94,13 @@ exports[`Modal Рендер окна с пропсами по умолчанию
     >
       <Button
         font="large"
-        onClick={[Function]}
         size="large"
         variant="solid"
       >
         Отправить
       </Button>
       <Button
-        onClick={[Function]}
+        className="modal-window__cancel-btn"
         size="large"
       >
         Отменить
