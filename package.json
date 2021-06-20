@@ -55,12 +55,11 @@
   },
   "lint-staged": {
     "*.css": [
-      "npm run stylelint:fix"
+      "stylelint --fix"
     ],
     "*.{ts, tsx}": [
-      "npm run eslint:fix",
-      "npm run prettier:fix",
-      "npm test"
+      "eslint --fix",
+      "prettier --fix"
     ]
   },
   "devDependencies": {
