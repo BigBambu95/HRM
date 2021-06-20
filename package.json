@@ -48,6 +48,21 @@
       "last 1 safari version"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.css": [
+      "npm run stylelint:fix"
+    ],
+    "*.{ts, tsx}": [
+      "npm run eslint:fix",
+      "npm run prettier:fix",
+      "npm test"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/plugin-syntax-export-default-from": "^7.14.5",
@@ -64,6 +79,8 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-actions": "^2.6.1",
     "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
     "babel-jest": "^27.0.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",

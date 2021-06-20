@@ -1,10 +1,10 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects'
 import { REQUEST } from 'helpers/redux'
 import Api from 'services/api'
-import DictionariesTypes from './types'
+import { FETCH_OFFICES, FETCH_PROFESSIONS, FETCH_DEPARTMENTS } from './types'
 import dictionaryActions from './actions'
 
-function* fetchOffices() {
+function* fetchOffices(): ANY_MIGRATION_TYPE {
 	try {
 		const offices = yield call(Api.get, '/offices')
 		yield put(dictionaryActions.fetchOfficesSuccess(offices.data))
@@ -14,10 +14,10 @@ function* fetchOffices() {
 }
 
 function* watchFetchOffices() {
-	yield takeEvery(REQUEST(DictionariesTypes.FETCH_OFFICES), fetchOffices)
+	yield takeEvery(REQUEST(FETCH_OFFICES), fetchOffices)
 }
 
-function* fetchProfessions() {
+function* fetchProfessions(): ANY_MIGRATION_TYPE {
 	try {
 		const professions = yield call(Api.get, '/professions')
 		yield put(dictionaryActions.fetchProfessionsSuccess(professions.data))
@@ -27,10 +27,10 @@ function* fetchProfessions() {
 }
 
 function* watchFetchProfessions() {
-	yield takeEvery(REQUEST(DictionariesTypes.FETCH_PROFESSIONS), fetchProfessions)
+	yield takeEvery(REQUEST(FETCH_PROFESSIONS), fetchProfessions)
 }
 
-function* fetchDepartments() {
+function* fetchDepartments(): ANY_MIGRATION_TYPE {
 	try {
 		const departments = yield call(Api.get, '/departments')
 		yield put(dictionaryActions.fetchDepartmentsSuccess(departments.data))
@@ -40,7 +40,7 @@ function* fetchDepartments() {
 }
 
 function* watchFetchDepartments() {
-	yield takeEvery(REQUEST(DictionariesTypes.FETCH_DEPARTMENTS), fetchDepartments)
+	yield takeEvery(REQUEST(FETCH_DEPARTMENTS), fetchDepartments)
 }
 
 export default function* rootSaga() {

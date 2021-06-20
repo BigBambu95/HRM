@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
-import DictionariesTypes from './types'
+import { FETCH_DEPARTMENTS, FETCH_PROFESSIONS, FETCH_OFFICES } from './types'
 
 const initialState: DictionariesState = {
 	offices: [],
@@ -12,19 +12,20 @@ const initialState: DictionariesState = {
 
 const dictionaries = handleActions(
 	{
-		[REQUEST(DictionariesTypes.FETCH_OFFICES)]: (state) => ({
+		// --------- FETCH OFFICES ------------
+		[REQUEST(FETCH_OFFICES)]: (state) => ({
 			...state,
 			offices: [],
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(DictionariesTypes.FETCH_OFFICES)]: (state, { payload }) => ({
+		[SUCCESS(FETCH_OFFICES)]: (state, action: { payload: Offices }) => ({
 			...state,
-			offices: payload,
+			offices: action.payload,
 			loading: false,
 			error: null,
 		}),
-		[FAILURE(DictionariesTypes.FETCH_OFFICES)]: (state) => ({
+		[FAILURE(FETCH_OFFICES)]: (state) => ({
 			...state,
 			offices: [],
 			loading: false,
@@ -32,19 +33,19 @@ const dictionaries = handleActions(
 		}),
 
 		// --------- FETCH PROFESSIONS ------------
-		[REQUEST(DictionariesTypes.FETCH_PROFESSIONS)]: (state) => ({
+		[REQUEST(FETCH_PROFESSIONS)]: (state) => ({
 			...state,
 			professions: [],
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(DictionariesTypes.FETCH_PROFESSIONS)]: (state, { payload }) => ({
+		[SUCCESS(FETCH_PROFESSIONS)]: (state, action: { payload: Professions }) => ({
 			...state,
-			professions: payload,
+			professions: action.payload,
 			loading: false,
 			error: null,
 		}),
-		[FAILURE(DictionariesTypes.FETCH_PROFESSIONS)]: (state) => ({
+		[FAILURE(FETCH_PROFESSIONS)]: (state) => ({
 			...state,
 			professions: [],
 			loading: false,
@@ -52,19 +53,19 @@ const dictionaries = handleActions(
 		}),
 
 		// --------- FETCH DEPARTMENTS ------------
-		[REQUEST(DictionariesTypes.FETCH_DEPARTMENTS)]: (state) => ({
+		[REQUEST(FETCH_DEPARTMENTS)]: (state) => ({
 			...state,
 			departments: [],
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(DictionariesTypes.FETCH_DEPARTMENTS)]: (state, { payload }) => ({
+		[SUCCESS(FETCH_DEPARTMENTS)]: (state, action: { payload: Departments }) => ({
 			...state,
-			departments: payload,
+			departments: action.payload,
 			loading: false,
 			error: null,
 		}),
-		[FAILURE(DictionariesTypes.FETCH_DEPARTMENTS)]: (state) => ({
+		[FAILURE(FETCH_DEPARTMENTS)]: (state) => ({
 			...state,
 			departments: [],
 			loading: false,
