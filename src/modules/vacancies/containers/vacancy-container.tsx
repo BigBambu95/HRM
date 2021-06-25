@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { compose } from 'redux'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'reducers'
 import { withRouter } from 'react-router-dom'
-
-import { Grid, Button, Spinner, FilterList, Filter } from 'components'
-
+import { Grid, Button, Spinner, FilterList, Filter, ToolBar, ToolBarGroupItem, ErrorIndicator } from 'components'
 import { PencilIcon, RemoveBasketIcon } from 'svg'
-import ErrorIndicator from 'components/error-indicator'
 import {
 	selectCandidates,
 	selectInterviewCandidates,
@@ -14,12 +12,10 @@ import {
 	selectReviewSummaryCandidates,
 	selectFinalCandidates,
 } from '../selectors'
-
 import actions from '../actions'
 import { CandidateList, AddSummaryForm } from '../components'
-import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
-const VacancyContainer = ({ history, match }) => {
+const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
 	const dispatch = useDispatch()
 
 	const candidates = useSelector(selectCandidates)
@@ -36,28 +32,28 @@ const VacancyContainer = ({ history, match }) => {
 	const candidateLists = [
 		{
 			title: 'Рассмотрение резюме',
-			items: reviewSummaryCandidates,
+			candidates: reviewSummaryCandidates,
 		},
 		{
 			title: 'Телефонное интервью',
-			items: phoneCandidates,
+			candidates: phoneCandidates,
 		},
 		{
 			title: 'Собеседование',
-			items: interviewCandidates,
+			candidates: interviewCandidates,
 		},
 		{
 			title: 'Кандидаты',
-			items: finalCandidates,
+			candidates: finalCandidates,
 		},
 	]
 
 	useEffect(() => {
 		dispatch(actions.fetchVacancyRequest(match.params.id))
-	}, [])
+	}, [match.params.id])
 
 	const deleteVacancy = () => {
-		dispatch(actions.removeVacancy(match.params.id))
+		dispatch(actions.removeVacancyRequest(match.params.id))
 		history.push('/vacancies/')
 	}
 
@@ -74,51 +70,57 @@ const VacancyContainer = ({ history, match }) => {
 			<ToolBar>
 				<FilterList>
 					<Filter
-						label='Возраст'
-						items={candidates}
-						onChange={(value) => dispatch(actions.vacancies.setFilter({ name: 'age', value }))}
-						defaultValue='Все'
+						label="Возраст"
+						items={candidates.map(({ id, age }) => {
+							return {
+								id,
+								value: age,
+							}
+						})}
+						onChange={({ value }) => dispatch(actions.setFilter({ name: 'age', value }))}
+						defaultValue="Все"
 					/>
 					<Filter
-						label='Опыт'
-						items={candidates}
-						onChange={(value) => dispatch(actions.vacancies.setFilter({ name: 'exp', value }))}
-						defaultValue='Все'
+						label="Опыт"
+						items={candidates.map(({ id, exp }) => {
+							return {
+								id,
+								value: exp,
+							}
+						})}
+						onChange={({ value }) => dispatch(actions.setFilter({ name: 'exp', value }))}
+						defaultValue="Все"
 					/>
 					<Filter
-						label='Желаемая з/п'
-						items={candidates}
-						onChange={(value) =>
-							dispatch(actions.vacancies.setFilter({ name: 'desiredSalary', value }))
-						}
-						defaultValue='Все'
+						label="Желаемая з/п"
+						items={candidates.map(({ id, desiredSalary }) => {
+							return {
+								id,
+								value: desiredSalary,
+							}
+						})}
+						onChange={({ value }) => dispatch(actions.setFilter({ name: 'desiredSalary', value }))}
+						defaultValue="Все"
 					/>
 				</FilterList>
 				<ToolBarGroupItem>
-					<Button
-						variant='outlined'
-						color='purple'
-						onClick={() => setIsOpenModal(true)}
-					>
+					<Button variant="outlined" color="purple" onClick={() => setIsOpenModal(true)}>
 						Добавить резюме
 					</Button>
-					<Button variant='icon'>
+					<Button variant="icon">
 						<PencilIcon />
 					</Button>
-					<Button variant='icon' onClick={deleteVacancy}>
+					<Button variant="icon" onClick={deleteVacancy}>
 						<RemoveBasketIcon />
 					</Button>
 				</ToolBarGroupItem>
 			</ToolBar>
-			<Grid columns={4} gap='2em'>
+			<Grid columns={4} gap="2em">
 				{candidateLists.map((props) => {
 					return <CandidateList key={props.title} {...props} />
 				})}
 			</Grid>
-			<AddSummaryForm
-				isOpenModal={isOpenModal}
-				setIsOpenModal={setIsOpenModal}
-			/>
+			<AddSummaryForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} dispatch={dispatch} />
 		</>
 	)
 }

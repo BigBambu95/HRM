@@ -5,8 +5,8 @@ import { CloseIcon } from '../../svg'
 import Button from '../button'
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
-	isOpen: boolean;
-	onCancel: () => void;
+	isOpen?: boolean;
+	onCancel?: () => void;
 	title?: string;
 	width?: number | string;
 	submitBtnText?: string;
@@ -23,37 +23,34 @@ const Modal: React.FC<ModalProps> = ({
 	onCancel,
 	className,
 }) => {
-
 	useKeyPress('Escape', () => {
-		onCancel()
+		onCancel && onCancel()
 	})
 
 	const styles = {
 		maxWidth: width,
 	}
 
+	const baseClassName = 'modal-window'
+
 	if (!isOpen) return null
 
 	return (
-		<div className='modal-window-wrapper'>
-			<div className='overlay' onClick={onCancel} />
-			<div className={classnames('modal-window', className)} style={styles}>
-				<div className='modal-window__header'>
+		<div className={`${baseClassName}-wrapper`}>
+			<div className="overlay" onClick={onCancel} />
+			<div className={classnames(baseClassName, className)} style={styles}>
+				<div className={`${baseClassName}__header`}>
 					<h2>{title}</h2>
-					<Button
-						variant='icon'
-						className='modal-window__close-btn'
-						onClick={onCancel}
-					>
+					<Button variant="icon" className={`${baseClassName}__close-btn`} onClick={onCancel}>
 						<CloseIcon />
 					</Button>
 				</div>
-				<div className='modal-window__body'>{children}</div>
-				<div className='modal-window__footer'>
-					<Button onClick={onSubmit} size='large' variant='solid' font='large'>
+				<div className={`${baseClassName}__body`}>{children}</div>
+				<div className={`${baseClassName}__footer`}>
+					<Button onClick={onSubmit} size="large" variant="solid" font="large">
 						{submitBtnText}
 					</Button>
-					<Button onClick={onCancel} size='large'>
+					<Button className={`${baseClassName}__cancel-btn`} onClick={onCancel} size="large">
 						Отменить
 					</Button>
 				</div>

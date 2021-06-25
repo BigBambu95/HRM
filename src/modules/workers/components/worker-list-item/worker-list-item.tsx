@@ -1,12 +1,15 @@
 import React from 'react'
-import { Link, match } from 'react-router-dom'
-import { Record, Typography } from 'components'
+import { Link, match as matchType } from 'react-router-dom'
+import classnames from 'classnames'
+import { Avatar, ContextMenu, Record } from 'components'
 import { getDictionaryValueById } from 'helpers/dictionaries'
+import { PencilIcon, RemoveBasketIcon } from 'svg'
+import { BASE_URL } from 'services/api'
 
 export interface WorkerListItemProps {
-	worker: Worker;
-	addTab: (label: string, path: string, office: string, prevPage?: string) => void;
-	match: match<Record<'id', string>>;
+	worker: IWorker;
+	addTab: ({ label, path, office, prevPage }: AddTabParams) => void;
+	match: matchType<Record<'id', string>>;
 }
 
 const WorkerListItem: React.FC<PropsWithDictionaries<WorkerListItemProps>> = ({
@@ -17,35 +20,39 @@ const WorkerListItem: React.FC<PropsWithDictionaries<WorkerListItemProps>> = ({
 	offices,
 	professions,
 }) => {
-	const { _id, name, department, phone, email, office, profession, avatar, status } = worker
+	const { id, name, department, phone, email, office, profession, avatar, status } = worker
 
-	const clazz =
-		match.params.id === _id ? `worker-list__item ${status} active` : `worker-list__item ${status}`
+	const className = classnames('worker-list__item', status, {
+		active: match.params.id === id,
+	})
+
+	const officeName = getDictionaryValueById(offices, office)
 
 	return (
-		<div className={clazz}>
+		<div className={className}>
 			<Link
-				to={`/workers/${_id}`}
-				onClick={() => addTab(name, `/workers/${_id}`, office, 'Сотрудники')}
+				to={`/workers/${id}`}
+				onClick={() => addTab({
+					label: name,  path: `/workers/${id}`, office: officeName as string,  prevPage: 'Сотрудники' })}
 			>
-				<div className='worker-list__item__left'>
-					<div className='worker-list__item__picture'>
-						<img src={avatar} alt={name} />
-					</div>
+				<div className="worker-list__item__left">
+					<Avatar src={`${BASE_URL}/images/${avatar}`} alt={name} className="worker-list__item__picture" />
 					<div>
-						<h3 className='worker-list__item__name'>{name}</h3>
-						<Typography.Text type='secondary'>
-							{getDictionaryValueById(professions, profession)}
-						</Typography.Text>
+						<h3 className="worker-list__item__name">{name}</h3>
+						<div className="worker-list__item__profession">{getDictionaryValueById(professions, profession)}</div>
 					</div>
 				</div>
-				<div className='worker-list__item__right'>
-					<Record label='E-mail' field={email} />
-					<Record label='Телефон' field={phone} />
-					<Record label='Отдел' field={getDictionaryValueById(departments, department)} />
-					<Record label='Офис' field={getDictionaryValueById(offices, office)} />
+				<div className="worker-list__item__right">
+					<Record label="E-mail" field={email} />
+					<Record label="Телефон" field={phone} />
+					<Record label="Отдел" field={getDictionaryValueById(departments, department)} />
+					<Record label="Офис" field={officeName} />
 				</div>
 			</Link>
+			<ContextMenu>
+				<ContextMenu.Item icon={<PencilIcon width={16} height={16} />}>Изменить</ContextMenu.Item>
+				<ContextMenu.Item icon={<RemoveBasketIcon width={16} height={16} />}>Удалить</ContextMenu.Item>
+			</ContextMenu>
 		</div>
 	)
 }

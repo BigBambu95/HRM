@@ -7,27 +7,32 @@ import { FireIcon, PencilIcon, RemoveBasketIcon } from 'svg'
 import { getDictionaryValueById } from 'helpers/dictionaries'
 
 export interface VacancyListItemProps {
-	item: Vacancy;
+	vacancy: Vacancy;
 	deleteItem: (id: React.Key) => void;
-	addTab: ANY_MIGRATION_TYPE;
-	offices: ANY_MIGRATION_TYPE;
-	professions: ANY_MIGRATION_TYPE;
+	addTab: ({ label, path, office, prevPage }: AddTabParams) => void;
+	offices: Offices;
+	professions: Professions;
 }
 
 const VacancyListItem: React.FC<VacancyListItemProps> = ({
-	item,
+	vacancy,
 	deleteItem,
 	addTab,
 	offices,
 	professions,
 }) => {
-	const { _id, profession, url, office, date, quickly = false } = item
+	const { id, profession, url, office, date, quickly = false } = vacancy
 
 	return (
 		<div className='vacancy-list__item'>
 			<Link
-				to={`/vacancies/${_id}`}
-				onClick={() => addTab(profession, `/vacancies/${url}`, office, 'Вакансии')}
+				to={`/vacancies/${id}`}
+				onClick={() => addTab({
+					label: getDictionaryValueById(professions, profession) as string,
+					path: `/vacancies/${url}`,
+					office: getDictionaryValueById(offices, office) as string,
+					prevPage: 'Вакансии'
+				})}
 			>
 				<div className='vacancy-list__item__description'>
 					<div className='vacancy-list__item__city'>{getDictionaryValueById(offices, office)}</div>
@@ -46,7 +51,7 @@ const VacancyListItem: React.FC<VacancyListItemProps> = ({
 			<ContextMenu>
 				<ContextMenu.Item icon={<PencilIcon width={16} height={16} />}>Изменить</ContextMenu.Item>
 				<ContextMenu.Item
-					onClick={() => deleteItem(_id)}
+					onClick={() => deleteItem(id)}
 					icon={<RemoveBasketIcon width={16} height={16} />}
 				>
 					Удалить

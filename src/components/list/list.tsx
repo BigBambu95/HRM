@@ -6,13 +6,13 @@ export interface ListProps<T> extends HTMLAttributes<HTMLDivElement> {
 	renderItem: (item: T) => JSX.Element;
 }
 
-function List<T extends Record<'_id', React.Key>>({ items, className, renderItem, ...otherProps }: ListProps<T>) {
+function List<T extends Record<'id', React.Key>>({ items, className, renderItem, ...otherProps }: ListProps<T>) {
 	const listClasses = classnames('list', className)
 
 	return (
 		<div className={listClasses} {...otherProps}>
 			{items.map((item) => (
-				<div className='list__item' key={item._id}>
+				<div className='list__item' key={item.id}>
 					{renderItem(item)}
 				</div>
 			))}

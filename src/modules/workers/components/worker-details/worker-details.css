@@ -10,7 +10,7 @@
 .worker-details__header {
     align-items: center;
     margin-bottom: 3em;
-    font-size: var(--small-font);
+    font-size: var(--font-size-xs);
 }
 
 .worker-details__content {
@@ -102,5 +102,5 @@
 
 .worker-details__content__right .history__item .date {
     color: var(--gray);
-    font-size: var(--small-font);
+    font-size: var(--font-size-xs);
 }

@@ -1,4 +1,2 @@
-import WorkerListContainer from './worker-list-container'
-import WorkerContainer from './worker-container'
-
-export { WorkerListContainer, WorkerContainer }
+export { default as WorkerListContainer } from './worker-list-container'
+export { default as WorkerContainer } from './worker-container'

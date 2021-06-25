@@ -1,19 +1,25 @@
-interface Dictionary {
-	_id: React.Key;
+interface DictionaryRecord {
+	id: React.Key;
 	name: string;
 }
 
-interface Office extends Dictionary {}
+type Office = DictionaryRecord
 type Offices = Array<Office>
 
-interface Department extends Dictionary {}
+type Department = DictionaryRecord
 type Departments = Array<Department>
 
-interface Profession extends Dictionary {}
+type Profession = DictionaryRecord
 type Professions = Array<Profession>
 
 type PropsWithDictionaries<P> = P & {
 	offices: Offices,
 	departments: Departments,
 	professions: Professions,
+}
+
+interface DictionariesState extends BaseState {
+	offices: Offices;
+	professions: Professions;
+	departments: Departments;
 }

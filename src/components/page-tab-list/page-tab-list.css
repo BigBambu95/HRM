@@ -1,7 +1,5 @@
 .page-tab-list {
     display: flex;
-    flex-direction: row;
-    padding: 0 2em;
 }
 
 .tab-list__item {
@@ -14,26 +12,37 @@
     font-weight: 300;
 }
 
-.tab-list__item.active {
-    padding: .8em .5em;
+.tab-list__item-active {
+    height: 81px;
+    padding: 10px 16px;
     border-radius: 8px;
     background: #fff;
     color: #000;
-    font-size: 2em;
-    box-shadow: var(--second-shadow);
+    font-size: 24px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.tab-list__item a {
+    color: #b1b1b1;
+}
+
+.tab-list__item-active a {
+    margin: 2px 0;
+    color: #000;
+    pointer-events: none;
 }
 
 .tab-list__item::after {
+    content: '';
     position: absolute;
     top: calc(50% - 20px);
     right: -1px;
     width: 1px;
     height: 40px;
     background: var(--light-gray);
-    content: '';
 }
 
-.tab-list__item.active::after {
+.tab-list__item-active::after {
     content: none;
 }
 
@@ -41,6 +50,7 @@
     margin-left: 1em;
     padding: .5em;
 }
+
 
 .tab-list__item a:hover {
     color: var(--purple);
@@ -61,7 +71,7 @@
 
 .tab-list__item__office,
 .tab-list__item__prev-page {
-    font-size: var(--small-font);
+    font-size: var(--font-size-xs);
 }
 
 .tab-list__item__prev-page {

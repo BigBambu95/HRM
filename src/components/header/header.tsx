@@ -3,10 +3,11 @@ import { compose } from 'redux'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeTab } from 'actions'
-import { BellIcon, ChatIcon, SearchIcon } from 'svg'
-import Logo from './logo'
-import MenuIcon from './menu'
+import { BellIcon, ChatIcon, SearchIcon, LogoIcon, MenuIcon } from 'svg'
+import { BASE_URL } from 'services/api'
+import { RootState } from 'reducers'
 import PageTabList from '../page-tab-list'
+import Avatar from '../avatar'
 
 export interface HeaderProps {
 	tabs: Tabs;
@@ -18,10 +19,10 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => (
 	<header className='header'>
-		<div style={{ display: 'flex' }}>
-			<MenuIcon />
+		<div className="flex">
+			<MenuIcon fill="#CC00FF" />
 			<Link to='/' className='header__logo'>
-				<Logo />
+				<LogoIcon />
 			</Link>
 		</div>
 		<div className='header__tabs'>
@@ -40,11 +41,7 @@ const Header: React.FC<HeaderProps> = (props) => (
 				</button>
 			</div>
 			<div className='header__user'>
-				<div className='header__user__picture'>
-					{
-						// TODO: Сделать реальный аватар пользователя
-					}
-				</div>
+				<Avatar src={`${BASE_URL}/images/TJ9tAywL4lo.jpg`} />
 				<div className='header__user__description'>
 					<h3 className='title'>Василий Акзаров</h3>
 					<div className='subtitle'>Руководитель отдела кадров</div>
@@ -54,7 +51,7 @@ const Header: React.FC<HeaderProps> = (props) => (
 	</header>
 )
 
-const mapStateToProps = ({ tabList }) => ({
+const mapStateToProps = ({ tabList }: RootState) => ({
 	tabs: tabList.tabs,
 	activeTab: tabList.activeTab,
 })
