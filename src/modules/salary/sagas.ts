@@ -4,7 +4,7 @@ import Api from 'services/api'
 import actions from './actions'
 import { FETCH_SALARY } from './types'
 
-function* fetchSalary() {
+function* fetchSalary(): ANY_MIGRATION_TYPE {
 	try {
 		const salaries = yield call(Api.get, '/salaries')
 		yield put(actions.fetchSalarySuccess(salaries.data))

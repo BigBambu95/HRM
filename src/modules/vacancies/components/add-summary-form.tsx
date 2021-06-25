@@ -14,19 +14,19 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }: AddSummaryFor
 
 	const employment = [
 		{
-			_id: 1,
+			id: 1,
 			name: 'Полная',
 		},
 		{
-			_id: 2,
+			id: 2,
 			name: 'Неполная',
 		},
 		{
-			_id: 3,
+			id: 3,
 			name: 'Частичная',
 		},
 		{
-			_id: 4,
+			id: 4,
 			name: 'Сезонная',
 		},
 	]
@@ -104,10 +104,10 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }: AddSummaryFor
 					<Col size={24}>
 						<Form.Item>
 							<Select
-								items={employment.map((item) => {
+								items={employment.map(({ id, name }) => {
 									return {
-										id: item._id,
-										value: item.name,
+										id,
+										value: name,
 									}
 								})}
 							/>

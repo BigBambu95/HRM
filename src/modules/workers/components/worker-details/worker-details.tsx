@@ -1,6 +1,6 @@
 import React from 'react'
-import { ButtonGroup, Button, Record, TabBar, List, Row, Typography, Select } from 'components'
-import { BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon, RemoveBasketIcon } from 'svg'
+import { ButtonGroup, Button, Record, TabBar, List, Row, Typography, Select, TagList } from 'components'
+import { BackIcon, PencilIcon, CalendarIcon, MailIcon, DownloadIcon, RemoveBasketIcon, TagIcon } from 'svg'
 import { ToolBar, ToolBarGroupItem } from 'components/tool-bar'
 import { getDictionaryValueById } from 'helpers/dictionaries'
 import WorkerStatus from '../worker-status'
@@ -8,17 +8,17 @@ import WorkerStatus from '../worker-status'
 // MockData
 const history = [
 	{
-		_id: '1',
+		id: '1',
 		name: 'Увеличили часовую ставку',
 		date: '15.11.18',
 	},
 	{
-		_id: '2',
+		id: '2',
 		name: 'Прошел испытательный срок',
 		date: '15.11.18',
 	},
 	{
-		_id: '3',
+		id: '3',
 		name: 'Устроился на работу',
 		date: '15.09.18',
 	},
@@ -27,19 +27,19 @@ const history = [
 // MockData
 const documents: Documents = [
 	{
-		_id: '1',
+		id: '1',
 		name: 'Тестовая работа',
 	},
 	{
-		_id: '2',
+		id: '2',
 		name: 'Анкета',
 	},
 	{
-		_id: '3',
+		id: '3',
 		name: 'Резюме',
 	},
 	{
-		_id: 4,
+		id: 4,
 		name: 'Портфолио',
 	},
 ]
@@ -55,7 +55,7 @@ export interface WorkerDetailsProps {
 
 const WorkerDetails: React.FC<WorkerDetailsProps> = ({ worker, closeWorker, departments, offices, professions }) => {
 	const { name, profession, office, email, phone, department, avatar, status, tags } = worker
-
+	console.log(worker)
 	return (
 		<div className="worker-details">
 			<header className="worker-details__header">
@@ -63,16 +63,11 @@ const WorkerDetails: React.FC<WorkerDetailsProps> = ({ worker, closeWorker, depa
 					<Button onClick={closeWorker} variant="icon">
 						<BackIcon />
 					</Button>
-					<div>
-						{tags?.map((tag) => {
-							return (
-								<Typography.Text type="secondary" key={tag}>
-									{tag}
-								</Typography.Text>
-							)
-						})}
-					</div>
-					<Button variant="text">Добавить метку</Button>
+					<TagList tags={tags} />
+					<Button variant="text">
+						<TagIcon width={16} height={16} />
+						<Typography.Text color="purple">Добавить метку</Typography.Text>
+					</Button>
 					<ToolBarGroupItem>
 						<Button variant="icon">
 							<MailIcon />
@@ -89,7 +84,7 @@ const WorkerDetails: React.FC<WorkerDetailsProps> = ({ worker, closeWorker, depa
 			<div className="worker-details__content">
 				<div className="worker-details__content__left">
 					<div className="worker-details__content__picture">
-						<img src={avatar} alt={name} />
+						<img src={`http://localhost:8080/images/${avatar}`} alt={name} />
 					</div>
 					<div className="worker-details__description">
 						<div>
@@ -128,7 +123,7 @@ const WorkerDetails: React.FC<WorkerDetailsProps> = ({ worker, closeWorker, depa
 				</div>
 				<div className="worker-details__content__right">
 					<div className="worker-details__content__actions">
-						<WorkerStatus color={status}>На работе</WorkerStatus>
+						<WorkerStatus status={status}>На работе</WorkerStatus>
 						<ButtonGroup className="worker-details__content__actions__btn-group" vertical>
 							<Button variant="outlined" color="green" fullWidth size="large">
 								Премировать

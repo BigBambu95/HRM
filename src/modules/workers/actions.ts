@@ -9,7 +9,7 @@ const fetchWorkersFailure = createAction(FAILURE(FETCH_WORKERS), (err: ErrorType
 
 // Fetch worker
 const fetchWorkerRequest = createAction(REQUEST(FETCH_WORKER), (id: React.Key) => id)
-const fetchWorkerSuccess = createAction(SUCCESS(FETCH_WORKER), (worker: Worker) => worker)
+const fetchWorkerSuccess = createAction(SUCCESS(FETCH_WORKER), (worker: IWorker) => worker)
 const fetchWorkerFailure = createAction(FAILURE(FETCH_WORKER), (err: ErrorType) => err)
 
 // Fetch worker salary

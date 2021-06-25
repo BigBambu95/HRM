@@ -11,6 +11,7 @@
     "number-leading-zero": null,
     "order/properties-order": [
       [
+        "content",
         "position",
         "top",
         "right",

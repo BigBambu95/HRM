@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import Button from '../button'
 import { BackIcon, CloseIcon } from 'svg'
+import Button from '../button'
 
 export interface PageTabListItemProps {
 	tab: Tab;
@@ -13,41 +13,34 @@ export interface PageTabListItemProps {
 	history: History;
 }
 
-const PageTabListItem: React.FC<PageTabListItemProps> = ({
-	tab,
-	office,
-	prevPage,
-	removeTab,
-	location,
-	history,
-}) => {
-	const renderPrevPage = prevPage ? (
-		<div className='tab-list__item__prev-page'>{prevPage}/</div>
-	) : null
+const PageTabListItem: React.FC<PageTabListItemProps> = ({ tab, removeTab, location, history }) => {
+	const { label, prevPage, office, path } = tab
 
-	const renderOffice = office ? <div className='tab-list__item__office'>{office}</div> : null
+	const baseClassName = 'tab-list__item'
+	const isActiveTab = location.pathname === tab.path
 
-	const arrowBack =
-		office || prevPage ? (
-			<Button variant='icon' className='tab-list__item__back' onClick={() => history.back()}>
-				<BackIcon />
-			</Button>
-		) : null
+	const renderPrevPage = prevPage && isActiveTab && <div className={`${baseClassName}__prev-page`}>{prevPage}/</div>
 
-	const styles = prevPage || office ? { padding: '.35em .5em' } : {}
+	const renderOffice = office && isActiveTab && <div className={`${baseClassName}__office`}>{office}</div>
 
-	const classNames = classnames(
-		location.pathname === tab.path ? 'tab-list__item active' : 'tab-list__item'
+	const arrowBack = isActiveTab && prevPage && (
+		<Button variant="icon" className={`${baseClassName}__back`} onClick={() => history.back()}>
+			<BackIcon />
+		</Button>
 	)
 
+	const classNames = classnames(baseClassName, {
+		[`${baseClassName}-active`]: isActiveTab,
+	})
+
 	return (
-		<li className={classNames} style={styles}>
+		<li className={classNames}>
 			{arrowBack}
 			<div>
 				{renderPrevPage}
-				<div className='flex align-items-center'>
-					<Link to={tab.path}>{tab.label}</Link>
-					<Button variant='icon' className='close-btn' onClick={removeTab}>
+				<div className="flex align-items-center">
+					<Link to={path}>{label}</Link>
+					<Button variant="icon" className="close-btn" onClick={removeTab}>
 						<CloseIcon width={16} height={16} />
 					</Button>
 				</div>

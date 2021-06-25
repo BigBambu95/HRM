@@ -43,7 +43,7 @@ const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={(label, path, office, prevPage) => dispatch(addTab({ label, path, office, prevPage }))}
+				addTab={(param) => dispatch(addTab(param))}
 			/>
 		)
 	})
@@ -59,49 +59,16 @@ const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 
 	const [content, spinner, errorIndicator] = useLoadData(itemList)
 
+	const setFilter = (name: string) => ({ id, value }: { id: React.Key, value: string }) =>
+		dispatch(actions.setFilter({ name, value: value !== 'Все' ? id.toString() : value }))
+
 	return (
 		<div className={className}>
 			<ToolBar>
 				<FilterList>
-					<Filter
-						label="Должность"
-						items={transformDictionaryValues(professions)}
-						onChange={({ id, value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'profession',
-									value: value !== 'Все' ? id.toString() : value,
-								})
-							)
-						}
-						defaultValue="Все"
-					/>
-					<Filter
-						label="Офис"
-						items={transformDictionaryValues(offices)}
-						onChange={({ id, value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'office',
-									value: value !== 'Все' ? id.toString() : value,
-								})
-							)
-						}
-						defaultValue="Все"
-					/>
-					<Filter
-						label="Отдел"
-						items={transformDictionaryValues(departments)}
-						onChange={({ id, value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'department',
-									value: value !== 'Все' ? id.toString() : value,
-								})
-							)
-						}
-						defaultValue="Все"
-					/>
+					<Filter label="Должность" items={transformDictionaryValues(professions)} onChange={setFilter('profession')} />
+					<Filter label="Офис" items={transformDictionaryValues(offices)} onChange={setFilter('office')} />
+					<Filter label="Отдел" items={transformDictionaryValues(departments)} onChange={setFilter('department')} />
 				</FilterList>
 				<ToolBarGroupItem>
 					<Button>Добавить сотрудника</Button>

@@ -1,11 +1,11 @@
 import React from 'react'
 
 export interface WorkerStatusProps {
-	color?: string;
+	status?: string;
 }
 
-const WorkerStatus: React.FC<WorkerStatusProps> = ({ color = 'green', children }) => (
-	<span className={`worker-status ${color}`}>{children}</span>
+const WorkerStatus: React.FC<WorkerStatusProps> = ({ status = 'work', children }) => (
+	<span className={`worker-status ${status}`}>{children}</span>
 )
 
 export default WorkerStatus

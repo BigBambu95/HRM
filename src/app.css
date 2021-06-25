@@ -1,20 +1,20 @@
 :root {
-    --purple: rgba(255, 0, 200, 0.72);
+    --purple: #c0f;
     --dark-purple: #6c00bf;
     --gray: #a3a3a3;
     --light-gray: #dfdfdf;
     --error-color: #eb5757;
     --link-color: #4285f4;
-    --main-gradient: linear-gradient(135deg, #c0f 0%, #6b00be 100%);
-    --transparent-gradient: linear-gradient(135deg, rgba(204, 0, 255, .5) 0%, rgba(107, 0, 190, .5) 100%);
+    --main-gradient: linear-gradient(99.49deg, var(--purple) 2.5%, #6b00be 96.67%);
+    --secondary-gradient: linear-gradient(99.49deg, var(--purple) 2.5%, var(--purple) 96.67%);
     --main-shadow: 0 4px 20px rgba(0, 0, 0, .1);
     --alternate-shadow: 0 -4px 20px rgba(0, 0, 0, .1);
     --second-shadow: 0 0 10px rgba(0, 0, 0, .15);
     --main-font-family: roboto, sans-serif;
-    --small-font: 12px;
-    --normal-font: 14px;
-    --big-font: 16px;
-    --very-big-font: 18px;
+    --font-size-xs: 12px;
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
     --thin-weight: 300;
     --normal-weight: 500;
     --bold-weight: 700;
@@ -22,7 +22,15 @@
     --main-border-radius: 10px;
     --second-border-radius: 8px;
     --base-padding: 8px;
+    --padding-xs: 4px;
+    --padding-md: 16px;
+    --padding-lg: 24px;
+    --padding-xl: 32px;
     --base-margin: 8px;
+    --margin-xs: 4px;
+    --margin-md: 16px;
+    --margin-lg: 24px;
+    --margin-xl: 32px;
 }
 
 *,
@@ -45,7 +53,7 @@ body {
 
 h1 {
     margin: 0;
-    font-size: calc(var(--very-big-font) * 2);
+    font-size: calc(var(--font-size-xl) * 2);
     font-weight: var(--very-bold-weight);
     line-height: 1.2;
 }
@@ -58,14 +66,14 @@ h2 {
 
 h3 {
     margin: 0;
-    font-size: var(--very-big-font);
+    font-size: var(--font-size-xl);
     font-weight: var(--bold-weight);
     line-height: 1.2;
 }
 
 h4 {
     margin: 0;
-    font-size: var(--big-font);
+    font-size: var(--font-size-lg);
     font-weight: var(--normal-weight);
     line-height: 1.5;
 }
@@ -141,7 +149,7 @@ input {
 }
 
 .small {
-    font-size: var(--small-font);
+    font-size: var(--font-size-xs);
 }
 
 .gray {
@@ -234,7 +242,7 @@ input {
     display: flex;
     align-items: center;
     margin: 0 3em;
-    font-size: var(--very-big-font);
+    font-size: var(--font-size-xl);
     font-weight: var(--bold-weight);
 }
 

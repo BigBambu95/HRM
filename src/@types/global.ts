@@ -3,6 +3,8 @@ type ANY_MIGRATION_TYPE = any
 interface Tab {
 	path: string;
 	label: string;
+	office: string;
+	prevPage: string;
 }
 
 type Tabs = Array<Tab>
@@ -27,8 +29,4 @@ interface VacancyListState extends BaseState {
 	filter: FilterType;
 }
 
-interface DictionariesState extends BaseState {
-	offices: Offices;
-	professions: Professions;
-	departments: Departments;
-}
+type AddTabParams = Record<'label' | 'path' | 'office' | 'prevPage', string>

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Modal, Form, Input, Select, Row, DatePicker } from 'components'
+import type { SelectValue } from 'components/select/select'
 import actions from '../actions'
 
 export interface AddVacancyFormProps {
 	isOpenModal: boolean;
 	setIsOpenModal: (isOpen: boolean) => void;
-	offices: ANY_MIGRATION_TYPE;
-	vacancyTemplates: ANY_MIGRATION_TYPE;
+	offices: Array<SelectValue>;
+	vacancyTemplates: Array<SelectValue>;
 	dispatch: ANY_MIGRATION_TYPE;
 }
 
@@ -18,18 +19,18 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 	vacancyTemplates,
 	dispatch,
 }) => {
-	const [term, onChangeTerm] = useState<Date | Date[]>()
+	const [term, setTerm] = useState<Date | Date[]>()
 	const { register, errors, handleSubmit, control } = useForm()
 	const [profession, setProfession] = useState<React.Key>()
 	const [office, setOffice] = useState<React.Key>()
 
-	const onSubmit = (data: ANY_MIGRATION_TYPE) => {
+	const onSubmit = () => {
 		setIsOpenModal(false)
 		return dispatch(
 			actions.addVacancyRequest({
-				...data,
 				profession,
 				office,
+				date: term,
 			})
 		)
 	}
@@ -66,8 +67,8 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 						<Controller
 							name="date"
 							control={control}
-							rules={{ required: true }}
-							render={(props) => <DatePicker format="dd.MM.yy" {...props} value={term} onChange={onChangeTerm} />}
+							// rules={{ required: true }}
+							render={(props) => <DatePicker format="dd.MM.yy" {...props} value={term} onChange={setTerm} />}
 						/>
 					</Form.Item>
 					<Form.Item validation={errors.salary} label="Зарплата">

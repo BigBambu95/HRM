@@ -4,9 +4,7 @@ import { FETCH_WORKERS, FETCH_WORKER_SALARY, FETCH_WORKER, SET_FILTER } from './
 
 const initialState: WorkersListState = {
 	workers: [],
-	worker: {
-		salary: [],
-	},
+	worker: {},
 	filter: {
 		profession: 'Все',
 		office: 'Все',
@@ -41,7 +39,7 @@ const workersList = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(FETCH_WORKER)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
+		[SUCCESS(FETCH_WORKER)]: (state, action: Action<IWorker>) => ({
 			...state,
 			worker: {
 				...state.worker,
@@ -52,9 +50,7 @@ const workersList = handleActions(
 		}),
 		[FAILURE(FETCH_WORKER)]: (state) => ({
 			...state,
-			worker: {
-				salary: [],
-			},
+			worker: {},
 			loading: false,
 			error: true,
 		}),
@@ -63,7 +59,7 @@ const workersList = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(FETCH_WORKER_SALARY)]: (state, action: Action<ANY_MIGRATION_TYPE>) => ({
+		[SUCCESS(FETCH_WORKER_SALARY)]: (state, action: Action<Workers>) => ({
 			...state,
 			worker: {
 				...state.worker,
@@ -81,7 +77,6 @@ const workersList = handleActions(
 			loading: false,
 			error: true,
 		}),
-		//@ts-ignore
 		[SET_FILTER]: (state, action: Action<FilterType>) => ({
 			...state,
 			filter: {

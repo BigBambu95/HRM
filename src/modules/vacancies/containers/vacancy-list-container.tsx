@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'reducers'
 import { addTab } from 'actions'
 import { ToolBar } from 'components/tool-bar'
-import { Grid, Button, Spinner, Filter, FilterList, ErrorIndicator } from 'components'
+import { Grid, Button, Filter, FilterList, ErrorIndicator, Spinner } from 'components'
 import { dictionaryActions } from 'dictionaries'
+import { transformDictionaryValues } from 'helpers/dictionaries'
 import { AddVacancyForm, VacancyListItem } from '../components'
 import actions from '../actions'
-import { transformDictionaryValues } from 'helpers/dictionaries'
 
 const VacancyListContainer = () => {
 	// Redux
@@ -33,11 +33,11 @@ const VacancyListContainer = () => {
 
 	const vacancyList = vacancies.map((vacancy: Vacancy) => (
 		<VacancyListItem
-			key={vacancy._id}
-			item={vacancy}
+			key={vacancy.id}
+			vacancy={vacancy}
 			offices={offices}
 			professions={professions}
-			addTab={(label, path, office, prevPage) => dispatch(addTab(label, path, office, prevPage))}
+			addTab={(params) => dispatch(addTab(params))}
 			deleteItem={(id) => dispatch(actions.removeVacancyRequest(id))}
 		/>
 	))
@@ -46,7 +46,7 @@ const VacancyListContainer = () => {
 		vacancies.length === 0 ? (
 			<p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
-			<Grid columns={3} gap='2em'>
+			<Grid columns={3} gap="2em">
 				{vacancyList}
 			</Grid>
 		)
@@ -55,36 +55,15 @@ const VacancyListContainer = () => {
 	const errorIndicator = error && <ErrorIndicator />
 	const content = !(loading || error) && itemList
 
+	const setFilter = (name: string) => ({ id, value }: { id: React.Key, value: string }) =>
+		dispatch(actions.setFilter({ name, value: value !== 'Все' ? id.toString() : value }))
+
 	return (
 		<>
 			<ToolBar>
 				<FilterList>
-					<Filter
-						label='Должность'
-						items={transformDictionaryValues(professions)}
-						onChange={({ value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'profession',
-									value: value ?? 'Все',
-								})
-							)
-						}
-						defaultValue='Все'
-					/>
-					<Filter
-						label='Офис'
-						items={transformDictionaryValues(offices)}
-						onChange={({ value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'office',
-									value: value ?? 'Все',
-								})
-							)
-						}
-						defaultValue='Все'
-					/>
+					<Filter label="Должность" items={transformDictionaryValues(professions)} onChange={setFilter('profession')} />
+					<Filter label="Офис" items={transformDictionaryValues(offices)} onChange={setFilter('office')} />
 				</FilterList>
 				<Button onClick={() => setIsOpenModal(true)}>Добавить вакансию</Button>
 			</ToolBar>
@@ -95,8 +74,8 @@ const VacancyListContainer = () => {
 				dispatch={dispatch}
 				isOpenModal={isOpenModal}
 				setIsOpenModal={setIsOpenModal}
-				vacancyTemplates={professions}
-				offices={offices}
+				vacancyTemplates={transformDictionaryValues(professions)}
+				offices={transformDictionaryValues(offices)}
 			/>
 		</>
 	)

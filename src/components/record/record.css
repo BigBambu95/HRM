@@ -1,6 +1,5 @@
 .record {
-    /* TODO: Delete magic number */
-    line-height: 17px;
+    white-space: nowrap;
 }
 
 .record span:first-child {

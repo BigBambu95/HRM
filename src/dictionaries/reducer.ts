@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions'
+import { Action, handleActions } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
 import { FETCH_DEPARTMENTS, FETCH_PROFESSIONS, FETCH_OFFICES } from './types'
 
@@ -19,7 +19,7 @@ const dictionaries = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(FETCH_OFFICES)]: (state, action: { payload: Offices }) => ({
+		[SUCCESS(FETCH_OFFICES)]: (state, action: Action<Offices>) => ({
 			...state,
 			offices: action.payload,
 			loading: false,
@@ -39,7 +39,7 @@ const dictionaries = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(FETCH_PROFESSIONS)]: (state, action: { payload: Professions }) => ({
+		[SUCCESS(FETCH_PROFESSIONS)]: (state, action: Action<Professions>) => ({
 			...state,
 			professions: action.payload,
 			loading: false,
@@ -59,7 +59,7 @@ const dictionaries = handleActions(
 			loading: true,
 			error: null,
 		}),
-		[SUCCESS(FETCH_DEPARTMENTS)]: (state, action: { payload: Departments }) => ({
+		[SUCCESS(FETCH_DEPARTMENTS)]: (state, action: Action<Departments>) => ({
 			...state,
 			departments: action.payload,
 			loading: false,

@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 1.65em 3.5em 1.65em 2.5em;
+    padding: 24px 48px 24px 32px;
     border-radius: 10px;
     background: #fff;
     transition: .2s all;

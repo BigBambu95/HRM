@@ -1,13 +1,25 @@
 import React from 'react'
 import { Table } from 'components'
+import { v4 as uuidv4 } from 'uuid'
 
-const SalaryTable = ({ salary }) => {
+export interface SalaryTableProps {
+	salary: ANY_MIGRATION_TYPE;
+}
+
+const SalaryTable = ({ salary }: SalaryTableProps) => {
 	const columns = [
 		{
+			key: uuidv4(),
+			title: 'Имя',
+			dataIndex: 'name',
+		},
+		{
+			key: uuidv4(),
 			title: 'Часы',
 			dataIndex: 'hours',
 		},
 		{
+			key: uuidv4(),
 			title: 'Часовая ставка',
 			dataIndex: 'hourlySalary',
 		},

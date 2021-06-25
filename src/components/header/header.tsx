@@ -4,8 +4,10 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeTab } from 'actions'
 import { BellIcon, ChatIcon, SearchIcon, LogoIcon, MenuIcon } from 'svg'
+import { BASE_URL } from 'services/api'
+import { RootState } from 'reducers'
 import PageTabList from '../page-tab-list'
-import { RootState } from '../../reducers'
+import Avatar from '../avatar'
 
 export interface HeaderProps {
 	tabs: Tabs;
@@ -17,8 +19,8 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => (
 	<header className='header'>
-		<div style={{ display: 'flex' }}>
-			<MenuIcon />
+		<div className="flex">
+			<MenuIcon fill="#CC00FF" />
 			<Link to='/' className='header__logo'>
 				<LogoIcon />
 			</Link>
@@ -39,11 +41,7 @@ const Header: React.FC<HeaderProps> = (props) => (
 				</button>
 			</div>
 			<div className='header__user'>
-				<div className='header__user__picture'>
-					{
-						// TODO: Сделать реальный аватар пользователя
-					}
-				</div>
+				<Avatar src={`${BASE_URL}/images/TJ9tAywL4lo.jpg`} />
 				<div className='header__user__description'>
 					<h3 className='title'>Василий Акзаров</h3>
 					<div className='subtitle'>Руководитель отдела кадров</div>

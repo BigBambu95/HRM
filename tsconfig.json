@@ -5,7 +5,6 @@
         "target": "ES6",
         "allowJs": true,
         "noImplicitAny": true,
-        "isolatedModules": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,

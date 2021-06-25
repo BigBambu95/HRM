@@ -9,7 +9,7 @@ export interface FilterProps extends SelectProps {
 const Filter: React.FC<FilterProps> = ({ label, ...props }) => (
 	<div className="filter">
 		{label && <span className="filter__label">{label}</span>}
-		<Select {...props} />
+		<Select defaultValue="Все" {...props} />
 	</div>
 )
 
