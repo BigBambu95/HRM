@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/ru'
-
 import { CalendarIcon } from 'svg'
 import { FilterList, Filter, Spinner, ErrorIndicator } from 'components'
 import { ToolBar } from 'components/tool-bar'
 import { dictionaryActions } from 'dictionaries'
+import { useSelector } from 'reducers'
 import actions from '../actions'
 import { SalaryTable } from '../components'
+import { transformDictionaryValues } from '../../../helpers/dictionaries'
 
 const SalaryContainer = () => {
 	const dispatch = useDispatch()
@@ -34,6 +35,7 @@ const SalaryContainer = () => {
 
 	const months = monthsEn?.map((item, idx) => {
 		return {
+			id: idx,
 			label: monthsRu[idx],
 			value: item,
 		}
@@ -41,16 +43,60 @@ const SalaryContainer = () => {
 
 	const spinner = loading && <Spinner />
 	const errorIndicator = error && <ErrorIndicator />
-	const content = !(loading || error) && <SalaryTable salary={salaries} />
+	const content = !(loading || error) && (
+		<SalaryTable
+			salary={salaries.map((salary) => {
+				return {
+					...salary,
+				}
+			})}
+		/>
+	)
 
 	return (
 		<>
 			<ToolBar>
 				<FilterList>
-					<Filter items={months} filter={() => {}} icon={<CalendarIcon />} />
-					<Filter label='Офис' items={offices} filter={() => {}} defaultValue='Все' />
-					<Filter label='Отдел' items={departments} filter={() => {}} defaultValue='Все' />
-					<Filter label='Должность' items={professions} filter={() => {}} defaultValue='Все' />
+					<Filter items={months} icon={<CalendarIcon />} />
+					<Filter
+						label="Офис"
+						items={transformDictionaryValues(offices)}
+						onChange={({ value }) =>
+							dispatch(
+								actions.setFilter({
+									name: 'office',
+									value: value ?? 'Все',
+								})
+							)
+						}
+						defaultValue="Все"
+					/>
+					<Filter
+						label="Отдел"
+						items={transformDictionaryValues(departments)}
+						onChange={({ value }) =>
+							dispatch(
+								actions.setFilter({
+									name: 'department',
+									value: value ?? 'Все',
+								})
+							)
+						}
+						defaultValue="Все"
+					/>
+					<Filter
+						label="Должность"
+						items={transformDictionaryValues(professions)}
+						onChange={({ value }) =>
+							dispatch(
+								actions.setFilter({
+									name: 'profession',
+									value: value ?? 'Все',
+								})
+							)
+						}
+						defaultValue="Все"
+					/>
 				</FilterList>
 			</ToolBar>
 			{spinner}

@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import { SUCCESS, REQUEST, FAILURE } from 'helpers/redux'
-import { FETCH_VACANCIES, FETCH_VACANCY, SET_FILTER, ADD_VACANCY, REMOVE_VACANCY } from './types'
 import { Key } from 'react'
+import { FETCH_VACANCIES, FETCH_VACANCY, SET_FILTER, ADD_VACANCY, REMOVE_VACANCY } from './types'
 
 // const actions = createActions<ANY_MIGRATION_TYPE>({
 // 	ARCHIVE_VACANCY_CANDIDATE: (candidate: Candidate) => ({ candidate }),

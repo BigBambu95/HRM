@@ -1,13 +1,13 @@
-import { takeEvery, call, put, all } from 'redux-saga/effects'
+import { takeEvery, call, put, all, StrictEffect } from 'redux-saga/effects'
 import Api from 'services/api'
 import { REQUEST } from 'helpers/redux'
 import { createQueryString } from 'helpers/sagas'
 import { Toast } from 'components'
+import { Action } from 'redux-actions'
 import actions from './actions'
 import { FETCH_VACANCY, FETCH_VACANCIES, ADD_VACANCY, REMOVE_VACANCY } from './types'
-import { Action } from 'redux-actions'
 
-function* fetchVacancies(action: Action<FilterType>): ANY_MIGRATION_TYPE {
+function* fetchVacancies(action: Action<FilterType>): Generator<StrictEffect, void, Record<'data', Vacancies>> {
 	try {
 		const query = createQueryString(action.payload)
 		const vacancies = yield call(Api.get, `/vacancies/${query}`)
@@ -21,7 +21,7 @@ function* watchFetchVacancies() {
 	yield takeEvery(REQUEST(FETCH_VACANCIES), fetchVacancies)
 }
 
-function* fetchVacancy(action: Action<string>): ANY_MIGRATION_TYPE {
+function* fetchVacancy(action: Action<string>): Generator<StrictEffect, void, Record<'data', Vacancy>> {
 	try {
 		const vacancy = yield call(Api.get, `/vacancies/${action.payload}`)
 		yield put(actions.fetchVacancySuccess(vacancy.data))
@@ -34,30 +34,30 @@ function* watchfetchVacancy() {
 	yield takeEvery(REQUEST(FETCH_VACANCY), fetchVacancy)
 }
 
-function* addVacancy(action: Action<Vacancy>): ANY_MIGRATION_TYPE {
+function* addVacancy(action: Action<Vacancy>): Generator<StrictEffect, void, Record<'data', Vacancy>> {
 	try {
 		const vacancy = yield call(Api.post, '/vacancies', action.payload)
-
 		yield put(actions.addVacancySuccess(vacancy.data))
-		Toast.push({ label: 'Вакансия добавлена' })
+		new Toast().push({ label: 'Вакансия добавлена' })
 	} catch (err) {
 		yield put(actions.addVacancyFailure(err))
-		Toast.push({ label: 'Произошла ошибка' })
+		console.error(err)
+		new Toast().push({ label: 'Произошла ошибка' })
 	}
 }
 
 function* watchAddVacancy() {
-	yield takeEvery(REQUEST(ADD_VACANCY), actions.addVacancyRequest)
+	yield takeEvery(REQUEST(ADD_VACANCY), addVacancy)
 }
 
-function* removeVacancy(action: Action<string>): ANY_MIGRATION_TYPE {
+function* removeVacancy(action: Action<string>): Generator<StrictEffect, void, Record<'data', any>> {
 	try {
 		const res = yield call(Api.delete, `/vacancies/${action.payload}`)
 		if (!res.data.status) {
 			throw new Error('Произошла ошибка при удалении вакансии')
 		}
 		yield put(actions.removeVacancySuccess(action.payload))
-		Toast.push({ label: 'Вакансия удалена' })
+		new Toast().push({ label: 'Вакансия удалена' })
 	} catch (err) {
 		yield put(actions.removeVacancyFailure(err))
 	}

@@ -3,12 +3,12 @@ import WorkerStatus from '../worker-status'
 
 // TODO: Сделать нормально
 const WorkerStatusPanel = () => (
-	<div className='worker-status-panel'>
-		<WorkerStatus color='work'>На работе</WorkerStatus>
-		<WorkerStatus color='blue'>В командировке</WorkerStatus>
-		<WorkerStatus color='orange'>Отсутствует</WorkerStatus>
-		<WorkerStatus color='aqua'>В отпуске</WorkerStatus>
-		<WorkerStatus color='yellow'>Уважительная причина</WorkerStatus>
+	<div className="worker-status-panel">
+		<WorkerStatus status="work">На работе</WorkerStatus>
+		<WorkerStatus status="mission">В командировке</WorkerStatus>
+		<WorkerStatus status="absent">Отсутствует</WorkerStatus>
+		<WorkerStatus status="vacation">В отпуске</WorkerStatus>
+		<WorkerStatus status="reason">Уважительная причина</WorkerStatus>
 	</div>
 )
 

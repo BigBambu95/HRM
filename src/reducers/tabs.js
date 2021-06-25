@@ -14,15 +14,13 @@ const updateObjectInArray = (array, payload, index) =>
 
 const initialState = {
 	tabs: [],
-	activeTab: '',
+	activeTab: {},
 }
 
 const tabList = handleActions(
 	{
 		ADD_TAB: (state, { payload }) => {
-			const tabIdx = state.tabs.findIndex((tab) =>
-				payload.path?.includes(tab.path)
-			)
+			const tabIdx = state.tabs.findIndex((tab) => payload.path?.includes(tab.path))
 
 			if (tabIdx !== -1) {
 				return {

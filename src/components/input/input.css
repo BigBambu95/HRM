@@ -19,7 +19,7 @@
     padding: 0 .85em;
     border: 1px solid var(--gray);
     border-radius: var(--second-border-radius);
-    font-size: var(--normal-font);
+    font-size: var(--font-size-md);
     transition: .2s all;
 }
 

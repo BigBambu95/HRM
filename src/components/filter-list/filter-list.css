@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    font-size: var(--normal-font);
+    font-size: var(--font-size-md);
 }
 
 .filter-list__btn {

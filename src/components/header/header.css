@@ -1,10 +1,10 @@
 .header {
     z-index: 10;
-    min-height: 80px;
     display: grid;
-    grid-template-columns: 190px 3fr 1fr;
+    grid-template-columns: 220px 3fr 500px;
     align-items: center;
-    padding: 0 2.5em;
+    min-height: 81px;
+    padding: 0 var(--padding-xl);
     background: #fff;
     box-shadow: var(--main-shadow);
 }
@@ -15,6 +15,11 @@
 
 .header__right {
     display: flex;
+    justify-content: flex-end;
+}
+
+.toolbar {
+    margin: 0 var(--margin-xl);
 }
 
 .header__user,
@@ -24,10 +29,6 @@
 }
 
 .header .toolbar button {
-    margin: 0 1em;
-}
-
-.header__user {
     margin: 0 1em;
 }
 
@@ -45,11 +46,10 @@
 }
 
 .header__user__description {
-    margin: 0 .75em;
+    margin: 0 var(--base-margin);
 }
 
 .header__user__description .subtitle {
     color: #b1b1b1;
-    font-size: .9rem;
-    line-height: 14px;
+    font-size: var(--font-size-xs);
 }

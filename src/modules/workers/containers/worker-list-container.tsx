@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'reducers'
+import classnames from 'classnames'
 import { addTab } from 'actions'
-import { Button, Grid, Filter, FilterList, Spinner, ErrorIndicator } from 'components'
+import { Button, Grid, Filter, FilterList, ToolBar, ToolBarGroupItem } from 'components'
 import { dictionaryActions } from 'dictionaries'
 import { transformDictionaryValues } from 'helpers/dictionaries'
+import { useLoadData } from 'hooks'
 import actions from '../actions'
 import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
-import { ToolBar, ToolBarGroupItem } from '../../../components/tool-bar'
 
-const WorkerListContainer = ({ match }) => {
+const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 	const dispatch = useDispatch()
 	const professions = useSelector((state) => state.dictionaries.professions)
 	const offices = useSelector((state) => state.dictionaries.offices)
 	const departments = useSelector((state) => state.dictionaries.departments)
 	const filter = useSelector((state) => state.workerList.filter)
 	const workers = useSelector((state) => state.workerList.workers)
-	const loading = useSelector((state) => state.workerList.loading)
-	const error = useSelector((state) => state.workerList.error)
 
 	useEffect(() => {
-		dispatch(dictionaryActions.fetchProfessionsRequest())
+		dispatch(dictionaryActions.fetchOfficesRequest())
 		dispatch(dictionaryActions.fetchDepartmentsRequest())
+		dispatch(dictionaryActions.fetchProfessionsRequest())
 	}, [])
 
 	useEffect(() => {
@@ -30,21 +30,20 @@ const WorkerListContainer = ({ match }) => {
 	}, [filter])
 
 	const columns = match.params.id ? 1 : 2
-	const clazz = match.params.id ? 'worker-list opened-worker' : 'worker-list'
+	const className = classnames('worker-list', {
+		'opened-worker': match.params.id,
+	})
 
 	const workerList = workers.map((w) => {
 		return (
 			<WorkerListItem
-				key={w._id}
+				key={w.id}
 				worker={w}
 				departments={departments}
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={
-					(label, path, office, prevPage) =>
-						dispatch(addTab(label, path, office, prevPage))
-				}
+				addTab={(param) => dispatch(addTab(param))}
 			/>
 		)
 	})
@@ -53,61 +52,23 @@ const WorkerListContainer = ({ match }) => {
 		workers.length === 0 ? (
 			<p>По данным параметрам фильтрации не найдено результатов!</p>
 		) : (
-			<Grid
-				columns={columns}
-				gap='2em'
-			>
+			<Grid columns={columns} gap="2em">
 				{workerList}
 			</Grid>
 		)
 
-	const spinner = loading && <Spinner />
-	const errorIndicator = error && <ErrorIndicator />
-	const content = !(loading || error) && itemList
+	const [content, spinner, errorIndicator] = useLoadData(itemList)
+
+	const setFilter = (name: string) => ({ id, value }: { id: React.Key, value: string }) =>
+		dispatch(actions.setFilter({ name, value: value !== 'Все' ? id.toString() : value }))
 
 	return (
-		<div className={clazz}>
+		<div className={className}>
 			<ToolBar>
 				<FilterList>
-					<Filter
-						label='Должность'
-						items={transformDictionaryValues(professions)}
-						onChange={({ value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'profession',
-									value: value ?? 'Все',
-								})
-							)
-						}
-						defaultValue='Все'
-					/>
-					<Filter
-						label='Офис'
-						items={transformDictionaryValues(offices)}
-						onChange={({ value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'office',
-									value: value ?? 'Все',
-								})
-							)
-						}
-						defaultValue='Все'
-					/>
-					<Filter
-						label='Отдел'
-						items={transformDictionaryValues(departments)}
-						onChange={({ value }) =>
-							dispatch(
-								actions.setFilter({
-									name: 'department',
-									value: value ?? 'Все',
-								})
-							)
-						}
-						defaultValue='Все'
-					/>
+					<Filter label="Должность" items={transformDictionaryValues(professions)} onChange={setFilter('profession')} />
+					<Filter label="Офис" items={transformDictionaryValues(offices)} onChange={setFilter('office')} />
+					<Filter label="Отдел" items={transformDictionaryValues(departments)} onChange={setFilter('department')} />
 				</FilterList>
 				<ToolBarGroupItem>
 					<Button>Добавить сотрудника</Button>

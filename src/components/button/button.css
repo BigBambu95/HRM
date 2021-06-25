@@ -5,7 +5,7 @@
     padding: .5em 1.7em;
     border-radius: var(--main-border-radius);
     color: #000;
-    font-size: var(--normal-font);
+    font-size: var(--font-size-md);
     font-weight: var(--thin-weight);
     white-space: nowrap;
 }
@@ -24,7 +24,7 @@
 }
 
 .btn.largeFont {
-    font-size: var(--big-font);
+    font-size: var(--font-size-lg);
     font-weight: var(--normal-weight);
 }
 
@@ -38,11 +38,11 @@
 }
 
 .btn.solid.purple:hover {
-    background: linear-gradient(130deg, var(--purple) 0%, var(--purple) 100%);
+    background: var(--secondary-gradient);
 }
 
 .btn.solid.purple:active {
-    background: linear-gradient(130deg, var(--dark-purple) 0%, var(--dark-purple) 100%);
+    background: var(--dark-purple);
 }
 
 .btn.outlined {
@@ -62,11 +62,11 @@
 }
 
 .btn.outlined.purple {
-    border-color: var(--purple);
+    border: 1px solid var(--purple);
 }
 
 .btn.outlined.purple:hover {
-    background: var(--purple);
+    background: var(--secondary-gradient);
     color: #fff;
 }
 

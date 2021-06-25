@@ -1,5 +1,5 @@
 interface IDocument {
-	_id: React.Key;
+	id: React.Key;
 	name: string;
 }
 

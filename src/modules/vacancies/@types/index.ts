@@ -1,5 +1,5 @@
 interface Vacancy {
-	_id: string;
+	id: string;
 	profession: string;
 	url: string;
 	office: string;
@@ -10,9 +10,10 @@ interface Vacancy {
 type Vacancies = Array<Vacancy>
 
 interface Candidate {
-	_id: string;
+	id: string;
 	name: string;
 	avatar: string;
+	status: string;
 	age: string;
 	exp: string;
 	desiredSalary: string;

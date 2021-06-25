@@ -9,7 +9,7 @@ const fetchWorkersFailure = createAction(FAILURE(FETCH_WORKERS), (err: ErrorType
 
 // Fetch worker
 const fetchWorkerRequest = createAction(REQUEST(FETCH_WORKER), (id: React.Key) => id)
-const fetchWorkerSuccess = createAction(SUCCESS(FETCH_WORKER), (worker: Worker) => worker)
+const fetchWorkerSuccess = createAction(SUCCESS(FETCH_WORKER), (worker: IWorker) => worker)
 const fetchWorkerFailure = createAction(FAILURE(FETCH_WORKER), (err: ErrorType) => err)
 
 // Fetch worker salary
@@ -17,7 +17,7 @@ const fetchWorkerSalaryRequest = createAction(REQUEST(FETCH_WORKER_SALARY), (id:
 const fetchWorkerSalarySuccess = createAction(SUCCESS(FETCH_WORKER_SALARY), (salary: Salary) => salary)
 const fetchWorkerSalaryFailure = createAction(FAILURE(FETCH_WORKER_SALARY), (err: ErrorType) => err)
 
-const setFilter = createAction(REQUEST(SET_FILTER), (params: SetFilterParamsType) => params)
+const setFilter = createAction(SET_FILTER, (params: SetFilterParamsType) => params)
 
 export default {
 	fetchWorkersRequest,

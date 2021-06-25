@@ -31,7 +31,7 @@
     margin-right: var(--base-margin);
     text-overflow: ellipsis;
     overflow: hidden;
-    font-size: var(--small-font);
+    font-size: var(--font-size-xs);
 }
 
 .select__list {

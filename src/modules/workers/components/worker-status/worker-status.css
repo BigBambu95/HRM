@@ -22,7 +22,7 @@
     background: #4285f4;
 }
 
-.worker-status.orange::before {
+.worker-status.absent::before {
     background: #eb5757;
 }
 
@@ -30,6 +30,6 @@
     background: #74eeee;
 }
 
-.worker-status.yellow::before {
+.worker-status.reason::before {
     background: #f2c94c;
 }

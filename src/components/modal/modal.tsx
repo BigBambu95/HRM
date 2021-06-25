@@ -31,24 +31,26 @@ const Modal: React.FC<ModalProps> = ({
 		maxWidth: width,
 	}
 
+	const baseClassName = 'modal-window'
+
 	if (!isOpen) return null
 
 	return (
-		<div className="modal-window-wrapper">
+		<div className={`${baseClassName}-wrapper`}>
 			<div className="overlay" onClick={onCancel} />
-			<div className={classnames('modal-window', className)} style={styles}>
-				<div className="modal-window__header">
+			<div className={classnames(baseClassName, className)} style={styles}>
+				<div className={`${baseClassName}__header`}>
 					<h2>{title}</h2>
-					<Button variant="icon" className="modal-window__close-btn" onClick={onCancel}>
+					<Button variant="icon" className={`${baseClassName}__close-btn`} onClick={onCancel}>
 						<CloseIcon />
 					</Button>
 				</div>
-				<div className="modal-window__body">{children}</div>
-				<div className="modal-window__footer">
+				<div className={`${baseClassName}__body`}>{children}</div>
+				<div className={`${baseClassName}__footer`}>
 					<Button onClick={onSubmit} size="large" variant="solid" font="large">
 						{submitBtnText}
 					</Button>
-					<Button onClick={onCancel} size="large">
+					<Button className={`${baseClassName}__cancel-btn`} onClick={onCancel} size="large">
 						Отменить
 					</Button>
 				</div>

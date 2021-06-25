@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 export type SelectValue = {
 	id: React.Key,
+	label?: string,
 	value: string,
 }
 
@@ -48,19 +49,19 @@ const Select: ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
 
 	const selectList = items?.map((item) => (
 		<li key={item.id} className={getSelectItemClass(item.value, value)} onClick={() => chooseItem(item)}>
-			{item.value}
+			{item.label || item.value}
 		</li>
 	))
 
 	return (
 		<div className={classnames('select', className)} style={style} ref={container}>
-			<div className='select__current-item'>{value}</div>
-			{ref && <input type='hidden' id={name} name={name} value={value} ref={ref} {...otherProps} />}
-			<Button variant='icon' onClick={() => setIsOpen(!isOpen)}>
+			<div className="select__current-item">{value}</div>
+			{ref && <input type="hidden" id={name} name={name} value={value} ref={ref} {...otherProps} />}
+			<Button variant="icon" onClick={() => setIsOpen(!isOpen)}>
 				{icon}
 			</Button>
 			{isOpen && (
-				<ul className='select__list'>
+				<ul className="select__list">
 					{selectList}
 					{defaultValue && (
 						<li

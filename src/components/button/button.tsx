@@ -9,7 +9,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	fullWidth?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
 	children,
 	size = 'medium',
 	font = 'medium',
@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
 	className,
 	fullWidth,
 	...otherProps
-}) => {
+}: ButtonProps) => {
 	const btnClass = classNames('btn', className, size, variant, color, {
 		largeFont: font === 'large',
 		fullWidth,

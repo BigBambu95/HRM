@@ -1,17 +1,30 @@
-import { createActions } from 'redux-actions'
+import { createAction } from 'redux-actions'
 import { REQUEST, SUCCESS, FAILURE } from 'helpers/redux'
-import DictionariesTypes from './types'
+import { FETCH_OFFICES, FETCH_DEPARTMENTS, FETCH_PROFESSIONS } from './types'
 
-const dictionaryActions = createActions({
-	[REQUEST(DictionariesTypes.FETCH_OFFICES)]: () => ({}),
-	[SUCCESS(DictionariesTypes.FETCH_OFFICES)]: (offices) => offices,
-	[FAILURE(DictionariesTypes.FETCH_OFFICES)]: (err) => err,
-	[REQUEST(DictionariesTypes.FETCH_PROFESSIONS)]: () => ({}),
-	[SUCCESS(DictionariesTypes.FETCH_PROFESSIONS)]: (professions) => professions,
-	[FAILURE(DictionariesTypes.FETCH_PROFESSIONS)]: (err) => err,
-	[REQUEST(DictionariesTypes.FETCH_DEPARTMENTS)]: () => ({}),
-	[SUCCESS(DictionariesTypes.FETCH_DEPARTMENTS)]: (departments) => departments,
-	[FAILURE(DictionariesTypes.FETCH_DEPARTMENTS)]: (err) => err,
-})
+// Fetch offices
+const fetchOfficesRequest = createAction(REQUEST(FETCH_OFFICES))
+const fetchOfficesSuccess = createAction(SUCCESS(FETCH_OFFICES), (offices: Offices) => offices)
+const fetchOfficesFailure = createAction(FAILURE(FETCH_OFFICES), (err: ErrorType) => err)
 
-export default dictionaryActions
+// Fetch professions
+const fetchProfessionsRequest = createAction(REQUEST(FETCH_PROFESSIONS))
+const fetchProfessionsSuccess = createAction(SUCCESS(FETCH_PROFESSIONS), (professions: Professions) => professions)
+const fetchProfessionsFailure = createAction(FAILURE(FETCH_PROFESSIONS), (err: ErrorType) => err)
+
+// Fetch departments
+const fetchDepartmentsRequest = createAction(REQUEST(FETCH_DEPARTMENTS))
+const fetchDepartmentsSuccess = createAction(SUCCESS(FETCH_DEPARTMENTS), (departments: Departments) => departments)
+const fetchDepartmentsFailure = createAction(FAILURE(FETCH_DEPARTMENTS), (err: ErrorType) => err)
+
+export default {
+	fetchOfficesRequest,
+	fetchOfficesSuccess,
+	fetchOfficesFailure,
+	fetchProfessionsRequest,
+	fetchProfessionsSuccess,
+	fetchProfessionsFailure,
+	fetchDepartmentsRequest,
+	fetchDepartmentsSuccess,
+	fetchDepartmentsFailure,
+}

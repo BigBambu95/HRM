@@ -1,19 +1,20 @@
 import { createSelector } from 'reselect'
+import { RootState } from '../../reducers'
 
-export const selectCandidates = (state: ANY_MIGRATION_TYPE) => state.vacancyList.vacancy.candidates
+export const selectCandidates = (state: RootState): Candidates => state.vacancyList.vacancy.candidates
 
-export const selectReviewSummaryCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'рассмотрение резюме')
+export const selectReviewSummaryCandidates = createSelector(selectCandidates, (candidates) =>
+	candidates.filter(({ status }) => status.toLowerCase() === 'рассмотрение резюме')
 )
 
-export const selectPhoneCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'телефонное интервью')
+export const selectPhoneCandidates = createSelector(selectCandidates, (candidates) =>
+	candidates.filter(({ status }) => status.toLowerCase() === 'телефонное интервью')
 )
 
-export const selectInterviewCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'собеседование')
+export const selectInterviewCandidates = createSelector(selectCandidates, (candidates) =>
+	candidates.filter(({ status }) => status.toLowerCase() === 'собеседование')
 )
 
-export const selectFinalCandidates = createSelector(selectCandidates, (items) =>
-	items.filter(({ status }: ANY_MIGRATION_TYPE) => status.toLowerCase() === 'кандидат')
+export const selectFinalCandidates = createSelector(selectCandidates, (candidates) =>
+	candidates.filter(({ status }) => status.toLowerCase() === 'кандидат')
 )

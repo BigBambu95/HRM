@@ -7,7 +7,7 @@
 
 .filter__label {
     margin-right: 1em;
-    font-size: var(--small-font);
+    font-size: var(--font-size-xs);
     font-weight: var(--thin-weight);
     white-space: nowrap;
 }

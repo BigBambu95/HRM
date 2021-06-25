@@ -37,8 +37,8 @@ export interface SidebarLinkProps {
 const SidebarLink = ({ icon, path, children, addTab, subLinks }: SidebarLinkProps) => {
 	const [isShowSubMenu, showSubMenu] = useState(false)
 
-	const arrow = subLinks.length ? <ArrowDownIcon /> : null
-	const subMenu = subLinks.length ? <SubMenuList items={subLinks} path={path} isShow={isShowSubMenu} /> : null
+	const arrow = subLinks.length > 0 && <ArrowDownIcon />
+	const subMenu = subLinks.length > 0 && <SubMenuList items={subLinks} path={path} isShow={isShowSubMenu} />
 
 	const arrowClassNames = isShowSubMenu ? 'arrow-btn active' : 'arrow-btn'
 

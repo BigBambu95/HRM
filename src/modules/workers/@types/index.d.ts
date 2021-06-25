@@ -1,5 +1,5 @@
 interface IWorker {
-	_id: React.Key;
+	id: React.Key;
 	name: string;
 	profession: string;
 	office: string;
@@ -8,6 +8,7 @@ interface IWorker {
 	department: string;
 	avatar: string;
 	status: string;
+	salary?: ANY_MIGRATION_TYPE;
 	tags: Array<string>;
 }
 
