@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from 'components'
+import { Typography } from '@components'
 
 export interface TagListProps {
 	tags: Array<string>;

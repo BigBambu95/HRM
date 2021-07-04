@@ -1,4 +1,5 @@
 import { VacancyListContainer, VacancyContainer } from './containers'
-import rootSaga from './sagas'
+import VacanciesStore from './store/vacancies'
+import VacancyStore from './store/vacancy'
 
-export { VacancyListContainer, VacancyContainer, rootSaga }
+export { VacancyListContainer, VacancyContainer, VacanciesStore, VacancyStore }

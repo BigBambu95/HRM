@@ -1,4 +1,4 @@
-import Toast from './toast'
+import toast from './toast'
 import './toast.css'
 
-export default Toast
+export default toast

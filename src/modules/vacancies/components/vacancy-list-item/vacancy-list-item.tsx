@@ -2,13 +2,14 @@ import React from 'react'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 
-import { ContextMenu } from 'components'
-import { FireIcon, PencilIcon, RemoveBasketIcon } from 'svg'
-import { getDictionaryValueById } from 'helpers/dictionaries'
+import { ContextMenu } from '@components'
+import { FireIcon, PencilIcon, RemoveBasketIcon } from '@svg'
+import { getDictionaryValueById } from '@helpers/dictionaries'
+import { observer } from 'mobx-react-lite'
 
 export interface VacancyListItemProps {
 	vacancy: Vacancy;
-	deleteItem: (id: React.Key) => void;
+	removeVacancy: (id: React.Key) => void;
 	addTab: ({ label, path, office, prevPage }: AddTabParams) => void;
 	offices: Offices;
 	professions: Professions;
@@ -16,7 +17,7 @@ export interface VacancyListItemProps {
 
 const VacancyListItem: React.FC<VacancyListItemProps> = ({
 	vacancy,
-	deleteItem,
+	removeVacancy,
 	addTab,
 	offices,
 	professions,
@@ -51,7 +52,7 @@ const VacancyListItem: React.FC<VacancyListItemProps> = ({
 			<ContextMenu>
 				<ContextMenu.Item icon={<PencilIcon width={16} height={16} />}>Изменить</ContextMenu.Item>
 				<ContextMenu.Item
-					onClick={() => deleteItem(id)}
+					onClick={() => removeVacancy(id)}
 					icon={<RemoveBasketIcon width={16} height={16} />}
 				>
 					Удалить
@@ -61,4 +62,4 @@ const VacancyListItem: React.FC<VacancyListItemProps> = ({
 	)
 }
 
-export default VacancyListItem
+export default observer(VacancyListItem)

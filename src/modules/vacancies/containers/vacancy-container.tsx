@@ -1,30 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { compose } from 'redux'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'reducers'
+import React, { useContext, useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Grid, Button, Spinner, FilterList, Filter, ToolBar, ToolBarGroupItem, ErrorIndicator } from 'components'
-import { PencilIcon, RemoveBasketIcon } from 'svg'
-import {
-	selectCandidates,
-	selectInterviewCandidates,
-	selectPhoneCandidates,
-	selectReviewSummaryCandidates,
-	selectFinalCandidates,
-} from '../selectors'
-import actions from '../actions'
+import { observer } from 'mobx-react-lite'
+import { Grid, Button, Spinner, FilterList, Filter, ToolBar, ToolBarGroupItem, ErrorIndicator } from '@components'
+import { PencilIcon, RemoveBasketIcon } from '@svg'
+import { StoreContext } from '@store/StoreContext'
+import { autorun } from 'mobx'
 import { CandidateList, AddSummaryForm } from '../components'
 
-const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
-	const dispatch = useDispatch()
-
-	const candidates = useSelector(selectCandidates)
-	const reviewSummaryCandidates = useSelector(selectReviewSummaryCandidates)
-	const phoneCandidates = useSelector(selectPhoneCandidates)
-	const interviewCandidates = useSelector(selectInterviewCandidates)
-	const finalCandidates = useSelector(selectFinalCandidates)
-	const loading = useSelector((state) => state.vacancyList.loading)
-	const error = useSelector((state) => state.vacancyList.error)
+const VacancyContainer = observer(({ history, match }: ANY_MIGRATION_TYPE) => {
+	const { vacancyStore, vacanciesStore: { removeVacancy } } = useContext(StoreContext)
+	const { state, candidates, phoneCandidates, fetchVacancy, setFilter,
+		interviewCandidates, finalCandidates, reviewSummaryCandidates, addCandidate
+	} = vacancyStore
 
 	// Local state
 	const [isOpenModal, setIsOpenModal] = useState(false)
@@ -49,21 +36,23 @@ const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
 	]
 
 	useEffect(() => {
-		dispatch(actions.fetchVacancyRequest(match.params.id))
+		autorun(() => fetchVacancy(match.params.id))
 	}, [match.params.id])
 
-	const deleteVacancy = () => {
-		dispatch(actions.removeVacancyRequest(match.params.id))
-		history.push('/vacancies/')
-	}
+	const itemList =
+		candidates.length === 0 ? (
+			<h4>На данную вакансию пока нет кандидатов!</h4>
+		) : (
+			<Grid columns={4} gap="2em">
+				{candidateLists.map((candidateList) => {
+					return <CandidateList key={candidateList.title} {...candidateList} />
+				})}
+			</Grid>
+		)
 
-	if (loading) return <Spinner />
-
-	if (error) return <ErrorIndicator />
-
-	if (candidates.length === 0) {
-		return <h4>На данную вакансию пока нет кандидатов!</h4>
-	}
+	const spinner = state === 'pending' && <Spinner />
+	const errorIndicator = state === 'error' && <ErrorIndicator />
+	const content = state === 'done' && itemList
 
 	return (
 		<>
@@ -77,7 +66,7 @@ const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
 								value: age,
 							}
 						})}
-						onChange={({ value }) => dispatch(actions.setFilter({ name: 'age', value }))}
+						onChange={({ value }) => setFilter({ name: 'age', value })}
 						defaultValue="Все"
 					/>
 					<Filter
@@ -88,7 +77,7 @@ const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
 								value: exp,
 							}
 						})}
-						onChange={({ value }) => dispatch(actions.setFilter({ name: 'exp', value }))}
+						onChange={({ value }) => setFilter({ name: 'exp', value })}
 						defaultValue="Все"
 					/>
 					<Filter
@@ -99,7 +88,7 @@ const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
 								value: desiredSalary,
 							}
 						})}
-						onChange={({ value }) => dispatch(actions.setFilter({ name: 'desiredSalary', value }))}
+						onChange={({ value }) => setFilter({ name: 'desiredSalary', value })}
 						defaultValue="Все"
 					/>
 				</FilterList>
@@ -110,19 +99,27 @@ const VacancyContainer = ({ history, match }: ANY_MIGRATION_TYPE) => {
 					<Button variant="icon">
 						<PencilIcon />
 					</Button>
-					<Button variant="icon" onClick={deleteVacancy}>
+					 <Button
+						variant="icon"
+						onClick={() => {
+						 removeVacancy(match.params.id)
+						 history.push('/vacancies/')
+					 }}
+					 >
 						<RemoveBasketIcon />
-					</Button>
+					 </Button>
 				</ToolBarGroupItem>
 			</ToolBar>
-			<Grid columns={4} gap="2em">
-				{candidateLists.map((props) => {
-					return <CandidateList key={props.title} {...props} />
-				})}
-			</Grid>
-			<AddSummaryForm isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} dispatch={dispatch} />
+			{spinner}
+			{errorIndicator}
+			{content}
+			<AddSummaryForm
+				isOpenModal={isOpenModal}
+				setIsOpenModal={setIsOpenModal}
+				addCandidate={(candidate: Candidate) => addCandidate(match.params.id, candidate)}
+			/>
 		</>
 	)
-}
+})
 
-export default compose(withRouter)(VacancyContainer)
+export default withRouter(VacancyContainer)

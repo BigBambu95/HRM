@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, Key } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Modal, Form, Input, Select, Row, DatePicker } from 'components'
+import { Modal, Form, Input, Select, Row, DatePicker } from '@components'
 import type { SelectValue } from 'components/select/select'
-import actions from '../actions'
 
 export interface AddVacancyFormProps {
 	isOpenModal: boolean;
 	setIsOpenModal: (isOpen: boolean) => void;
 	offices: Array<SelectValue>;
 	vacancyTemplates: Array<SelectValue>;
-	dispatch: ANY_MIGRATION_TYPE;
+	addVacancy: ({ profession, office, date }: { profession?: Key, office?: Key, date?: Date | Date[] }) => void;
 }
 
 const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
@@ -17,7 +16,7 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 	setIsOpenModal,
 	offices,
 	vacancyTemplates,
-	dispatch,
+	addVacancy
 }) => {
 	const [term, setTerm] = useState<Date | Date[]>()
 	const { register, errors, handleSubmit, control } = useForm()
@@ -26,13 +25,11 @@ const AddVacancyForm: React.FC<AddVacancyFormProps> = ({
 
 	const onSubmit = () => {
 		setIsOpenModal(false)
-		return dispatch(
-			actions.addVacancyRequest({
-				profession,
-				office,
-				date: term,
-			})
-		)
+		return addVacancy({
+			profession,
+			office,
+			date: term,
+		})
 	}
 
 	return (

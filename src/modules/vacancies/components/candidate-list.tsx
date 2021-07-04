@@ -1,6 +1,7 @@
 import React from 'react'
-import { Grid, Row, ContextMenu } from 'components'
-import { ArchiveIcon, VacancyIcon } from 'svg'
+import { Grid, Row, ContextMenu } from '@components'
+import { ArchiveIcon, VacancyIcon } from '@svg'
+import { observer } from 'mobx-react-lite'
 import CandidateListItem from './candidate-list-item'
 
 export interface CandidateListProps {
@@ -40,4 +41,4 @@ const CandidateList: React.FC<CandidateListProps> = ({ candidates, archiveAllIte
 	)
 }
 
-export default CandidateList
+export default observer(CandidateList)

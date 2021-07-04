@@ -1,16 +1,15 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
-import { Modal, Form, Input, Select, Row, Col } from 'components'
-import actions from '../actions'
+import { Controller, useForm } from 'react-hook-form'
+import { Modal, Form, Input, Select, Row, Col } from '@components'
 
 export interface AddSummaryFormProps {
 	isOpenModal: boolean;
 	setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-	dispatch: ANY_MIGRATION_TYPE;
+	addCandidate: ANY_MIGRATION_TYPE;
 }
 
-const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }: AddSummaryFormProps) => {
-	const { handleSubmit } = useForm()
+const AddSummaryForm = ({ isOpenModal, setIsOpenModal, addCandidate }: AddSummaryFormProps) => {
+	const { handleSubmit, control } = useForm()
 
 	const employment = [
 		{
@@ -31,13 +30,12 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }: AddSummaryFor
 		},
 	]
 
-	const onSubmit = (data: ANY_MIGRATION_TYPE) => {
+	const onSubmit = ({ firstName, lastName, ...data }: Record<string, any>) => {
 		setIsOpenModal(false)
-		return dispatch(
-			actions.addVacancyRequest({
-				...data,
-			})
-		)
+		return addCandidate({
+			...data,
+			name: `${lastName} ${firstName}`
+		})
 	}
 
 	return (
@@ -55,24 +53,44 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }: AddSummaryFor
 				<Row justify="space-between" gutter={[20, 20]}>
 					<Col size={8}>
 						<Form.Item>
-							<Input placeholder="Фамилия" />
+							<Controller
+								name="lastName"
+								control={control}
+								render={(props) => (
+									<Input
+										placeholder="Фамилия"
+										{...props}
+									/>
+								)}
+							/>
 						</Form.Item>
 					</Col>
 					<Col size={8}>
 						<Form.Item>
-							<Input placeholder="Имя" />
+							<Controller
+								name="firstName"
+								control={control}
+								render={(props) => (
+									<Input
+										placeholder="Имя"
+										{...props}
+									/>
+								)}
+							/>
 						</Form.Item>
 					</Col>
 					<Col size={8}>
 						<Form.Item>
-							<Input placeholder="Отчество" />
-						</Form.Item>
-					</Col>
-				</Row>
-				<Row justify="space-between" gutter={[20, 20]}>
-					<Col size={8}>
-						<Form.Item>
-							<Input placeholder="Возраст" />
+							<Controller
+								name="age"
+								control={control}
+								render={(props) => (
+									<Input
+										placeholder="Возраст"
+										{...props}
+									/>
+								)}
+							/>
 						</Form.Item>
 					</Col>
 				</Row>
@@ -80,12 +98,30 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }: AddSummaryFor
 				<Row justify="space-between" gutter={[20, 20]}>
 					<Col size={12}>
 						<Form.Item>
-							<Input placeholder="E-mail" />
+							<Controller
+								name="mail"
+								control={control}
+								render={(props) => (
+									<Input
+										placeholder="E-mail"
+										{...props}
+									/>
+								)}
+							/>
 						</Form.Item>
 					</Col>
 					<Col size={12}>
 						<Form.Item>
-							<Input placeholder="Телефон" />
+							<Controller
+								name="phone"
+								control={control}
+								render={(props) => (
+									<Input
+										placeholder="Телефон"
+										{...props}
+									/>
+								)}
+							/>
 						</Form.Item>
 					</Col>
 				</Row>
@@ -93,12 +129,30 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, dispatch }: AddSummaryFor
 				<Row justify="space-between" gutter={[20, 20]}>
 					<Col size={12}>
 						<Form.Item>
-							<Input placeholder="Опыт" />
+							<Controller
+								name="exp"
+								control={control}
+								render={(props) => (
+									<Input
+										placeholder="Опыт"
+										{...props}
+									/>
+								)}
+							/>
 						</Form.Item>
 					</Col>
 					<Col size={12}>
 						<Form.Item>
-							<Input placeholder="Желаемая зарплата" />
+							<Controller
+								name="desiredSalary"
+								control={control}
+								render={(props) => (
+									<Input
+										placeholder="Желаемая зарплата"
+										{...props}
+									/>
+								)}
+							/>
 						</Form.Item>
 					</Col>
 					<Col size={24}>

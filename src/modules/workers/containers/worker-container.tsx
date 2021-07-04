@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'reducers'
+import React, { useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Spinner, ErrorIndicator } from 'components'
-import actions from '../actions'
+import { Spinner, ErrorIndicator } from '@components'
+import { observer } from 'mobx-react-lite'
+import { StoreContext } from '@store/StoreContext'
+import useDictionary from '@hooks'
+import { autorun } from 'mobx'
 import WorkerDetails from '../components/worker-details'
 
 export interface WorkerContainerProps {
@@ -12,24 +13,22 @@ export interface WorkerContainerProps {
 	closeWorker?: ANY_MIGRATION_TYPE;
 }
 
-const WorkerContainer = ({ match, closeWorker, history }: WorkerContainerProps) => {
-	const dispatch = useDispatch()
+const WorkerContainer = observer(({ match, closeWorker, history }: WorkerContainerProps) => {
+	const { workerStore: {
+		worker, state, fetchWorker
+	}} = useContext(StoreContext)
 
-	const offices = useSelector((state) => state.dictionaries.offices)
-	const departments = useSelector((state) => state.dictionaries.departments)
-	const professions = useSelector((state) => state.dictionaries.professions)
-	const worker = useSelector((state) => state.workerList.worker)
-	const loading = useSelector((state) => state.workerList.loading)
-	const error = useSelector((state) => state.workerList.error)
+	const [professions, offices, departments] = useDictionary()
 
 	useEffect(() => {
-		dispatch(actions.fetchWorkerRequest(match.params.id))
-		dispatch(actions.fetchWorkerSalaryRequest(match.params.id))
+		autorun(() => {
+			fetchWorker(match.params.id)
+		})
 	}, [match.params.id])
 
-	if (loading) return <Spinner />
+	if (state === 'pending') return <Spinner />
 
-	if (error) return <ErrorIndicator />
+	if (state === 'error') return <ErrorIndicator />
 
 	return (
 		<WorkerDetails
@@ -41,6 +40,6 @@ const WorkerContainer = ({ match, closeWorker, history }: WorkerContainerProps) 
 			history={history}
 		/>
 	)
-}
+})
 
 export default withRouter(WorkerContainer)

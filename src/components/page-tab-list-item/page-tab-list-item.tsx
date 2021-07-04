@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import { BackIcon, CloseIcon } from 'svg'
+import { BackIcon, CloseIcon } from '@svg'
+import { observer } from 'mobx-react-lite'
 import Button from '../button'
 
 export interface PageTabListItemProps {
@@ -13,13 +14,18 @@ export interface PageTabListItemProps {
 	history: History;
 }
 
-const PageTabListItem: React.FC<PageTabListItemProps> = ({ tab, removeTab, location, history }) => {
+const PageTabListItem: React.FC<PageTabListItemProps> = observer(({ tab, removeTab, location, history }) => {
 	const { label, prevPage, office, path } = tab
 
 	const baseClassName = 'tab-list__item'
 	const isActiveTab = location.pathname === tab.path
 
-	const renderPrevPage = prevPage && isActiveTab && <div className={`${baseClassName}__prev-page`}>{prevPage}/</div>
+	const renderPrevPage = prevPage && isActiveTab && (
+		<div className={`${baseClassName}__prev-page`}>
+			{prevPage}
+/
+		</div>
+	)
 
 	const renderOffice = office && isActiveTab && <div className={`${baseClassName}__office`}>{office}</div>
 
@@ -48,6 +54,6 @@ const PageTabListItem: React.FC<PageTabListItemProps> = ({ tab, removeTab, locat
 			</div>
 		</li>
 	)
-}
+})
 
 export default PageTabListItem

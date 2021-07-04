@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'components'
+import { Table } from '@components'
 import { v4 as uuidv4 } from 'uuid'
 
 export interface SalaryTableProps {

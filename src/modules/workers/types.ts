@@ -1,4 +1,0 @@
-export const FETCH_WORKERS = 'FETCH_WORKERS'
-export const FETCH_WORKER = 'FETCH_WORKER'
-export const FETCH_WORKER_SALARY = 'FETCH_WORKER_SALARY'
-export const SET_FILTER = 'SET_FILTER'
