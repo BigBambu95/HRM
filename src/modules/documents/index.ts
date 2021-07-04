@@ -1,4 +1,4 @@
 import { DocumentListContainer } from './containers'
-import rootSaga from './sagas'
+import DocumentsStore from './store/documents'
 
-export { DocumentListContainer, rootSaga }
+export { DocumentListContainer, DocumentsStore }

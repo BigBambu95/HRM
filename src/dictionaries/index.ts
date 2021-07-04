@@ -1,5 +1,3 @@
-import dictionaryActions from './actions'
-import rootSaga from './sagas'
-import dictionaries from './reducer'
+import DictionariesStore from './dictionariesStore'
 
-export { dictionaryActions, rootSaga, dictionaries }
+export  default  DictionariesStore

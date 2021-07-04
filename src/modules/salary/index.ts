@@ -1,4 +1,4 @@
 import { SalaryContainer } from './containers'
-import rootSaga from './sagas'
+import SalaryStore from './store/salary'
 
-export { SalaryContainer, rootSaga }
+export { SalaryContainer, SalaryStore }

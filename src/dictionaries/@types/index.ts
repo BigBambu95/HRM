@@ -17,9 +17,3 @@ type PropsWithDictionaries<P> = P & {
 	departments: Departments,
 	professions: Professions,
 }
-
-interface DictionariesState extends BaseState {
-	offices: Offices;
-	professions: Professions;
-	departments: Departments;
-}
