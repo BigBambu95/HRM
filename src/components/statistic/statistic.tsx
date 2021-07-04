@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from 'components/index'
+import { Typography } from '@components'
 
 export interface StatisticProps {
 	title: string;

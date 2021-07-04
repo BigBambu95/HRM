@@ -1,40 +1,38 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { Spinner, ContextMenu, FilterList, Filter, Button, Row, ErrorIndicator } from 'components'
-import { Table } from 'components/table'
-import { DownloadIcon, PrinterIcon } from 'svg'
+import React, { useContext, useEffect } from 'react'
 import Moment from 'react-moment'
-import { ToolBar } from 'components/tool-bar'
-import actions from '../actions'
-import { useSelector } from 'reducers'
-import type { ColumnsType } from 'components/table'
+import {
+	Spinner, ContextMenu, FilterList,
+	Button, Row, ErrorIndicator, Table, ToolBar
+} from '@components'
+import { DownloadIcon, PrinterIcon } from '@svg'
+import type { ColumnsType } from '@components/table'
+import { StoreContext } from '@store/StoreContext'
 
 const DocumentListContainer = () => {
-	const dispatch = useDispatch()
-	const documents = useSelector((state) => state.documentList.documents)
-	const error = useSelector((state) => state.documentList.error)
-	const loading = useSelector((state) => state.documentList.loading)
+	const { documentsStore: {
+		state, fetchDocuments, removeDocument, documents
+	}} = useContext(StoreContext)
 
 	useEffect(() => {
-		dispatch(actions.fetchDocumentsRequest())
+		fetchDocuments({})
 	}, [])
 
 	const columns: ColumnsType = [
 		{
 			key: 'name',
 			title: 'Название',
-			dataIndex: 0,
+			dataIndex: 'name',
 		},
 		{
 			key: 'date',
 			title: 'Дата',
-			dataIndex: 1,
+			dataIndex: 'date',
 			render: (date) => <Moment format="DD.MM.YY">{date}</Moment>,
 		},
 		{
 			key: 'download',
 			title: '',
-			dataIndex: 3,
+			dataIndex: 'download',
 			render: (file) => {
 				return (
 					<Row justify="end" gutter={[24, 0]}>
@@ -45,7 +43,7 @@ const DocumentListContainer = () => {
 							<DownloadIcon />
 						</a>
 						<ContextMenu>
-							<ContextMenu.Item>Удалить</ContextMenu.Item>
+							<ContextMenu.Item onClick={() => removeDocument(file.id)}>Удалить</ContextMenu.Item>
 						</ContextMenu>
 					</Row>
 				)
@@ -53,15 +51,15 @@ const DocumentListContainer = () => {
 		},
 	]
 
-	if (loading) return <Spinner />
+	if (state === 'pending') return <Spinner />
 
-	if (error) return <ErrorIndicator />
+	if (state === 'error') return <ErrorIndicator />
 
 	return (
 		<>
 			<ToolBar>
 				<FilterList>
-					<Filter items={[]} onChange={() => {}} defaultValue="Все" />
+					{/* <Filter items={[]} onChange={() => {}} defaultValue="Все" /> */}
 				</FilterList>
 				<Button>Добавить документ</Button>
 			</ToolBar>

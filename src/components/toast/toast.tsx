@@ -8,10 +8,22 @@ const ToastView: React.FC<{ label: string }> = ({ label }) => (
 )
 
 // TODO Переписать компонент
-export default class Toast extends Component {
+class Toast extends Component {
 	_container: Node | null
 
 	_el: Node | null
+
+	constructor(props?: ANY_MIGRATION_TYPE) {
+		super(props)
+		this._container = null
+		this._el = null
+	}
+
+	componentWillUnmount() {
+		if (this._container && this._el) {
+			this._container.removeChild(this._el)
+		}
+	}
 
 	push({ label, timeout }: { label: string, timeout?: number }) {
 		this._container = document.getElementById('portal-root')
@@ -25,16 +37,7 @@ export default class Toast extends Component {
 			}
 		}, timeout ?? 3000)
 	}
-
-	constructor(props?: ANY_MIGRATION_TYPE) {
-		super(props)
-		this._container = null
-		this._el = null
-	}
-
-	componentWillUnmount() {
-		if (this._container && this._el) {
-			this._container.removeChild(this._el)
-		}
-	}
 }
+
+const toast = new Toast()
+export default toast

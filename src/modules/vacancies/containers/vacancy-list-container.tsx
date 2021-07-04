@@ -1,34 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'reducers'
-import { addTab } from 'actions'
-import { ToolBar } from 'components/tool-bar'
-import { Grid, Button, Filter, FilterList, ErrorIndicator, Spinner } from 'components'
-import { dictionaryActions } from 'dictionaries'
-import { transformDictionaryValues } from 'helpers/dictionaries'
+import React, { useState, useEffect, useContext } from 'react'
+import { autorun } from 'mobx'
+import { observer } from 'mobx-react-lite'
+import { addTab } from '@actions'
+import { Grid, Button, Filter, ToolBar, FilterList, ErrorIndicator, Spinner } from '@components'
+import { transformDictionaryValues } from '@helpers/dictionaries'
+import { StoreContext } from '@store/StoreContext'
+import useDictionary from '@hooks'
 import { AddVacancyForm, VacancyListItem } from '../components'
-import actions from '../actions'
 
 const VacancyListContainer = () => {
-	// Redux
-	const dispatch = useDispatch()
-	const professions = useSelector((state) => state.dictionaries.professions)
-	const offices = useSelector((state) => state.dictionaries.offices)
-	const vacancies = useSelector((state) => state.vacancyList.vacancies)
-	const filter = useSelector((state) => state.vacancyList.filter)
-	const loading = useSelector((state) => state.vacancyList.loading)
-	const error = useSelector((state) => state.vacancyList.error)
+	const { vacanciesStore: {
+		state, fetchVacancies, filter, setFilter: setFilterAction, vacancies, removeVacancy, addVacancy
+	}} = useContext(StoreContext)
 
 	// Local state
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
-	useEffect(() => {
-		dispatch(dictionaryActions.fetchOfficesRequest())
-		dispatch(dictionaryActions.fetchProfessionsRequest())
-	}, [])
+	const [professions, offices] = useDictionary()
 
 	useEffect(() => {
-		dispatch(actions.fetchVacanciesRequest(filter))
+		autorun(() => {
+			fetchVacancies(filter)
+		})
 	}, [filter])
 
 	const vacancyList = vacancies.map((vacancy: Vacancy) => (
@@ -37,8 +30,8 @@ const VacancyListContainer = () => {
 			vacancy={vacancy}
 			offices={offices}
 			professions={professions}
-			addTab={(params) => dispatch(addTab(params))}
-			deleteItem={(id) => dispatch(actions.removeVacancyRequest(id))}
+			addTab={addTab}
+			removeVacancy={removeVacancy}
 		/>
 	))
 
@@ -51,12 +44,12 @@ const VacancyListContainer = () => {
 			</Grid>
 		)
 
-	const spinner = loading && <Spinner />
-	const errorIndicator = error && <ErrorIndicator />
-	const content = !(loading || error) && itemList
+	const spinner = state === 'pending' && <Spinner />
+	const errorIndicator = state === 'error' && <ErrorIndicator />
+	const content = state === 'done' && itemList
 
 	const setFilter = (name: string) => ({ id, value }: { id: React.Key, value: string }) =>
-		dispatch(actions.setFilter({ name, value: value !== 'Все' ? id.toString() : value }))
+		setFilterAction({ name, value: value !== 'Все' ? id.toString() : value })
 
 	return (
 		<>
@@ -71,7 +64,7 @@ const VacancyListContainer = () => {
 			{errorIndicator}
 			{content}
 			<AddVacancyForm
-				dispatch={dispatch}
+				addVacancy={addVacancy}
 				isOpenModal={isOpenModal}
 				setIsOpenModal={setIsOpenModal}
 				vacancyTemplates={transformDictionaryValues(professions)}
@@ -81,4 +74,4 @@ const VacancyListContainer = () => {
 	)
 }
 
-export default VacancyListContainer
+export default observer(VacancyListContainer)

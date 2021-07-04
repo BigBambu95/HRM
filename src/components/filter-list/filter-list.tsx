@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react'
 import classnames from 'classnames'
-import { Button } from 'components'
-import { FilterIcon, ArrowDownIcon } from 'svg'
+import { Button } from '@components'
+import { FilterIcon, ArrowDownIcon } from '@svg'
 import { FilterProps } from '../filter/filter'
 
 export interface FilterListProps {

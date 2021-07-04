@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link, match as matchType } from 'react-router-dom'
 import classnames from 'classnames'
-import { Avatar, ContextMenu, Record } from 'components'
-import { getDictionaryValueById } from 'helpers/dictionaries'
-import { PencilIcon, RemoveBasketIcon } from 'svg'
-import { BASE_URL } from 'services/api'
+import { Avatar, ContextMenu, Record } from '@components'
+import { getDictionaryValueById } from '@helpers/dictionaries'
+import { PencilIcon, RemoveBasketIcon } from '@svg'
+import { BASE_URL } from '@services/api'
 
 export interface WorkerListItemProps {
 	worker: IWorker;

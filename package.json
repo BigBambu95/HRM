@@ -24,10 +24,10 @@
     "start": "webpack serve --open --color --progress",
     "test": "jest --coverage --runInBand --colors",
     "build": "webpack --mode-production",
-    "eslint": "eslint src/**/*.tsx",
-    "eslint:fix": "eslint src/**/*.tsx --fix",
-    "prettier": "prettier --check src/**/*.tsx",
-    "prettier:fix": "prettier --config ./.prettierrc --write src/**/*.tsx",
+    "eslint": "eslint src/**/*.{ts,tsx}",
+    "eslint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "prettier": "prettier --parser typescript --check src/**/*.{ts,tsx}",
+    "prettier:fix": "prettier -parser typescript --config ./.prettierrc --write src/**/*.{ts,tsx}",
     "stylelint": "stylelint src/**/*.css",
     "stylelint:fix": "stylelint src/**/*.css --fix"
   },
@@ -57,7 +57,7 @@
     ],
     "*.{ts, tsx}": [
       "eslint --fix",
-      "prettier --fix"
+      "prettier --parser typescript --fix"
     ]
   },
   "devDependencies": {

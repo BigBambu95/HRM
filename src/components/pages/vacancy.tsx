@@ -1,5 +1,5 @@
 import React from 'react'
-import { VacancyContainer } from 'modules/vacancies'
+import { VacancyContainer } from '@modules/vacancies'
 
 const Vacancy = () => (
 	<section className='vacancy-detail'>

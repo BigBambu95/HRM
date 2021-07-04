@@ -1,3 +1,3 @@
-import useLoadData from './useLoadData'
+import useDictionary from './useDictionary'
 
-export { useLoadData }
+export default useDictionary

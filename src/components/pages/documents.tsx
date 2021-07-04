@@ -1,5 +1,5 @@
 import React from 'react'
-import { DocumentListContainer } from 'modules/documents'
+import { DocumentListContainer } from '@modules/documents'
 
 const Documents = () => (
 	<section className='documents'>

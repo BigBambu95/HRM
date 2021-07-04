@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowDownIcon } from '../../svg'
@@ -29,7 +30,7 @@ const SubMenuList = ({ items, path, isShow }: SubMenuListProps) => {
 export interface SidebarLinkProps {
 	children: string;
 	path: string;
-	addTab: (label: string, path: string) => void;
+	addTab: ({ label, path }: Record<'label' | 'path', string>) => void;
 	subLinks: ANY_MIGRATION_TYPE;
 	icon: ANY_MIGRATION_TYPE;
 }
@@ -45,7 +46,7 @@ const SidebarLink = ({ icon, path, children, addTab, subLinks }: SidebarLinkProp
 	return (
 		<>
 			<div className="sidebar__link">
-				<Link to={path} onClick={() => addTab(children, path)}>
+				<Link to={path} onClick={() => addTab({ label: children, path })}>
 					<span>
 						<span className="sidebar__link__icon">{icon}</span>
 						{children}
@@ -64,4 +65,4 @@ SidebarLink.defaultProps = {
 	subLinks: [],
 }
 
-export default SidebarLink
+export default observer(SidebarLink)

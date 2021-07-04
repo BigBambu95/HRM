@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'reducers'
-import { addTab } from 'actions'
+import { observer } from 'mobx-react-lite'
+import tabsStore from '@store/TabsStore'
+import menu from '../../menu'
 import SidebarLink from '../sidebar-link'
 
-const Sidebar = ({ history, location }: ANY_MIGRATION_TYPE) => {
-	const dispatch = useDispatch()
-	const menu = useSelector((state) => state.menu.items)
-	const activeTab = useSelector((state) => state.tabList.activeTab)
+const Sidebar = observer(({ history, location }: ANY_MIGRATION_TYPE) => {
+	const { activeTab, addTab } = tabsStore
 
 	useEffect(() => {
 		history.push(activeTab.path)
@@ -21,10 +19,8 @@ const Sidebar = ({ history, location }: ANY_MIGRATION_TYPE) => {
 		return (
 			<li className={className} key={link.id}>
 				<SidebarLink
-					path={link.path}
-					icon={link.icon}
-					addTab={(label, path) => dispatch(addTab({ label, path }))}
-					subLinks={link.subLinks}
+					{...link}
+					addTab={addTab}
 				>
 					{link.label}
 				</SidebarLink>
@@ -37,6 +33,6 @@ const Sidebar = ({ history, location }: ANY_MIGRATION_TYPE) => {
 			<ul>{mainMenu}</ul>
 		</aside>
 	)
-}
+})
 
 export default withRouter(Sidebar)

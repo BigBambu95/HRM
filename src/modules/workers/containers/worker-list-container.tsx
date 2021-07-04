@@ -1,32 +1,25 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'reducers'
+import React, { useContext, useEffect } from 'react'
 import classnames from 'classnames'
-import { addTab } from 'actions'
-import { Button, Grid, Filter, FilterList, ToolBar, ToolBarGroupItem } from 'components'
-import { dictionaryActions } from 'dictionaries'
-import { transformDictionaryValues } from 'helpers/dictionaries'
-import { useLoadData } from 'hooks'
-import actions from '../actions'
+import { Button, Grid, Filter, FilterList, ToolBar, ToolBarGroupItem, Spinner, ErrorIndicator } from '@components'
+import { transformDictionaryValues } from '@helpers/dictionaries'
+import { observer } from 'mobx-react-lite'
+import useDictionary from '@hooks'
+import { StoreContext } from '@store/StoreContext'
+import { autorun } from 'mobx'
 import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
 
 const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
-	const dispatch = useDispatch()
-	const professions = useSelector((state) => state.dictionaries.professions)
-	const offices = useSelector((state) => state.dictionaries.offices)
-	const departments = useSelector((state) => state.dictionaries.departments)
-	const filter = useSelector((state) => state.workerList.filter)
-	const workers = useSelector((state) => state.workerList.workers)
+	const { workersStore: {
+		fetchWorkers, filter, workers, state, setFilter: setFilterAction
+	}} = useContext(StoreContext)
+
+	const [professions, offices, departments] = useDictionary()
 
 	useEffect(() => {
-		dispatch(dictionaryActions.fetchOfficesRequest())
-		dispatch(dictionaryActions.fetchDepartmentsRequest())
-		dispatch(dictionaryActions.fetchProfessionsRequest())
-	}, [])
-
-	useEffect(() => {
-		dispatch(actions.fetchWorkersRequest(filter))
+		autorun(() => {
+			fetchWorkers(filter)
+		})
 	}, [filter])
 
 	const columns = match.params.id ? 1 : 2
@@ -43,7 +36,7 @@ const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={(param) => dispatch(addTab(param))}
+				addTab={() => {}}
 			/>
 		)
 	})
@@ -57,10 +50,14 @@ const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 			</Grid>
 		)
 
-	const [content, spinner, errorIndicator] = useLoadData(itemList)
 
-	const setFilter = (name: string) => ({ id, value }: { id: React.Key, value: string }) =>
-		dispatch(actions.setFilter({ name, value: value !== 'Все' ? id.toString() : value }))
+	const spinner = state === 'pending' && <Spinner />
+	const errorIndicator = state === 'error' && <ErrorIndicator />
+	const content = state === 'done' && itemList
+
+	const setFilter = (name: string) => ({ id, value }: { id: React.Key, value: string }) => {
+		setFilterAction({ name, value: value !== 'Все' ? id.toString() : value })
+	}
 
 	return (
 		<div className={className}>
@@ -82,4 +79,4 @@ const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 	)
 }
 
-export default WorkerListContainer
+export default observer(WorkerListContainer)

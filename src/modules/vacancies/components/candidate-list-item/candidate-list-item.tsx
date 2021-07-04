@@ -1,6 +1,6 @@
 import React from 'react'
-import { ArchiveIcon, PencilIcon } from 'svg'
-import { ContextMenu, Record } from 'components'
+import { ArchiveIcon, PencilIcon } from '@svg'
+import { ContextMenu, Record } from '@components'
 
 export interface CandidateListItemProps {
 	candidate: Candidate;

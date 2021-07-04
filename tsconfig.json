@@ -1,7 +1,11 @@
 {
     "compilerOptions": {
+        "experimentalDecorators": true,
+        "useDefineForClassFields" : true,
         "outDir": "dist",
-        "module": "commonjs",
+        "module": "ESNext",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "moduleResolution": "Node",
         "target": "ES6",
         "allowJs": true,
         "noImplicitAny": true,
@@ -10,7 +14,13 @@
         "strict": true,
         "sourceMap": true,
         "baseUrl": "src",
-        "jsx": "react"
+        "jsx": "react",
+        "types": ["vite/client"],
+        "paths": {
+            "@*": [
+                "*"
+            ]
+        }
     },
     "include": [
         "./src/**/*"
