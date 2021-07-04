@@ -1,6 +1,6 @@
-import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import StylelintPlugin from 'stylelint-webpack-plugin'
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
 const config = {
 	mode: 'development',
@@ -34,11 +34,7 @@ const config = {
 			{
 				test: /\.css$/,
 				exclude: '/node_modules',
-				use: [
-					'style-loader',
-					'css-loader',
-					"postcss-loader",
-				],
+				use: ['style-loader', 'css-loader', 'postcss-loader'],
 			},
 		],
 	},
@@ -54,7 +50,7 @@ const config = {
 			'@helpers': path.join(__dirname, 'src/helpers'),
 			'@actions': path.join(__dirname, 'src/actions'),
 			'@hooks': path.join(__dirname, 'src/hooks'),
-			'@templates': path.join(__dirname, 'src/templates')
+			'@templates': path.join(__dirname, 'src/templates'),
 		},
 		extensions: ['.tsx', '.ts', '.jsx', '.js'],
 	},

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
-import React, { Fragment } from 'react'
-import tabsStore from '@store/TabsStore'
+import React, { Fragment, useContext } from 'react'
+import { StoreContext } from '@store/StoreContext'
 import PageTabListItem from '../page-tab-list-item'
 
 export interface PageTabListProps {
@@ -13,7 +13,9 @@ export interface PageTabListProps {
 }
 
 const PageTabList: React.FC<PageTabListProps> = (props) => {
-	const { tabs, removeTab } = tabsStore
+	const {
+		tabsStore: { tabs, removeTab },
+	} = useContext(StoreContext)
 
 	const tabList = tabs.map((tab, idx) => (
 		<Fragment key={tab.label}>
@@ -21,7 +23,7 @@ const PageTabList: React.FC<PageTabListProps> = (props) => {
 		</Fragment>
 	))
 
-	return <ul className='page-tab-list'>{tabList}</ul>
+	return <ul className="page-tab-list">{tabList}</ul>
 }
 
 export default observer(PageTabList)

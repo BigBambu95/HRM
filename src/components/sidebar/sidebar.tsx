@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import tabsStore from '@store/TabsStore'
+import { StoreContext } from '@store/StoreContext'
 import menu from '../../menu'
 import SidebarLink from '../sidebar-link'
 
 const Sidebar = observer(({ history, location }: ANY_MIGRATION_TYPE) => {
-	const { activeTab, addTab } = tabsStore
+	const {
+		tabsStore: { activeTab, addTab },
+	} = useContext(StoreContext)
 
 	useEffect(() => {
 		history.push(activeTab.path)
@@ -18,10 +20,7 @@ const Sidebar = observer(({ history, location }: ANY_MIGRATION_TYPE) => {
 
 		return (
 			<li className={className} key={link.id}>
-				<SidebarLink
-					{...link}
-					addTab={addTab}
-				>
+				<SidebarLink {...link} addTab={addTab}>
 					{link.label}
 				</SidebarLink>
 			</li>

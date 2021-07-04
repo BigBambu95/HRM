@@ -10,9 +10,10 @@ import WorkerListItem from '../components/worker-list-item'
 import WorkerStatusPanel from '../components/worker-status-panel'
 
 const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
-	const { workersStore: {
-		fetchWorkers, filter, workers, state, setFilter: setFilterAction
-	}} = useContext(StoreContext)
+	const {
+		tabsStore: { addTab },
+		workersStore: { fetchWorkers, filter, workers, state, setFilter: setFilterAction },
+	} = useContext(StoreContext)
 
 	const [professions, offices, departments] = useDictionary()
 
@@ -36,7 +37,7 @@ const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 				offices={offices}
 				professions={professions}
 				match={match}
-				addTab={() => {}}
+				addTab={addTab}
 			/>
 		)
 	})
@@ -49,7 +50,6 @@ const WorkerListContainer = ({ match }: ANY_MIGRATION_TYPE) => {
 				{workerList}
 			</Grid>
 		)
-
 
 	const spinner = state === 'pending' && <Spinner />
 	const errorIndicator = state === 'error' && <ErrorIndicator />

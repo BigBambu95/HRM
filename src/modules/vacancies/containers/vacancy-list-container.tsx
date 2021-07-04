@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { autorun } from 'mobx'
 import { observer } from 'mobx-react-lite'
-import { addTab } from '@actions'
 import { Grid, Button, Filter, ToolBar, FilterList, ErrorIndicator, Spinner } from '@components'
 import { transformDictionaryValues } from '@helpers/dictionaries'
 import { StoreContext } from '@store/StoreContext'
@@ -9,7 +8,7 @@ import useDictionary from '@hooks'
 import { AddVacancyForm, VacancyListItem } from '../components'
 
 const VacancyListContainer = () => {
-	const { vacanciesStore: {
+	const { tabsStore: { addTab }, vacanciesStore: {
 		state, fetchVacancies, filter, setFilter: setFilterAction, vacancies, removeVacancy, addVacancy
 	}} = useContext(StoreContext)
 
