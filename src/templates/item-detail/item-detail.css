@@ -1,0 +1,29 @@
+.item-detail {
+    padding: var(--padding-xl);
+    background: #fff;
+}
+
+.item-detail__toolbar {
+    margin-bottom: var(--margin-xl);
+}
+
+.item-detail__content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+}
+
+.item-detail__content__left {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-detail__content__description {
+    margin-left: 40px;
+}
+
+.item-detail__content__actions {
+    padding: 0 var(--padding-xl);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--main-border-radius);
+    text-align: center;
+}

@@ -9,11 +9,11 @@ export interface VacancyStoreModel {
 	state: StateType;
 	fetchVacancy: (id: Key) => void;
 	addCandidate: (id: Key, candidate: Candidate) => void;
-	addCandidateInVacancy: (id: Key, candidates: Array<Key>) => void;
+	addCandidateInVacancy: (id: Key, candidateId: Key) => void;
 	setFilter: (params: FilterType) => void;
 }
 
-export default class VacancyStore implements VacancyStoreModel {
+class VacancyStore implements VacancyStoreModel {
 	candidates: Candidates = []
 
 	filter: FilterType = {
@@ -27,7 +27,7 @@ export default class VacancyStore implements VacancyStoreModel {
 	constructor() {
 		makeAutoObservable(this, {}, { autoBind: true })
 	}
-	
+
 	async fetchVacancy(id: Key) {
 		this.state = 'pending'
 
@@ -35,7 +35,7 @@ export default class VacancyStore implements VacancyStoreModel {
 			const res = await Api.get(`/vacancies/${id}`)
 			this.candidates = res.data.candidates
 			this.state = 'done'
-		} catch(err) {
+		} catch (err) {
 			this.state = 'error'
 		}
 	}
@@ -43,24 +43,20 @@ export default class VacancyStore implements VacancyStoreModel {
 	async addCandidate(id: Key, candidate: Candidate) {
 		try {
 			const res = await Api.post('/candidates', candidate)
-			this.candidates.push(res.data)
-			this.addCandidateInVacancy(id, this.candidates.map((item) => item.id))
-		} catch(err) {
-			console.error(err)
-			toast.push({ label: "Не удалось добавить резюме" })
+			this.addCandidateInVacancy(id, res.data.id)
+		} catch (err) {
+			toast.push({ label: 'Не удалось создать кандидата' })
 		}
 	}
 
-	async addCandidateInVacancy(id: Key, candidateIds: Array<Key>) {
+	async addCandidateInVacancy(id: Key, candidateId: Key) {
 		try {
-			const res = await Api.put(`/vacancies/${id}`, candidateIds)
-			if (!res.data.status) {
-				throw new Error('Произошла ошибка при добавлении кандидата в вакансию')
-			}
+			const res = await Api.put(`/vacancies/${id}`, { id: candidateId })
 
+			this.fetchVacancy(res.data.id)
 			toast.push({ label: 'Резюме успешно добавлено' })
-		} catch(err) {
-			toast.push({ label: "Не удалось добавить резюме" })
+		} catch (err) {
+			toast.push({ label: 'Не удалось добавить кандидата в эту вакансию' })
 		}
 	}
 
@@ -81,7 +77,8 @@ export default class VacancyStore implements VacancyStoreModel {
 	}
 
 	get finalCandidates() {
-		return this.candidates.filter(({ status }) => status.toLowerCase() === 'кандидат')
+		return this.candidates.filter(({ status }) => status.toLowerCase() === 'кандидаты')
 	}
-
 }
+
+export default VacancyStore

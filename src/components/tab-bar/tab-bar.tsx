@@ -19,7 +19,10 @@ const TabBar = ({ children }: TabBarProps) => {
 
 	const renderTabs = () => {
 		return getChildrenLabels(children).map((navLabel) => (
-			<TabBarNav key={navLabel} className={classNames({ active: activeTab === navLabel })} setActiveTab={setActiveTab}>
+			<TabBarNav
+				key={navLabel}
+				className={classNames({ active: activeTab === navLabel })}
+				setActiveTab={setActiveTab}>
 				{navLabel}
 			</TabBarNav>
 		))

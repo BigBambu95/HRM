@@ -1,13 +1,5 @@
-import AddVacancyForm from './add-vacancy-form'
-import CandidateList from './candidate-list'
-import VacancyListItem from './vacancy-list-item'
-import CandidateListItem from './candidate-list-item'
-import AddSummaryForm from './add-summary-form'
-
-export {
-	AddVacancyForm,
-	CandidateList,
-	VacancyListItem,
-	CandidateListItem,
-	AddSummaryForm,
-}
+export { default as VacancyForm } from './vacancy-form'
+export { default as CandidateList } from './candidate-list'
+export { default as VacancyListItem } from './vacancy-list-item'
+export { default as CandidateListItem } from './candidate-list-item'
+export { default as СandidateForm } from './candidate-form'

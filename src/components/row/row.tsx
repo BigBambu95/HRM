@@ -1,8 +1,8 @@
-import React, { HTMLAttributes, ReactElement } from 'react'
+import React, { HTMLAttributes, ReactElement, ReactNode } from 'react'
 import classnames from 'classnames'
 
 export interface RowProps extends HTMLAttributes<HTMLDivElement> {
-	children: ReactElement[] | ReactElement;
+	children: ReactNode;
 	gutter?: [number, number];
 	justify?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
 	align?: 'top' | 'center' | 'bottom';
@@ -25,7 +25,10 @@ const Row: React.FC<RowProps> = ({
 	}
 
 	return (
-		<div className={classNames} style={styles} {...otherProps}>
+		<div
+			className={classNames}
+			style={styles}
+			{...otherProps}>
 			{React.Children.map(children, (child) => {
 				return React.cloneElement(child as ReactElement, {
 					style: {

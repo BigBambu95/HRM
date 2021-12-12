@@ -14,7 +14,7 @@ export interface VacanciesStoreModel {
 	setFilter: (params: FilterType) => void;
 }
 
-export default class VacanciesStore implements VacanciesStoreModel {
+class VacanciesStore implements VacanciesStoreModel {
 	vacancies: Vacancies = []
 
 	state: StateType = 'pending'
@@ -69,3 +69,5 @@ export default class VacanciesStore implements VacanciesStoreModel {
 		this.filter[params.name] = params.value
 	}
 }
+
+export default VacanciesStore

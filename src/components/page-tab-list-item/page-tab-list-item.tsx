@@ -23,14 +23,17 @@ const PageTabListItem: React.FC<PageTabListItemProps> = observer(({ tab, removeT
 	const renderPrevPage = prevPage && isActiveTab && (
 		<div className={`${baseClassName}__prev-page`}>
 			{prevPage}
-/
+			/
 		</div>
 	)
 
 	const renderOffice = office && isActiveTab && <div className={`${baseClassName}__office`}>{office}</div>
 
 	const arrowBack = isActiveTab && prevPage && (
-		<Button variant="icon" className={`${baseClassName}__back`} onClick={() => history.back()}>
+		<Button
+			variant="icon"
+			className={`${baseClassName}__back`}
+			onClick={() => history.back()}>
 			<BackIcon />
 		</Button>
 	)
@@ -46,7 +49,10 @@ const PageTabListItem: React.FC<PageTabListItemProps> = observer(({ tab, removeT
 				{renderPrevPage}
 				<div className="flex align-items-center">
 					<Link to={path}>{label}</Link>
-					<Button variant="icon" className="close-btn" onClick={removeTab}>
+					<Button
+						variant="icon"
+						className="close-btn"
+						onClick={removeTab}>
 						<CloseIcon width={16} height={16} />
 					</Button>
 				</div>

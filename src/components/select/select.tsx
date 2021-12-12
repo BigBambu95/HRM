@@ -1,9 +1,9 @@
-import React, { useState, useRef, ForwardRefRenderFunction, HTMLAttributes, memo, forwardRef, useEffect } from 'react'
+import React, { useState, useRef, ForwardRefRenderFunction, HTMLAttributes, forwardRef, useEffect } from 'react'
 import classnames from 'classnames'
-import { ArrowDownIcon } from '../../svg'
-import Button from '../button'
 import { useClickAway } from 'ahooks'
 import { v4 as uuidv4 } from 'uuid'
+import { ArrowDownIcon } from '../../svg'
+import Button from '../button'
 
 export type SelectValue = {
 	id: React.Key,
@@ -43,7 +43,7 @@ const Select: ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
 
 	const chooseItem = (item: SelectValue) => {
 		setValue(item.value)
-		onChange && onChange(item)
+		onChange?.(item)
 		setIsOpen(false)
 	}
 
@@ -79,4 +79,4 @@ const Select: ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
 
 Select.displayName = 'Select'
 
-export default memo(forwardRef(Select))
+export default forwardRef(Select)

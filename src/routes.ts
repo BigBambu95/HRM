@@ -28,6 +28,10 @@ const routes = [
 		path: '/archive/',
 		component: 'archive',
 	},
+	{
+		path: '/candidates/',
+		component: 'candidates',
+	},
 ]
 
 export default routes

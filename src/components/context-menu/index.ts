@@ -1,5 +1,5 @@
-import InternalContextMenu from './context-menu'
-import ContextMenuItem from './context-menu-item';
+import InternalContextMenu from './ContextMenu'
+import ContextMenuItem from './ContextMenuItem';
 import './context-menu.css'
 
 type InternalContextMenuType = typeof InternalContextMenu;

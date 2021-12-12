@@ -39,7 +39,10 @@ const SidebarLink = ({ icon, path, children, addTab, subLinks }: SidebarLinkProp
 	const [isShowSubMenu, showSubMenu] = useState(false)
 
 	const arrow = subLinks.length > 0 && <ArrowDownIcon />
-	const subMenu = subLinks.length > 0 && <SubMenuList items={subLinks} path={path} isShow={isShowSubMenu} />
+	const subMenu = subLinks.length > 0 && <SubMenuList
+		items={subLinks}
+		path={path}
+		isShow={isShowSubMenu} />
 
 	const arrowClassNames = isShowSubMenu ? 'arrow-btn active' : 'arrow-btn'
 
@@ -52,7 +55,10 @@ const SidebarLink = ({ icon, path, children, addTab, subLinks }: SidebarLinkProp
 						{children}
 					</span>
 				</Link>
-				<Button onClick={() => showSubMenu(!isShowSubMenu)} className={arrowClassNames} variant="icon">
+				<Button
+					onClick={() => showSubMenu(!isShowSubMenu)}
+					className={arrowClassNames}
+					variant="icon">
 					{arrow}
 				</Button>
 			</div>

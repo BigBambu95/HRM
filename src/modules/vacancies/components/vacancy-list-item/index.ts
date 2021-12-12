@@ -1,4 +1,4 @@
-import VacancyListItem from './vacancy-list-item'
+import VacancyListItem from './VacancyListItem'
 import './vacancy-list-item.css'
 
 export default VacancyListItem

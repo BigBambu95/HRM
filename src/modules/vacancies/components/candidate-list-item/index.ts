@@ -1,4 +1,4 @@
-import CandidateListItem from './candidate-list-item'
+import CandidateListItem from './CandidateListItem'
 import './candidate-list-item.css'
 
 export default CandidateListItem

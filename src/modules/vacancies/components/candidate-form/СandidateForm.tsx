@@ -2,13 +2,13 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Modal, Form, Input, Select, Row, Col } from '@components'
 
-export interface AddSummaryFormProps {
-	isOpenModal: boolean;
-	setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-	addCandidate: ANY_MIGRATION_TYPE;
+export interface CandidateFormProps {
+	visible: boolean;
+	onCancel: () => void;
+	onSubmit: (candidate: Omit<Candidate, 'name'> & { firstName: string, lastName: string }) => void;
 }
 
-const AddSummaryForm = ({ isOpenModal, setIsOpenModal, addCandidate }: AddSummaryFormProps) => {
+const CandidateForm = ({ visible, onCancel, onSubmit }: CandidateFormProps) => {
 	const { handleSubmit, control } = useForm()
 
 	const employment = [
@@ -30,21 +30,14 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, addCandidate }: AddSummar
 		},
 	]
 
-	const onSubmit = ({ firstName, lastName, ...data }: Record<string, any>) => {
-		setIsOpenModal(false)
-		return addCandidate({
-			...data,
-			name: `${lastName} ${firstName}`
-		})
-	}
 
 	return (
 		<Modal
 			title="Создать резюме"
 			width={840}
 			className="vacancy-list__modal-window"
-			isOpen={isOpenModal}
-			onCancel={() => setIsOpenModal(false)}
+			isOpen={visible}
+			onCancel={onCancel}
 			onSubmit={handleSubmit(onSubmit)}
 			submitBtnText="Создать"
 		>
@@ -173,4 +166,4 @@ const AddSummaryForm = ({ isOpenModal, setIsOpenModal, addCandidate }: AddSummar
 	)
 }
 
-export default AddSummaryForm
+export default CandidateForm

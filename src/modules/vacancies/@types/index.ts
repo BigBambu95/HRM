@@ -1,10 +1,9 @@
 interface Vacancy {
 	id: string;
+	url?: string;
 	profession: string;
-	url: string;
 	office: string;
 	date: string;
-	quickly: boolean;
 }
 
 type Vacancies = Array<Vacancy>

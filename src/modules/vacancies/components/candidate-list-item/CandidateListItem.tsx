@@ -14,7 +14,11 @@ const CandidateListItem: React.FC<CandidateListItemProps> = ({ candidate, editIt
 	return (
 		<div className="candidate-list__item">
 			<div className="candidate-list__item__picture">
-				<img src={avatar} alt={name} className="responsive-img" />
+				<img
+					src={avatar}
+					alt={name}
+					className="responsive-img" 
+				/>
 			</div>
 			<div className="candidate-list__item__description">
 				<h3>{name}</h3>

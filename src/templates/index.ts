@@ -1,6 +1,4 @@
-import ItemDetail from './ItemDetail'
-import './ItemDetail.css'
+import ItemDetail from './item-detail'
+import ItemList from './item-list'
 
-export {
-	ItemDetail
-}
+export { ItemDetail, ItemList }

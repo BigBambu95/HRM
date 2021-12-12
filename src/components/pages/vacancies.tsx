@@ -1,6 +1,6 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { VacancyListContainer } from '@modules/vacancies'
+import { withRouter } from 'react-router-dom'
 
 const Vacancies = (props: ANY_MIGRATION_TYPE) => (
 	<section className="vacancies">

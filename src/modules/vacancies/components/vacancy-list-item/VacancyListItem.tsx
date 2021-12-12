@@ -1,28 +1,25 @@
-import React from 'react'
+import React, { Key, ReactNode } from 'react'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
-
-import { ContextMenu } from '@components'
-import { FireIcon, PencilIcon, RemoveBasketIcon } from '@svg'
-import { getDictionaryValueById } from '@helpers/dictionaries'
 import { observer } from 'mobx-react-lite'
+import { getDictionaryValueById } from '@helpers/dictionaries'
 
 export interface VacancyListItemProps {
 	vacancy: Vacancy;
-	removeVacancy: (id: React.Key) => void;
 	addTab: ({ label, path, office, prevPage }: AddTabParams) => void;
 	offices: Offices;
 	professions: Professions;
+	renderContextMenu: (id: Key) => ReactNode;
 }
 
-const VacancyListItem: React.FC<VacancyListItemProps> = ({
+const VacancyListItem = ({
 	vacancy,
-	removeVacancy,
 	addTab,
 	offices,
 	professions,
-}) => {
-	const { id, profession, url, office, date, quickly = false } = vacancy
+	renderContextMenu
+}: VacancyListItemProps) => {
+	const { id, profession, office, date } = vacancy
 
 	return (
 		<div className='vacancy-list__item'>
@@ -30,7 +27,7 @@ const VacancyListItem: React.FC<VacancyListItemProps> = ({
 				to={`/vacancies/${id}`}
 				onClick={() => addTab({
 					label: getDictionaryValueById(professions, profession) as string,
-					path: `/vacancies/${url}`,
+					path: `/vacancies/${id}`,
 					office: getDictionaryValueById(offices, office) as string,
 					prevPage: 'Вакансии'
 				})}
@@ -44,20 +41,12 @@ const VacancyListItem: React.FC<VacancyListItemProps> = ({
 				<div className='vacancy-list__item__right'>
 					<div className='label'>Крайний срок до:</div>
 					<div className='vacancy-list__item__date'>
-						{quickly && <FireIcon />}
+						{/* {quickly && <FireIcon />} */}
 						<Moment format='DD.MM.YY'>{date}</Moment>
 					</div>
 				</div>
 			</Link>
-			<ContextMenu>
-				<ContextMenu.Item icon={<PencilIcon width={16} height={16} />}>Изменить</ContextMenu.Item>
-				<ContextMenu.Item
-					onClick={() => removeVacancy(id)}
-					icon={<RemoveBasketIcon width={16} height={16} />}
-				>
-					Удалить
-				</ContextMenu.Item>
-			</ContextMenu>
+			{renderContextMenu(id)}
 		</div>
 	)
 }

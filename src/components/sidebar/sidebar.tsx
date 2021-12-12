@@ -1,18 +1,14 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { StoreContext } from '@store/StoreContext'
 import menu from '../../menu'
 import SidebarLink from '../sidebar-link'
 
-const Sidebar = observer(({ history, location }: ANY_MIGRATION_TYPE) => {
+const Sidebar = observer(({ location }: ANY_MIGRATION_TYPE) => {
 	const {
-		tabsStore: { activeTab, addTab },
+		tabsStore: { addTab },
 	} = useContext(StoreContext)
-
-	useEffect(() => {
-		history.push(activeTab.path)
-	}, [activeTab.path])
 
 	const mainMenu = menu.map((link) => {
 		const isActive = location.pathname.includes(link.path)
