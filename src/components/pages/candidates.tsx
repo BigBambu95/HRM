@@ -1,29 +1,12 @@
-// import React from 'react';
-// import { compose } from 'redux';
-// import { connect } from 'react-redux';
+import React from 'react'
+import { CandidateListContainer } from '@modules/candidates'
 
-// import { getArchiveCandidatesSelector } from '../../selectors/candidates';
-// import Grid from '../grid';
-// import CandidateListItem from '../../modules/vacancies/components/candidate-list-item';
+const Candidates = () => {
+	return (
+		<section className="candidates">
+			<CandidateListContainer />
+		</section>
+	)
+}
 
-// const Candidates = ({ candidates }) => {
-//   const candidateList = candidates.map((candidate) => <CandidateListItem item={candidate} />);
-
-//   const itemList = candidates.length === 0
-//     ? <h4>На данный момент архив кандидатов пуст!</h4>
-//     : <Grid columns={4} gap="2em">{candidateList}</Grid>;
-
-//   return (
-//     <section className="candidates">
-//       {itemList}
-//     </section>
-//   );
-// };
-
-// const mapStateToProps = (state) => ({
-//   candidates: getArchiveCandidatesSelector(state),
-// });
-
-// export default compose(
-//   connect(mapStateToProps, null),
-// )(Candidates);
+export default Candidates
