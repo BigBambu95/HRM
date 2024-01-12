@@ -1,0 +1,23 @@
+.col {
+    position: relative;
+}
+
+.col-24 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.col-12 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.col-6 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.col-8 {
+    flex: 0 0 33%;
+    max-width: 33%;
+}

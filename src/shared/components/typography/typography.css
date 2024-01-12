@@ -1,0 +1,9 @@
+.text_secondary {
+    color: var(--gray);
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+}
+
+.text_purple {
+    color: var(--purple);
+}

@@ -1,0 +1,73 @@
+.context-menu {
+    position: relative;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.context-menu__btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.context-menu__btn::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.context-menu__btn:hover::after {
+    background: rgba(0, 0, 0, .05);
+}
+
+.context-menu__btn.active::after {
+    border: 1px solid #6b00be;
+}
+
+.context-menu__btn.horizontal {
+    transform: rotate(90deg);
+}
+
+.context-menu__list {
+    position: absolute;
+    top: 40px;
+    right: -6px;
+    z-index: 10;
+    padding: 1em;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 300;
+    transform: translateY(-10px);
+    box-shadow: var(--second-shadow);
+}
+
+.context-menu__list__item {
+    display: flex;
+    margin-bottom: .55em;
+}
+
+.context-menu__list__item:last-child {
+    margin: 0;
+}
+
+.context-menu__list__item button {
+    align-items: center;
+    font-size: 1rem;
+}
+
+.context-menu__list__item svg {
+    margin-right: 10px;
+}
+
+.context-menu__list__item:hover button {
+    color: #6b00be;
+}
+
+.context-menu__list__item:hover path {
+    fill: #6b00be;
+}

@@ -15,7 +15,6 @@
         "sourceMap": true,
         "baseUrl": "src",
         "jsx": "react",
-        "types": ["vite/client"],
         "paths": {
             "@*": [
                 "*"
@@ -23,7 +22,9 @@
         }
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*", 
+        "src/tempPolyfills.js", 
+        "src/setupTests.js"    
     ],
     "exclude": [
         "node_modules",

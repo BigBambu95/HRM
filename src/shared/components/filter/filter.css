@@ -1,0 +1,13 @@
+.filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1.4em;
+}
+
+.filter__label {
+    margin-right: 1em;
+    font-size: var(--font-size-xs);
+    font-weight: var(--thin-weight);
+    white-space: nowrap;
+}

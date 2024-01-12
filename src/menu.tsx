@@ -2,7 +2,7 @@ import React from 'react'
 import {
 	ArchiveIcon, CalendarIcon, ContactsIcon,
 	DocumentsIcon, VacancyIcon, WalletIcon, WorkersIcon
-} from '@svg'
+} from '@shared/components/icons'
 
 const menu = [
 	{

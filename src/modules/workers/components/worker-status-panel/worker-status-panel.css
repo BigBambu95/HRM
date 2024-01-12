@@ -1,5 +1,0 @@
-.worker-status-panel {
-    display: flex;
-    flex-flow: row wrap;
-    margin-top: var(--margin-lg);
-}

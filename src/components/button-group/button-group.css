@@ -1,7 +1,0 @@
-.button-group {
-    display: flex;
-}
-
-.button-group.vertical {
-    flex-direction: column;
-}
